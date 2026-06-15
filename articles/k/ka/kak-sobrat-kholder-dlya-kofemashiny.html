@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Сборка холдера для кофемашины: пошаговая инструкция и нюансы — Кофини</title>
+    <meta name="description" content="Подробное руководство по сборке холдера для кофемашины. Выбор комплектующих, техника пайки, балансировка корзины и устранение типичных ошибок.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-sobrat-kholder-dlya-kofemashiny.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Сборка холдера для кофемашины: пошаговая инструкция и нюансы">
+    <meta property="og:description" content="Подробное руководство по сборке холдера для кофемашины. Выбор комплектующих, техника пайки, балансировка корзины и устранение типичных ошибок.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/aksessuary-i-instrumenty/">Аксессуары и инструменты</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Сборка холдера для кофемашины: пошаговая инструкция и нюансы</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как собрать холдер для кофемашины: от комплектующих до финальной настройки</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#выбор-материалов-и-комплектующих">Выбор материалов и комплектующих</a></li><li><a href="#технология-соединения-корпуса-и-корзины">Технология соединения корпуса и корзины</a></li><li><a href="#установка-и-крепление-ручки">Установка и крепление ручки</a></li><li><a href="#балансировка-и-проверка-геометрии">Балансировка и проверка геометрии</a></li><li><a href="#типы-холдеров-и-их-особенности">Типы холдеров и их особенности</a></li><li><a href="#типичные-ошибки-при-сборке">Типичные ошибки при сборке</a></li><li><a href="#финальная-проверка-и-эксплуатация">Финальная проверка и эксплуатация</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Сборка холдера — это не просто механическое соединение металлических деталей, а процесс создания ключевого элемента для приготовления качественного эспрессо. Именно от того, насколько грамотно собран и сбалансирован <strong>холдер</strong>, зависит стабильность экстракции, температура напитка и долговечность самой кофемашины. Многие пользователи недооценивают важность этого узла, считая его просто "ручкой", однако на профессиональных машинах или при кастомизации <em>порт-фильтров</em> к сборке предъявляются строгие требования.</p>
+
+<p>В современном кофе-сообществе растёт популярность кастомных решений, где бариста самостоятельно подбирают материалы для улучшения теплоёмкости и эргономики. Неправильно собранный узел может привести к "утечке" давления, нестабильному давлению помпы и быстрому износу уплотнительных колец <code>группы</code>. Разберёмся, как правильно собрать холдер, чтобы он служил годами и радовал стабильным вкусом.</p>
+
+<h2 id="выбор-материалов-и-комплектующих">Выбор материалов и комплектующих</h2>
+<p>Первым шагом является подбор качественных заготовок. Корпус холдера должен быть изготовлен из латуни или нержавеющей стали, так как эти металлы обладают необходимой <strong>теплопроводностью</strong> и устойчивостью к коррозии. Дешёвые сплавы алюминия или силумина быстро деформируются под воздействием высокого давления и агрессивной среды горячей воды.</p>
+
+<p>Особое внимание уделите корзине. Для пассивного холдера (без встроенного термоблока) критически важна толщина стенок. Стандартные корзинки часто имеют слишком тонкие стенки, которые быстро остывают. Рекомендуется выбирать корзины с увеличенной <strong>массой</strong>, например, двойного или тройного обжаривания, которые удерживают тепло дольше. Если вы собираете холдер с термоблоком, убедитесь, что материал блока совместим с материалами корпуса.</p>
+
+<h2 id="технология-соединения-корпуса-и-корзины">Технология соединения корпуса и корзины</h2>
+<p>Существует два основных способа фиксации корзины внутри корпуса: механический (защёлкивание в пазы) и пайка (для неразборных кастомных решений). В большинстве серийных моделей используется механический способ, где корзина имеет специальные "уши" или выступы, фиксируемые поворотом. Однако при сборке кастомного холдера часто применяется <strong>пайка</strong> для создания монолитной конструкции с максимальной теплоёмкостью.</p>
+
+<p>Если вы используете метод пайки, необходимо соблюдать температурный режим. Латунный корпус и стальную корзину нужно прогреть равномерно, используя высокотемпературный припой. Неправильный нагрев может привести к появлению микротрещин или деформации посадочного места, что впоследствии вызовет подтекание эспрессо. </p>
+
+<p>При механическом монтаже убедитесь, что выступы корзины плотно прилегают к внутренней стенке корпуса. Малейший люфт приведёт к тому, что при вращении холдера в группе кофемашины корзина прокрутится, нарушив ориентацию фильтра. Проверьте это вращая корзину пальцами: она должна зафиксироваться с характерным щелчком и не иметь свободного хода.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка сборки холдера</h4><label class="check-item"><input type="checkbox"><span>Корзина плотно сидит в корпусе</span></label><label class="check-item"><input type="checkbox"><span>Нет видимых зазоров</span></label><label class="check-item"><input type="checkbox"><span>Ручка надёжно закреплена</span></label><label class="check-item"><input type="checkbox"><span>Уплотнительное кольцо целое</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<blockquote>
+<p>⚠️ Внимание: Если вы паяете холдер самостоятельно, убедитесь, что используемый припой безопасен для пищевого контакта и не содержит токсичных примесей. Убедитесь, что спаянный шов полностью герметичен перед первым использованием.</p>
+</blockquote>
+
+<h2 id="установка-и-крепление-ручки">Установка и крепление ручки</h2>
+<p>Ручка холдера — это не только элемент управления, но и важный компонент теплового баланса. Деревянные ручки, популярные в ретро-стиле, отлично защищают руки от ожогов, но требуют правильного крепления, чтобы не расшататься. Металлические или пластиковые ручки более долговечны, но могут нагреваться до высоких температур, требуя изоляции.</p>
+
+<p>Процесс крепления ручки зависит от типа резьбы. В большинстве случаев используется стандартная резьба М6 или М8. Нанесите на резьбовой конец небольшое количество термостойкого герметика или фум-ленты, если соединение кажется слишком свободным. Затягивать ручку нужно с усилием, но без фанатизма, чтобы не сорвать резьбу в корпусе из мягких металлов.</p>
+
+<p>Обратите внимание на угол наклона ручки. Она должна располагаться так, чтобы при установке холдера в группу кофемашины сосуд (чашку) можно было разместить удобно, без пересечения с носиком. Для некоторых машин, особенно с узкими группами, может потребоваться ручка с изогнутой формой или специальной выемкой.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед окончательной затяжкой ручки проверьте её положение, приложив холдер к группе вашей кофемашины, чтобы убедиться в отсутствии помех для чашек разного размера.</p></div>
+
+<h2 id="балансировка-и-проверка-геометрии">Балансировка и проверка геометрии</h2>
+<p>После сборки необходимо проверить геометрию холдера. Носик (спутник) должен быть строго перпендикулярен плоскости корзины. Даже небольшой перекос приведёт к тому, что эспрессо будет литься струёй в сторону, а не центром, что затруднит слияние напитка в чашке и ухудшит презентацию. Используйте угольник для проверки.</p>
+
+<p>Вес холдера также играет роль. Слишком лёгкий холдер может не обеспечить достаточного прижима к группе, что приведёт к протечкам по периметру прокладки. Слишком тяжёлый — создаст неудобство при длительной работе бариста. Оптимальным считается вес, при котором рука не устаёт держать инструмент, но холдер чувствуется как "весомый" инструмент.</p>
+
+<p>Если вы собираете кастомный холдер с термоблоком, важно проверить, нет ли внутренних заусенцев, которые могут мешать потоку воды. Пройдитесь наждачной бумагой зернистостью 400-600 по внутренним каналам, чтобы сгладить переходы. Гладкие стенки обеспечивают более стабильный поток и упрощают чистку от кофейных масел.</p>
+
+<details class="faq-item"><summary>Как проверить угол наклона носика? Возьмите ровную поверхность и приложите к ней дно холдера. Носик должен касаться поверхности всей нижней гранью, не шатаясь.-->
+
+<!--WIDGET</summary><div class="faq-answer"><p>poll:Какой материал ручки вы предпочитаете?:Дерево|Металл|Пластик|Резина/Термопластик</p></div></details>
+
+<h2 id="типы-холдеров-и-их-особенности">Типы холдеров и их особенности</h2>
+<p>В зависимости от конструкции кофемашины и ваших целей, холдеры делятся на несколько типов. Стандартные серийные модели подходят для большинства бытовых машин, но часто имеют недостаточную теплоёмкость. Эспрессо-холдеры с увеличенной массой стенок (heavy duty) требуют предварительного прогрева, но обеспечивают стабильную температуру экстракции.</p>
+
+<p>Отдельную категорию составляют холдеры с встроенным термоблоком или подогревом. Они подключаются к электричеству или используют тепло самой группы машины. Такие модели сложны в сборке, так как требуют точной установки нагревательных элементов и термодатчиков. Ошибки здесь могут привести к перегреву и порче электроники.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип холдера</th>
+<th>Материал корпуса</th>
+<th>Особенности сборки</th>
+<th>Подходит для</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Стандартный</td>
+<td>Латунь</td>
+<td>Механическая фиксация</td>
+<td>Бытовые машины</td>
+</tr>
+<tr>
+<td>Тяжелый (Heavy)</td>
+<td>Латунь/Нержавейка</td>
+<td>Двойная толщина стенок</td>
+<td>Профи/Полупрофи</td>
+</tr>
+<tr>
+<td>Кастомный паяный</td>
+<td>Сплав металлов</td>
+<td>Пайка припоем</td>
+<td>Специализированные бариста</td>
+</tr>
+<tr>
+<td>С подогревом</td>
+<td>Композит/Металл</td>
+<td>Электромонтаж</td>
+<td>Сложные заваривания</td>
+</tr>
+<tr>
+<td>Двойной спутник</td>
+<td>Нержавейка</td>
+<td>Сложная форма носика</td>
+<td>Латте-арт</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="типичные-ошибки-при-сборке">Типичные ошибки при сборке</h2>
+<p>Одной из самых частых ошибок является неправильный подбор уплотнительного кольца. Резинка должна быть достаточно мягкой, чтобы компенсировать микронеровности, но не слишком мягкой, чтобы не деформироваться под давлением 9 бар. Использование кольца от другой модели кофемашины часто приводит к протечкам. Всегда сверяйте диаметр и профиль уплотнителя.</p>
+
+<p>Другая ошибка — игнорирование чистоты поверхностей перед сборкой. Даже микроскопическая частица кофейной пыли или масла может создать зазор, через который будет выходить пар или вода. Тщательно обезжирьте все поверхности перед пайкой или механическим соединением. Используйте изопропиловый спирт или специальный очиститель.</p>
+
+<p>Иногда при затяжке ручки пользователи перетягивают гайку, что приводит к деформации резьбовой части корпуса. Это делает холдер непригодным для использования, так как новая ручка не будет держаться. Используйте динамометрический ключ или контролируйте усилие на ощупь, останавливаясь сразу после появления сопротивления.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Никогда не используйте металлические щётки для чистки внутренней поверхности холдера перед сборкой. Это создаёт царапины, в которых застревают кофейные масла, вызывая прогорклость вкуса.</p>
+</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Качество сборки холдера напрямую влияет на стабильность температуры и давления, что является фундаментом для приготовления вкусного эспрессо.</p></div>
+
+<h2 id="финальная-проверка-и-эксплуатация">Финальная проверка и эксплуатация</h2>
+<p>После полной сборки холдер необходимо протестировать. Налейте в него горячую воду и дайте постоять 2-3 минуты. Проверьте, нет ли подтеканий из соединений ручки или между корзиной и корпусом. Затем установите холдер в группу кофемашины без кофе и прогоните воду через него ("пролив"). Это поможет прогреть узел и проверить герметичность под рабочим давлением.</p>
+
+<p>В процессе эксплуатации регулярно проверяйте состояние уплотнительных колец и чистоту корзины. Если вы используете холдер с пайкой, следите за целостностью шва. При появлении ржавчины или трещин лучше заменить деталь, чем рисковать порчей кофемашины или получением ожогов.</p>
+
+<details>
+<summary>Как часто нужно чистить холдер после сборки?</summary>
+<p>Чистка должна проводиться после каждой варки эспрессо. Используйте обратный фильтр (blind basket) и специальные таблетки для промывки раз в неделю, чтобы удалить накопившиеся кофейные масла и остатки кальция.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать обычный холдер для холодного эспрессо?</summary>
+<p>Да, но предварительно холдер нужно охладить, иначе горячее железо мгновенно нагреет эспрессо, испортив вкус холодного напитка. Лучше использовать специальный охлаждённый холдер или предварительно положить его в морозилку.</p>
+</details>
+
+<details>
+<summary>Что делать, если корзина прокручивается в корпусе?</summary>
+<p>Проверьте, не стерлись ли "ушки" корзины. Если они стерлись, корзину нужно заменить. Если проблема в посадочном месте корпуса, возможно, потребуется пайка или замена всего корпуса, так как механическая фиксация нарушена.</p>
+</details>
+
+<blockquote>
+<p>⚠️ Внимание: Перед началом работы с электрическими компонентами (если холдер с подогревом) обязательно отключите кофемашину от сети и разрядите конденсаторы, чтобы избежать удара током.</p>
+</blockquote>
+
+<details>
+<summary>Можно ли собрать холдер из деталей разных брендов?</summary>
+<p>Теоретически можно, но это рискованно из-за различий в геометрии посадочных мест, диаметрах корзин и типах резьбы ручек. Рекомендуется использовать комплектующие одного производителя или проверенные совместимые кастомные наборы.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#выбор-материалов-и-комплектующих">Выбор материалов и комплектующих</a></li><li><a href="#технология-соединения-корпуса-и-корзины">Технология соединения корпуса и корзины</a></li><li><a href="#установка-и-крепление-ручки">Установка и крепление ручки</a></li><li><a href="#балансировка-и-проверка-геометрии">Балансировка и проверка геометрии</a></li><li><a href="#типы-холдеров-и-их-особенности">Типы холдеров и их особенности</a></li><li><a href="#типичные-ошибки-при-сборке">Типичные ошибки при сборке</a></li><li><a href="#финальная-проверка-и-эксплуатация">Финальная проверка и эксплуатация</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/s/sh/shtuka-dlya-vzbivaniya-moloka-dlya-kofe.html" class="related-card">Штука для взбивания молока: виды капучинаторов и выбор пенки</a></li><li><a href="/articles/k/ka/kakie-zhernova-u-kofemolki-luchshe.html" class="related-card">Какие жернова у кофемолки лучше: Стальные, керамические или сапфировые?</a></li><li><a href="/articles/c/ch/chto-takoe-kapuchinator-ruchnoj-i-kak-im-polzovatsya.html" class="related-card">Ручной капучинатор: что это и как правильно взбивать молоко</a></li><li><a href="/articles/k/ka/kak-nazyvaetsya-press-dlya-kofemashiny-rozhka.html" class="related-card">Как называется пресс для рожка кофемашины: виды, выбор и применение</a></li><li><a href="/articles/k/ko/konus-dlya-kofe-v-chashku.html" class="related-card">Конус для кофе в чашку: Фильтр, сифон и альтернативы заваривания</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/s/sh/shtuka-dlya-vzbivaniya-moloka-dlya-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Штука для взбивания молока: виды капучинаторов и выбор пенки</span><span class="related-bottom-desc">Как выбрать идеальную штуку для взбивания молока для кофе? Обзор ручных, автоматических и электричес</span></a><a href="/articles/k/ka/kakie-zhernova-u-kofemolki-luchshe.html" class="related-bottom-card"><span class="related-bottom-title">Какие жернова у кофемолки лучше: Стальные, керамические или сапфировые?</span><span class="related-bottom-desc">Полный разбор типов жерновов для кофемолки. Сравнение стальных и керамических мельниц по качеству по</span></a><a href="/articles/c/ch/chto-takoe-kapuchinator-ruchnoj-i-kak-im-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Ручной капучинатор: что это и как правильно взбивать молоко</span><span class="related-bottom-desc">Узнайте, что такое ручной капучинатор для кофемашины и как им пользоваться. Секреты идеальной пены, </span></a><a href="/articles/k/ka/kak-nazyvaetsya-press-dlya-kofemashiny-rozhka.html" class="related-bottom-card"><span class="related-bottom-title">Как называется пресс для рожка кофемашины: виды, выбор и применение</span><span class="related-bottom-desc">Узнайте точное название инструмента для утрамбовки кофе. Разбор видов темперов, правил подбора диаме</span></a><a href="/articles/k/ko/konus-dlya-kofe-v-chashku.html" class="related-bottom-card"><span class="related-bottom-title">Конус для кофе в чашку: Фильтр, сифон и альтернативы заваривания</span><span class="related-bottom-desc">Подробный гид по выбору и использованию конусных фильтров и воронок для приготовления кофе в чашку. </span></a><a href="/articles/k/ko/kofemolka-timemore-otzyvy.html" class="related-bottom-card"><span class="related-bottom-title">Timemore кофемолка отзывы: честный разбор моделей C2, C3 и Black Mirror</span><span class="related-bottom-desc">Честные отзывы владельцев кофемолок Timemore. Разбор моделей C2, C3, Black Mirror. Плюсы, минусы, ср</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

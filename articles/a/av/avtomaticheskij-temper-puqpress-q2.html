@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Автоматический темпер PuqPress Q2: обзор, настройка и эксплуатация — Кофини</title>
+    <meta name="description" content="Полный гид по автоматическому темперу PuqPress Q2. Разбор технологии контроля давления, особенности установки, настройка под помол и сравнение с ручным темперам.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/a/av/avtomaticheskij-temper-puqpress-q2.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Автоматический темпер PuqPress Q2: обзор, настройка и эксплуатация">
+    <meta property="og:description" content="Полный гид по автоматическому темперу PuqPress Q2. Разбор технологии контроля давления, особенности установки, настройка под помол и сравнение с ручным темперам.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/aksessuary-i-instrumenty/">Аксессуары и инструменты</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Автоматический темпер PuqPress Q2: обзор, настройка и эксплуатация</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Автоматический темпер PuqPress Q2: эволюция качества эспрессо</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-мир-автоматического-темперирования">Введение в мир автоматического темперирования</a></li><li><a href="#конструкция-и-технологические-особенности-модели-q2">Конструкция и технологические особенности модели Q2</a></li><li><a href="#механизм-работы-и-алгоритм-экстракции">Механизм работы и алгоритм экстракции</a></li><li><a href="#настройка-параметров-под-конкретный-помол">Настройка параметров под конкретный помол</a></li><li><a href="#сравнение-с-ручным-темперированием-и-конкурентами">Сравнение с ручным темперированием и конкурентами</a></li><li><a href="#обслуживание-и-продление-срока-службы">Обслуживание и продление срока службы</a></li><li><a href="#экономическая-эффективность-для-бизнеса">Экономическая эффективность для бизнеса</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-мир-автоматического-темперирования">Введение в мир автоматического темперирования</h2>
+<p>В современном мире профессионального кофе стабильность вкуса является приоритетом номер один для любого бариста и владельца кофейного бизнеса. Именно здесь на сцену выходит <em>PuqPress Q2</em> — устройство, радикально меняющее подход к подготовке портафильтра перед экстракцией. Это не просто автоматизация рутины, а переход на новый уровень контроля качества напитка.</p>
+<p>Традиционный ручной темпер требует от специалиста колоссальной концентрации и физической выносливости, что неизбежно ведет к ошибкам в течение смены. <strong>Автоматический темпер</strong> устраняет человеческий фактор, гарантируя идентичное давление на каждой чашке. Для владельцев <em>кафе</em> это означает предсказуемый продукт, а для бариста — снижение нагрузки на кисти и запястья.</p>
+<p>Модель <em>Q2</em> от итальянского бренда <em>PuqPress</em> представляет собой вершину инженерной мысли в классе настольных автоматических темперов. Она сочетает в себе компактный дизайн, продвинутую электронику и надежную механику. Вы получаете инструмент, который работает быстрее и точнее любого человека.</p>
+
+<h2 id="конструкция-и-технологические-особенности-модели-q2">Конструкция и технологические особенности модели Q2</h2>
+<p>В центре устройства находится мощный электромеханический привод, способный приложить усилие до 30 фунтов (около 13,6 кг) с микронной точностью. Корпус выполнен из авиационного алюминия, что обеспечивает долговечность и устойчивость к коррозии в условиях влажной кофейной кухни. В отличие от предыдущих версий, модель <em>Q2</em> получила улучшенную систему сенсоров, реагирующих на наличие портафильтра.</p>
+<p>Уникальной чертой является технология <strong>Pre-infusion detection</strong>. Устройство не просто давит, а анализирует состояние кофеины в корзине. Если вы забыли положить кофейную таблетку или она имеет неправильную форму, механизм остановится, предотвращая поломку корзины. Это критически важный элемент защиты вашего оборудования.</p>
+<p>Внешний вид <em>PuqPress Q2</strong> адаптирован под строгие стандарты эстетик современных кофеен. Гладкие поверхности без лишних щелей позволяют легко поддерживать <strong>санитарную чистоту</strong>. Подставка регулируется под разные типы ручек портафильтра, что делает устройство универсальным решением для большинства станций эспрессо на рынке.</p>
+
+<h2 id="механизм-работы-и-алгоритм-экстракции">Механизм работы и алгоритм экстракции</h2>
+<p>Принцип действия основан на датчике веса и давления. Как только вы вставляете портафильтр в посадочное место, <strong>сенсоры активируются</em>. Сперва происходит предварительное распределение кофе, а затем следует основной цикл прессования. Весь процесс занимает менее двух секунд, что позволяет не терять время в час пик.</p>
+<p>После того как давление достигает запрограммированного значения, механизм автоматически отключается и поднимается, освобождая руки бариста. Это исключает эффект "отскока", часто возникающий при ручном темпера, когда давление резко сбрасывается. <em>Стабильность экстракции</em> достигается за счет плавного нарастания и удержания пикового усилия.</p>
+<p>Важно отметить, что <code>Q2</code> не требует сложной калибровки под каждый новый сорт зерна. Достаточно один раз настроить базовые параметры, и устройство будет работать автономно. Это особенно актуально для кофеен с высокой проходимостью, где скорость обслуживания клиентов напрямую влияет на выручку.</p>
+
+<div class="poll-widget" id="poll-e08d39d9"><div class="poll-widget-question">📊 Как часто вы используете ручной темпер?</div><div class="poll-widget-option" data-poll="e08d39d9" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Каждый день</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e08d39d9" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Редко</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e08d39d9" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Никогда, только автомат</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e08d39d9" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Только дома</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="настройка-параметров-под-конкретный-помол">Настройка параметров под конкретный помол</h2>
+<p>Адаптация <em>PuqPress Q2</em> под ваш кофе происходит через панель управления на задней панели устройства. Здесь вы можете установить целевое значение давления в фунтах на квадратный дюйм (PSI) или килограммах. Рекомендуемый диапазон обычно составляет от 25 до 30 PSI, но это зависит от плотности помола и сорта.</p>
+<p>Если вы переходите на более свежую обжарку или другой <strong>помол</strong>, необходимо провести серию тестовых экстракций. Изменяйте давление на 1-2 единицы и оценивайте время пролива. Слишком высокое давление приведет к затеканию, слишком низкое — к кислинке. <em>Идеальный баланс</em> находится методом проб, но автоматика делает этот процесс более воспроизводимым.</p>
+<p>Особое внимание уделите высоте посадки портафильтра. Неправильная установка может привести к тому, что <strong>механизм не сработает</strong> или, наоборот, нанесет удар по ручке. Используйте регулировочные винты на основании, чтобы подогнать устройство под высоту ручек ваших <code>La Marzocco</code>, <code>Synesso</code> или <code> Nuova Simonelli</code>.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка перед началом смены</h4><label class="check-item"><input type="checkbox"><span>Уровень заряда батареи</span></label><label class="check-item"><input type="checkbox"><span>Чистота сенсора</span></label><label class="check-item"><input type="checkbox"><span>Отсутствие посторонних предметов</span></label><label class="check-item"><input type="checkbox"><span>Корректность давления</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="сравнение-с-ручным-темперированием-и-конкурентами">Сравнение с ручным темперированием и конкурентами</h2>
+<p>Многие скептики утверждают, что ручное темперирование обеспечивает "душу" напитка, однако статистика качества говорит об обратном. <strong>Автоматический темпер</strong> обеспечивает стандарт отклонения менее 1%, в то время как даже самый опытный бариста может колебаться в пределах 5-10% за смену. Это фундаментальное различие в подходе к производству.</p>
+<p>Сравнивая <em>Q2</em> с другими брендами, такими как La Marzocco или Mazzer, можно выделить его независимость от кофемашины. Он работает от собственного аккумулятора, что дает свободу размещения. Конкуренты часто требуют стационарного подключения или занимают больше места на столешнице.</p>
+<p>Ниже приведена сравнительная таблица ключевых характеристик:</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>PuqPress Q2</th>
+<th>Ручной темпер</th>
+<th>Конкуренты (аналоги)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Время цикла</td>
+<td>< 2 сек</td>
+<td>5-10 сек</td>
+<td>2-3 сек</td>
+</tr>
+<tr>
+<td>Точность давления</td>
+<td>±0.5 PSI</td>
+<td>±5 PSI</td>
+<td>±1-2 PSI</td>
+</tr>
+<tr>
+<td>Заряд батареи</td>
+<td>до 4000 циклов</td>
+<td>Не требуется</td>
+<td>до 2000 циклов</td>
+</tr>
+<tr>
+<td>Защита от ошибок</td>
+<td>Высокая</td>
+<td>Отсутствует</td>
+<td>Средняя</td>
+</tr>
+</tbody>
+</table>
+
+<details class="faq-item"><summary>Почему давление так важно?</summary><div class="faq-answer"><p>При неправильном давлении вода проходит сквозь кофе неравномерно. Это вызывает каналы (channeling), где вода проходит быстрее, вымывая кислые ноты, в то время как другие части не экстрагируются полностью, оставляя горечь.</p></div></details>
+
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: Не пытайтесь использовать <em>PuqPress Q2</em> с портафильтрами нестандартной формы или поврежденными корзинами. Это может привести к заклиниванию механизма и потере гарантии. Всегда проверяйте целостность корзины перед установкой.</p>
+</blockquote>
+
+<h2 id="обслуживание-и-продление-срока-службы">Обслуживание и продление срока службы</h2>
+<p>Для поддержания работоспособности устройства требуется регулярная чистка. Удаляйте кофейную пыль из посадочного места после каждой смены или по мере накопления. Используйте сухую ткань или мягкую щетку, избегая использования агрессивных химикатов, которые могут повредить сенсоры.</p>
+<p>Батарея литий-ионная и рассчитана на долгий срок службы, но требует правильного режима зарядки. Рекомендуется заряжать устройство, когда индикация показывает низкий уровень. <strong>Своевременная зарядка</strong> предотвращает глубокий разряд, который может убить батарею.</p>
+<p>Если вы заметили, что устройство работает медленнее обычного или давление стало нестабильным, возможно, требуется калибровка. В этом случае лучше обратиться к авторизованному сервисному центру. Самостоятельная разборка корпуса нарушает условия гарантии.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Для максимальной защиты сенсоров от кофейной пыли используйте защитный колпачок, который часто идет в комплекте, когда устройство не используется длительное время.</p></div>
+
+<h2 id="экономическая-эффективность-для-бизнеса">Экономическая эффективность для бизнеса</h2>
+<p>Инвестиция в <em>PuqPress Q2</em> быстро окупается за счет экономии времени бариста и снижения процента брака. Один лишний пролив в час превращается в сотни литров кофе в месяц, потраченных впустую. Кроме того, снижается нагрузка на персонал, что уменьшает риск профессиональных заболеваний кистей.</p>
+<p>В долгосрочной перспективе <strong>стабильность качества</strong> привлекает постоянных клиентов. Люди возвращаются туда, где вкус кофе предсказуем. Автоматический темпер становится маркетинговым преимуществом, демонстрируя клиентам, что вы заботитесь о деталях.</p>
+<p>Кроме того, устройство помогает стандартизировать обучение новых сотрудников. Вам не нужно тратить недели на то, чтобы научить новичка правильно темперить. Достаточно показать, как вставить портафильтр в <code>Q2</code>, и качество будет на высоте с первой чашки.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Автоматический темпер PuqPress Q2 — это инвестиция в стабильность вкуса и здоровье рук бариста, окупающаяся за счет снижения брака и ускорения работы.</p></div>
+
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: Производитель периодически обновляет прошивку и условия гарантии. Перед покупкой или настройкой обязательно сверьтесь с официальным сайтом PuqPress или проконсультируйтесь с дилером, так как технические характеристики могут незначительно изменяться в новых партиях.</p>
+</blockquote>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+<p>В этом разделе мы отвечаем на самые популярные вопросы пользователей, которые могут возникнуть при эксплуатации устройства.</p>
+
+<details>
+<summary>Можно ли использовать PuqPress Q2 с керамическими корзинами?</summary>
+<p>Технически устройство может сработать, но производители категорически не рекомендуют использовать его с хрупкими корзинами. Электронные весы могут ошибочно интерпретировать вес керамики, а риск расколоть корзину при давлении 30 PSI очень высок. Используйте только металлические корзины из нержавеющей стали.</p>
+</details>
+
+<details>
+<summary>Как долго держит заряд встроенная батарея?</summary>
+<p>В зависимости от интенсивности использования, одного полного заряда хватает примерно на 4000 циклов темперирования. Это эквивалентно работе в небольшой кофейне в течение нескольких дней. Индикатор на корпусе покажет, когда необходимо подключить зарядное устройство.</p>
+</details>
+
+<details>
+<summary>Что делать, если устройство не реагирует на портафильтр?</summary>
+<p>Первое, что нужно проверить — чистоту сенсорной зоны. Кофейная пыль может блокировать датчики. Протрите место установки влажной (не мокрой) тканью. Если проблема сохраняется, проверьте заряд батареи и убедитесь, что портафильтр полностью вставлен до упора.</p>
+</details>
+
+<details>
+<summary>Можно ли настроить разное давление для разных сортов кофе?</summary>
+<p>Модель Q2 обычно имеет один фиксированный уровень давления, который можно изменить через сервисное меню. Для быстрого переключения между сортами с разной плотностью рекомендуется использовать разные настройки давления вручную, если вы часто меняете зерно, либо остановиться на среднем универсальном значении.</p>
+</details>
+
+<details>
+<summary>Как часто нужно проводить профилактику?</summary>
+<p>Рекомендуется еженедельная чистка посадочного места и проверка затяжки винтов. Глубокое техническое обслуживание с проверкой механических узлов стоит проводить раз в полгода или после 10 000 циклов работы, в зависимости от интенсивности загрузки.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-мир-автоматического-темперирования">Введение в мир автоматического темперирования</a></li><li><a href="#конструкция-и-технологические-особенности-модели-q2">Конструкция и технологические особенности модели Q2</a></li><li><a href="#механизм-работы-и-алгоритм-экстракции">Механизм работы и алгоритм экстракции</a></li><li><a href="#настройка-параметров-под-конкретный-помол">Настройка параметров под конкретный помол</a></li><li><a href="#сравнение-с-ручным-темперированием-и-конкурентами">Сравнение с ручным темперированием и конкурентами</a></li><li><a href="#обслуживание-и-продление-срока-службы">Обслуживание и продление срока службы</a></li><li><a href="#экономическая-эффективность-для-бизнеса">Экономическая эффективность для бизнеса</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/s/sk/skolko-topitsya-shokolad-v-mikrovolnovke.html" class="related-card">Сколько времени топить шоколад в микроволновке: полное руководство</a></li><li><a href="/articles/g/gd/gde-khranit-kofevarku.html" class="related-card">Где хранить кофеварку: лучшие места, правила и советы по размещению</a></li><li><a href="/articles/k/ka/kak-polzovatsya-kofemolkoj-bork.html" class="related-card">Как пользоваться кофемолкой Bork: инструкция, настройки и уход</a></li><li><a href="/articles/k/ko/kofejka-ili-kofejku.html" class="related-card">Кофейка или кофейку: как правильно склонять и писать</a></li><li><a href="/articles/c/ch/chashka-na-stole.html" class="related-card">Чашка на столе: как выбрать керамику и правильно сервировать кофе</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/s/sk/skolko-topitsya-shokolad-v-mikrovolnovke.html" class="related-bottom-card"><span class="related-bottom-title">Сколько времени топить шоколад в микроволновке: полное руководство</span><span class="related-bottom-desc">Узнайте, сколько секунд топить шоколад в микроволновке без риска. Пошаговая инструкция, таблица врем</span></a><a href="/articles/g/gd/gde-khranit-kofevarku.html" class="related-bottom-card"><span class="related-bottom-title">Где хранить кофеварку: лучшие места, правила и советы по размещению</span><span class="related-bottom-desc">Ищете идеальное место для кофеварки? Узнайте про влажность, тепло, доступ к розетке и эргономику кух</span></a><a href="/articles/k/ka/kak-polzovatsya-kofemolkoj-bork.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемолкой Bork: инструкция, настройки и уход</span><span class="related-bottom-desc">Полное руководство по эксплуатации кофемолок Bork. Настройка помола, чистка жерновов и особенности м</span></a><a href="/articles/k/ko/kofejka-ili-kofejku.html" class="related-bottom-card"><span class="related-bottom-title">Кофейка или кофейку: как правильно склонять и писать</span><span class="related-bottom-desc">Разбираем правила склонения слова кофейка. Узнайте, когда писать «кофейка», а когда «кофейку». Склон</span></a><a href="/articles/c/ch/chashka-na-stole.html" class="related-bottom-card"><span class="related-bottom-title">Чашка на столе: как выбрать керамику и правильно сервировать кофе</span><span class="related-bottom-desc">Полный гид по выбору чашек для кофе, их влиянию на вкус напитка и правилам сервировки. Узнайте, как </span></a><a href="/articles/p/pa/pakety-dlya-molotogo-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Пакеты для молотого кофе: виды, клапаны и правила упаковки</span><span class="related-bottom-desc">Как выбрать правильную упаковку для кофе? Обзор материалов, дегазационных клапанов и герметичности. </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

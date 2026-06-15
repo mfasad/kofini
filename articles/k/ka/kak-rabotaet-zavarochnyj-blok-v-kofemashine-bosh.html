@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как работает заварочный блок в кофемашине Bosch: принцип и обслуживание — Кофини</title>
+    <meta name="description" content="Подробный разбор устройства и работы заварочного узла Bosch. Узнайте о цикле варки, чистке и типичных неисправностях для долгой жизни аппарата.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-rabotaet-zavarochnyj-blok-v-kofemashine-bosh.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как работает заварочный блок в кофемашине Bosch: принцип и обслуживание">
+    <meta property="og:description" content="Подробный разбор устройства и работы заварочного узла Bosch. Узнайте о цикле варки, чистке и типичных неисправностях для долгой жизни аппарата.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как работает заварочный блок в кофемашине Bosch: принцип и обслуживание</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Принцип работы и обслуживание заварочного блока в кофемашинах Bosch</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#конструкция-и-основные-компоненты-узла">Конструкция и основные компоненты узла</a></li><li><a href="#этапы-цикла-приготовления-напитка">Этапы цикла приготовления напитка</a></li><li><a href="#роль-промывки-и-самоочистки">Роль промывки и самоочистки</a></li><li><a href="#правильное-извлечение-и-ручная-чистка">Правильное извлечение и ручная чистка</a></li><li><a href="#типичные-неисправности-и-их-причины">Типичные неисправности и их причины</a></li><li><a href="#профилактика-и-продление-срока-службы">Профилактика и продление срока службы</a></li><li><a href="#когда-нужно-менять-заварочный-блок">Когда нужно менять заварочный блок?</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Сердцем любой автоматической кофемашины является <strong>заварочный блок</strong>, и именно от его исправности зависит вкус вашего утреннего эспрессо. В аппаратах бренда <em>Bosch</em> этот узел спроектирован с особой инженерной точностью, обеспечивая стабильное давление и идеальную экстракцию кофе. Понимание того, как именно работает механизм внутри корпуса, поможет вам избежать распространенных поломок и продлить срок службы устройства.</p>
+
+<p>Многие пользователи ошибочно полагают, что заварочный узел — это статичная камера, где просто смешиваются вода и молотые зерна. На самом деле это сложный гидравлический и механический агрегат, который совершает до 50 движений за один цикл приготовления напитка. Гармоничная работа <strong>поршня</strong>, <strong>дозирующего устройства</strong> и <strong>термоблока</strong> создает ту самую пенку и аромат, за которые ценят кофемашины <em>Series 2000</em> и <em>Series 4000</em>. Давайте разберем этот процесс по шагам.</p>
+
+<h2 id="конструкция-и-основные-компоненты-узла">Конструкция и основные компоненты узла</h2>
+<p>Заварочный блок в кофемашинах <em>Bosch</em> представляет собой съемный модуль, выполненный из прочной термостойкой пластмассы и металлических втулок. Внутри корпуса скрыты подвижные элементы, которые приводятся в действие <strong>сервоприводом</strong> или редукторным механизмом. Именно эта система обеспечивает точное дозирование кофе и создание необходимого давления для пролива воды.</p>
+
+<p>Ключевым элементом является <strong>пробивная игла</strong> и <strong>напрессовочный поршень</strong>. При начале цикла игла прокалывает верхнюю крышку капсулы с кофе (или уплотняет слой молотого зерна), а поршень с силой прижимает его к стенкам заварочной камеры. В аппаратах <em>Bosch</em> используется уникальная система <strong>TRADIC</strong>, которая гарантирует идеальную трамбовку без участия человека, обеспечивая равномерный контакт воды с кофейной пылью.</p>
+
+<p>Важно отметить, что каждый компонент имеет свой ресурс эксплуатации. <strong>Резиновые уплотнители</strong> со временем дубеют, а металлические шестерни могут износиться от частых циклов. Если вы слышите странные звуки при работе, возможно, проблема кроется именно в этих деталях. Не игнорируйте шумы, так как они часто предшествуют полному выходу механизма из строя.</p>
+
+<h2 id="этапы-цикла-приготовления-напитка">Этапы цикла приготовления напитка</h2>
+<p>Работа заварочного блока происходит в замкнутом цикле, который можно разделить на несколько последовательных фаз. Сначала заземленный <strong>дозатор</strong> выдает строго определенную порцию молотого кофе в камеру. Это происходит в момент, когда пользователь нажимает кнопку на панели управления или выбирает напиток на дисплее модели <em>Tassimo</em> или <em>VeroBar</em>.</p>
+
+<p>Далее включается <strong>термопресс</strong>, и вода подается под высоким давлением через иглу. На этом этапе происходит экстракция: горячая вода растворяет вкусные вещества и эфирные масла из кофейной стружки. Давление в системе должно быть строго в диапазоне 9-15 бар, чтобы получить качественную эмульсию. Если давление падает, напиток будет водянистым, а если слишком высоким — может произойти разрушение уплотнителей.</p>
+
+<p>После завершения пролива поршень отходит, и механизм открывает лючок для сброса кофейной гущи. Остатки кофе падают в специальный лоток, а заварочная камера промывается горячей водой. Этот цикл повторяется каждый раз, когда вы заказываете напиток. Регулярность и плавность движений <strong>сервомотора</strong> напрямую влияют на скорость приготовления чашки кофе.</p>
+
+<div class="poll-widget" id="poll-2c044d70"><div class="poll-widget-question">📊 Какой напиток вы готовите чаще всего?</div><div class="poll-widget-option" data-poll="2c044d70" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Эспрессо</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="2c044d70" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Капучино</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="2c044d70" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Латте</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="2c044d70" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Американо</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="роль-промывки-и-самоочистки">Роль промывки и самоочистки</h2>
+<p>Одной из самых важных функций заварочного блока в кофемашинах <em>Bosch</em> является автоматическая промывка. Перед началом работы и после окончания цикла через узел пропускается поток горячей воды. Это необходимо для смывания остатков кофейного масла, которое со временем окисляется и создает неприятный привкус. <strong>Система самоочистки</strong> предотвращает засорение каналов и образование налета.</p>
+
+<p>Однако вода не всегда справляется с жировыми отложениями. Здесь на помощь приходит процедура декаффеинизации или использование специальных таблеток для чистки. <strong>Таблетки</strong> содержат активные вещества, расщепляющие жиры, которые вода не может удалить. Без регулярного применения химии стенки камеры покрываются темным налетом, что портит вкус напитка и может привести к поломке.</p>
+
+<p>Владельцы моделей <em>Maximatic</em> часто игнорируют звуки промывки, считая их шумом работы насоса. На самом деле, если вы не слышите характерного журчания воды в начале цикла, это может сигнализировать о проблемах с <strong>клапаном промывки</strong>. Проверка наличия воды в лотке для сбора капель после включения машины — простой способ убедиться в исправности системы.</p>
+
+<blockquote>Внимание: Если вы видите ошибку на дисплее, связанную с заварочным блоком, не пытайтесь forcedly протолкнуть механизм. Это может привести к слому шестеренок редуктора и дорогостоящему ремонту.</blockquote>
+
+<h2 id="правильное-извлечение-и-ручная-чистка">Правильное извлечение и ручная чистка</h2>
+<p>Регулярная ручная чистка заварочного блока — обязательное условие долгой службы вашей кофемашины. Производитель рекомендует выполнять эту процедуру раз в неделю или после приготовления 50-70 чашек. Процесс начинается с извлечения узла: выключите машину, откройте сервисную дверцу и потяните за ручку, чтобы освободить <strong>фиксаторы</strong>.</p>
+
+<p>После извлечения блок необходимо промыть под теплой водой. Используйте мягкую щетку для удаления остатков гущи из труднодоступных мест, например, из-под <strong>пробивной иглы</strong>. Ни в коем случае не используйте абразивные губки или агрессивную химию, так как это повредит полимерное покрытие и приведет к микротрещинам, где будут скапливаться бактерии.</p>
+
+<p>Особое внимание уделите <strong>подвижным направляющим</strong> и шестерням. Если они выглядят сухими, их следует смазать специальной пищевой смазкой (обычно идет в комплекте или продается отдельно). Сухая смазка вызывает трение, что увеличивает нагрузку на двигатель и может привести к его перегреву. Нанесите тонкий слой смазки на все трущиеся поверхности перед установкой.</p>
+
+<div class="checklist-block"><h4>☑️ Инструкция по ручной чистке</h4><label class="check-item"><input type="checkbox"><span>Выключить кофемашину</span></label><label class="check-item"><input type="checkbox"><span>Открыть сервисный отсек</span></label><label class="check-item"><input type="checkbox"><span>Аккуратно извлечь блок</span></label><label class="check-item"><input type="checkbox"><span>Промыть теплой водой</span></label><label class="check-item"><input type="checkbox"><span>Смазать подвижные части</span></label><label class="check-item"><input type="checkbox"><span>Вернуть на место</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 6</div></div>
+
+<h2 id="типичные-неисправности-и-их-причины">Типичные неисправности и их причины</h2>
+<p>Даже надежные кофемашины <em>Bosch</em> со временем сталкиваются с проблемами. Самой частой ошибкой является заклинивание механизма, которое сопровождается громким гудением мотора. Это происходит из-за попадания посторонних предметов, например, кусочка зерен или камня, в камеру заваривания. Также причиной может стать <strong>разбалансировка</strong> шестерен после неудачной установки блока.</p>
+
+<p>Другая распространенная проблема — протечки воды в области заварочного узла. Это часто свидетельствует о износе <strong>уплотнительных колец</strong> или повреждении корпуса блока. Микротрещины в пластике могут возникнуть из-за перегрева воды или попадания горячей воды в зону, не предназначенную для высоких температур. В таких случаях простая замена колец часто не помогает, требуется полная замена модуля.</p>
+
+<p>Иногда пользователи жалуются на то, что кофе получается слишком сухим или, наоборот, жидким. Причина кроется в неправильной настройке <strong>силы трамбовки</strong> или засорении дозатора. Если зерна слишком крупные, поршень может не уплотнить их достаточно плотно, и вода пройдет мимо. Если помол слишком мелкий, создастся избыточное давление, и машина может перестать работать.</p>
+
+<details class="faq-item"><summary>Что делать, если заварочный блок застрял?</summary><div class="faq-answer"><p>Не пытайтесь дергать его силой. Попробуйте запустить цикл "Очистка" или "Сброс ошибок" через меню настроек. Если это не поможет, аккуратно, без применения грубой силы, покачайте блок из стороны в сторону, чтобы освободить заклинившие шестерни. Если механизм не поддается — обратитесь в сервис.</p></div></details>
+
+<p>Ниже приведена таблица основных ошибок и возможных причин их возникновения для моделей серии <em>Series 4</em> и <em>Series 6</em>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Ошибка / Симптом</th>
+<th>Возможная причина</th>
+<th>Рекомендуемое действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Красный индикатор "Заварочный блок"</td>
+<td>Блок не установлен до конца</td>
+<td>Извлечь и заново вставить с щелчком</td>
+</tr>
+<tr>
+<td>Гудящий звук, блок не движется</td>
+<td>Заклинивание шестерен</td>
+<td>Очистить от мусора, смазать механизм</td>
+</tr>
+<tr>
+<td>Вода течет под машину</td>
+<td>Поврежден уплотнитель</td>
+<td>Заменить кольцо или весь блок</td>
+</tr>
+<tr>
+<td>Кофе жидкий и без пенки</td>
+<td>Неправильный помол или засор</td>
+<td>Настроить помол, промыть каналы</td>
+</tr>
+</tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед установкой заварочного блока убедитесь, что в лотке для капель достаточно места. Если лоток переполнен, датчик уровня может не дать машине запустить цикл, даже если блок вставлен правильно.</p></div>
+
+<h2 id="профилактика-и-продление-срока-службы">Профилактика и продление срока службы</h2>
+<p>Чтобы заварочный блок кофемашины <em>Bosch</em> служил вам верой и правдой долгие годы, необходимо соблюдать режим профилактики. Самое главное правило — использовать только качественные зерна подходящего помола. Слишком жирные сорта (например, с добавлением сахара или масла) забивают каналы быстрее, чем обычные. Используйте <strong>специальные чаи</strong> для чистки раз в месяц для профилактики налета.</p>
+
+<p>Важно следить за качеством воды. Жесткая вода приводит к образованию накипи, которая оседает не только на ТЭНе, но и внутри заварочного механизма. Накипь сужает проходы и нарушает герметичность уплотнителей. Установите <strong>фильтр-насадку</strong> на водопровод или используйте бутилированную воду с минерализацией до 150 мг/л. Это снизит частоту процедур декальцинации.</p>
+
+<p>Не забывайте включать машину хотя бы раз в 2-3 дня, даже если вы не пьете кофе. Влага внутри механизма может испариться, а смазка загустеть, если машина стоит без движения. Краткий цикл промывки освежит <strong>систему подачи</strong> и подготовит аппарат к работе. Это простой совет, который спасет вас от внезапных поломок после длительных простоев.</p>
+
+<blockquote>Внимание: В современных моделях Bosch с сенсорным управлением иногда возникают программные сбои, когда датчик не видит заварочный блок. В этом случае попробуйте полностью обесточить машину на 10 минут, чтобы сбросить ошибки контроллера, прежде чем звонить в сервис.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная смазка и использование воды оптимальной жесткости — два главных фактора, определяющих срок службы заварочного блока.</p></div>
+
+<h2 id="когда-нужно-менять-заварочный-блок">Когда нужно менять заварочный блок?</h2>
+<p>Несмотря на все меры предосторожности, заварочный блок — это расходный материал. Его ресурс обычно составляет от 50 000 до 100 000 чашек, в зависимости от интенсивности использования и качества обслуживания. Если вы заметили, что даже после замены уплотнителей и смазки появляются протечки или странное поведение механизма, пришло время задуматься о замене.</p>
+
+<p>Покупка нового оригинального блока для <em>Bosch</em> — это инвестиция в стабильную работу вашей техники. Дешевые аналоги часто имеют неточные допуски, что приводит к плохому давлению и быстрому износу двигателя. Убедитесь, что номер детали совпадает с моделью вашей машины, так как заварочные узлы для разных серий могут отличаться по размерам и креплению.</p>
+
+<p>Замена блока своими силами вполне возможна, если вы следовали инструкциям по чистке. Главное — помнить о <strong>последовательности</strong> подключения шлейфов и фиксации рычагов. Если вы неуверены в своих силах, лучше доверить эту работу профессионалам, чтобы избежать повреждения электроники. Правильно установленный новый блок вернет машине былую производительность и вкус кофе.</p>
+
+<details class="faq-item"><summary>Как проверить состояние шестеренок?</summary><div class="faq-answer"><p>Снимите пластиковую крышку привода (если она предусмотрена конструкцией) и осмотрите шестерни. Если на них видны сколы, трещины или "слизанные" зубья — механизм требует замены, даже если он пока крутится. Это признак критического износа.</p></div></details>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+
+<details>
+<summary>Можно ли мыть заварочный блок в посудомоечной машине?</summary>
+<p>Нет, категорически не рекомендуется. Высокая температура и агрессивные моющие средства могут деформировать пластик и разрушить резиновые уплотнители. Мойте блок только вручную теплой водой с мягкой щеткой.</p>
+</details>
+
+<details>
+<summary>Как часто нужно смазывать заварочный блок Bosch?</summary>
+<p>Смазывать подвижные части рекомендуется каждые 2-3 месяца при активном использовании, или сразу после глубокой чистки. Используйте только специальную силиконовую смазку для кофемашин.</p>
+</details>
+
+<details>
+<summary>Что делать, если блок не вынимается из машины?</summary>
+<p>Не прилагайте чрезмерных усилий. Проверьте, не открыта ли сервисная дверца полностью. Попробуйте немного покачать блок вверх-вниз, одновременно потянув за ручку. Если не помогает, обратитесь в сервисный центр.</p>
+</details>
+
+<details>
+<summary>Влияет ли тип зерна на работу заварочного блока?</summary>
+<p>Да, слишком жирные зерна или зерна с добавлением сиропов могут забивать дозатор и каналы. Также слишком крупный помол может вызвать проблемы с уплотнением. Используйте качественные зерна для эспрессо.</p>
+</details>
+
+<details>
+<summary>Почему после чистки машина не включается?</summary>
+<p>Возможно, блок не установлен до конца или датчик не замкнул контакт. Проверьте, чтобы рычаг фиксации был в нижнем положении, а сам блок входил в пазы до характерного щелчка.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#конструкция-и-основные-компоненты-узла">Конструкция и основные компоненты узла</a></li><li><a href="#этапы-цикла-приготовления-напитка">Этапы цикла приготовления напитка</a></li><li><a href="#роль-промывки-и-самоочистки">Роль промывки и самоочистки</a></li><li><a href="#правильное-извлечение-и-ручная-чистка">Правильное извлечение и ручная чистка</a></li><li><a href="#типичные-неисправности-и-их-причины">Типичные неисправности и их причины</a></li><li><a href="#профилактика-и-продление-срока-службы">Профилактика и продление срока службы</a></li><li><a href="#когда-нужно-менять-заварочный-блок">Когда нужно менять заварочный блок?</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-promyt-kofemashinu-delonghi-magnifica-instruktsiya.html" class="related-card">Как промыть кофемашину DeLonghi Magnifica: Полная инструкция по декальцинации</a></li><li><a href="/articles/k/ko/kofemashiny-krups-kak-pochistit.html" class="related-card">Как почистить кофемашину Krups: инструкция по декальцинации и очистки</a></li><li><a href="/articles/k/ka/kak-promyt-kofemashinu-bosch-verocafe.html" class="related-card">Как промыть кофемашину Bosch Verocafe: Инструкция по декальцинации</a></li><li><a href="/articles/p/po/pochemu-kofemashina-ne-nalivaet-kofe-delonghi.html" class="related-card">Почему кофемашина Delonghi не наливает кофе: причины и ремонт</a></li><li><a href="/articles/k/ka/kak-sobrat-kofemashinu-franke-flair-instruktsiya.html" class="related-card">Как собрать кофемашину Franke Flair: пошаговая инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-promyt-kofemashinu-delonghi-magnifica-instruktsiya.html" class="related-bottom-card"><span class="related-bottom-title">Как промыть кофемашину DeLonghi Magnifica: Полная инструкция по декальцинации</span><span class="related-bottom-desc">Пошаговая инструкция: как правильно промыть и декальцинировать кофемашину DeLonghi Magnifica. Схемы </span></a><a href="/articles/k/ko/kofemashiny-krups-kak-pochistit.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Krups: инструкция по декальцинации и очистки</span><span class="related-bottom-desc">Пошаговая инструкция: как почистить кофемашину Krups от накипи и кофейных масел. Декальцинация, пром</span></a><a href="/articles/k/ka/kak-promyt-kofemashinu-bosch-verocafe.html" class="related-bottom-card"><span class="related-bottom-title">Как промыть кофемашину Bosch Verocafe: Инструкция по декальцинации</span><span class="related-bottom-desc">Пошаговое руководство: как правильно промыть кофемашину Bosch Verocafe от накипи. Советы по выбору с</span></a><a href="/articles/p/po/pochemu-kofemashina-ne-nalivaet-kofe-delonghi.html" class="related-bottom-card"><span class="related-bottom-title">Почему кофемашина Delonghi не наливает кофе: причины и ремонт</span><span class="related-bottom-desc">Не течет кофе из кофемашины Delonghi? Узнайте основные причины: засоры, воздух, поломки насоса. Поша</span></a><a href="/articles/k/ka/kak-sobrat-kofemashinu-franke-flair-instruktsiya.html" class="related-bottom-card"><span class="related-bottom-title">Как собрать кофемашину Franke Flair: пошаговая инструкция</span><span class="related-bottom-desc">Подробное руководство по сборке профессиональной кофемашины Franke Flair. Этапы установки, подключен</span></a><a href="/articles/k/ka/kak-zavarit-kofe-v-kofemashine-polaris.html" class="related-bottom-card"><span class="related-bottom-title">Как заварить кофе в кофемашине Polaris: пошаговая инструкция</span><span class="related-bottom-desc">Подробный гайд по приготовлению эспрессо и напитков в кофемашинах Polaris. Настройка помола, крепост</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

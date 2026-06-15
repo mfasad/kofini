@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Список напитков в кофемашинах: как настроить и изменить меню — Кофини</title>
+    <meta name="description" content="Полный гид по редактированию списка напитков на кофемашинах. Как добавить, удалить или изменить размер порции в настройках меню вашего аппарата.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/n/na/nazvanie-kofe-spisok-iz-kofemashiny.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Список напитков в кофемашинах: как настроить и изменить меню">
+    <meta property="og:description" content="Полный гид по редактированию списка напитков на кофемашинах. Как добавить, удалить или изменить размер порции в настройках меню вашего аппарата.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Список напитков в кофемашинах: как настроить и изменить меню</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Полное руководство по управлению списком напитков в кофемашинах</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#понимание-структуры-меню-напитков">Понимание структуры меню напитков</a></li><li><a href="#как-добавить-новый-напиток-в-список">Как добавить новый напиток в список</a></li><li><a href="#редактирование-и-удаление-существующих-программ">Редактирование и удаление существующих программ</a></li><li><a href="#скрытые-сервисные-меню-и-продвинутые-настройки">Скрытые сервисные меню и продвинутые настройки</a></li><li><a href="#типичные-проблемы-и-ошибки-отображения">Типичные проблемы и ошибки отображения</a></li><li><a href="#сравнение-возможностей-настройки-по-брендам">Сравнение возможностей настройки по брендам</a></li><li><a href="#важные-нюансы-при-синхронизации-с-приложениями">Важные нюансы при синхронизации с приложениями</a></li><li><a href="#заключение-и-рекомендации-по-эксплуатации">Заключение и рекомендации по эксплуатации</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Многие пользователи автоматических кофемашин сталкиваются с ситуацией, когда панель управления предлагает стандартный набор опций, который не всегда соответствует индивидуальным предпочтениям. Фраза «название кофе список из кофемашины» часто вбивается в поисковик, когда владелец пытается найти способы кастомизации меню, скрытые функции или инструкцию по сбросу настроек до заводских значений. Понимание того, как работает внутренний алгоритм выбора напитков, позволяет раскрыть потенциал техники на 100%.</p>
+<p>Современные аппараты, будь то компактные модели <em>De'Longhi</em> или мощные станции <em>Jura</em>, хранят конфигурацию напитков в энергонезависимой памяти. Это означает, что вы можете не только выбирать готовые программы, но и менять их параметры, сохраняя собственные рецепты. В этой статье мы разберем, как именно редактировать список, какие ограничения существуют для разных брендов и как избежать ошибок при перенастройке интерфейса.</p>
+<p>Некоторые пользователи ошибочно полагают, что список напитков зашит в «железо» и не поддается изменениям. На самом деле, в большинстве случаев речь идет о программных настройках, доступных через меню сервиса или пользовательский интерфейс. Правильная настройка позволяет быстрее готовить любимые эспрессо или латте, экономя время каждое утро.</p>
+
+<h2 id="понимание-структуры-меню-напитков">Понимание структуры меню напитков</h2>
+<p>Внутренняя структура меню кофемашины представляет собой иерархическую систему, где каждый элемент соответствует определенной комбинации действий: заваривание, дозировка молока, температура и объем воды. Основа этого списка — <strong>профиль напитка</strong>, который хранит все параметры прогона. При нажатии на кнопку «Капучино» машина не просто льет молоко, а последовательно выполняет заложенную в памяти последовательность команд.</p>
+<p>Важно различать физические кнопки (если они есть) и виртуальное меню на дисплее. В моделях с полным сенсорным управлением, таких как <em>Saeco Xelsis</em>, список напитков часто можно сортировать или скрывать редко используемые позиции. Это избавляет от необходимости искать нужный режим среди десятков лишних иконок. Система позволяет группировать напитки по категориям: «Горячий кофе», «Молочные напитки», «Горячая вода».</p>
+<p>Если вы заметили, что какой-то напиток исчез из списка, это может быть связано с блокировкой из-за необходимости проведения обслуживания. Например, при высоком уровне загрязнения группы заваривания или отсутствии воды система может автоматически убрать из меню опции, требующие большого расхода жидкости. Перезагрузка или проведение цикла промывки часто возвращает отсутствующие элементы.</p>
+
+<h2 id="как-добавить-новый-напиток-в-список">Как добавить новый напиток в список</h2>
+<p>Процесс добавления новой позиции зависит от типа вашей кофемашины. В большинстве автоматических моделей эта функция называется «Создать пользовательский напиток» или «My Drink». Для этого необходимо перейти в <code>Настройки → Меню напитков → Добавить</code>. Машина попросит вас задать параметры: крепость, объем эспрессо, температуру и количество молока.</p>
+<p>После настройки параметров вам нужно будет сохранить рецепт, присвоив ему имя и назначив иконку. В некоторых моделях <em>Philips/Saeco</em> это делается через сервисное меню, где можно активировать скрытые программы, например, «Американо» с двойной подачей воды. В других случаях, как у <em>Siemens</em>, создание нового напитка доступно только через мобильное приложение, синхронизирующееся с устройством по Bluetooth.</p>
+<p>Обратите внимание, что добавление напитка требует наличия соответствующих модулей. Если у вас нет системы автоматического вспенивания молока, вы не сможете добавить в меню «Капучино» или «Латте Макиатто», даже если попытаетесь это сделать в программном коде. Аппарат физически не сможет исполнить команду, и система часто блокирует создание таких программ на этапе сохранения.</p>
+<p>Иногда требуется ручное вмешательство в прошивку или использование сторонних утилит, если производитель ограничил функционал. Однако для бытовых моделей это редкость, так как производители заинтересованы в удобстве пользователя.</p>
+
+
+
+<h2 id="редактирование-и-удаление-существующих-программ">Редактирование и удаление существующих программ</h2>
+<p>Изменение параметров уже существующего напитка обычно проще, чем создание нового. Вы можете выбрать любой пункт из стандартного списка и нажать кнопку «Изменить» или значок карандаша. Здесь открывается полный доступ к настройкам: можно увеличить крепость с 3 до 5 ложек кофе, изменить температуру с 85 до 90 градусов или сократить объем порции.</p>
+<p>Удаление стандартных напитков возможно не во всех моделях. Производители часто запрещают удаление базовых программ, таких как «Эспрессо» или «Эспрессо дюо», чтобы пользователь не потерял возможность готовить классические напитки. Однако в премиальных сегментах, например, в линейке <em>DeLonghi Primadonna Elite</em>, разрешено полностью перестроить меню, выбрав только те 5-6 напитков, которые вы пьете ежедневно.</p>
+<p>При редактировании обратите внимание на логику работы заварочного блока. Если вы установите слишком маленький объем воды при высокой температуре, система может выдать предупреждение о риске перегрева. Это защита от ошибок, которую нельзя обойти. <strong>Перенастройка</strong> должна быть разумной, чтобы не нарушить баланс экстракции.</p>
+<p> Если вы случайно настроили напиток не так, как хотели, большинство аппаратов имеют функцию «Сброс настроек напитка», которая возвращает параметры к заводским значениям. Это удобно, если эксперимент по настройке крепости не удался и кофе получился слишком горьким.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка перед сохранением нового рецепта</h4><label class="check-item"><input type="checkbox"><span>Выберите тип зерна</span></label><label class="check-item"><input type="checkbox"><span>Установите крепость</span></label><label class="check-item"><input type="checkbox"><span>Задайте объем воды</span></label><label class="check-item"><input type="checkbox"><span>Настройте температуру</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="скрытые-сервисные-меню-и-продвинутые-настройки">Скрытые сервисные меню и продвинутые настройки</h2>
+<p>Существует категория настроек, недоступных в обычном пользовательском режиме. Это так называемое сервисное меню, которое часто требует ввода специального кода или нажатия комбинации кнопок при включении. В этом разделе можно найти параметры, влияющие на базовую работу списка напитков, такие как калибровка дозатора или тестирование соленоидных клапанов.</p>
+<p>Например, в аппаратах <em>Miele</em> через сервисное меню можно изменить количество циклов промывки перед завариванием, что влияет на скорость старта программы. В моделях <em>Gaggia</em> там же настраивается чувствительность датчика наличия чашки, что критично для корректного начала программы. Однако вход в эти разделы требует осторожности: некорректное изменение параметров может привести к отказу электроники.</p>
+<p>Некоторые пользователи ищут способы активации «скрытых» напитков, которые производитель не добавил в меню, но которые аппарат технически способен готовить. Обычно это достигается изменением прошивки, но это лишает гарантию и может привести к нестабильной работе. Лучше использовать официальные инструменты настройки, которые предоставлены производителем.</p>
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: Вход в сервисное меню и изменение системных параметров осуществляется на ваш страх и риск. Ошибки в настройке могут привести к выходу из строя заварочного механизма или электронного контроллера.</p>
+</blockquote>
+<p>Если вы не уверены в своих действиях, лучше проконсультироваться с сертифицированным мастером. Он сможет безопасно активировать нужные функции, не нарушая целостность программного обеспечения.</p>
+
+<details class="faq-item"><summary>Как войти в сервисное меню на моделях Saeco?|Обычно это комбинация</summary><div class="faq-answer"><p> при выключенном аппарате зажмите кнопку «Выключение» и кнопку «Предварительный нагрев», затем включите питание и удерживайте кнопки до появления кода ошибки или меню.</p></div></details>
+
+<h2 id="типичные-проблемы-и-ошибки-отображения">Типичные проблемы и ошибки отображения</h2>
+<p>Иногда пользователи сталкиваются с тем, что список напитков отображается некорректно: иконки «скачут», названия обрезаются или некоторые пункты становятся серыми и неактивными. Это может быть связано с программным сбоем или устаревшей прошивкой. Производители регулярно выпускают обновления, которые исправляют баги в интерфейсе и добавляют новые функции управления.</p>
+<p>Другая частая причина — неправильная настройка языка. Если язык выбран некорректно или выбран региональный вариант, в котором нет перевода некоторых названий, машина может показывать их как набор символов или кодов. Проверьте настройки языка в разделе <code>Система → Язык</code> и выберите тот, который поддерживается полностью.</p>
+<p>Также стоит проверить, не включен ли режим «Экономия» или «Детская защита». В режиме экономии некоторые напитки могут быть отключены для снижения расхода воды и энергии. Детская защита блокирует запуск программ, требующих нажатия нескольких кнопок одновременно. <strong>Перезагрузка</strong> аппарата часто решает проблему временного зависания интерфейса.</p>
+<p>Если после обновления прошивки список напитков изменился радикально, это может быть особенностью новой версии ПО. Производители иногда меняют логику меню, чтобы упростить навигацию или, наоборот, скрыть сложные настройки. В таком случае стоит изучить инструкцию к новой версии, так как кнопки могут переместиться в другие разделы.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Если меню «зависло», попробуйте полностью обесточить кофемашину на 5-10 минут, вынув вилку из розетки. Это сбрасывает кэш контроллера и часто исправляет визуальные ошибки интерфейса.</p></div>
+
+<h2 id="сравнение-возможностей-настройки-по-брендам">Сравнение возможностей настройки по брендам</h2>
+<p>Разные производители подходят к вопросу кастомизации меню по-разному. Некоторые делают ставку на простоту и минимализм, другие — на максимальную гибкость. Понимание этих различий поможет вам выбрать правильную стратегию управления устройством. Ниже приведена таблица с основными возможностями настройки для популярных брендов.</p>
+
+<table>
+<thead>
+<tr>
+<th>Бренд</th>
+<th>Способ настройки</th>
+<th>Возможность удаления</th>
+<th>Мобильное приложение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>De'Longhi</td>
+<td>Меню на дисплее + App</td>
+<td>Частичная</td>
+<td>Да (Smart App)</td>
+</tr>
+<tr>
+<td>Jura</td>
+<td>Иерархическое меню</td>
+<td>Нет (только скрытие)</td>
+<td>Да (J.O.E.)</td>
+</tr>
+<tr>
+<td>Philips/Saeco</td>
+<td>Тачскрин + App</td>
+<td>Полная (в топ-моделях)</td>
+<td>Да (Coffee App)</td>
+</tr>
+<tr>
+<td>Nespresso</td>
+<td>Фиксированный список</td>
+<td>Нет</td>
+<td>Нет</td>
+</tr>
+</tbody>
+</table>
+
+<p>Как видно из таблицы, линейка <em>Nespresso</em> предлагает наименьшую гибкость, так как ориентирована на капсульную систему с фиксированным объемом воды и давления. В то же время, модели <em>Philips</em> позволяют полностью переписать логику меню. Важно учитывать эти особенности при покупке, если для вас критична возможность создания уникальных рецептов.</p>
+
+<h2 id="важные-нюансы-при-синхронизации-с-приложениями">Важные нюансы при синхронизации с приложениями</h2>
+<p>Современный тренд — управление кофемашиной через смартфон. Приложения позволяют создавать рецептуры, которые затем загружаются в память устройства. Это удобно, так как на большом экране телефона проще настраивать сложные параметры, чем на маленьком дисплее аппарата. Однако синхронизация требует стабильного соединения.</p>
+<p>При изменении списка напитков через приложение убедитесь, что устройство находится в режиме ожидания или включено. Если связь прервется в момент загрузки, настройки могут не сохраниться или, что хуже, вызвать конфликт версий прошивки. Всегда дожидайтесь сообщения об успешной синхронизации в приложении.</p>
+<p>Некоторые приложения позволяют сохранять несколько профилей пользователей. Это удобно для семьи: каждый член семьи может иметь свой набор «любимых» напитков, который загружается одним нажатием. Машина автоматически подстроит крепость и объем под конкретного пользователя, если вы выберете его профиль при запуске.</p>
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: При смене владельца кофемашины или продаже устройства обязательно выполните «Сброс до заводских настроек» через меню или приложение. Это удалит все личные рецепты и привязанные аккаунты, защищая ваши данные.</p>
+</blockquote>
+
+<h2 id="заключение-и-рекомендации-по-эксплуатации">Заключение и рекомендации по эксплуатации</h2>
+<p>Управление списком напитков — это не просто техническая процедура, а способ сделать использование кофемашины максимально комфортным. Регулярная настройка под ваши вкусовые предпочтения позволяет каждый день получать идеальный вкус. Не бойтесь экспериментировать с параметрами, но делайте это постепенно, фиксируя изменения.</p>
+<p>Если вы не нашли нужного пункта в меню, проверьте, не заблокирован ли он служебными алгоритмами. Внимательно изучите инструкцию к вашей модели, так как производители часто добавляют секретные комбинации или функции, о которых не сообщают в рекламных буклетах. <strong>Кастомизация</strong> — это ключ к долгой и приятной эксплуатации техники.</p>
+<p>Помните о регулярном обслуживании. Даже самая совершенная настройка списка напитков не даст качественного результата, если заварочный блок забит кофейными маслами или система подачи молока требует чистки. Своевременный уход гарантирует, что все программы будут выполняться корректно.</p>
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: Если после выполнения всех настроек напиток все еще имеет некорректный вкус или объем, проблема может быть механической (засор, износ насоса). В этом случае обратитесь в сервисный центр.</p>
+</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Правильная настройка списка напитков экономит ваше время и позволяет получить идеальный вкус, но требует понимания логики работы конкретного бренда и регулярного обслуживания техники.</p></div>
+
+<details>
+<summary>Как восстановить стандартный список напитков?</summary>
+<p>Для восстановления заводских настроек перейдите в меню <code>Настройки → Общие → Сброс настроек</code>. В некоторых моделях эта опция находится в разделе <code>Система</code>. После подтверждения действия машина перезагрузится и вернет исходный набор программ.</p>
+</details>
+
+<details>
+<summary>Можно ли добавить горячее молоко в список напитков?</summary>
+<p>Да, если ваша модель оснащена капучинатором или автоматическим молокопроводом. Выберите функцию «Горячее молоко» в меню создания напитка и задайте необходимый объем и температуру. Это полезно для приготовления какао или просто для подогрева молока.</p>
+</details>
+
+<details>
+<summary>Почему некоторые кнопки в меню серые и неактивны?</summary>
+<p>Серые кнопки обычно означают, что функция недоступна в данный момент. Это может быть связано с отсутствием молока, необходимостью очистки, низким уровнем воды или блокировкой в режиме энергосбережения. Проверьте состояние всех расходных материалов и выполните необходимые процедуры обслуживания.</p>
+</details>
+
+<details>
+<summary>Влияет ли выбор зерна на список напитков?</summary>
+<p>Прямого влияния на наличие кнопок в меню нет, но некоторые машины автоматически корректируют параметры (крепость, помол) в зависимости от типа зерна, если вы загрузили его в бункер. Это делается для оптимизации экстракции.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#понимание-структуры-меню-напитков">Понимание структуры меню напитков</a></li><li><a href="#как-добавить-новый-напиток-в-список">Как добавить новый напиток в список</a></li><li><a href="#редактирование-и-удаление-существующих-программ">Редактирование и удаление существующих программ</a></li><li><a href="#скрытые-сервисные-меню-и-продвинутые-настройки">Скрытые сервисные меню и продвинутые настройки</a></li><li><a href="#типичные-проблемы-и-ошибки-отображения">Типичные проблемы и ошибки отображения</a></li><li><a href="#сравнение-возможностей-настройки-по-брендам">Сравнение возможностей настройки по брендам</a></li><li><a href="#важные-нюансы-при-синхронизации-с-приложениями">Важные нюансы при синхронизации с приложениями</a></li><li><a href="#заключение-и-рекомендации-по-эксплуатации">Заключение и рекомендации по эксплуатации</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-wmf-1200s.html" class="related-card">Как включить кофемашину WMF 1200s: пошаговая инструкция запуска</a></li><li><a href="/articles/c/ch/chto-zabivaetsya-v-kofemashine.html" class="related-card">Что забивается в кофемашине: причины и методы очистки</a></li><li><a href="/articles/p/po/pochemu-ne-pakhnet-kofe-pri-varke-iz-kofemashiny.html" class="related-card">Почему не пахнет кофе при варке: 7 скрытых причин и решения</a></li><li><a href="/articles/k/ko/kofemashina-pishet-chto-net-zeren.html" class="related-card">Кофемашина пишет &#x27;нет зерен&#x27;: причины ошибки и способы устранения</a></li><li><a href="/articles/s/st/sterling-kofevarka-kak-polzovatsya.html" class="related-card">Как пользоваться кофеваркой Sterngold и Sterling: полная инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-wmf-1200s.html" class="related-bottom-card"><span class="related-bottom-title">Как включить кофемашину WMF 1200s: пошаговая инструкция запуска</span><span class="related-bottom-desc">Подробный гайд по включению кофемашины WMF 1200s. Инструкция по первому запуску, режимам промывки и </span></a><a href="/articles/c/ch/chto-zabivaetsya-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Что забивается в кофемашине: причины и методы очистки</span><span class="related-bottom-desc">Узнайте, какие элементы забиваются в кофемашине чаще всего. Причины засоров, виды накипи и пошаговая</span></a><a href="/articles/p/po/pochemu-ne-pakhnet-kofe-pri-varke-iz-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Почему не пахнет кофе при варке: 7 скрытых причин и решения</span><span class="related-bottom-desc">Разбираем, почему кофемашина перестала пахнуть ароматом. Диагностика засоров, правильный помол, каче</span></a><a href="/articles/k/ko/kofemashina-pishet-chto-net-zeren.html" class="related-bottom-card"><span class="related-bottom-title">Кофемашина пишет &#x27;нет зерен&#x27;: причины ошибки и способы устранения</span><span class="related-bottom-desc">Ваша кофемашина сообщает об отсутствии зерен, хотя бункер полон? Узнайте реальные причины сбоя датчи</span></a><a href="/articles/s/st/sterling-kofevarka-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофеваркой Sterngold и Sterling: полная инструкция</span><span class="related-bottom-desc">Пошаговое руководство: как пользоваться кофеваркой Sterling и Sterngold. Инструкция по завариванию, </span></a><a href="/articles/k/ka/kak-ochistit-kofevarku-ot-nakipi.html" class="related-bottom-card"><span class="related-bottom-title">Как очистить кофеварку от накипи: полная инструкция и методы</span><span class="related-bottom-desc">Узнайте, как правильно удалить накипь из кофемашин. Проверенные средства, пошаговые инструкции для к</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

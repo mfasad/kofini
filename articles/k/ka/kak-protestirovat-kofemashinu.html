@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как протестировать кофемашину: пошаговая инструкция проверки — Кофини</title>
+    <meta name="description" content="Пошаговый алгоритм тестирования кофемашины. Проверка давления, температуры, вкусовых качеств и выявление скрытых дефектов перед покупкой или после ремонта.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-protestirovat-kofemashinu.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как протестировать кофемашину: пошаговая инструкция проверки">
+    <meta property="og:description" content="Пошаговый алгоритм тестирования кофемашины. Проверка давления, температуры, вкусовых качеств и выявление скрытых дефектов перед покупкой или после ремонта.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как протестировать кофемашину: пошаговая инструкция проверки</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как протестировать кофемашину: полный чек-лист проверки</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#визуальный-осмотр-и-первичная-подготовка">Визуальный осмотр и первичная подготовка</a></li><li><a href="#диагностика-системы-промывки-и-гидравлики">Диагностика системы промывки и гидравлики</a></li><li><a href="#проверка-температуры-и-парогенератора">Проверка температуры и парогенератора</a></li><li><a href="#оценка-качества-экстракции-и-вкусовых-качеств">Оценка качества экстракции и вкусовых качеств</a></li><li><a href="#анализ-шума-и-вибрации">Анализ шума и вибрации</a></li><li><a href="#таблица-нормативов-и-допустимых-отклонений">Таблица нормативов и допустимых отклонений</a></li><li><a href="#финальная-проверка-и-рекомендации-по-эксплуатации">Финальная проверка и рекомендации по эксплуатации</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Покупка или получение в ремонт кофемашины — это всегда волнительный момент, ведь от качества работы агрегата зависит не только утренний настрой, но и здоровье вашей техники в долгосрочной перспективе. Многие пользователи совершают ошибку, пытаясь сразу сварить эспрессо и выпить его, не проведя базовую диагностику. Ошибки в работе помпы, нагревательного элемента или системы промывки могут стоить дорого, если их не выявить на старте.</p>
+
+<p>Профессиональный подход к тестированию включает в себя не просто проверку наличия воды в чашке, а комплексную оценку всех узлов устройства. Вам необходимо убедиться в герметичности соединений, корректности работы термоблока и стабильности давления при экстракции. Только системный метод позволит вам отличить исправный <strong>автоматический эспрессо-аппарат</strong> от устройства с скрытыми дефектами.</p>
+
+<p>В этой статье мы разберем пошаговый алгоритм, который поможет вам самостоятельно провести аудит кофемашины. Мы рассмотрим, как проверить температуру напитка, как оценить качество пенки и на какие звуки нужно обращать особое внимание во время работы. Грамотная диагностика сэкономит вам время и деньги на последующем ремонте.</p>
+
+<h2 id="визуальный-осмотр-и-первичная-подготовка">Визуальный осмотр и первичная подготовка</h2>
+
+<p>Перед тем как включать устройство в сеть, необходимо провести тщательный внешний осмотр корпуса и комплектующих. Проверьте целостность пластиковых панелей, отсутствие трещин на резервуаре для воды и надежность крепления всех съемных элементов. Любые механические повреждения могут свидетельствовать о неаккуратной транспортировке или попытке несанкционированного ремонта.</p>
+
+<p>Особое внимание уделите состоянию заварочного блока. В автоматических кофемашинах это сердце устройства, и его состояние критически важно для стабильной работы. Если блок выдвигается, проверьте плавность хода и отсутствие ржавчины или следов старого кофейного масла на металлических шестернях. Чистота и целостность <strong>заварочного узла</strong> напрямую влияют на вкус напитка.</p>
+
+<p>Убедитесь, что в комплекте есть все необходимые принадлежности: мерная ложка, дозатор, шланг для слива конденсата и инструкция. Проверьте наличие и целостность уплотнительных резинок на крышке контейнера для отработанной гущи. Отсутствие или деформация этих мелких деталей может привести к протечкам и засорению внутреннего пространства.</p>
+
+<ul>
+<li>✅ Осмотрите корпус на предмет вмятин и царапин, которые могут скрыть более глубокие повреждения.</li>
+<li>✅ Проверьте герметичность крышки контейнера для жмыха — она должна закрываться плотно без люфта.</li>
+<li>✅ Убедитесь, что поддон для капель и контейнер для отработки свободно выдвигаются и не заедают.</li>
+</ul>
+
+<h2 id="диагностика-системы-промывки-и-гидравлики">Диагностика системы промывки и гидравлики</h2>
+
+<p>Первый запуск устройства должен сопровождаться обязательной процедурой промывки, которая часто игнорируется новичками. Этот процесс необходим для удаления заводской смазки с трубок и проверки работоспособности <strong>помпового насоса</strong> без риска испортить вкус будущего напитка. Вставьте пустой заварочный блок и запустите цикл промывки, следуя подсказкам на дисплее.</p>
+
+<p>Внимательно слушайте звук работы насоса: он должен быть ровным, без посторонних скрежета, визга или прерывистых щелчков. Если вы слышите, что помпа "схватывает" воздух или работает рывками, это верный признак неисправности гидравлической системы. Не пытайтесь варить кофе, пока не устраните эти проблемы, так как сухая помпа быстро выйдет из строя.</p>
+
+<p>Следите за тем, как вода выходит из группы заваривания. Поток должен быть ровным, без разбрызгивания и капания после завершения цикла. Если вода течет тонкой струйкой или образует лужу под машиной, это указывает на проблемы с давлением или засорение трубок. Записывайте любые отклонения в работе, чтобы предъявить их продавцу или мастеру.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если при первом запуске из машины идет сильный запах пластика или химии, это может быть нормально для новых моделей, но если запах не исчезает после трех циклов промывки — это признак некачественных материалов корпуса или сборки.</p>
+</blockquote>
+
+<h2 id="проверка-температуры-и-парогенератора">Проверка температуры и парогенератора</h2>
+
+<p>Температурный режим — один из самых важных параметров для качественного приготовления эспрессо. Недостаточный нагрев воды приведет к тому, что напиток будет кислым и водянистым, а перегрев вызовет горечь. Идеальная температура воды на выходе из группы должна быть в диапазоне <code>92-94°C</code>. Для проверки используйте термометр или просто оцените интенсивность пара.</p>
+
+<p>Если ваша кофемашина оснащена функцией взбивания молока, протестируйте парогенератор отдельно. Включите режим пара и опустите капилляр в стакан с холодной водой. Пар должен выходить мощной, сухой струей, а не влажным конденсатом. Сухой пар мгновенно нагревает молоко, создавая идеальную микропену, тогда как влажный сделает молоко водянистым.</p>
+
+<p>Обратите внимание на скорость разогрева термоблока. Современные устройства должны выходить на рабочую температуру за 30-60 секунд. Длительный прогрев может указывать на неисправность <strong>ТЭНа</strong> или системы управления температурой. В таких случаях машина может перегреваться при длительной работе, отключаясь по датчику защиты.</p>
+
+<div class="poll-widget" id="poll-22cbe7d1"><div class="poll-widget-question">📊 Какой параметр для вас важнее всего при проверке кофемашины?</div><div class="poll-widget-option" data-poll="22cbe7d1" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Температура напитка</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="22cbe7d1" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Скорость прогрева</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="22cbe7d1" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Качество взбивания пены</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="22cbe7d1" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Герметичность системы</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="оценка-качества-экстракции-и-вкусовых-качеств">Оценка качества экстракции и вкусовых качеств</h2>
+
+<p>Самый главный тест — это приготовление напитка. Используйте свежемолотое зерно средней обжарки, чтобы получить объективную оценку работы машины. Заложите порцию кофе, уплотните её (если машина не делает это сама) и запустите процесс экстракции. Следите за цветом и консистенцией потока: идеальный эспрессо выходит тонкой струйкой "мышиного хвостика" золотисто-коричневого цвета.</p>
+
+<p>Если поток слишком быстрый и светлый, значит, помпа не держит давление или помол слишком крупный. Слишком медленный, темный поток указывает на высокое давление или слишком мелкий помол, что может привести к горечи. В автоматических машинах важно проверить, насколько точно работает <strong>система дозирования</strong> и измельчения, чтобы порции были одинаковыми.</p>
+
+<p>Оцените crema (кофейную пенку) на поверхности напитка. Она должна быть плотной, однородной и сохранять структуру минимум 2 минуты. Быстрое расслоение пенки говорит о проблемах с температурой или давлением. Вкус напитка должен быть сбалансированным, без выраженной кислинки или горечи, которые не характерны для выбранного сорта зерна.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Не используйте для теста кофе низкого качества или старый помол. Некачественное сырье может исказить картину, и вы можете ошибочно списать проблемы с вкусом на неисправность машины, хотя причина кроется в зернах.</p>
+</blockquote>
+
+<h2 id="анализ-шума-и-вибрации">Анализ шума и вибрации</h2>
+
+<p>Кофемашина не должна быть громким устройством, но она не может работать в полной тишине. Звук работы помпы должен быть глухим, глубоким гулом. Резкий металлический стук, скрип или свист — это тревожные сигналы, указывающие на износ подшипников, проблемы с шестернями заварочного блока или наличие воздуха в системе.</p>
+
+<p>Проверьте устойчивость машины на поверхности во время работы. Вибрация не должна быть настолько сильной, чтобы сдвигать аппарат или вызывать дребезжание чашек рядом. Если корпус сильно вибрирует, проверьте ножки-регуляторы и убедитесь, что машина стоит ровно. Избыточная вибрация ускоряет износ внутренних соединений и может привести к протечкам.</p>
+
+<p>Сравните уровень шума в разных режимах: при помоле зерна, при работе помпы и при взбивании пара. Резкие перепады громкости или появление нового звука в процессе работы говорят о нестабильной работе электроники или механики. Запишите эти особенности, так как они могут быть полезны при гарантийном обслуживании.</p>
+
+<div class="checklist-block"><h4>☑️ Чек-лист проверки звука и вибрации</h4><label class="check-item"><input type="checkbox"><span>Помпа работает ровно без свиста</span></label><label class="check-item"><input type="checkbox"><span>Нет постороннего стука в заварочном блоке</span></label><label class="check-item"><input type="checkbox"><span>Машина не сдвигается со стола</span></label><label class="check-item"><input type="checkbox"><span>Пар выходит без шипения</span></label><label class="check-item"><input type="checkbox"><span>Нет вибрации корпуса при помоле</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<h2 id="таблица-нормативов-и-допустимых-отклонений">Таблица нормативов и допустимых отклонений</h2>
+
+<p>Для наглядности мы собрали основные параметры работы кофемашины в одну таблицу. Сверяйте свои наблюдения с этими значениями, чтобы понять, находится ли устройство в нормальном состоянии. Отклонения более чем на 10-15% от нормы требуют внимания специалиста.</p>
+
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Нормальное значение</th>
+<th>Допустимое отклонение</th>
+<th>Проблема при отклонении</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Температура воды</td>
+<td>92-94°C</td>
+<td>±2°C</td>
+<td>Кислый или горький вкус</td>
+</tr>
+<tr>
+<td>Давление помпы</td>
+<td>9-15 бар</td>
+<td>±1 бар</td>
+<td>Слабая экстракция или течь</td>
+</tr>
+<tr>
+<td>Время экстракции (30мл)</td>
+<td>20-30 сек</td>
+<td>±5 сек</td>
+<td>Передержка или недоэкстракция</td>
+</tr>
+<tr>
+<td>Уровень шума</td>
+<td>55-65 дБ</td>
+<td>±5 дБ</td>
+<td>Износ узлов или дефекты</td>
+</tr>
+</tbody>
+</table>
+
+<details class="faq-item"><summary>Что делать, если температура ниже нормы?</summary><div class="faq-answer"><p>Если температура воды ниже 90 градусов, это часто связано с накипью на ТЭНе или неисправностью термодатчика. Попробуйте провести цикл декальцинации. Если это не помогло, возможно, потребуется замена нагревательного элемента в сервисном центре.</p></div></details>
+
+<h2 id="финальная-проверка-и-рекомендации-по-эксплуатации">Финальная проверка и рекомендации по эксплуатации</h2>
+
+<p>После завершения всех тестовых циклов проведите финальный осмотр. Убедитесь, что в поддоне для капель нет лишней влаги, а контейнер для жмыха заполнен корректно. Проверьте, как машина отключается в режиме ожидания: дисплей должен погаснуть или перейти в экономичный режим без зависаний. Это важный признак исправности системы управления энергией.</p>
+
+<p>Если вы проводите проверку после ремонта, обязательно сравните результаты с состоянием до вмешательства. Машина должна звучать тише и работать стабильнее. <strong>Восстановленный аппарат</strong> не должен иметь запаха гари или протечек в местах, где производилась замена узлов. Любые сомнения должны быть зафиксированы в акте приема-передачи.</p>
+
+<p>Помните, что регулярная проверка помогает продлить жизнь техники. Не ждите поломки, а проводите мониторинг состояния раз в месяц. Это позволит вам вовремя заменить фильтр, провести чистку или вызвать мастера до того, как возникнет критическая ситуация. Бережное отношение и внимательность — залог долгой работы вашей любимой кофемашины.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Совет: Сохраняйте чек и гарантийный талон в одном месте с записью даты покупки и серийного номера. Это значительно упростит процесс гарантийного ремонта, если в первые дни эксплуатации выявятся скрытые дефекты.</p></div>
+
+<blockquote>
+<p>⚠️ Внимание: Гарантийные обязательства могут быть аннулированы, если вы самостоятельно вскрыли корпус или пытались починить машину без квалификации. Никогда не разбирайте <em>закрытый блок</em> заваривания или электронику во время тестов.</p>
+</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная проверка температурных режимов и герметичности системы позволяет выявить скрытые дефекты на ранней стадии и избежать дорогостоящего ремонта в будущем.</p></div>
+
+<details>
+<summary>Как часто нужно проводить полное тестирование кофемашины?</summary>
+<p>Полное тестирование рекомендуется проводить сразу после покупки, после каждого планового обслуживания (декальцинации, чистки) и при подозрении на снижение качества напитков. В обычном режиме достаточно визуального осмотра раз в неделю.</p>
+</details>
+
+<details>
+<summary>Что делать, если кофемашина работает нормально, но кофе невкусный?</summary>
+<p>Если машина исправна по всем техпараметрам, проблема может быть в зерне. Попробуйте сменить сорт, степень обжарки или помол. Также проверьте чистоту жерновов и наличие затхлого масла в бункере, что часто влияет на вкус.</p>
+</details>
+
+<details>
+<summary>Можно ли тестировать машину без воды?</summary>
+<p>Категорически нельзя включать помпу или нагревательный элемент без воды. Это приведет к мгновенному выходу из строя нагревателя и поломке помпы. Тестирование системы промывки можно проводить только при заполненном резервуаре.</p>
+</details>
+
+<details>
+<summary>Как проверить давление в системе без манометра?</summary>
+<p>Без манометра точное давление измерить сложно, но можно оценить его по скорости потока кофе. Если вода льется слишком быстро, давление низкое. Если поток еле капает, давление может быть избыточным или засоренным. Идеальный поток — ровная струя за 25-30 секунд.</p>
+</details>
+
+<details>
+<summary>Нужно ли тестировать капучинатор каждый раз?</summary>
+<p>Каждый раз не обязательно, но после приготовления молочных напитков обязательно нужно промывать капилляр паром и водой. Раз в неделю рекомендуется делать полный цикл взбивания для проверки стабильности пены и отсутствия засоров.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#визуальный-осмотр-и-первичная-подготовка">Визуальный осмотр и первичная подготовка</a></li><li><a href="#диагностика-системы-промывки-и-гидравлики">Диагностика системы промывки и гидравлики</a></li><li><a href="#проверка-температуры-и-парогенератора">Проверка температуры и парогенератора</a></li><li><a href="#оценка-качества-экстракции-и-вкусовых-качеств">Оценка качества экстракции и вкусовых качеств</a></li><li><a href="#анализ-шума-и-вибрации">Анализ шума и вибрации</a></li><li><a href="#таблица-нормативов-и-допустимых-отклонений">Таблица нормативов и допустимых отклонений</a></li><li><a href="#финальная-проверка-и-рекомендации-по-эксплуатации">Финальная проверка и рекомендации по эксплуатации</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-ot-nakipi-v-domashnikh-usloviyakh.html" class="related-card">Как почистить кофемашину Delonghi от накипи: полная инструкция</a></li><li><a href="/articles/c/ch/chto-znachit-znachok-na-kofemashine-filips.html" class="related-card">Что значит значок на кофемашине Philips: расшифровка иконок и ошибок</a></li><li><a href="/articles/k/ka/kak-pochistit-kapsulnuyu-kofemashinu-nespresso.html" class="related-card">Как почистить капсульную кофемашину Nespresso: полная инструкция</a></li><li><a href="/articles/k/ka/kak-otmyt-kapelnuyu-kofevarku.html" class="related-card">Как отмыть капельную кофеварку: инструкция по чистке и декальцинации</a></li><li><a href="/articles/k/ka/kak-sdelat-kipyatok-v-kofemashine.html" class="related-card">Как получить кипяток в кофемашине: Инструкция для всех типов</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-ot-nakipi-v-domashnikh-usloviyakh.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Delonghi от накипи: полная инструкция</span><span class="related-bottom-desc">Пошаговая инструкция по удалению накипи в кофемашинах Delonghi. Обзор средств, режимов промывки и со</span></a><a href="/articles/c/ch/chto-znachit-znachok-na-kofemashine-filips.html" class="related-bottom-card"><span class="related-bottom-title">Что значит значок на кофемашине Philips: расшифровка иконок и ошибок</span><span class="related-bottom-desc">Полное руководство по индикаторам Philips. Узнайте, что означают мигающие иконки очистки, кальцинаци</span></a><a href="/articles/k/ka/kak-pochistit-kapsulnuyu-kofemashinu-nespresso.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить капсульную кофемашину Nespresso: полная инструкция</span><span class="related-bottom-desc">Пошаговое руководство по декальцинации и промывке кофемашин Nespresso. Узнайте, как удалить накипь и</span></a><a href="/articles/k/ka/kak-otmyt-kapelnuyu-kofevarku.html" class="related-bottom-card"><span class="related-bottom-title">Как отмыть капельную кофеварку: инструкция по чистке и декальцинации</span><span class="related-bottom-desc">Пошаговая инструкция как отмыть капельную кофеварку от накипи и кофейных масел. Советы по уходу, выб</span></a><a href="/articles/k/ka/kak-sdelat-kipyatok-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Как получить кипяток в кофемашине: Инструкция для всех типов</span><span class="related-bottom-desc">Узнайте, как правильно извлечь кипяток из кофемашины. Пошаговые инструкции для автоматических, рожко</span></a><a href="/articles/k/ko/kofemashina-delonghi-rozhkovaya-kak-pochistit.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить рожковую кофемашину DeLonghi: Полная инструкция</span><span class="related-bottom-desc">Пошаговое руководство по очистке и декальцинации рожковых кофемашин DeLonghi. Советы по уходу за гру</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

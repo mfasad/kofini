@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Ошибка OBK в кофемашине Bosch: причины, диагностика и ремонт — Кофини</title>
+    <meta name="description" content="Полное руководство по устранению ошибки OBK в кофемашинах Bosch. Узнайте, почему возникает сбой, как проверить датчики и восстановить работу группы помола.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/o/os/oshibka-obr-v-tekhsl-kofemashina-bosch-chto-delat.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Ошибка OBK в кофемашине Bosch: причины, диагностика и ремонт">
+    <meta property="og:description" content="Полное руководство по устранению ошибки OBK в кофемашинах Bosch. Узнайте, почему возникает сбой, как проверить датчики и восстановить работу группы помола.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Ошибка OBK в кофемашине Bosch: причины, диагностика и ремонт</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Ошибка OBK в техсл кофемашина Bosch: что делать и как исправить</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#причины-возникновения-кода-ошибки-obk">Причины возникновения кода ошибки OBK</a></li><li><a href="#первичная-диагностика-и-безопасная-разблокировка">Первичная диагностика и безопасная разблокировка</a></li><li><a href="#механическая-очистка-жерновов-и-редуктора">Механическая очистка жерновов и редуктора</a></li><li><a href="#электронная-диагностика-и-датчики">Электронная диагностика и датчики</a></li><li><a href="#программный-сброс-и-калибровка-системы">Программный сброс и калибровка системы</a></li><li><a href="#профилактика-и-правильное-обслуживание">Профилактика и правильное обслуживание</a></li><li><a href="#когда-стоит-обратиться-в-сервисный-центр">Когда стоит обратиться в сервисный центр?</a></li><li><a href="#часто-задаваемые-вопросы">Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Столкнувшись с надписью <strong>OBK</strong> (или <em>OBK</em>) на дисплее вашей кофемашины <em>Bosch</em>, многие пользователи впадают в панику, считая, что аппарат требует сложного ремонта. На самом деле этот код ошибки указывает на сбой в работе жерновной кофемолки или проблему с датчиками положения, что часто решается простыми действиями без вызова мастера.</p>
+
+<p>Система диагностики <em>Bosch</em> тщательно следит за синхронизацией мотора и механической группы, и при малейшем отклонении от нормы блокирует работу, чтобы предотвратить поломку. <strong>Ошибка OBK</strong> сигнализирует о том, что процесс помола не был завершен, либо датчик не зафиксировал возврат жерновов в исходное положение.</p>
+
+<h2 id="причины-возникновения-кода-ошибки-obk">Причины возникновения кода ошибки OBK</h2>
+
+<p>Основная причина появления <strong>OBK</strong> — это механическое препятствие, мешающее вращению жерновов. Это может быть застрявшее зерно неправильной формы, посторонний предмет или, что случается реже, износ подшипников мотора. Если кофемашина <em>Bosch</em> долго не чистилась, в узлах трения скапливается кофейная пыль, превращающаяся в твердую массу.</p>
+
+<p>Вторая по частоте причина кроется в электронике: датчик Холла, отвечающий за отслеживание оборотов, может загрязниться или выйти из строя. Также стоит проверить <strong>коннекторы</strong> и шлейфы, идущие к мотору помолки, так как окисление контактов приводит к ложным срабатываниям системы защиты.</p>
+
+<p>Нередко проблема возникает после использования слишком влажных или слипшихся зерен, которые забивают зазор между жерновами. В таких случаях мотор не может провернуть механизм, и контроллер фиксирует <strong>сбой помолки</strong> как ошибку OBK.</p>
+
+<blockquote>⚠️ Внимание: Никогда не пытайтесь разблокировать жернова силой, вращая их отверткой или руками, если аппарат включен в сеть. Это может привести к срыву шестеренки редуктора и дорогостоящему ремонту.</blockquote>
+
+<div class="poll-widget" id="poll-997d1573"><div class="poll-widget-question">📊 Что вы делали перед появлением ошибки?</div><div class="poll-widget-option" data-poll="997d1573" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Новая пачка зерен</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="997d1573" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Длительный простой аппарата</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="997d1573" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Низкий уровень воды</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="997d1573" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Отключение из розетки</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="первичная-диагностика-и-безопасная-разблокировка">Первичная диагностика и безопасная разблокировка</h2>
+
+<p>Первым шагом при появлении <strong>OBK</strong> должна быть полная перезагрузка системы. Отключите кофемашину <em>Bosch</em> от электросети и оставьте её в таком состоянии минимум на 15-20 минут. Это необходимо для того, чтобы конденсаторы на плате управления полностью разрядились, а система сбросила временные ошибки.</p>
+
+<p>После включения обратите внимание на звуковые сигналы: если мотор пытается запуститься, но сразу останавливается, значит, механическая блокировка сохраняется. В этом случае необходимо проверить <strong>отсеки для зерен</strong> и убедиться, что там нет посторонних предметов, а уровень зерна не превышает максимальную отметку.</p>
+
+<p>Если проблема не решается простым перезапуском, потребуется доступ к внутренним узлам. Перед началом любого вмешательства убедитесь, что вы отключили аппарат из розетки, чтобы избежать удара током или случайного запуска механизмов.</p>
+
+<div class="checklist-block"><h4>☑️ Безопасная проверка</h4><label class="check-item"><input type="checkbox"><span>Отключить шнур от сети</span></label><label class="check-item"><input type="checkbox"><span>Снять верхнюю крышку</span></label><label class="check-item"><input type="checkbox"><span>Осмотреть жернова</span></label><label class="check-item"><input type="checkbox"><span>Проверить датчики</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="механическая-очистка-жерновов-и-редуктора">Механическая очистка жерновов и редуктора</h2>
+
+<p>Для доступа к кофемолке на большинстве моделей <em>Bosch</em> (серии <code>Tassimo</code>, <code>Maximatic</code>) необходимо снять верхнюю крышку и контейнер для зерен. Внимательно осмотрите жернова: часто причиной <strong>застревания</strong> становится одно крупное или обломленное зерно, застрявшее между дисками.</p>
+
+<p>Используйте мягкую кисть или пылесос с узкой насадкой, чтобы удалить всю кофейную пыль и остатки масла из зоны помола. Если жернова вращаются вручную с трудом, возможно, потребуется смазка, но только специальной силиконовой, предназначенной для пищевого оборудования.</p>
+
+<p>Особое внимание уделите <strong>редуктору</strong>: если зубья шестеренки изношены или сломаны, мотор будет прокручивать вал, но жернова останутся на месте. В таком случае механическая очистка не поможет, и потребуется замена шестерен или всей группы помолки.</p>
+
+<details class="faq-item"><summary>Как проверить жернова вручную</summary><div class="faq-answer"><p>Аккуратно попробуйте провернуть верхний жернов пальцем. Если он вращается свободно, проблема скорее в датчике. Если заедает — ищите механическое препятствие или износ.</p></div></details>
+
+<h2 id="электронная-диагностика-и-датчики">Электронная диагностика и датчики</h2>
+
+<p>Если механическая часть в идеальном состоянии, а ошибка <strong>OBK</strong> продолжает появляться, проблема кроется в электронном блоке управления или датчиках. Датчик Холла, который считывает обороты мотора, может быть загрязнен кофейной пылью, из-за чего сигнал не поступает на плату.</p>
+
+<p>Проверьте целостность проводов, идущих к мотору помолки. Часто от вибрации контакты в разъемах разболтаются или окислятся. Очистите разъемы специальным контактным спреем и убедитесь в плотном прилегании штекера.</p>
+
+<p>В редких случаях выходит из строя сама плата управления, которая не может корректно интерпретировать сигналы датчиков. Для точной диагностики в этом случае понадобятся мультиметр и навыки работы с электроникой, чтобы проверить напряжение на выводах мотора.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Если вы не уверены в своих силах при разборке электроники, лучше не рисковать и обратиться в авторизованный сервисный центр Bosch, чтобы избежать замыкания платы.</p></div>
+
+<h2 id="программный-сброс-и-калибровка-системы">Программный сброс и калибровка системы</h2>
+
+<p>Иногда после механической очистки система не понимает, что проблема устранена, и продолжает выдавать <strong>ошибку OBK</strong>. В таких ситуациях необходим программный сброс (калибровка) группы помолки. Для этого часто требуется выполнить специальную последовательность нажатий кнопок или комбинацию в сервисном меню.</p>
+
+<p>На некоторых моделях <em>Bosch</em> процедура калибровки запускается следующим образом: включите аппарат, нажмите и удерживайте кнопку регулировки помола (обычно это колесико или кнопка с иконкой зерен) в течение 10 секунд, пока не прозвучит сигнал.</p>
+
+<p>Если стандартные методы не работают, может потребоваться вход в <code>Service Menu</code>. Будьте осторожны: неверные действия в сервисном меню могут привести к полной блокировке устройства. Ниже приведена таблица с типовыми кодами ошибок, похожими на OBK.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Код ошибки</th>
+      <th>Значение</th>
+      <th>Вероятная причина</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBK</td>
+      <td>Сбой помолки</td>
+      <td>Застревание жерновов, датчик Холла</td>
+    </tr>
+    <tr>
+      <td>OBK1</td>
+      <td>Ошибка редуктора</td>
+      <td>Износ шестерен, поломка мотора</td>
+    </tr>
+    <tr>
+      <td>OBK2</td>
+      <td>Нет сигнала</td>
+      <td>Обрыв провода, неисправность датчика</td>
+    </tr>
+    <tr>
+      <td>OBK3</td>
+      <td>Перегрузка</td>
+      <td>Слишком твердое зерно, заблокирован вал</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="профилактика-и-правильное-обслуживание">Профилактика и правильное обслуживание</h2>
+
+<p>Чтобы ошибка <strong>OBK</strong> не возвращалась, важно соблюдать регулярный график обслуживания. Раз в месяц проводите полную очистку жерновов от кофейной пыли и масла, используя специальные таблетки для чистки кофемашин.</p>
+
+<p>Используйте только качественные, сухие зерна с небольшим содержанием масел. Избегайте добавления специй, сахара или подгоревших зерен, так как они способны мгновенно вывести из строя систему помолки.</p>
+
+<blockquote>⚠️ Внимание: Регулярное использование влажных или подгоревших зерен может привести к необратимой деформации жерновов, что потребует их полной замены, а не просто очистки.</blockquote>
+
+<p>Следите за тем, чтобы уровень зерна в бункере не был слишком низким или слишком высоким. Перепады давления при подаче зерен также могут создавать неравномерную нагрузку на мотор, провоцируя срабатывание защиты.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная профилактическая чистка жерновов и использование качественных сухих зерен — лучший способ избежать ошибки OBK и продлить жизнь кофемашине Bosch.</p></div>
+
+<h2 id="когда-стоит-обратиться-в-сервисный-центр">Когда стоит обратиться в сервисный центр?</h2>
+
+<p>Если вы выполнили все описанные действия: перезагрузили, почистили, проверили датчики и выполнили калибровку, но ошибка <strong>OBK</strong> все еще появляется, проблема может быть серьезнее. В таких случаях речь идет о неисправности мотора помолки или контроллера.</p>
+
+<p>Замена мотора или жерновой группы — это сложная процедура, требующая разборки всего корпуса аппарата и точной настройки зазоров. Самостоятельные попытки могут привести к еще большим повреждениям, поэтому лучше доверить работу профессионалам.</p>
+
+<p>Обратите внимание, что в авторизованных сервисах <em>Bosch</em> используют оригинальные запчасти, что гарантирует долговечность ремонта. Попытка сэкономить на дешевых аналогах часто приводит к повторному отказу системы в ближайшем будущем.</p>
+
+<blockquote>⚠️ Внимание: Если аппарат находится на гарантии, любые самостоятельные вскрытия и попытки ремонта могут стать основанием для отказа в гарантийном обслуживании.</blockquote>
+
+<p>Не откладывайте ремонт надолго: игнорирование ошибки <strong>OBK</strong> может привести к сгоранию электроники или полному выходу из строя механизма, что сделает ремонт экономически нецелесообразным.</p>
+
+<details class="faq-item"><summary>Средняя стоимость ремонта</summary><div class="faq-answer"><p>Замена жерновов стоит от 3000 руб., ремонт электронного модуля — от 5000 руб., полная замена мотора помолки — от 7000 руб. без учета стоимости работ.</p></div></details>
+
+<h2 id="часто-задаваемые-вопросы">Часто задаваемые вопросы</h2>
+
+<details>
+  <summary>Можно ли использовать кофемашину, если горит ошибка OBK?</summary>
+  <p>Нет, использование аппарата с этой ошибкой запрещено. Система блокирует работу, чтобы предотвратить перегрев мотора и механическое разрушение редуктора. Попытка принудительно запустить варку может привести к серьезной поломке.</p>
+</details>
+
+<details>
+  <summary>Причина ошибки — в зернах?</summary>
+  <p>Да, часто проблема кроется в качестве зерен. Слишком твердые, влажные или подгоревшие зерна могут застрять между жерновами, вызывая сбой. Попробуйте заменить пачку зерен на другую марку.</p>
+</details>
+
+<details>
+  <summary>Нужно ли чистить машину часто, чтобы избежать OBK?</summary>
+  <p>Рекомендуется проводить чистку жерновов раз в 1-2 месяца в зависимости от интенсивности использования. Скопление кофейной пыли и масел со временем затвердевает и блокирует вращение.</p>
+</details>
+
+<details>
+  <summary>Самостоятельно можно исправить ошибку OBK?</summary>
+  <p>В большинстве случаев, если проблема в застревании зерна или пыли, да. Достаточно разобрать, почистить и перезагрузить аппарат. Если же вышел из строя датчик или мотор — потребуется ремонт в сервисе.</p>
+</details>
+
+<p>Помните, что <mark>своевременная профилактика и правильная эксплуатация</mark> способны предотвратить появление большинства ошибок, включая OBK, сохраняя вашу кофемашину <em>Bosch</em> в идеальном состоянии на долгие годы.</p></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#причины-возникновения-кода-ошибки-obk">Причины возникновения кода ошибки OBK</a></li><li><a href="#первичная-диагностика-и-безопасная-разблокировка">Первичная диагностика и безопасная разблокировка</a></li><li><a href="#механическая-очистка-жерновов-и-редуктора">Механическая очистка жерновов и редуктора</a></li><li><a href="#электронная-диагностика-и-датчики">Электронная диагностика и датчики</a></li><li><a href="#программный-сброс-и-калибровка-системы">Программный сброс и калибровка системы</a></li><li><a href="#профилактика-и-правильное-обслуживание">Профилактика и правильное обслуживание</a></li><li><a href="#когда-стоит-обратиться-в-сервисный-центр">Когда стоит обратиться в сервисный центр?</a></li><li><a href="#часто-задаваемые-вопросы">Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ko/kofemashina-saeco-minuto-kak-razobrat.html" class="related-card">Как разобрать кофемашину Saeco Minuto: полная инструкция по разборке</a></li><li><a href="/articles/k/ka/kak-pravilno-polzovatsya-kofemashinoj.html" class="related-card">Правильная эксплуатация кофемашины: полная инструкция по уходу</a></li><li><a href="/articles/k/ka/kak-proverit-yakor-kofemolki.html" class="related-card">Как проверить якорь кофемолки: диагностика и замена двигателя</a></li><li><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-verocup-100.html" class="related-card">Как включить кофемашину Verocup 100: Пошаговая инструкция и нюансы</a></li><li><a href="/articles/k/ka/kak-nastroit-kofemashinu-garlin-l70.html" class="related-card">Как настроить кофемашину Gorenje L70: полная инструкция по эксплуатации</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ko/kofemashina-saeco-minuto-kak-razobrat.html" class="related-bottom-card"><span class="related-bottom-title">Как разобрать кофемашину Saeco Minuto: полная инструкция по разборке</span><span class="related-bottom-desc">Подробное руководство по разборке кофемашины Saeco Minuto. Пошаговая инструкция, схема демонтажа кор</span></a><a href="/articles/k/ka/kak-pravilno-polzovatsya-kofemashinoj.html" class="related-bottom-card"><span class="related-bottom-title">Правильная эксплуатация кофемашины: полная инструкция по уходу</span><span class="related-bottom-desc">Узнайте, как правильно пользоваться кофемашиной: подготовка зерна, запуск цикла, регулярное декальци</span></a><a href="/articles/k/ka/kak-proverit-yakor-kofemolki.html" class="related-bottom-card"><span class="related-bottom-title">Как проверить якорь кофемолки: диагностика и замена двигателя</span><span class="related-bottom-desc">Руководство по диагностике якоря электродвигателя кофемолки. Инструкция по проверке обмоток, коллект</span></a><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-verocup-100.html" class="related-bottom-card"><span class="related-bottom-title">Как включить кофемашину Verocup 100: Пошаговая инструкция и нюансы</span><span class="related-bottom-desc">Полное руководство по запуску кофемашины Verocup 100. Инструкция по первой активации, прогреву, наст</span></a><a href="/articles/k/ka/kak-nastroit-kofemashinu-garlin-l70.html" class="related-bottom-card"><span class="related-bottom-title">Как настроить кофемашину Gorenje L70: полная инструкция по эксплуатации</span><span class="related-bottom-desc">Пошаговая настройка кофемашины Gorenje L70. Инструкция по первому запуску, калибровке помола, темпер</span></a><a href="/articles/k/ka/kak-pochistit-kofevarku-ot-nakipi-limonnoj.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофеварку от накипи лимонной кислотой: Полная инструкция</span><span class="related-bottom-desc">Пошаговый гайд по удалению накипи лимонной кислотой. Соотношение воды и порошка, инструкция для разн</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

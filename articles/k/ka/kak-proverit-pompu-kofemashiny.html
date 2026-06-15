@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как проверить помпу кофемашины: диагностика шума и давления — Кофини</title>
+    <meta name="description" content="Полное руководство по диагностике насоса кофемашины своими руками. Как понять, что помпа неисправна, и заменить её без сервисного центра.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-proverit-pompu-kofemashiny.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как проверить помпу кофемашины: диагностика шума и давления">
+    <meta property="og:description" content="Полное руководство по диагностике насоса кофемашины своими руками. Как понять, что помпа неисправна, и заменить её без сервисного центра.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как проверить помпу кофемашины: диагностика шума и давления</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Полная диагностика и проверка помпы кофемашины</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#анализ-звукового-сопровождения-работы-аппарата">Анализ звукового сопровождения работы аппарата</a></li><li><a href="#визуальный-контроль-и-проверка-давления">Визуальный контроль и проверка давления</a></li><li><a href="#электрическая-диагностика-мультиметром">Электрическая диагностика мультиметром</a></li><li><a href="#сравнительная-таблица-признаков-неисправности">Сравнительная таблица признаков неисправности</a></li><li><a href="#проверка-системы-управления-и-датчиков">Проверка системы управления и датчиков</a></li><li><a href="#процедура-замены-и-финальные-тесты">Процедура замены и финальные тесты</a></li><li><a href="#профилактика-поломок-насоса">Профилактика поломок насоса</a></li><li><a href="#частые-вопросы-пользователей">Частые вопросы пользователей</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Симптомы неисправности насоса в кофемашине могут быть самыми разными: от странных звуков при заваривании до полного отсутствия подачи воды в чашку. Часто пользователи списывают проблемы на засорение системы или низкий напор в водопроводе, хотя корень зла кроется именно в сердцевине аппарата — <strong>помпе</strong>. <em>Вибрационные</em> или <em>роторные</em> насосы подвержены износу, и своевременная проверка позволяет избежать дорогостоящего ремонта или покупки нового устройства.</p>
+
+<p>Игнорирование первых признаков поломки может привести к тому, что сгоревший двигатель насоса повредит другие электронные компоненты или приведет к протечкам внутри корпуса. Чтобы сэкономить время и деньги, необходимо провести самостоятельную <strong>диагностику</strong> до обращения в сервисный центр. В этой статье мы разберем основные методы проверки, начиная от визуального осмотра и заканчивая замерами давления.</p>
+
+<h2 id="анализ-звукового-сопровождения-работы-аппарата">Анализ звукового сопровождения работы аппарата</h2>
+
+<p>Первым и самым доступным методом проверки является внимательное прослушивание работы агрегата во время цикла заваривания. Если вы слышите ритмичный стук, скрежет или пронзительный свист, который не характерен для штатной работы вашего <em>DeLonghi</em> или <em>Philips</em>, это верный признак проблем с помпой. <strong>Сухой ход</strong> часто сопровождается характерным треском, когда поршни насоса работают без смазки водой.</p>
+
+<p>Вибрационные насосы обычно издают гул, напоминающий работу старого холодильника, но громкость и характер звука меняются при износе. Роторные модели работают тише, но при поломке подшипников или смещении ротора появляется металлический лязг. Обратите внимание, меняется ли звук при нажатии кнопки <code>Start</code> или когда аппарат пытается нагнать давление для эспрессо.</p>
+
+<p>Иногда проблема не в самом двигателе, а в гидравлике. Если <strong>обратный клапан</strong> заклинило или трубка отсоединилась, насос может работать вхолостую, создавая вакуум и гудеть очень громко. В таких случаях требуется проверка соединений, а не замена дорогостоящего узла.</p>
+
+<h2 id="визуальный-контроль-и-проверка-давления">Визуальный контроль и проверка давления</h2>
+
+<p>Для более точной диагностики потребуется манометр, который подключается к выходу помпы вместо заварочного блока или трубки подачи. Это позволяет увидеть реальное значение давления, которое создает насос. Для большинства кофемашин <em>Saeco</em> и <em>Gaggia</em> нормальное рабочее давление составляет от 9 до 12 бар. Если манометр показывает значение ниже 8 бар даже при чистых жмых-корзинах, <strong>помпа</strong> уже не может обеспечить необходимую мощность.</p>
+
+<p>Важно также осмотреть корпус насоса на предмет подтеков. Вибрационные помпы часто выходят из строя из-за потери герметичности в месте крепления патрубков. Если вы видите влажные следы на дне корпуса или вокруг <strong>электрических клемм</strong>, устройство требует немедленной замены, так как вода могла попасть на обмотку двигателя.</p>
+
+<p>Проверьте также состояние фильтра на входе в насос. Засоренный фильтр создает лишнюю нагрузку, из-за чего мотор перегревается и снижает эффективность. Иногда достаточно просто почистить <code>сетчатый фильтр</code> в баке для воды, чтобы насос снова заработал в полную силу.</p>
+
+<blockquote>⚠️ Внимание: Не пытайтесь разобрать герметичный корпус вибрационного насоса для смазки или ремонта поршней. Это устройство не подлежит восстановлению, и любые попытки его разборки приведут к потере герметичности и окончательной поломке.</blockquote>
+
+<div class="poll-widget" id="poll-33fef0e4"><div class="poll-widget-question">📊 С какими симптомами вы столкнулись?</div><div class="poll-widget-option" data-poll="33fef0e4" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Странный шум при работе</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="33fef0e4" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Нет подачи воды</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="33fef0e4" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Слабое давление эспрессо</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="33fef0e4" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Запах гари из помпы</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="электрическая-диагностика-мультиметром">Электрическая диагностика мультиметром</h2>
+
+<p>Если визуальный осмотр и проверка давления не дали однозначного ответа, необходимо замерить сопротивление обмотки двигателя. Для этого вам понадобится мультиметр, переведенный в режим измерения сопротивления (Ом). Отключите кофемашину от сети и аккуратно достаньте помпу, чтобы получить доступ к контактам.</p>
+
+<p>Прикоснитесь щупами мультиметра к выводам насоса. Исправная <strong>помпа</strong> должна показывать сопротивление в диапазоне от 120 до 180 Ом (зависит от модели). Если прибор показывает «0» или «бесконечность», значит, в обмотке произошло короткое замыкание или обрыв цепи. В обоих случаях <em>электрическая часть</em> насоса неисправна.</p>
+
+<p>Также стоит проверить целостность питающего кабеля и контактов, идущих от печатной платы. Окисление контактов или перетертая оплетка провода могут имитировать поломку помпы, создавая впечатление, что мотор не запускается. <strong>Контактная группа</strong> должна быть чистой и плотно прилегать к выводам.</p>
+
+<blockquote>⚠️ Внимание: Все измерения сопротивлений проводите только при полностью отключенном устройстве от электросети 220В. Попытка измерить сопротивление под напряжением выведет из строя ваш мультиметр и может быть опасна для жизни.</blockquote>
+
+<div class="checklist-block"><h4>☑️ Этапы проверки электрики</h4><label class="check-item"><input type="checkbox"><span>Отключить устройство от сети</span></label><label class="check-item"><input type="checkbox"><span>Снять боковую панель корпуса</span></label><label class="check-item"><input type="checkbox"><span>Найти выводы насоса</span></label><label class="check-item"><input type="checkbox"><span>Измерить сопротивление мультиметром</span></label><label class="check-item"><input type="checkbox"><span>Записать полученные значения</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<h2 id="сравнительная-таблица-признаков-неисправности">Сравнительная таблица признаков неисправности</h2>
+
+<p>Для удобства диагностики мы собрали основные симптомы в таблицу, которая поможет быстрее определить источник проблемы. Сравните поведение вашей кофемашины с данными показателями, чтобы принять решение о ремонте или замене.</p>
+
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Вероятная причина</th>
+<th>Сложность ремонта</th>
+<th>Рекомендуемое действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Громкий стук при работе</td>
+<td>Износ поршней/подшипников</td>
+<td>Высокая</td>
+<td>Замена помпы целиком</td>
+</tr>
+<tr>
+<td>Слабый напор воды</td>
+<td>Засор фильтра или износ</td>
+<td>Низкая</td>
+<td>Очистка или замена</td>
+</tr>
+<tr>
+<td>Вода течет из корпуса</td>
+<td>Разгерметизация корпуса</td>
+<td>Средняя</td>
+<td>Замена уплотнителей или насоса</td>
+</tr>
+<tr>
+<td>Мигает индикатор ошибки</td>
+<td>Ошибка электроники/датчика</td>
+<td>Высокая</td>
+<td>Диагностика платы управления</td>
+</tr>
+<tr>
+<td>Вода не идет, но шум есть</td>
+<td>Воздушная пробка или засор</td>
+<td>Низкая</td>
+<td>Прокачка системы</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="проверка-системы-управления-и-датчиков">Проверка системы управления и датчиков</h2>
+
+<p>Иногда кофемашина выдает ошибку, связанную с помпой, хотя сам насос исправен. Это происходит из-за некорректной работы <strong>датчика потока</strong> или платы управления. Если насос включается, но через короткое время отключается, плата может не получать сигнал о том, что вода движется по трубкам.</p>
+
+<p>Датчик потока (турбинка) установлен в системе подачи воды. Если он забит накипью или мусором, он перестает вращаться, и кофемашина думает, что помпа не работает. Проверьте, вращается ли крыльчатка датчика при подаче воды через <code>капучинатор</code>. Чистка датчика спиртом или уксусом часто решает проблему ложных срабатываний.</p>
+
+<p>Также стоит обратить внимание на настройки давления в сервисном меню. Некоторые модели позволяют регулировать время работы помпы или целевое давление. Если эти параметры сбиты, аппарат может преждевременно отключать насос, создавая впечатление его поломки. Для входа в меню зажать определенные комбинации кнопок при включении.</p>
+
+<details class="faq-item"><summary>Как войти в сервисное меню?</summary><div class="faq-answer"><p>Для большинства моделей DeLonghi нужно включить аппарат, зажать кнопку'Cappuccino' и кнопку'Espresso', затем нажать кнопку'Power'. Для Philips/Saeco часто используется комбинация'Menu' +'Steam'. Точные комбинации зависят от года выпуска модели.</p></div></details>
+
+<h2 id="процедура-замены-и-финальные-тесты">Процедура замены и финальные тесты</h2>
+
+<p>Если диагностика подтвердила неисправность помпы, потребуется её замена. Процесс замены зависит от конструкции корпуса, но общий алгоритм одинаков для большинства устройств. Снимите боковые панели, отсоедините шланги, внимательно запомнив их расположение, и открутите крепежные винты. <strong>Вибрационный насос</strong> часто фиксируется на резиновых амортизаторах, которые нужно аккуратно снять.</p>
+
+<p>При установке нового насоса обязательно проверьте состояние всех уплотнительных колец. Старые резинки со временем дубеют и теряют герметичность. Лучше сразу заменить их, чтобы избежать протечек после сборки. Убедитесь, что электрические контакты плотно сидят и не имеют следов окисления.</p>
+
+<p>После сборки и подключения шлангов необходимо сделать пробный запуск. Сначала просто включите подачу воды без заваривания, чтобы убедиться в отсутствии протечек и нормальном заполнении системы. <mark>Если из насоса не идет вода, не запускайте его на сухую более чем на 5 секунд, чтобы не сжечь обмотку.</mark> Только после проверки подачи воды можно переходить к варке напитка.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед установкой нового насоса слегка смочите уплотнительные кольца силиконовой смазкой или водой. Это облегчит монтаж и обеспечит лучшую герметичность соединений при первом запуске.</p></div>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Замена помпы требует аккуратности при работе с электрикой и гидравликой. Если вы не уверены в своих силах, лучше доверить работу профессионалам, так как ошибка может привести к короткому замыканию всей платы.</p></div>
+
+<h2 id="профилактика-поломок-насоса">Профилактика поломок насоса</h2>
+
+<p>Чтобы продлить жизнь помпе, необходимо использовать качественную воду. Жесткая вода приводит к образованию накипи, которая забивает каналы и заставляет насос работать с повышенной нагрузкой. Установка <strong>фильтра для воды</strong> или использование бутилированной воды значительно снизит риск поломок.</p>
+
+<p>Регулярная декальцинация также играет важную роль. Не ждите, пока аппарат выдаст ошибку, проводите очистку по графику, указанному в инструкции. Использование специальных средств для удаления накипи помогает поддерживать внутреннюю систему в чистоте. <em>Автоматические</em> кофемашины с функцией самоочистки требуют внимания к сбросу счетчика накипи после процедуры.</p>
+
+<p>Не оставляйте кофемашину надолго без воды в баке, если есть риск попадания воздуха в систему. Работа всухую — главный враг любого насоса, даже самого надежного. Если вы планируете длительное отсутствие, лучше слейте остатки воды из бака и системы, следуя инструкции производителя.</p>
+
+<blockquote>⚠️ Внимание: Использование фильтров для воды не отменяет необходимости периодической декальцинации. Фильтр смягчает воду, но со временем насыщается минералами и перестает работать, поэтому меняйте его строго по регламенту.</blockquote>
+
+<h2 id="частые-вопросы-пользователей">Частые вопросы пользователей</h2>
+
+<details>
+<summary>Почему насос гудит, но вода не идет?</summary>
+<p>Это может быть воздушная пробка в системе или засорение трубок накипью. Попробуйте запустить цикл промывки через капучинатор или отключить аппарат на 15 минут и снова включить. Если проблема не исчезла, возможно, заклинило клапан.</p>
+</details>
+
+<details>
+<summary>Можно ли смазать вибрационную помпу?</summary>
+<p>Нет, современные вибрационные насосы герметичны и не предназначены для разборки и смазки. Попытка вскрыть корпус приведет к нарушению герметичности и полной потере работоспособности узла.</p>
+</details>
+
+<details>
+<summary>Как часто нужно менять помпу в кофемашине?</summary>
+<p>Ресурс помпы зависит от интенсивности использования и качества воды. В среднем вибрационные насосы служат от 3 до 5 лет при домашнем использовании. Роторные насосы более выносливы и могут работать до 7-8 лет.</p>
+</details>
+
+<details>
+<summary>Что делать, если после замены насоса появились протечки?</summary>
+<p>Скорее всего, вы плохо затянули хомуты или забыли заменить уплотнительные кольца. Проверьте все соединения, убедитесь, что трубки надеты до упора, и замените старые прокладки на новые.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать помпу от другой модели?</summary>
+<p>Технически это возможно, если совпадает напряжение, тип крепления и параметры давления. Однако лучше использовать оригинальную запчасть или полный аналог, рекомендованный производителем, чтобы избежать проблем с давлением и электроникой.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#анализ-звукового-сопровождения-работы-аппарата">Анализ звукового сопровождения работы аппарата</a></li><li><a href="#визуальный-контроль-и-проверка-давления">Визуальный контроль и проверка давления</a></li><li><a href="#электрическая-диагностика-мультиметром">Электрическая диагностика мультиметром</a></li><li><a href="#сравнительная-таблица-признаков-неисправности">Сравнительная таблица признаков неисправности</a></li><li><a href="#проверка-системы-управления-и-датчиков">Проверка системы управления и датчиков</a></li><li><a href="#процедура-замены-и-финальные-тесты">Процедура замены и финальные тесты</a></li><li><a href="#профилактика-поломок-насоса">Профилактика поломок насоса</a></li><li><a href="#частые-вопросы-пользователей">Частые вопросы пользователей</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/c/ch/chto-takoe-zu-v-kofemashine.html" class="related-card">Что такое ЗУ в кофемашине: расшифровка и обслуживание</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-polaris-limonnoj-kislotoj.html" class="related-card">Как почистить кофемашину Polaris лимонной кислотой: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-polzovatsya-kofemashina-bosh.html" class="related-card">Как пользоваться кофемашиной Bosch: Полное руководство по эксплуатации</a></li><li><a href="/articles/k/ko/kofevarka-aurora-kak-polzovatsya.html" class="related-card">Как пользоваться кофеваркой Aurora: Инструкция по эксплуатации и настройке</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-dinamica.html" class="related-card">Как почистить кофемашину De&#x27;Longhi Dinamica: Полное руководство</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/c/ch/chto-takoe-zu-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Что такое ЗУ в кофемашине: расшифровка и обслуживание</span><span class="related-bottom-desc">Расшифровка аббревиатуры ЗУ в кофемашине. Зачем нужен заварочный узел, как его чистить, разбирать и </span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-polaris-limonnoj-kislotoj.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Polaris лимонной кислотой: пошаговая инструкция</span><span class="related-bottom-desc">Полная инструкция по декальцинации кофемашин Polaris лимонной кислотой. Расход, пропорции, этапы про</span></a><a href="/articles/k/ka/kak-polzovatsya-kofemashina-bosh.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Bosch: Полное руководство по эксплуатации</span><span class="related-bottom-desc">Подробная инструкция: включение, заваривание, настройка крепости и очистка кофемашин Bosch. Узнайте,</span></a><a href="/articles/k/ko/kofevarka-aurora-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофеваркой Aurora: Инструкция по эксплуатации и настройке</span><span class="related-bottom-desc">Полное руководство по управлению кофемашиной Aurora. Настройка помола, заваривание эспрессо, удаленн</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-dinamica.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину De&#x27;Longhi Dinamica: Полное руководство</span><span class="related-bottom-desc">Пошаговая инструкция по очистке кофемашин De&#x27;Longhi Dinamica. Удаление накипи, промывка заварочного </span></a><a href="/articles/k/ka/kak-razobrat-kofemolku-dlya-remonta.html" class="related-bottom-card"><span class="related-bottom-title">Как разобрать кофемолку для ремонта: пошаговая инструкция и советы</span><span class="related-bottom-desc">Пошаговый гид по разборке кофемолки. Узнайте, как снять жернова, почистить механизм и устранить неис</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

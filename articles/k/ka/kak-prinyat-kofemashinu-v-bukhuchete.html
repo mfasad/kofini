@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Учет кофемашины: принятие к бухгалтерскому учету и амортизация — Кофини</title>
+    <meta name="description" content="Пошаговая инструкция: как оприходовать кофемашину, выбрать счет учета, рассчитать амортизацию и оформить документы в 1С. Разбор НМА и ОС.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-prinyat-kofemashinu-v-bukhuchete.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Учет кофемашины: принятие к бухгалтерскому учету и амортизация">
+    <meta property="og:description" content="Пошаговая инструкция: как оприходовать кофемашину, выбрать счет учета, рассчитать амортизацию и оформить документы в 1С. Разбор НМА и ОС.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Учет кофемашины: принятие к бухгалтерскому учету и амортизация</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Принятие кофемашины к бухгалтерскому учету: полный гайд</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-проблему-учета-офисного-оборудования">Введение в проблему учета офисного оборудования</a></li><li><a href="#критерии-отнесения-к-основным-средствам-или-малоценным-активам">Критерии отнесения к основным средствам или малоценным активам</a></li><li><a href="#документальное-оформление-поступления-кофемашины">Документальное оформление поступления кофемашины</a></li><li><a href="#выбор-амортизационной-группы-и-срока-полезного-использования">Выбор амортизационной группы и срока полезного использования</a></li><li><a href="#регламентные-процедуры-в-учетной-системе-1с">Регламентные процедуры в учетной системе 1С</a></li><li><a href="#налоговые-последствия-и-амортизационные-отчисления">Налоговые последствия и амортизационные отчисления</a></li><li><a href="#выбор-амортизационной-группы-для-разных-типов-кофемашин">Выбор амортизационной группы для разных типов кофемашин</a></li><li><a href="#специфика-утилизации-и-выбытия-кофемашины">Специфика утилизации и выбытия кофемашины</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-проблему-учета-офисного-оборудования">Введение в проблему учета офисного оборудования</h2>
+<p>Кофемашина в современном офисе перестала быть просто бытовым прибором и превратилась в полноценный актив, требующий строгого финансового контроля. Ошибки при первичном учете могут привести к неверному расчету налога на прибыль и проблемам при налоговой проверке, поэтому важно подойти к процессу осознанно.</p>
+<p>Главная дилемма бухгалтера заключается в выборе между счетом <strong>Основные средства</strong> (ОС) и счетом <strong>Нематериальные активы</strong> (НМА), хотя на практике кофемашины почти всегда относятся к первой категории. Критерием служит не только стоимость, но и срок полезного использования (СПИ) и способность генерировать доход для организации.</p>
+<p>Нередко компании совершают ошибку, сразу списывая дорогостоящие аппараты в расходы, что категорически запрещено для активов стоимостью выше лимита. В зависимости от выбранного способа учета, процедура отражения в <code>1С:Бухгалтерия</code> будет кардинально отличаться.</p>
+
+<h2 id="критерии-отнесения-к-основным-средствам-или-малоценным-активам">Критерии отнесения к основным средствам или малоценным активам</h2>
+<p>Согласно действующему законодательству, для признания объекта в качестве <strong>основного средства</strong> необходимо одновременное соблюдение нескольких условий. Объект должен иметь материально-вещественную форму, использоваться в деятельности организации и быть способен приносить экономические выгоды.</p>
+<p>Ключевым фактором является срок полезного использования, который для профессиональной кофемашины обычно превышает 12 месяцев. Если вы приобретаете аппарат типа <em>DeLonghi Magnifica</em> или <em>Jura Z8</em> для использования в офисе более года, это уже кандидат в ОС.</p>
+<p>Второй критерий — стоимость. В бухгалтерском учете существует лимит, ниже которого активы не считаются основными средствами. Если цена кофемашины ниже установленного лимита (например, 100 000 рублей, хотя компания может установить свой лимит в учетной политике), ее можно учесть как <strong>материальные ценности</strong> или <strong>расходы будущих периодов</strong>.</p>
+<blockquote>
+<p>⚠️ Внимание: Налоговый кодекс РФ устанавливает лимит в 100 000 рублей для амортизационных групп. Если стоимость объекта ниже этой суммы, вы можете сразу отнести её на расходы, не начисляя амортизацию, но это право, а не обязанность.</p>
+</blockquote>
+<p> Это может привести к переквалификации расходов налоговой службой.</p>
+
+<h2 id="документальное-оформление-поступления-кофемашины">Документальное оформление поступления кофемашины</h2>
+<p>Первым шагом после оплаты является получение первичных документов от поставщика. Без них бухгалтерия не имеет права отражать движение активов. Вам необходим <strong>товарная накладная</strong> (ТОРГ-12 или УПД) и <strong>счет-фактура</strong> (если поставщик плательщик НДС).</p>
+<p>На основании этих документов составляется Акт ввода в эксплуатацию. В акте фиксируется дата начала использования, инвентарный номер и место установки. Для каждого аппарата присваивается уникальный <strong>инвентарный номер</strong>, который проставляется на корпусе несмываемой краской или наклейкой.</p>
+<p>Правильное заполнение акта ввода — залог отсутствия претензий при инвентаризации. В документе обязательно должны быть подписи ответственных лиц: материально-ответственного сотрудника и членов комиссии по принятию активов.</p>
+<p>Если кофемашина была приобретена в лизинг, процедура усложняется дополнительными договорами и графиком платежей. В этом случае объект может числиться на балансе лизингодателя или лизингополучателя в зависимости от условий контракта.</p>
+<ul>
+<li>⚡ Получите от поставщика полный пакет закрывающих документов (УПД, акт приема-передачи).</li>
+<li>⚡ Проверьте соответствие серийного номера в документах и на корпусе аппарата.</li>
+<li>⚡ Изучите гарантийный талон для подтверждения срока службы и условий ремонта.</li>
+</ul>
+
+<h2 id="выбор-амортизационной-группы-и-срока-полезного-использования">Выбор амортизационной группы и срока полезного использования</h2>
+<p>Для правильного расчета амортизации необходимо определить, к какой <strong>амортизационной группе</strong> относится кофемашина. В ОКОФ (Общероссийский классификатор основных фондов) бытовая техника и оргтехника обычно попадают в группу оборудования.</p>
+<p>Кофемашины чаще всего классифицируются по коду <code>330.28.23.2</code> или близким к нему, что относит их к третьей амортизационной группе. Это означает срок полезного использования от 3 лет и 1 месяца до 5 лет.</p>
+<p>Однако, если вы приобрели простую капельную кофеварку, которая относится к бытовой технике, её можно отнести к более коротким срокам. Важно свериться с актуальными версиями ОКОФ, так как коды могут меняться.</p>
+<blockquote>
+<p>⚠️ Внимание: Устаревшие коды ОКОФ могут привести к неверному расчету амортизации в налоговом учете. Всегда используйте актуальную версию классификатора на дату принятия объекта к учету.</p>
+</blockquote>
+<p>Срок полезного использования (СПИ) устанавливается приказом руководителя и фиксируется в учетной политике. Если вы выбрали СПИ 3 года, амортизация будет начисляться равными долями в течение этого периода.</p>
+<p>Для профессиональных рожковых машин, таких как <em>La Marzocco</em>, срок службы может быть продлен до 5 лет, так как они рассчитаны на интенсивную нагрузку и имеют более высокий ресурс деталей.</p>
+
+<h2 id="регламентные-процедуры-в-учетной-системе-1с">Регламентные процедуры в учетной системе 1С</h2>
+<p>В программе <code>1С:Бухгалтерия 8.3</code> процесс оприходования кофемашины начинается с создания документа «Поступление (акты, накладные)». В строке табличной части выбирается номенклатура, соответствующая кофемашине.</p>
+<p>Важно правильно указать счет учета. Если объект признается основным средством, выбирайте счет <code>08.04</code> («Приобретение других ОС»). Если стоимость ниже лимита, можно использовать счет <code>10.05</code> или <code>41.03</code> в зависимости от учетной политики.</p>
+<p>После проведения документа «Поступление» необходимо создать документ «Принятие к учету ОС». В этом документе вы указываете инвентарный номер, субсчет (например, <code>01.04</code> для офисной техники) и срок полезного использования.</p>
+<div class="checklist-block"><h4>☑️ Чек-лист регистрации в 1С</h4><label class="check-item"><input type="checkbox"><span>Выбрать счет 08.04</span></label><label class="check-item"><input type="checkbox"><span>Проверить код ОКОФ</span></label><label class="check-item"><input type="checkbox"><span>Установить СПИ</span></label><label class="check-item"><input type="checkbox"><span>Провести документ Принятие к учету</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+<p>Система автоматически рассчитает сумму амортизации на следующий месяц. Проверьте, чтобы ставка амортизации соответствовала выбранному методу (линейному или нелинейному).</p>
+<p>Если кофемашина была куплена за наличные через подотчетное лицо, сначала вы должны отразить выдачу денег, а затем оприходование товара. Ошибки в цепочке документов могут привести к расхождениям в дебиторской задолженности.</p>
+<blockquote>
+<p>⚠️ Внимание: Не проводите документ «Принятие к учету» раньше даты, указанной в акте ввода в эксплуатацию. Это может исказить финансовый результат отчетного месяца.</p>
+</blockquote>
+
+<h2 id="налоговые-последствия-и-амортизационные-отчисления">Налоговые последствия и амортизационные отчисления</h2>
+<p>В налоговом учете амортизация начисляется с первого числа месяца, следующего за месяцем ввода объекта в эксплуатацию. Это значит, что если кофемашина принята в январе, амортизация начнет начисляться с февраля.</p>
+<p>Суммы амортизации уменьшают базу по налогу на прибыль. Для этого необходимо корректно вести регистры налогового учета. В случае использования метода уменьшаемого остатка, сумма отчислений будет снижаться с каждым годом.</p>
+<p>Для кофемашин, используемых в офисных целях, расходы на обслуживание, ремонт и закупку расходных материалов также подлежат списанию. Важно разделять эти расходы на текущий ремонт и капитальный, так как порядок их учета различается.</p>
+<ul>
+<li>💰 Текущий ремонт списывается полностью в расходы текущего периода.</li>
+<li>💰 Капитальный ремонт увеличивает первоначальную стоимость ОС (если выполнялись улучшения).</li>
+<li>💰 Расходные материалы (зерно, вода, пакеты) списываются как материалы.</li>
+</ul>
+<p>Если вы используете упрощенную систему налогообложения (УСН), порядок учета будет иным. На УСН «Доходы минус расходы» стоимость кофемашины списывается по особым правилам, часто равными долями в течение года или квартала.</p>
+
+<h2 id="выбор-амортизационной-группы-для-разных-типов-кофемашин">Выбор амортизационной группы для разных типов кофемашин</h2>
+<p>Таблица ниже иллюстрирует, как классифицируются различные типы кофейного оборудования в зависимости от их функционала и стоимости. Это поможет вам быстрее определить правильную группу.</p>
+<table>
+<thead>
+<tr>
+<th>Тип оборудования</th>
+<th>Пример модели</th>
+<th>ОКОФ (пример)</th>
+<th>Ам. группа</th>
+<th>СПИ (лет)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Профессиональная рожковая</td>
+<td><em>Faema E61</em></td>
+<td>330.28.23.2</td>
+<td>3</td>
+<td>3-5</td>
+</tr>
+<tr>
+<td>Автоматическая офисная</td>
+<td><em>Saeco Exprelia</em></td>
+<td>330.28.23.2</td>
+<td>3</td>
+<td>3-5</td>
+</tr>
+<tr>
+<td>Капсульная система</td>
+<td><em>Nespresso Vertuo</em></td>
+<td>330.28.23.2</td>
+<td>2</td>
+<td>2-3</td>
+</tr>
+<tr>
+<td>Капельная кофеварка</td>
+<td><em>Bosch TKA</em></td>
+<td>330.28.23.2</td>
+<td>2</td>
+<td>2-3</td>
+</tr>
+</tbody>
+</table>
+<p>Выбор правильной группы влияет на баланс и отчетность. Если вы ошибетесь и выберете слишком долгий срок, это увеличит налог на прибыль в текущем периоде. Если слишком короткий — возникнут проблемы при проверке.</p>
+<p>В случае сомнений всегда можно обратиться к пояснениям Минфина или использовать специализированные справочники по ОКОФ. Ошибка в классификации часто является следствием невнимательности при прочтении паспорта изделия.</p>
+<div class="poll-widget" id="poll-9b15dca2"><div class="poll-widget-question">📊 Какой срок службы кофемашины вы указали в учете?</div><div class="poll-widget-option" data-poll="9b15dca2" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">2-3 года</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="9b15dca2" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">3-5 лет</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="9b15dca2" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Более 5 лет</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="9b15dca2" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не знаю, что выбрать</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="специфика-утилизации-и-выбытия-кофемашины">Специфика утилизации и выбытия кофемашины</h2>
+<p>Когда срок службы кофемашины истек или она вышла из строя, необходимо оформить её выбытие. Для этого создается Акт списания (форма ОС-4 или свободная форма), где указывается причина списания.</p>
+<p>Если кофемашина продается, требуется документ о реализации. Остаточная стоимость в этом случае списывается в доходы, а выручка учитывается как продажа. НДС с продажи также подлежит начислению.</p>
+<p>При полной утилизации (сломана и не подлежит ремонту) остатки списываются на счета учета убытков. Важно провести инвентаризацию перед списанием, чтобы подтвердить фактическое наличие или отсутствие объекта.</p>
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Сохраняйте акты списания и утилизации не менее 5 лет, так как налоговая инспекция может запросить их при проверке расходов прошлых лет.</p></div>
+<p>Если кофемашина была передана безвозмездно, это приравнивается к дарению и влечет за собой уплату НДС и налога на прибыль с рыночной стоимости подарка.</p>
+<p>В современных условиях некоторые компании передают кофемашины в аренду или лизинг, что требует особого учета доходов и расходов от аренды. Здесь важно четко разграничивать моменты перехода права собственности.</p>
+
+<h2 id="часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</h2>
+<details>
+<summary>Можно ли учесть кофемашину стоимостью 15 000 рублей как основное средство?</summary>
+<p>Да, вы можете учесть её как основное средство, если это предусмотрено вашей учетной политикой. Однако чаще такие объекты списываются в расходы текущего периода, так как они дешевле лимита налога на прибыль (100 000 руб.).</p>
+</details>
+<details>
+<summary>Нужно ли начислять амортизацию на кофемашину, если она простаивает?</summary>
+<p>Да, амортизация начисляется вне зависимости от фактического использования, если объект числится на балансе и не законсервирован. Для остановки начисления нужно оформить приказ о консервации.</p>
+</details>
+<details>
+<summary>Как учесть ремонт кофемашины, если она на гарантии?</summary>
+<p>Если ремонт бесплатный, никаких проводок не делается. Если вы оплатили ремонт, но потом вернули деньги через гарантийный случай, сначала спишите расходы, а затем отразите возврат.</p>
+</details>
+<details>
+<summary>Можно ли принять кофемашину к учету без накладной?</summary>
+<p>Нет, без первичного документа (накладной, УПД, акта) бухгалтерия не имеет права оприходовать актив. Это нарушает закон о бухгалтерском учете.</p>
+</details>
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Правильное принятие кофемашины к учету зависит от учетной политики компании, стоимости оборудования и выбранного срока полезного использования.</p></div></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-проблему-учета-офисного-оборудования">Введение в проблему учета офисного оборудования</a></li><li><a href="#критерии-отнесения-к-основным-средствам-или-малоценным-активам">Критерии отнесения к основным средствам или малоценным активам</a></li><li><a href="#документальное-оформление-поступления-кофемашины">Документальное оформление поступления кофемашины</a></li><li><a href="#выбор-амортизационной-группы-и-срока-полезного-использования">Выбор амортизационной группы и срока полезного использования</a></li><li><a href="#регламентные-процедуры-в-учетной-системе-1с">Регламентные процедуры в учетной системе 1С</a></li><li><a href="#налоговые-последствия-и-амортизационные-отчисления">Налоговые последствия и амортизационные отчисления</a></li><li><a href="#выбор-амортизационной-группы-для-разных-типов-кофемашин">Выбор амортизационной группы для разных типов кофемашин</a></li><li><a href="#специфика-утилизации-и-выбытия-кофемашины">Специфика утилизации и выбытия кофемашины</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/p/po/pochemu-kofemashina-varit-vodyanistyj-kofe.html" class="related-card">Почему кофемашина варит водянистый кофе: 7 причин и способы решения</a></li><li><a href="/articles/k/ka/kak-smazyvat-kofemashinu.html" class="related-card">Как правильно смазывать кофемашину: пошаговая инструкция и выбор лубриканта</a></li><li><a href="/articles/k/ka/kak-promyt-ot-nakipi-kofemashinu-filips-latte-gou.html" class="related-card">Как промыть от накипи кофемашину Philips LatteGo: пошаговая инструкция</a></li><li><a href="/articles/c/ch/chto-pokazyvaet-verkhnyaya-strelka-na-manometre-kofemashiny.html" class="related-card">Верхняя стрелка на манометре кофемашины: расшифровка значений</a></li><li><a href="/articles/c/ch/chto-oznachaet-descaling-na-kofemashine.html" class="related-card">Что означает Descaling на кофемашине: Полное руководство по удалению накипи</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/p/po/pochemu-kofemashina-varit-vodyanistyj-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Почему кофемашина варит водянистый кофе: 7 причин и способы решения</span><span class="related-bottom-desc">Экспертный разбор причин жидкого кофе. Узнайте, как настроить помол, проверить давление и избежать о</span></a><a href="/articles/k/ka/kak-smazyvat-kofemashinu.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно смазывать кофемашину: пошаговая инструкция и выбор лубриканта</span><span class="related-bottom-desc">Узнайте, как смазывать кофемашину самостоятельно. Выбор правильной смазки,.interval обслуживания и п</span></a><a href="/articles/k/ka/kak-promyt-ot-nakipi-kofemashinu-filips-latte-gou.html" class="related-bottom-card"><span class="related-bottom-title">Как промыть от накипи кофемашину Philips LatteGo: пошаговая инструкция</span><span class="related-bottom-desc">Полное руководство по удалению накипи в Philips LatteGo. Пошаговая инструкция, выбор средств, частот</span></a><a href="/articles/c/ch/chto-pokazyvaet-verkhnyaya-strelka-na-manometre-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Верхняя стрелка на манометре кофемашины: расшифровка значений</span><span class="related-bottom-desc">Что показывает верхняя стрелка на манометре? Разбираем давление заваривания, пар и причины неисправн</span></a><a href="/articles/c/ch/chto-oznachaet-descaling-na-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Что означает Descaling на кофемашине: Полное руководство по удалению накипи</span><span class="related-bottom-desc">Узнайте, что значит индикатор Descaling на кофемашине. Пошаговая инструкция, выбор средства, таблица</span></a><a href="/articles/p/po/pochemu-poluchaetsya-kislyj-kofe-iz-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Кислый кофе из кофемашины: 7 причин и способы исправления</span><span class="related-bottom-desc">Почему кофе получается кислым? Разбираем ошибки помола, настройки температуры, качество воды и чистк</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

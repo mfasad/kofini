@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Принцип работы кофемашин Ares: устройство, цикл и настройка — Кофини</title>
+    <meta name="description" content="Подробный разбор устройства и принципа работы кофемашин Ares. Узнайте о системе пролива, помпе, бойлере и особенностях эксплуатации автоматических моделей.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-rabotaet-kofemashina-aresa.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Принцип работы кофемашин Ares: устройство, цикл и настройка">
+    <meta property="og:description" content="Подробный разбор устройства и принципа работы кофемашин Ares. Узнайте о системе пролива, помпе, бойлере и особенностях эксплуатации автоматических моделей.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Принцип работы кофемашин Ares: устройство, цикл и настройка</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как работает кофемашина Ares: принцип действия и обслуживание</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#сердце-системы-гидравлический-контур-и-помпа">Сердце системы: гидравлический контур и помпа</a></li><li><a href="#термодинамика-и-подготовка-воды">Термодинамика и подготовка воды</a></li><li><a href="#кофейный-узел-и-процесс-заваривания">Кофейный узел и процесс заваривания</a></li><li><a href="#система-управления-и-интерфейсы">Система управления и интерфейсы</a></li><li><a href="#техническое-обслуживание-и-уход">Техническое обслуживание и уход</a></li><li><a href="#типичные-сценарии-работы-и-диагностика">Типичные сценарии работы и диагностика</a></li><li><a href="#особенности-эксплуатации-в-быту">Особенности эксплуатации в быту</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Феномен итальянской кофемарки <em>Ares</em> кроется не только в дизайне, но и в инженерных решениях, обеспечивающих стабильное качество эспрессо. Многие пользователи задаются вопросом, что происходит внутри корпуса при нажатии кнопки, и как именно получается напиток с густой пенкой. Понимание внутреннего устройства и алгоритмов работы позволяет избегать частых ошибок при эксплуатации и продлить срок службы агрегата.</p>
+
+<p>В основе функционирования любой автоматической кофемашины <em>Ares</em> лежит сложная синхронизация механических узлов и электронных контроллеров. От момента загрузки зерен до подачи готового напитка проходит несколько миллисекунд, в течение которых система должна точно рассчитать дозировку, температуру и давление. Это не просто механика, а целая лаборатория, встроенная в компактный корпус.</p>
+
+<p>Начинающим пользователям часто кажется, что процесс приготовления кофе линейный, однако реальность такова, что устройство постоянно мониторит множество параметров. Если вы хотите получать стабильный результат, вам необходимо разобраться в цикле заваривания, работе системы гидравлики и особенностях термостатирования. Ниже мы детально разберем каждый этап работы вашего помощника.</p>
+
+<h2 id="сердце-системы-гидравлический-контур-и-помпа">Сердце системы: гидравлический контур и помпа</h2>
+
+<p>Главным элементом, создающим необходимое давление для экстракции эспрессо, является вибрационная помпа. В моделях бренда <em>Ares</em> используется насос, способный развивать давление до 15 бар, что является стандартом для качественной кофейной экстракции. Именно создание такого давления позволяет воде проникать в спрессованную таблетку кофе, растворяя ароматические масла и эфирные соединения.</p>
+
+<p>Процесс начинается с подачи воды из резервуара, который соединен с помпой через систему трубок и клапанов. При активации программы работы, электроника подает сигнал на включение двигателя помпы, который начинает создавать вакуум и проталкивать воду вперед. Важно отметить, что помпа работает только при наличии воды, а датчики уровня предотвращают «сухой ход», который мог бы разрушить механизм.</p>
+
+<p>Давление в системе не является постоянным на протяжении всего цикла. Современные контроллеры могут модулировать давление, создавая так называемый «преднасыщение». Это позволяет равномерно промочить кофейный порошок перед основным проливом, что предотвращает образование каналов и обеспечивает равномерную экстракцию.</p>
+
+<h2 id="термодинамика-и-подготовка-воды">Термодинамика и подготовка воды</h2>
+
+<p>Температурный режим — критический параметр, влияющий на вкус напитка. В устройствах <em>Ares</em> чаще всего используется бойлерная система нагрева, хотя в некоторых компактных моделях могут встречаться термоблоки. Бойлер представляет собой герметичный резервуар из нержавеющей стали, внутри которого расположен ТЭН.</p>
+
+<p>Как только вода поступает в бойлер, датчик температуры фиксирует её значение и передает данные на управляющий модуль. Если температура ниже заданной (обычно 90–95°C), включается нагрев. Система удерживает воду в узком температурном коридоре, чтобы избежать перегрева или недогрева, который делает эспрессо кислым или горьким.</p>
+
+<p>Для приготовления капучино или латте система переключается на подачу пара. В этот момент клапан перенаправляет поток воды в паровую трубку, где она превращается в сухой пар высокой температуры. Это позволяет вам взбивать молоко, создавая идеальную текстуру для кофейных напитков.</p>
+
+<h2 id="кофейный-узел-и-процесс-заваривания">Кофейный узел и процесс заваривания</h2>
+
+<p>Центральное место в создании вкуса занимает заварочный блок. Это механическое устройство, где происходит магия превращения молотого зерна в напиток. В моделях <em>Ares</em> заварочный блок обычно съемный, что позволяет проводить регулярную очистку и смазку. Зерна попадают в жернова, где измельчаются до нужной фракции.</p>
+
+<p>После помола порция кофе точно отмеряется и попадает в кофейную корзину внутри заварочного блока. Поршень сжимает порошок, создавая плотную таблетку. Затем на неё подается горячая вода под давлением. Весь этот процесс контролируется датчиками положения и давлением, чтобы убедиться, что таблетка сформирована правильно.</p>
+
+<p>После пролива использованная гуща выбрасывается в специальный контейнер для отходов. Механизм выброса работает автоматически, и вам нужно лишь вовремя опустошать бункер. Если не следить за этим, механизм может заклинить, и кофемашина перестанет работать.</p>
+
+<div class="poll-widget" id="poll-3fa1c8ec"><div class="poll-widget-question">📊 Какой тип нагрева воды вам важнее?</div><div class="poll-widget-option" data-poll="3fa1c8ec" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Термоблок (быстрый)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="3fa1c8ec" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Бойлер (стабильный)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="3fa1c8ec" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Не важно</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="3fa1c8ec" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не знаю</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="система-управления-и-интерфейсы">Система управления и интерфейсы</h2>
+
+<p>«Мозгом» кофемашины является электронная плата управления, которая обрабатывает сигналы от всех датчиков и управляет исполнительными механизмами. Интерфейс пользователя, представленный кнопками или сенсорным дисплеем, служит лишь точкой входа для ваших команд. Вы выбираете тип напитка, а машина сама рассчитывает длительность пролива и количество воды.</p>
+
+<p>Современные модели <em>Ares</em> оснащаются программным обеспечением, которое может запоминать ваши предпочтения. Вы можете настроить крепость, температуру и объем напитка под себя. Эти настройки сохраняются в памяти устройства даже после отключения от сети.</p>
+
+<p>При возникновении ошибок система выводит код или символ на дисплей. Это упрощает диагностику проблем. Например, мигающая лампочка может означать необходимость декальцинации или опустошения контейнера для гущи. Знание этих сигналов помогает быстро реагировать на неполадки.</p>
+
+<blockquote>⚠️ Внимание: Если кофемашина выдает ошибку, не пытайтесь сбросить её простым отключением от сети. Это может привести к сбою в программной памяти и потере пользовательских настроек. Сначала изучите инструкцию по коду ошибки.</blockquote>
+
+<blockquote>⚠️ Внимание: Регулярное использование воды с высоким содержанием минералов приведет к быстрому образованию накипи. Это снизит эффективность теплообмена и может вывести ТЭН из строя. Используйте фильтрованную воду или специальные таблетки.</blockquote>
+
+<h2 id="техническое-обслуживание-и-уход">Техническое обслуживание и уход</h2>
+
+<p>Для долгой службы устройства необходимо соблюдать регламент технического обслуживания. Это не просто рекомендация, а обязательная процедура для сохранения гарантии и качества напитков. Основной уход включает в себя очистку заварочного блока, декальцинацию и замену фильтров.</p>
+
+<p>Съемный заварочный блок следует промывать под теплой водой раз в несколько дней. Не используйте моющие средства, так как остатки химии могут испортить вкус кофе. Достаточно просто смыть остатки гущи и высушить блок перед установкой обратно.</p>
+
+<p>Процесс декальцинации проводится с использованием специальных растворов. Машина прогоняет раствор через систему, растворяя накопившуюся накипь в бойлере и трубках. После этого необходимо несколько раз прогнать чистую воду, чтобы удалить остатки средства.</p>
+
+<div class="checklist-block"><h4>☑️ Еженедельный чек-лист ухода</h4><label class="check-item"><input type="checkbox"><span>Снять и промыть заварочный блок</span></label><label class="check-item"><input type="checkbox"><span>Очистить паровую трубку</span></label><label class="check-item"><input type="checkbox"><span>Опустить контейнер для гущи</span></label><label class="check-item"><input type="checkbox"><span>Добавить таблетку в отсек для моющего средства</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="типичные-сценарии-работы-и-диагностика">Типичные сценарии работы и диагностика</h2>
+
+<p>В таблице ниже приведены основные режимы работы и возможные причины их нарушений. Это поможет вам быстрее сориентироваться, если машина ведет себя не так, как обычно.</p>
+
+<table>
+<thead>
+<tr>
+<th>Режим работы</th>
+<th>Нормальное поведение</th>
+<th>Возможная проблема</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Нагрев</td>
+<td>Индикатор горит ровно, время нагрева 30-60 сек</td>
+<td>Длительный нагрев или перегрев</td>
+</tr>
+<tr>
+<td>Помол</td>
+<td>Звук жерновов равномерный, без скрежета</td>
+<td>Неравномерный помол или застревание зерен</td>
+</tr>
+<tr>
+<td>Пролив</td>
+<td>Струя эспрессо густая, темно-коричневая</td>
+<td>Вода течет слишком быстро или медленно</td>
+</tr>
+<tr>
+<td>Пар</td>
+<td>Выход сухого пара, молоко взбивается быстро</td>
+<td>Выходит только вода или влажный пар</td>
+</tr>
+</tbody>
+</table>
+
+<p>Если вы заметили, что кофе стал менее ароматным, стоит проверить настройки помола. Возможно, жернова засорились или изношены. Регулировка степени помола — это тонкая настройка, которую нужно делать постепенно, делая по одному щелчку на день.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Правильная настройка помола напрямую влияет на вкус напитка: слишком крупный помол даст кислый эспрессо, а слишком мелкий — горький и с заторможенным проливом.</p></div>
+
+<h2 id="особенности-эксплуатации-в-быту">Особенности эксплуатации в быту</h2>
+
+<p>Использование <em>Ares</em> в домашних условиях требует учета многих факторов, от качества зерна до влажности в помещении. Владельцы должны знать, что машина не любит «грязных» зерен с большим количеством масел, которые могут забить жернова. Также важно правильно хранить кофе в бункере, чтобы он не набрал лишней влаги.</p>
+
+<p>Некоторые пользователи задаются вопросом, можно ли оставлять машину включенной на ночь. Большинство современных моделей имеют функцию автоматического отключения через определенное время бездействия. Это экономит электроэнергию и продлевает срок службы нагревательных элементов.</p>
+
+<p>При переезде или длительном простое машину необходимо правильно законсервировать. Рекомендуется слить воду из бойлера и трубок, чтобы избежать коррозии и развития бактерий внутри системы. Это особенно актуально для регионов с жесткой водой.</p>
+
+<details class="faq-item"><summary>Что делать, если кофемашина издает странные звуки?</summary><div class="faq-answer"><p>Если вы слышите стук или вибрацию, проверьте, стоит ли машина на ровной поверхности. Неровный пол может передавать вибрацию от помпы на корпус, усиливая шум. Также проверьте, не засорились ли трубки от накипи.</p></div></details>
+
+<p>Важно понимать, что даже самая надежная техника требует внимания. Регулярная очистка и использование качественных материалов — залог того, что ваш <em>Ares</em> прослужит долгие годы, радовав вас ароматным кофе каждое утро.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Для лучшего вкуса эспрессо прогревайте чашку, поставив её на поддон для чашек во время прогрева машины перед приготовлением первого напитка.</p></div>
+
+<blockquote>⚠️ Внимание: Используйте только рекомендованные производителем средства для декальцинации и промывки. Химические составы других брендов могут повредить уплотнительные резинки и пластиковые элементы гидросистемы.</blockquote>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+
+<details>
+<summary>Почему кофемашина Ares не проливает воду?</summary>
+<p>Это может быть вызвано отсутствием воды в баке, засором фильтров или неисправностью помпы. Проверьте наличие воды и очистите входной фильтр. Если проблема не исчезла, возможно, потребуется сервисное обслуживание помпы.</p>
+</details>
+
+<details>
+<summary>Как часто нужно проводить декальцинацию?</summary>
+<p>Частота зависит от жесткости вашей воды. При использовании жесткой воды процедуру следует проводить каждые 2-3 месяца или после 500-800 чашек. Индикатор на дисплее обычно сигнализирует о необходимости очистки.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать молотый кофе вместо зерен?</summary>
+<p>Да, большинство моделей <em>Ares</em> имеют отдельный отсек для молотого кофе (предварительно смолотого). Однако не используйте этот отсек для хранения кофе, а добавляйте его перед каждым приготовлением, чтобы избежать застревания.</p>
+</details>
+
+<details>
+<summary>Что означает ошибка «Заполните контейнер для гущи» даже если он пуст?</summary>
+<p>Часто это связано с тем, что датчик не видит контейнер из-за неправильной установки или загрязнения контактов. Выньте контейнер, протрите его и место установки сухой тканью, затем вставьте до упора.</p>
+</details>
+
+<details>
+<summary>Как продлить срок службы заварочного блока?</summary>
+<p>Регулярно промывайте его теплой водой без моющих средств и смазывайте специальными силиконовыми смазками раз в полгода. Это обеспечит плавность хода поршня и сохранность уплотнителей.</p>
+</details>
+
+<mark>Критически важно: При использовании автоматических моделей Ares, никогда не оставляйте воду в баке на срок более 3-х дней без использования, так как это может привести к появлению бактерий и неприятного запаха в напитке.</mark></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#сердце-системы-гидравлический-контур-и-помпа">Сердце системы: гидравлический контур и помпа</a></li><li><a href="#термодинамика-и-подготовка-воды">Термодинамика и подготовка воды</a></li><li><a href="#кофейный-узел-и-процесс-заваривания">Кофейный узел и процесс заваривания</a></li><li><a href="#система-управления-и-интерфейсы">Система управления и интерфейсы</a></li><li><a href="#техническое-обслуживание-и-уход">Техническое обслуживание и уход</a></li><li><a href="#типичные-сценарии-работы-и-диагностика">Типичные сценарии работы и диагностика</a></li><li><a href="#особенности-эксплуатации-в-быту">Особенности эксплуатации в быту</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-polzovatsya-tabletkami-dlya-ochistki-kofemashiny-ot-kofejnykh-masel.html" class="related-card">Как правильно чистить кофемашину таблетками: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-magnifica-ot-nakipi-limonnoj-kislotoj.html" class="related-card">Чистка кофемашины DeLonghi Magnifica лимонной кислотой: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-perezagruzit-kofemashinu-delonghi.html" class="related-card">Как перезагрузить кофемашину DeLonghi: Полная инструкция по сбросу</a></li><li><a href="/articles/f/fi/filtry-dlya-kofevarki-dlya-chego.html" class="related-card">Фильтры для кофеварки: для чего нужны и как выбрать правильный</a></li><li><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-rooma.html" class="related-card">Как включить кофемашину Rooma: пошаговая инструкция и настройка</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-polzovatsya-tabletkami-dlya-ochistki-kofemashiny-ot-kofejnykh-masel.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно чистить кофемашину таблетками: пошаговая инструкция</span><span class="related-bottom-desc">Полный гид по декальцинации и удалению кофейных масел таблетками. Инструкция, частота очистки, выбор</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-magnifica-ot-nakipi-limonnoj-kislotoj.html" class="related-bottom-card"><span class="related-bottom-title">Чистка кофемашины DeLonghi Magnifica лимонной кислотой: пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как правильно удалить накипь из кофемашины DeLonghi Magnifica с помощью лимонной кислоты. П</span></a><a href="/articles/k/ka/kak-perezagruzit-kofemashinu-delonghi.html" class="related-bottom-card"><span class="related-bottom-title">Как перезагрузить кофемашину DeLonghi: Полная инструкция по сбросу</span><span class="related-bottom-desc">Пошаговая инструкция: как перезагрузить, сбросить настройки и устранить ошибки на кофемашинах DeLong</span></a><a href="/articles/f/fi/filtry-dlya-kofevarki-dlya-chego.html" class="related-bottom-card"><span class="related-bottom-title">Фильтры для кофеварки: для чего нужны и как выбрать правильный</span><span class="related-bottom-desc">Зачем нужны фильтры в кофеварке? Разбор типов, влияния на вкус кофе и защиту от накипи. Инструкция п</span></a><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-rooma.html" class="related-bottom-card"><span class="related-bottom-title">Как включить кофемашину Rooma: пошаговая инструкция и настройка</span><span class="related-bottom-desc">Подробное руководство по включению кофемашин Rooma. Разбор кнопок, первого запуска, декальцинации и </span></a><a href="/articles/k/ko/kofemashina-polaris-s-kapuchinatorom-kak-pochistit.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Polaris с капучинатором: полная инструкция</span><span class="related-bottom-desc">Пошаговая guía по очистке кофемашины Polaris с автокапучинатором. Промывка, декальцинация, разборка </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

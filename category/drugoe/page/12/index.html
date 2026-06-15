@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Другое — страница 12 — Кофини</title>
+    <meta name="description" content="Различные вопросы о кофе, кулинарные эксперименты и сопутствующие темы.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+        .cat-hero {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e3a5f 100%);
+            border-bottom: none;
+            padding: 48px 0 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cat-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(37,99,235,0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(139,92,246,0.1) 0%, transparent 50%);
+            animation: heroShimmer 8s ease-in-out infinite alternate;
+        }
+        @keyframes heroShimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(3deg); }
+        }
+        .cat-hero .container { position: relative; z-index: 1; }
+        .cat-hero-icon {
+            font-size: 3.5rem; display: block; margin-bottom: 16px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+        }
+        .cat-hero h1 {
+            font-size: 2rem; font-weight: 800; color: #f1f5f9;
+            margin-bottom: 10px; letter-spacing: -0.02em;
+        }
+        .cat-hero p {
+            color: #94a3b8; font-size: 1.05rem; max-width: 600px;
+            margin: 0 auto; line-height: 1.6;
+        }
+        .cat-benefits {
+            display: flex; justify-content: center; gap: 12px;
+            margin-top: 24px; flex-wrap: wrap;
+        }
+        .cat-benefit {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px; padding: 8px 18px;
+            font-size: 0.88rem; color: #e2e8f0; font-weight: 500;
+            transition: all 0.25s;
+        }
+        .cat-benefit:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+        .benefit-icon { font-size: 1.15em; }
+
+        .cat-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px; padding: 32px 0 24px;
+        }
+        .article-home-card {
+            background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+            padding: 0; text-decoration: none; color: #1e293b;
+            transition: all 0.25s ease; display: flex; flex-direction: column;
+            overflow: hidden; position: relative;
+        }
+        .article-home-card:hover {
+            border-color: #bfdbfe;
+            box-shadow: 0 8px 24px rgba(37,99,235,0.1);
+            transform: translateY(-4px);
+        }
+        .card-top {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 20px 0;
+        }
+        .card-icon {
+            font-size: 1.4em;
+            background: linear-gradient(135deg, #eff6ff, #e0f2fe);
+            width: 36px; height: 36px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 6px rgba(37,99,235,0.1);
+        }
+        .card-read-time {
+            font-size: 0.78rem; color: #94a3b8; font-weight: 500;
+        }
+        .article-home-title {
+            font-weight: 600; font-size: 0.97rem; line-height: 1.4;
+            padding: 12px 20px 0; transition: color 0.2s;
+        }
+        .article-home-card:hover .article-home-title { color: #2563eb; }
+        .article-home-desc {
+            font-size: 0.84rem; color: #64748b; line-height: 1.5;
+            padding: 6px 20px 0; flex: 1;
+        }
+        .card-footer {
+            display: flex; justify-content: flex-end; align-items: center;
+            padding: 12px 20px; margin-top: auto;
+            border-top: 1px solid #f1f5f9;
+        }
+        .card-read-more {
+            font-size: 0.82rem; font-weight: 600; color: #94a3b8;
+            transition: all 0.2s;
+        }
+        .article-home-card:hover .card-read-more {
+            color: #2563eb; letter-spacing: 0.02em;
+        }
+
+        .pagination {
+            display: flex; justify-content: center; gap: 6px;
+            padding: 8px 0 48px; flex-wrap: wrap; align-items: center;
+        }
+        .pag-link {
+            padding: 10px 16px; border-radius: 10px; border: 1px solid #e2e8f0;
+            color: #64748b; font-size: 0.9rem; text-decoration: none;
+            transition: all 0.2s; font-weight: 500;
+        }
+        .pag-link:hover { border-color: #2563eb; color: #2563eb; background: #eff6ff; }
+        .pag-active {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: #fff !important; border-color: #2563eb;
+            box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+        }
+        .pag-edge { font-size: 1rem; font-weight: 700; }
+        .pag-dots { color: #94a3b8; padding: 0 4px; }
+
+        
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+
+        @media (max-width: 640px) {
+            .cat-grid { grid-template-columns: 1fr; }
+            .cat-hero h1 { font-size: 1.5rem; }
+        }
+    </style>
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container">
+            <a href="/">Главная</a>
+            <span class="breadcrumb-sep">›</span>
+            <span class="breadcrumb-current">Другое</span>
+        </div>
+    </nav>
+
+    <section class="cat-hero">
+        <div class="container">
+            <span class="cat-hero-icon">📁</span>
+            <h1>Другое</h1>
+            <p>Различные вопросы о кофе, кулинарные эксперименты и сопутствующие темы. · страница 12 из 48</p>
+            <div class="cat-benefits"><div class="cat-benefit"><span class="benefit-icon">📖</span><span>Понятные инструкции</span></div><div class="cat-benefit"><span class="benefit-icon">✅</span><span>Проверенные решения</span></div><div class="cat-benefit"><span class="benefit-icon">⚡</span><span>Без лишних слов</span></div></div>
+        </div>
+    </section>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="cat-grid">
+            <a href="/articles/k/ka/kak-sdelat-latte-sladkaya-skazka-v-igre-moya-kofejnya.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 8 мин</span>
+                </div>
+                <div class="article-home-title">Как сделать латте «Сладкая сказка» в игре Моя кофейня: рецепт и секрет</div>
+                <div class="article-home-desc">Пошаговая инструкция приготовления латте «Сладкая сказка» в «Моя кофейня». Узнайте ингредиенты, уровень открытия и тонко</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/k/ko/kofe-chast-rechi.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 11 мин</span>
+                </div>
+                <div class="article-home-title">Кофе — часть речи: как правильно склонять и использовать в речи</div>
+                <div class="article-home-desc">Подробный разбор: кофе — одушевлённое или неодушевлённое существительное? Как правильно говорить: вкусный кофе или вкусн</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/k/ko/kofejnaya-ili-kofejnya.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 10 мин</span>
+                </div>
+                <div class="article-home-title">Кофейня или кофейная: в чем разница и как правильно писать</div>
+                <div class="article-home-desc">Разбираем грамматические нюансы: когда используется существительное «кофейня» и прилагательное «кофейная». Таблица отлич</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/n/ni/nina-farina-krem-dlya-torta.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 9 мин</span>
+                </div>
+                <div class="article-home-title">Крем для торта Nina Farina: виды, применение и рецепты</div>
+                <div class="article-home-desc">Полный гид по кремам Nina Farina: выбор основы, стабилизация, рецепты для бисквитов и тортов. Профессиональные советы ко</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/p/pl/plashch-tsveta-kapuchino-s-chem-nosit.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 11 мин</span>
+                </div>
+                <div class="article-home-title">Плащ цвета капучино: 7 стильных образов и с чем носить в сезоне</div>
+                <div class="article-home-desc">Узнайте, с чем носить плащ цвета капучино. Подборка трендовых сочетаний, цветовых палитр и аксессуаров для создания идеа</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/r/re/retsepty-dlya-termosa.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 8 мин</span>
+                </div>
+                <div class="article-home-title">Горячие и холодные заторы: лучшие рецепты для термоса</div>
+                <div class="article-home-desc">Узнайте, как готовить вкусные супы, каши и напитки в термосе. Проверенные рецепты, советы по подготовке и таблицы времен</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/r/ru/rulety-yashkino-vse-vkusy.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 9 мин</span>
+                </div>
+                <div class="article-home-title">Обзор всех вкусов рулетов Яшкино: рейтинг, состав и отзывы</div>
+                <div class="article-home-desc">Полный гид по вкусовой линейке рулетов Яшкино: от классики до эксклюзивов. Разбор калорийности, состава и секретов выбор</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/s/sk/skolko-grammov-v-2-kilogrammakh.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 9 мин</span>
+                </div>
+                <div class="article-home-title">Сколько граммов в 2 килограммах: расчет и применение на практике</div>
+                <div class="article-home-desc">Точный ответ на вопрос о переводе килограммов в граммы. Узнайте, как правильно считать вес для кофе, рецептов и взвешива</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/s/st/stelki-dlya-obuvi-zhenskie-na-vajldberriz.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 10 мин</span>
+                </div>
+                <div class="article-home-title">Стельки для обуви женские на Wildberries: выбор, материалы и отзывы 2026</div>
+                <div class="article-home-desc">Полный гид по выбору женских стелек на Wildberries. Обзор материалов, ортопедических моделей и советы по размеру. Читайт</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/3/3-/3-plitki-shokolada-skolko-gramm.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 8 мин</span>
+                </div>
+                <div class="article-home-title">3 плитки шоколада: сколько грамм в стандартной и мини-упаковке</div>
+                <div class="article-home-desc">Узнайте точный вес 3 плиток шоколада в зависимости от бренда и типа. Таблица весов, калорийность и нюансы расчета для вы</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/c/ch/chto-ispech-s-shokoladom.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 8 мин</span>
+                </div>
+                <div class="article-home-title">Что испечь с шоколадом: 7 лучших десертов и секреты идеального вкуса</div>
+                <div class="article-home-desc">Ищете, что испечь с шоколадом? От воздушных брауни до нежной фондан. Лучшие рецепты, секреты выбора какао и советы по вы</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/d/dl/dlya-plavki-shokolada.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 10 мин</span>
+                </div>
+                <div class="article-home-title">Как правильно плавить шоколад: лучшие способы и ошибки</div>
+                <div class="article-home-desc">Узнайте, как растопить шоколад без кристаллизации. Методы водяной бани и микроволновки, выбор температуры и техники для </div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/k/ka/kak-poluchit-tsvet-kapuchino-kraski-dlya-sten.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 10 мин</span>
+                </div>
+                <div class="article-home-title">Как получить идеальный цвет капучино для стен: инструкция колеровки</div>
+                <div class="article-home-desc">Полное руководство по смешиванию краски в цвет капучино. Таблица пропорций, нюансы освещения и выбор оттенков для создан</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/k/ka/kak-vybrat-pravilnyj-shokolad.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 9 мин</span>
+                </div>
+                <div class="article-home-title">Как выбрать правильный шоколад: состав, процент какао и секреты дегустации</div>
+                <div class="article-home-desc">Узнайте, как отличить настоящий шоколад от конфектуры. Разбор состава, виды какао-масла, таблица отличий и советы сомель</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/k/kt/kto-ispolnyaet-pesnyu-2-kapuchino.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 11 мин</span>
+                </div>
+                <div class="article-home-title">Исполнитель песни «2 капучино»: Кто поёт хит и что это за трек</div>
+                <div class="article-home-desc">Узнайте, кто исполняет песню «2 капучино». Разбор популярного трека, исполнители, слова, клип и интересные факты о музык</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/m/me/med-po-turetski.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 9 мин</span>
+                </div>
+                <div class="article-home-title">Медь по-турецки: перевод, название металла и физические свойства</div>
+                <div class="article-home-desc">Как переводится слово медь на турецкий язык, химические обозначия и свойства металла. Полный гид по использованию термин</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/m/mo/mozhno-li-pit-pivo-s-shokoladom.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 10 мин</span>
+                </div>
+                <div class="article-home-title">Пиво и шоколад: идеальное совпадение или гастрономический провал?</div>
+                <div class="article-home-desc">Можно ли пить пиво с шоколадом? Разбираем правила сочетания стилей, выбор правильного сорта и лучшие гастрономические па</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/r/re/retsept-dubajskoj-shokoladki.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 11 мин</span>
+                </div>
+                <div class="article-home-title">Дубайская шоколадка рецепт: как приготовить дома с тахини</div>
+                <div class="article-home-desc">Пошаговый рецепт легендарной дубайской шоколадки с тахини и фисташковой пастой. Секреты идеальной текстуры и выбор ингре</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/s/s-/s-kakim-tsvetom-sochetaetsya-tsvet-latte.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 9 мин</span>
+                </div>
+                <div class="article-home-title">С каким цветом сочетается цвет латте: гайд по интерьеру и стилю</div>
+                <div class="article-home-desc">Узнайте, с каким цветом сочетается цвет латте в интерьере и одежде. Подбор идеальных палитр, контрастов и акцентов для с</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/s/sa/samyj-vkusnyj-dubajskij-shokolad.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 10 мин</span>
+                </div>
+                <div class="article-home-title">Самый вкусный дубайский шоколад: Топ-5 брендов и секреты выбора</div>
+                <div class="article-home-desc">Ищете самый вкусный дубайский шоколад? Разбираем популярные бренды, состав, секреты рецептуры и где купить оригинал без </div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/t/ts/tsvet-kapuchino-eto-kakoj-foto-dveri.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 11 мин</span>
+                </div>
+                <div class="article-home-title">Цвет капучино в интерьере: фото дверей, оттенки и выбор</div>
+                <div class="article-home-desc">Узнайте, какой оттенок имеет цвет капучино для межкомнатных дверей. Фото, сочетания с полом и стенами, матовые и глянцев</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/t/ts/tsvet-latte-v-odezhde-komu-idet.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 7 мин</span>
+                </div>
+                <div class="article-home-title">Цвет латте в одежде: кому идет, с чем носить и как выбрать</div>
+                <div class="article-home-desc">Узнайте, кому идет нежный цвет латте в одежде. Разбор цветотипов, правила сочетания с другими оттенками и популярные мод</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/b/be/belyj-shokolad-s-lebedem-na-upakovke.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 9 мин</span>
+                </div>
+                <div class="article-home-title">Белый шоколад с лебедем на упаковке: выбор подарка и состав</div>
+                <div class="article-home-desc">Обзор белого шоколада с лебедем на упаковке. Разбор состава, вкусовые качества, хранение и особенности использования в к</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/f/fo/fotki-babl-ti.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 9 мин</span>
+                </div>
+                <div class="article-home-title">Как сделать идеальные фотки бабл ти: гайд по стилю и съемке</div>
+                <div class="article-home-desc">Изучите секреты создания эффектных фоток бабл ти. Советы по освещению, композиции и подаче для социальных сетей и меню.</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/f/fo/fotoseparator-dlya-chego.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 9 мин</span>
+                </div>
+                <div class="article-home-title">Фотосепаратор для чего: назначение, принцип работы и сфера применения</div>
+                <div class="article-home-desc">Узнайте, для чего нужен фотосепаратор, как он разделяет сыпучие материалы и повышает качество продукции. Полный обзор те</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/k/ka/kak-ochistit-mednuyu-posudu.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 10 мин</span>
+                </div>
+                <div class="article-home-title">Как очистить медную посуду: проверенные методы и народные средства</div>
+                <div class="article-home-desc">Полное руководство по очистке медной утвари. Узнайте, как вернуть блеск, удалить нагар и окисление, используя уксус, сол</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/k/ka/kakoj-shokolad-plavitsya-khorosho.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 12 мин</span>
+                </div>
+                <div class="article-home-title">Какой шоколад лучше всего плавится: виды, темперируемые и кондитерские</div>
+                <div class="article-home-desc">Узнайте, какой вид шоколада плавится идеально для соусов и конфет. Разбор состава какао-масла, работа с кондитерской гла</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/k/kr/kraska-dlya-volos-kapuchino-eto-kakoj.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 9 мин</span>
+                </div>
+                <div class="article-home-title">Краска для волос Капучино: какой это оттенок, нюансы и палитра</div>
+                <div class="article-home-desc">Узнайте, какой оттенок соответствует краске для волос Капучино. Разбор подтонов, рекомендации по выбору для разных исход</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/k/ku/kukhnya-kapuchino-glyanets-kakie-oboi.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 10 мин</span>
+                </div>
+                <div class="article-home-title">Какие обои выбрать для кухни цвета капучино: глянцевые фасады и дизайн</div>
+                <div class="article-home-desc">Узнайте, какие обои идеально подходят для кухни с глянцевыми фасадами цвета капучино. Подбор фактур, цветовых сочетаний </div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a>
+            <a href="/articles/l/la/latto-chto-eto.html" class="article-home-card">
+                <div class="card-top">
+                    <span class="card-icon">📁</span>
+                    <span class="card-read-time">⏱ 12 мин</span>
+                </div>
+                <div class="article-home-title">Латто что это: описание, отличие от латте и способы приготовления</div>
+                <div class="article-home-desc">Разбираемся, что такое латто, в чем его разница с классическим латте, какие пропорции кофе и молока используются и как с</div>
+                <div class="card-footer">
+                    <span class="card-read-more">Читать →</span>
+                </div>
+            </a></div>
+            <nav class="pagination" aria-label="Страницы"><a href="/category/drugoe/" class="pag-link pag-edge" title="В начало">«</a><a href="/category/drugoe/page/11/" class="pag-link">← Назад</a><a href="/category/drugoe/" class="pag-link">1</a><span class="pag-dots">…</span><a href="/category/drugoe/page/9/" class="pag-link">9</a><a href="/category/drugoe/page/10/" class="pag-link">10</a><a href="/category/drugoe/page/11/" class="pag-link">11</a><a href="/category/drugoe/page/12/" class="pag-link pag-active">12</a><a href="/category/drugoe/page/13/" class="pag-link">13</a><a href="/category/drugoe/page/14/" class="pag-link">14</a><a href="/category/drugoe/page/15/" class="pag-link">15</a><span class="pag-dots">…</span><a href="/category/drugoe/page/48/" class="pag-link">48</a><a href="/category/drugoe/page/13/" class="pag-link">Далее →</a><a href="/category/drugoe/page/48/" class="pag-link pag-edge" title="В конец">»</a></nav>
+        </div>
+    </main>
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script>
+    document.getElementById('menuBtn')?.addEventListener('click', () => {
+        document.getElementById('mainNav')?.classList.toggle('open');
+    });
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

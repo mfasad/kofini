@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как настроить эспрессо: идеальный вкус и параметры экстракции — Кофини</title>
+    <meta name="description" content="Пошаговая инструкция по настройке эспрессо. Узнайте, как регулировать помол, дозировку и давление для идеального вкуса.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-nastroit-espresso-v-kofemashine.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как настроить эспрессо: идеальный вкус и параметры экстракции">
+    <meta property="og:description" content="Пошаговая инструкция по настройке эспрессо. Узнайте, как регулировать помол, дозировку и давление для идеального вкуса.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как настроить эспрессо: идеальный вкус и параметры экстракции</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как настроить эспрессо: полный гайд по идеальной экстракции</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-мир-настройки-эспрессо">Введение в мир настройки эспрессо</a></li><li><a href="#подготовка-оборудования-и-выбор-зерен">Подготовка оборудования и выбор зерен</a></li><li><a href="#базовые-параметры-вес-время-и-давление">Базовые параметры: вес, время и давление</a></li><li><a href="#пошаговая-инструкция-настройки-помола">Пошаговая инструкция настройки помола</a></li><li><a href="#работа-с-темпером-и-утрамбовкой">Работа с темпером и утрамбовкой</a></li><li><a href="#оценка-вкуса-и-корректировка-профиля">Оценка вкуса и корректировка профиля</a></li><li><a href="#техническое-обслуживание-для-стабильности">Техническое обслуживание для стабильности</a></li><li><a href="#частые-вопросы-и-ответы">Частые вопросы и ответы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-мир-настройки-эспрессо">Введение в мир настройки эспрессо</h2>
+
+<p>Идеальный <strong>эспрессо</strong> — это не магия, а точная инженерия, где каждый параметр играет решающую роль. Многие пользователи совершают ошибку, полагая, что достаточно просто насыпать зерна в <em>Hario</em> или <em>Breville</em> и нажать кнопку. На самом деле, баланс между <strong>диаспорой</strong> (потоком жидкости) и плотностью кофейной таблетки определяет, получите ли вы горький сгусток или кислый, водянистый напиток.</p>
+
+<p>Процесс настройки требует терпения и понимания физики экстракции. Вам предстоит работать с тремя главными переменными: <strong>дозировкой</strong> (весом кофе), <strong>помолом</strong> (размером частиц) и <strong>время экстракции</strong>. Изменение любого из этих параметров кардинально меняет профиль вкуса вашего напитка, превращая утренний ритуал в настоящее исследование.</p>
+
+<h2 id="подготовка-оборудования-и-выбор-зерен">Подготовка оборудования и выбор зерен</h2>
+
+<p>Прежде чем приступать к протиранию группы, необходимо убедиться, что ваш <strong>помол</strong> соответствует типу кофемашины. Для рожковых кофеварок требуется тонкий, почти пылеобразный помол, который создает необходимое сопротивление. Если вы используете <em>Sage Barista Express</em> или <em>DeLonghi Dedica</em>, убедитесь, что жернова чисты и не содержат масел от предыдущих партий, которые могли окислиться и испортить вкус.</p>
+
+<p>Выбор <strong>зерна</strong> также критичен. Свежесть обжарки влияет на выход газов: слишком свежий кофе (< 3 дней после обжарки) может вызвать неравномерную экстракцию из-за избыточного <strong>CO2</strong>. Для стабильной работы рожка лучше брать зерна возрастом 7-14 дней. Фактор свежести часто игнорируется, но именно он определяет наличие густой <strong>крема</strong>.
+
+<blockquote>⚠️ Внимание! Если вы меняете сорт кофе или степень обжарки, необходимо полностью перенастроить параметры экстракции. Старые настройки не подойдут для новых характеристик плотности и влажности зерна.</blockquote>
+
+<p>Не забывайте о качестве воды. Жесткая вода может быстро вывести из строя нагревательный элемент, а слишком мягкая не даст полноценной экстракции вкуса. Используйте фильтрованную воду или бутилированную с минерализацией около 100-150 ppm. Это обеспечит стабильность работы <strong>помпы</strong> и чистоту вкуса.</p>
+
+<h2 id="базовые-параметры-вес-время-и-давление">Базовые параметры: вес, время и давление</h2>
+
+<p>Золотым стандартом для классического эспрессо считается соотношение 1:2. Это означает, что на 18 граммов сухого кофе вы должны получить 36 граммов жидкого напитка. Временной интервал для такой экстракции обычно составляет 25-30 секунд. Если вы набираете вес быстрее, значит, помол слишком крупный, и вода проходит сквозь <strong>пакет</strong> слишком быстро, не успевая растворить вкус.</p>
+
+<p>Давление в системе должно быть стабильным и составлять 9 бар. Большинство современных <em>Rancilio</em> или <em>Gaggia</em> имеют встроенные манометры, позволяющие визуализировать этот процесс. Если стрелка манометра падает в начале пролива, возможно, у вас проблемы с <strong>забиванием</strong> корзины или слишком крупный помол. Напротив, если давление зашкаливает, кофе будет горчить из-за перерасстройства.</p>
+
+<p>Важно понимать, что эти цифры — лишь отправная точка. Вкусовые предпочтения субъективны: кому-то нравится более плотный эспрессо (1:1.5), а кто-то предпочитает более мягкий и кислый профиль (1:2.5). Экспериментируйте с количеством <strong>воды</strong> и временем, записывая результаты в блокнот, чтобы найти свой идеальный баланс.</p>
+
+<div class="poll-widget" id="poll-388753f6"><div class="poll-widget-question">📊 Какой параметр вы корректируете чаще всего?</div><div class="poll-widget-option" data-poll="388753f6" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Размер помола</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="388753f6" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Количество кофе</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="388753f6" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Время экстракции</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="388753f6" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Температура воды</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="пошаговая-инструкция-настройки-помола">Пошаговая инструкция настройки помола</h2>
+
+<p>Настройка помола — это основной инструмент тонкой регулировки вкуса. Если ваш эспрессо течет слишком быстро (меньше 20 секунд) и выглядит как вода, нужно <strong>уменьшить</strong> размер частиц. Делайте это небольшими шагами, по пол-оборота регулятора в сторону «+» или «Fine». Помните, что после изменения помола всегда нужно делать пробный пролив и выбрасывать первую порцию, так как в жерновах остается старый помол.</p>
+
+<div class="checklist-block"><h4>☑️ Чек-лист настройки помола</h4><label class="check-item"><input type="checkbox"><span>Взвесьте сухую дозу кофе</span></label><label class="check-item"><input type="checkbox"><span>Установите время пролива</span></label><label class="check-item"><input type="checkbox"><span>Оцените вкус напитка</span></label><label class="check-item"><input type="checkbox"><span>Запишите параметры</span></label><label class="check-item"><input type="checkbox"><span>Скорректируйте помол при необходимости</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<p>Если же вода капает по одной капле или не идет вовсе, а давление высокое, значит, помол слишком мелкий. В этом случае нужно <strong>увеличить</strong> размер частиц, поворачивая регулятор в сторону «-» или «Coarse». Слишком мелкий помол может привести к затуплению жерновов и перегреву мотора, поэтому не затягивайте процесс регулировки.</p>
+
+<p>Часто возникает вопрос: что делать, если вкус горчит, но время пролива в норме? Скорее всего, проблема в <strong>температуре</strong> или <strong>давлении</strong>. Попробуйте немного снизить температуру воды на 1-2 градуса. В некоторых <em>Synesso</em> или <em>La Marzocco</em> можно точно настроить температуру для каждого профиля пролива, что дает невероятную гибкость.</p>
+
+<blockquote>⚠️ Внимание! Никогда не меняйте настройки помола, пока жернова вращаются. Это может привести к заклиниванию механизма и поломке регулировочного узла. Всегда останавливайте работу машины перед сдвигом конуса.</blockquote>
+
+<h2 id="работа-с-темпером-и-утрамбовкой">Работа с темпером и утрамбовкой</h2>
+
+<p>Равномерность утрамбовки (тамповки) влияет на то, как вода будет проходить через кофейный <strong>пакет</strong>. Если вы прижимаете кофе под углом, вода найдет путь наименьшего сопротивления и пройдет по краю, не экстрагируя центр таблетки. Это явление называется <strong>каналезацией</strong> и приводит к смешанному вкусу: кислинке и горечи одновременно.</p>
+
+<p>Для получения идеального результата используйте <strong>распределитель</strong> (WDT-инструмент) перед утрамбовкой. Он помогает разбить комочки и равномерно распределить частицы по корзине. После распределения используйте <strong>темпер</strong> с плоской базой, прикладывая усилие строго перпендикулярно поверхности. Не нужно давить изо всех сил, главное — получить ровную, горизонтальную поверхность.</p>
+
+<p>Важно также следить за чистотой <strong>тампера</strong>. Налипшие частицы кофе на боковой стенке могут нарушить герметичность прижатия. Регулярно протирайте инструмент влажной салфеткой. Некоторые бариста используют <strong>качественные</strong> тамперы с магнитной базой, которые помогают центрировать инструмент и исключать перекосы.</p>
+
+<details class="faq-item"><summary>Секрет ровного тампа</summary><div class="faq-answer"><p>Используйте зеркало или телефон на селфи, чтобы проверить угол наклона тампера под столом, или купите тампер с уровнем пузырька на рукоятке для идеального контроля.</p></div></details>
+
+<p>Не забывайте о технике безопасности: при сильном нажатии на тампер можно случайно повредить <strong>корзину</strong> или поранить пальцы. Движения должны быть уверенными, но без лишней агрессии. Ровный стол и устойчивая позиция тела — залог качественного тампа.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед каждой утрамбовкой очищайте края корзины от остатков кофе, чтобы избежать смещения таблетки при проходе воды.</p></div>
+
+<h2 id="оценка-вкуса-и-корректировка-профиля">Оценка вкуса и корректировка профиля</h2>
+
+<p>Как понять, что вы добились успеха? Вам нужно попробовать напиток. Если эспрессо <strong>кислый</strong> и резкий, значит, экстракция прошла недостаточно глубоко. В этом случае нужно либо уменьшить размер помола, либо увеличить время пролива. Если же вкус <strong>горький</strong>, вяжущий и оставляет неприятный осадок во рту, экстракция перешла границу разумного — увеличьте помол или уменьшите время.</p>
+
+<p>Для точной оценки используйте <strong>рефрактометр</strong>, если есть возможность, или полагайтесь на свои вкусовые рецепторы. Идеальный эспрессо должен иметь сбалансированный вкус, где слышны ноты шоколада, ореха или фруктов, но нет чистого уксуса или пепла. <mark>Самая критичная ошибка новичков — изменение нескольких параметров одновременно, что делает невозможным понимание причины изменения вкуса.</mark></p>
+
+<p>В таблице ниже приведены основные симптомы и рекомендации по их устранению:</p>
+
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Вероятная причина</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Напиток течет слишком быстро (менее 20 сек)</td>
+<td>Слишком крупный помол</td>
+<td>Уменьшите размер частиц</td>
+</tr>
+<tr>
+<td>Напиток течет слишком медленно (более 35 сек)</td>
+<td>Слишком мелкий помол</td>
+<td>Увеличьте размер частиц</td>
+</tr>
+<tr>
+<td>Вода течет струей сбоку (канализация)</td>
+<td>Неравномерный тамп</td>
+<td>Используйте распределитель</td>
+</tr>
+<tr>
+<td>Нет крема (пенки)</td>
+<td>Слишком старый кофе или неправильный помол</td>
+<td>Замените зерна, проверьте помол</td>
+</tr>
+</tbody>
+</table>
+
+<p>Помните, что настройка — это цикл. Вы меняете параметр, пробуете, записываете, меняете снова. Этот процесс называется <strong>калибровкой</strong>. Со временем вы выработаете интуицию, которая позволит вам мгновенно понимать, что пошло не так, просто глядя на поток эспрессо.</p>
+
+<h2 id="техническое-обслуживание-для-стабильности">Техническое обслуживание для стабильности</h2>
+
+<p>Даже самая лучшая настройка будет бесполезна, если машина не обслуживается. Регулярная очистка <strong>группы</strong> и промывка корзины от остатков кофейного масла обязательны. Масла со временем прогоркают и дают горький, прогорклый привкус, который невозможно убрать даже идеальной настройкой помола.</p>
+
+<p>Используйте специальные таблетки для декафеинизации или чистящие порошки для удаления <strong>минеральных отложений</strong>. В зависимости от жесткости воды, это нужно делать раз в 1-2 месяца. Также не забывайте очищать <strong>каплесборник</strong> и заправлять резервуар свежей водой каждый вечер.</p>
+
+<p>Если у вас есть <em>профессиональная</em> машина с бойлером, следите за уровнем воды и состоянием <strong>насоса</strong>. Шумная работа помпы может сигнализировать о засорении или воздушной пробке. Своевременное выявление проблем поможет избежать дорогостоящего ремонта и сохранить качество напитка.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная чистка машины и использование свежих зерен важнее, чем микроскопическая настройка помола. Без базового ухода даже идеальный рецепт не сработает.</p></div>
+
+<h2 id="частые-вопросы-и-ответы">Частые вопросы и ответы</h2>
+
+<details>
+<summary>Как часто нужно менять настройки помола?</summary>
+<p>Настройки нужно менять при смене сорта кофе, изменении влажности зерна (сезонность) или при изменении температуры окружающей среды. Обычно это требуется раз в 1-2 недели или при покупке новой партии.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать одну настройку для разных сортов?</summary>
+<p>Нет, разные сорта и степени обжарки имеют разную плотность и влажность. Легкая обжарка требует более мелкого помола, а темная — более крупного. Попытка использовать одну настройку приведет к дисбалансу вкуса.</p>
+</details>
+
+<details>
+<summary>Что делать, если кофе горчит даже при быстрых проливах?</summary>
+<p>Скорее всего, проблема в слишком высокой температуре воды или в прогоркших маслах внутри машины. Попробуйте снизить температуру на 1-2 градуса и провести цикл чистки с таблеткой.</p>
+</details>
+
+<details>
+<summary>Нужен ли специальный вес для настройки эспрессо?</summary>
+<p>Да, использование весов с точностью до 0.1 грамма критически важно. Визуальная оценка объема напитка ненадежна из-за разной плотности крема. Точный вес — основа повторяемости результата.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-мир-настройки-эспрессо">Введение в мир настройки эспрессо</a></li><li><a href="#подготовка-оборудования-и-выбор-зерен">Подготовка оборудования и выбор зерен</a></li><li><a href="#базовые-параметры-вес-время-и-давление">Базовые параметры: вес, время и давление</a></li><li><a href="#пошаговая-инструкция-настройки-помола">Пошаговая инструкция настройки помола</a></li><li><a href="#работа-с-темпером-и-утрамбовкой">Работа с темпером и утрамбовкой</a></li><li><a href="#оценка-вкуса-и-корректировка-профиля">Оценка вкуса и корректировка профиля</a></li><li><a href="#техническое-обслуживание-для-стабильности">Техническое обслуживание для стабильности</a></li><li><a href="#частые-вопросы-и-ответы">Частые вопросы и ответы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-sobrat-kofemashinu-delonghi-primadonna.html" class="related-card">Пошаговая инструкция: как собрать кофемашину DeLonghi Primadonna</a></li><li><a href="/articles/k/ka/kak-polzovatsya-kofevarkoj-skarlet-sc-cm33005.html" class="related-card">Как пользоваться кофеваркой Scarlett SC-CM33005: Полная инструкция</a></li><li><a href="/articles/k/ka/kak-ochistit-kofemashinu-bosch.html" class="related-card">Как очистить кофемашину Bosch: полная инструкция по декальцинации</a></li><li><a href="/articles/p/po/pochemu-kapuchinator-ne-vspenivaet-moloko-v-kofemashine.html" class="related-card">Капучинатор не вспенивает молоко: причины и способы ремонта</a></li><li><a href="/articles/k/ka/kak-razobrat-kofevarku-vitek-1525.html" class="related-card">Как разобрать кофеварку Vitek 1525: пошаговая инструкция по чистке</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-sobrat-kofemashinu-delonghi-primadonna.html" class="related-bottom-card"><span class="related-bottom-title">Пошаговая инструкция: как собрать кофемашину DeLonghi Primadonna</span><span class="related-bottom-desc">Подробный гайд по сборке кофемашин DeLonghi Primadonna. Инструкция по установке заварочного блока, б</span></a><a href="/articles/k/ka/kak-polzovatsya-kofevarkoj-skarlet-sc-cm33005.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофеваркой Scarlett SC-CM33005: Полная инструкция</span><span class="related-bottom-desc">Подробное руководство по эксплуатации кофеварки Scarlett SC-CM33005. Настройка помола, приготовление</span></a><a href="/articles/k/ka/kak-ochistit-kofemashinu-bosch.html" class="related-bottom-card"><span class="related-bottom-title">Как очистить кофемашину Bosch: полная инструкция по декальцинации</span><span class="related-bottom-desc">Пошаговое руководство по очистке кофемашин Bosch. Узнайте, как правильно снять накипь, промыть жерно</span></a><a href="/articles/p/po/pochemu-kapuchinator-ne-vspenivaet-moloko-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Капучинатор не вспенивает молоко: причины и способы ремонта</span><span class="related-bottom-desc">Почему капучинатор не взбивает молоко? Полное руководство по диагностике и устранению неисправностей</span></a><a href="/articles/k/ka/kak-razobrat-kofevarku-vitek-1525.html" class="related-bottom-card"><span class="related-bottom-title">Как разобрать кофеварку Vitek 1525: пошаговая инструкция по чистке</span><span class="related-bottom-desc">Подробный гайд по разборке рожковой кофеварки Vitek VT-1525 для удаления накипи и ремонта. Схемы, ин</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-caffe-corso-ot-nakipi-video.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину DeLonghi Caffe Corso от накипи: Видео и инструкция</span><span class="related-bottom-desc">Пошаговая инструкция и видео-гайд по удалению накипи в кофемашине DeLonghi Caffe Corso. Советы по вы</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

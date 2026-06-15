@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Права sudo на кофемашине: что это на самом деле? — Кофини</title>
+    <meta name="description" content="Разбираем миф о правах sudo в кофемашинах. Узнайте, что такое инженерный режим, как получить доступ к скрытым настройкам и зачем это нужно.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/p/pr/prava-sudo-na-kofemashine-chto-eto.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Права sudo на кофемашине: что это на самом деле?">
+    <meta property="og:description" content="Разбираем миф о правах sudo в кофемашинах. Узнайте, что такое инженерный режим, как получить доступ к скрытым настройкам и зачем это нужно.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Права sudo на кофемашине: что это на самом деле?</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Права sudo на кофемашине: что это и зачем нужно?</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#что-скрывается-за-термином-права-sudo-в-кофе-технике">Что скрывается за термином «права sudo» в кофе-технике</a></li><li><a href="#способы-получения-полного-доступа-к-системе">Способы получения полного доступа к системе</a></li><li><a href="#что-можно-изменить-с-помощью-скрытых-настроек">Что можно изменить с помощью скрытых настроек</a></li><li><a href="#риски-и-последствия-вмешательства-в-систему">Риски и последствия вмешательства в систему</a></li><li><a href="#инструменты-для-обслуживания-и-настройки">Инструменты для обслуживания и настройки</a></li><li><a href="#когда-стоит-прибегать-к-сложным-настройкам">Когда стоит прибегать к сложным настройкам</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Многие владельцы автоматических кофемашин сталкиваются с термином «права sudo», который пришел из мира Linux и программирования. В контексте бытовой техники это выражение используется как метафора для описания полного доступа к скрытым алгоритмам работы устройства. По сути, это возможность получить инженерный доступ к прошивке, минуя обычные ограничения интерфейса.</p>
+
+<p>Автоматические кофемашины, такие как модели от <em>DeLonghi</em>, <em>Jura</em> или <em>Siemens</em>, представляют собой сложные компьютерные системы с встроенными операционными системами. Разработчики скрывают множество параметров от обычного пользователя, чтобы предотвратить случайные поломки или нарушение условий гарантии. Однако энтузиасты и мастера сервисных центров знают, как обойти эти ограничения.</p>
+
+<p>Попытка использования «прав sudo» может открыть доступ к калибровке давления, изменению температурных режимов или сбросу счетчиков. Важно понимать, что подобные действия требуют глубоких технических знаний. Ошибочное изменение параметра может привести к выходу из строя дорогостоящих узлов, таких как <strong>термоблок</strong> или <strong>молотый механизм</strong>.</p>
+
+<h2 id="что-скрывается-за-термином-права-sudo-в-кофе-технике">Что скрывается за термином «права sudo» в кофе-технике</h2>
+
+<p>В мире программного обеспечения <strong>sudo</strong> (superuser do) дает пользователю административные права на выполнение команд. В кофемашинах аналогом этого понятия выступает доступ к инженерному меню или сервисному режиму. Это уровень управления, который позволяет изменять фундаментальные настройки работы аппарата, недоступные в стандартном режиме.</p>
+
+<p>Обычный пользователь видит на дисплее только базовые функции: выбор напитка, крепость, объем воды. Инженерный режим раскрывает данные о текущем напряжении сети, температуре в различных точках системы, состоянии насоса и даже историю ошибок. Именно этот доступ часто ошибочно называют «правами root» или «правами sudo».</p>
+
+<p>Разработчики специально ограничивают этот функционал. </p>
+<p>Главная цель — защита от некомпетентных вмешательств, которые могут нарушить работу устройства.</p>
+<p>Без специальных знаний изменение <strong>давления помпы</strong> может привести к протечкам или поломке заварочного блока.</p>
+
+<h2 id="способы-получения-полного-доступа-к-системе">Способы получения полного доступа к системе</h2>
+
+<p>Существует несколько методов в скрытое меню, и выбор зависит от бренда и модели вашего устройства. Для некоторых аппаратов достаточно нажать определенную комбинацию кнопок при включении. Другие модели требуют подключения через специальный кабель и использование программного обеспечения на компьютере.</p>
+
+<p>Самый распространенный способ — использование сервисной комбинации. Обычно это длительное удержание кнопок выбора напитка или регулировки температуры при включении питания. В меню <em>Siemens</em> или <em>Bosch</em> часто используется комбинация нажатия на кнопку «Эспрессо» и «Длинный» одновременно.</p>
+
+<ul>
+ <li>🔧 Использование USB-кабеля для подключения к ПК и отправки команд через терминал.</li>
+ <li>🎛️ Ввод секретных кодов через панель управления при включении устройства.</li>
+ <li>📡 Обход защиты через обновление прошивки с модифицированным файлом.</li>
+</ul>
+
+<p> Ошибка в последовательности нажатий может привести к тому, что устройство уйдет в режим защиты и откажется работать до сброса.</p>
+
+<p>Если вы не обладаете точной информацией по вашей модели, лучше не экспериментировать. Неудачная попытка входа может заблокировать <strong>заварочный блок</strong> или вызвать сбой электроники.</p>
+
+<div class="poll-widget" id="poll-24315b2d"><div class="poll-widget-question">📊 Какой бренд вашей кофемашины?</div><div class="poll-widget-option" data-poll="24315b2d" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">DeLonghi</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="24315b2d" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Jura</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="24315b2d" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Philips/Saeco</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="24315b2d" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Siemens/Bosch</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="24315b2d" data-idx="4" onclick="pbPollVote(this)"><span class="poll-widget-label">Другой</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="что-можно-изменить-с-помощью-скрытых-настроек">Что можно изменить с помощью скрытых настроек</h2>
+
+<p>Получив доступ к инженерному меню, пользователь может корректировать множество параметров, влияющих на вкус и работу машины. Например, можно изменить температуру пролива, время помола или количество воды в чашку. Это позволяет тонко настроить аппарат под конкретные предпочтения или специфические сорта кофе.</p>
+
+<p>Одной из самых популярных функций является сброс счетчиков. Многие машины имеют встроенный таймер, требующий обслуживания после определенного количества чашек. С помощью <strong>сервисного доступа</strong> можно обнулить эти счетчики, что актуально при самостоятельной чистке или замене фильтров.</p>
+
+<p>Также можно изменить скорость работы насоса. Это полезно, если вы используете зерна, требующие более быстрого или медленного пролива. Однако изменение этих значений должно производиться с учетом физических возможностей помпы.</p>
+
+<p>В таблице ниже приведены примеры параметров, доступных для изменения в инженерном режиме:</p>
+
+<table>
+ <thead>
+ <tr>
+ <th>Параметр</th>
+ <th>Стандартное значение</th>
+ <th>Диапазон изменений</th>
+ <th>Влияние на напиток</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Температура пролива</td>
+ <td>90-94°C</td>
+ <td>80-98°C</td>
+ <td>Раскрытие вкуса, горечь</td>
+ </tr>
+ <tr>
+ <td>Время предварительного смачивания</td>
+ <td>2 сек</td>
+ <td>0-10 сек</td>
+ <td>Насыщенность эспрессо</td>
+ </tr>
+ <tr>
+ <td>Количество воды в чашку</td>
+ <td>40-120 мл</td>
+ <td>10-250 мл</td>
+ <td>Объем напитка</td>
+ </tr>
+ <tr>
+ <td>Давление помпы</td>
+ <td>15 бар</td>
+ <td>9-19 бар</td>
+ <td>Скорость экстракции</td>
+ </tr>
+ </tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед изменением любых параметров запишите или сфотографируйте их текущие значения. Это позволит вернуть настройки в исходное состояние при возникновении проблем с качеством напитка.</p></div>
+
+<blockquote>⚠️ Внимание: Изменение давления помпы выше заводских значений может привести к разрыву уплотнительных колец и протечкам в системе.</blockquote>
+
+<h2 id="риски-и-последствия-вмешательства-в-систему">Риски и последствия вмешательства в систему</h2>
+
+<p>Получение «прав sudo» — это обоюдоострый меч. С одной стороны, вы получаете полный контроль над устройством. С другой стороны, вы берете на себя ответственность за любые сбои. Производители не несут гарантийных обязательств, если выявят следы несанкционированного вмешательства в электронику.</p>
+
+<p>Одной из главных опасностей является «окирпичивание» устройства. Если во время обновления прошивки или изменения настроек произойдет сбой питания, машина может перестать включаться. Восстановление в таком случае часто требует замены материнской платы или перепрошивки через специализированное оборудование.</p>
+
+<p>Неправильная калибровка может привести к тому, что кофе станет кислым или горьким. Более того, слишком высокая температура может испортить жернова или вызвать перегрев термоблока. <strong>Термостойкость</strong> деталей имеет свои пределы, которые нельзя игнорировать.</p>
+
+<p>Существует риск блокировки устройства. Некоторые современные модели, например, от <em>Nespresso</em> или <em>Keurig</em>, используют программную защиту, которая может блокировать работу при обнаружении нештатных изменений. В таком случае аппарат может потребовать официального ремонта для разблокировки.</p>
+
+<blockquote>⚠️ Внимание: Гарантия на устройство аннулируется при обнаружении следов взлома прошивки или изменения заводских параметров через сервисный интерфейс.</blockquote>
+
+<details class="faq-item"><summary>Как узнать, что прошивка была изменена?
+<p>При проверке серийного номера в официальном сервисном центре система может отобразить статус «Non-Compliant» или «Modified Firmware». Это часто становится причиной отказа в гарантийном обслуживании.--></p>
+
+<h2 id="инструменты-для-обслуживания-и-настройки">Инструменты для обслуживания и настройки</h2>
+
+<p>Для безопасного входа в инженерный режим и настройки параметров часто используются специализированные программы. Они позволяют подключаться к устройству через USB или Wi-Fi и менять настройки визуально, без необходимости запоминать сложные коды.</p>
+
+<p>Одним из таких инструментов является программное обеспечение для диагностики <em>DeLonghi</em> или <em>Jura</em>. Эти утилиты отображают статус всех датчиков и позволяют выполнять тестовые циклы. Они незаменимы при поиске неисправностей.</p>
+
+<p>Для энтузиастов также существуют открытые проекты, позволяющие создать собственный интерфейс управления. Однако такие решения требуют навыков программирования и понимания работы микроконтроллеров. Они подходят только для опытных пользователей.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка перед входом в инженерный режим</h4><label class="check-item"><input type="checkbox"><span>Убедиться в стабильном питании</span></label><label class="check-item"><input type="checkbox"><span>Записать текущие настройки</span></label><label class="check-item"><input type="checkbox"><span>Подготовить инструменты</span></label><label class="check-item"><input type="checkbox"><span>Прочитать инструкцию к модели</span></label><div class="check-progress">Выполнено</summary><div class="faq-answer"><p> <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="когда-стоит-прибегать-к-сложным-настройкам">Когда стоит прибегать к сложным настройкам</h2>
+
+<p>В большинстве случаев стандартных настроек достаточно для приготовления отличного кофе. Прибегать к глубокому вмешательству стоит только тогда, когда вы точно понимаете причину проблемы или имеете специфические требования к вкусу. Например, если вы используете редкие сорта зерен, требующие нестандартной температуры.</p>
+
+<p>Также доступ к скрытым параметрам может понадобиться при самостоятельном ремонте. Если замена детали не устранила ошибку, возможно, потребуется перенастройка контроллера или сброс ошибок, которые не очищаются обычным способом.</p>
+
+<p>Если вы не уверены в своих силах, лучше доверить эту задачу профессионалам. Сервисные центры имеют доступ к оригинальным утилитам и знают нюансы работы конкретных моделей. Это сэкономит время и предотвратит дорогостоящие поломки.</p>
+
+<p>Помните, что <strong>стабильность работы</strong> важнее экспериментов. Кофемашина должна быть надежным помощником, а не источником проблем.</p>
+
+
+
+<blockquote>⚠️ Внимание: Перед началом любых манипуляций убедитесь, что вы имеете доступ к официальной документации или проверенным источникам информации по вашей конкретной модели.</blockquote>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+
+<details>
+ <summary>Можно ли получить права sudo на любой кофемашине?</summary>
+ <p>Нет, не на любой. Многие современные капсульные и простые капельные системы не имеют открытого доступа к системным настройкам. Инженерный режим чаще всего доступен на автоматических моделях брендов <em>DeLonghi</em>, <em>Siemens</em>, <em>Jura</em> и других производителей профессионального оборудования.</p>
+</details>
+
+<details>
+ <summary>Что произойдет, если я изменю температуру на максимуме?</summary>
+ <p>Чрезмерное повышение температуры может привести к перегреву заварочного блока, ускоренному износу уплотнителей и появлению горечи в напитке. В некоторых случаях термоблок может сработать аварийно и отключить подачу питания.</p>
+</details>
+
+<details>
+ <summary>Смогу ли я вернуть заводские настройки после взлома?</summary>
+ <p>В большинстве случаев да, если вы записали исходные значения. Однако, если прошивка была заменена или изменена критически, может потребоваться перепрошивка через сервисный кабель или обращение в дилерский центр.</p>
+</details>
+
+<details>
+ <summary>Потеряю ли я гарантию при использовании инженерного меню?</summary>
+ <p>Да, если сервисный центр обнаружит следы вмешательства в программное обеспечение или изменение заводских параметров. Даже если поломка не связана с настройками, факт несанкционированного доступа может стать основанием для отказа в гарантийном ремонте.</p>
+</details>
+
+<details>
+ <summary>Как часто нужно сбрасывать счетчики обслуживания?</summary>
+ <p>Сброс счетчиков производится только после того, как вы реально выполнили необходимое обслуживание (прогонка чистящего раствора, замена фильтров, смазка заварочного блока). Делать это без реального обслуживания нельзя, так как машина перестанет сигнализировать о необходимости ухода.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#что-скрывается-за-термином-права-sudo-в-кофе-технике">Что скрывается за термином «права sudo» в кофе-технике</a></li><li><a href="#способы-получения-полного-доступа-к-системе">Способы получения полного доступа к системе</a></li><li><a href="#что-можно-изменить-с-помощью-скрытых-настроек">Что можно изменить с помощью скрытых настроек</a></li><li><a href="#риски-и-последствия-вмешательства-в-систему">Риски и последствия вмешательства в систему</a></li><li><a href="#инструменты-для-обслуживания-и-настройки">Инструменты для обслуживания и настройки</a></li><li><a href="#когда-стоит-прибегать-к-сложным-настройкам">Когда стоит прибегать к сложным настройкам</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-dolce-gusto-krups-infinissima.html" class="related-card">Как почистить кофемашину Krups Infinissima: инструкция по декальцинации</a></li><li><a href="/articles/k/ko/kofemashina-barista-kak-chistit.html" class="related-card">Как правильно чистить кофемашину Barista: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-myt-rozhkovuyu-kofemashinu-khimiej.html" class="related-card">Как правильно мыть рожковую кофемашину химией: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-pravilno-smazyvat-kofemashinu.html" class="related-card">Как правильно смазывать кофемашину: полная инструкция по уходу</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-beko.html" class="related-card">Как почистить кофемашину Beko: полные инструкции по декальцинации и промывке</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-pochistit-kofemashinu-dolce-gusto-krups-infinissima.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Krups Infinissima: инструкция по декальцинации</span><span class="related-bottom-desc">Пошаговая инструкция по очистке кофемашины Krups Infinissima Dolce Gusto. Как снять накипь, промыть </span></a><a href="/articles/k/ko/kofemashina-barista-kak-chistit.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно чистить кофемашину Barista: пошаговая инструкция</span><span class="related-bottom-desc">Полный гид по уходу за кофемашиной Barista. Разбор декальцинации, промывки системы, замены фильтров </span></a><a href="/articles/k/ka/kak-myt-rozhkovuyu-kofemashinu-khimiej.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно мыть рожковую кофемашину химией: пошаговая инструкция</span><span class="related-bottom-desc">Полное руководство по декальцинации и очистке группы рожковой кофемашины. Выбор химии, этапы промывк</span></a><a href="/articles/k/ka/kak-pravilno-smazyvat-kofemashinu.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно смазывать кофемашину: полная инструкция по уходу</span><span class="related-bottom-desc">Пошаговое руководство по смазке заварочного блока и подвижных частей. Узнайте, какие смазки использо</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-beko.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Beko: полные инструкции по декальцинации и промывке</span><span class="related-bottom-desc">Пошаговое руководство по очистке кофемашин Beko. Узнайте, как правильно провести декальцинацию, пром</span></a><a href="/articles/s/sa/safari-coffee-zhivoj-kofe-kofemashina-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Safari Coffee Живой Кофе: Полная инструкция по использованию кофемашины</span><span class="related-bottom-desc">Пошаговая инструкция как пользоваться кофемашиной Safari Coffee Живой Кофе. Настройка, заправка зере</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

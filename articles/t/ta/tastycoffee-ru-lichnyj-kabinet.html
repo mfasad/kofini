@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Личный кабинет TastyCoffee: вход, настройки и бонусы — Кофини</title>
+    <meta name="description" content="Полное руководство по личному кабинету TastyCoffee.ru. Как войти, настроить подписку, отслеживать заказы и использовать бонусную систему за 5 минут.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/t/ta/tastycoffee-ru-lichnyj-kabinet.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Личный кабинет TastyCoffee: вход, настройки и бонусы">
+    <meta property="og:description" content="Полное руководство по личному кабинету TastyCoffee.ru. Как войти, настроить подписку, отслеживать заказы и использовать бонусную систему за 5 минут.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/zerna-i-pomol/">Зерна и помол</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Личный кабинет TastyCoffee: вход, настройки и бонусы</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Личный кабинет TastyCoffee: полный гид по управлению заказами и подпиской</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#первый-вход-и-регистрация-аккаунта">Первый вход и регистрация аккаунта</a></li><li><a href="#управление-подпиской-кофе-в-подарок">Управление подпиской «Кофе в подарок»</a></li><li><a href="#настройка-профиля-и-управление-бонусами">Настройка профиля и управление бонусами</a></li><li><a href="#отслеживание-статуса-заказа-и-доставки">Отслеживание статуса заказа и доставки</a></li><li><a href="#безопасность-аккаунта-и-смена-данных">Безопасность аккаунта и смена данных</a></li><li><a href="#частые-вопросы-пользователей">Частые вопросы пользователей</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Покупка свежеобжаренного кофе требует не только выбора правильного сорта, но и удобного управления своими заказами. Для постоянных покупателей сервис <strong>lucky coffee</strong> (Tasty Coffee) создал специальный инструмент — <strong>личный кабинет</strong>, который объединяет все функции заказа, настройки подписки и получения бонусов в одном месте. Именно здесь вы можете контролировать график доставки, следить за статусом текущих отправлений и экономить деньги.</p>
+
+<p>Многие пользователи совершают ошибку, путая стандартную форму быстрого заказа с полноценным профилем пользователя. В то время как гостевой режим позволяет купить пару пачек, именно <strong>авторизация</strong> открывает доступ к расширенным возможностям: накопительным скидкам, истории покупок и персональным предложениям. Давайте разберем, как максимально эффективно использовать этот инструмент для комфортного потребления кофе.</p>
+
+<h2 id="первый-вход-и-регистрация-аккаунта">Первый вход и регистрация аккаунта</h2>
+
+<p>Процесс создания учетной записи максимально упрощен и не требует заполнения длинных анкет. Вам достаточно ввести свой номер телефона, который будет служить логином, и подтвердить его кодом из SMS. Это стандартная практика для современных маркетплейсов, позволяющая быстро восстановить доступ и привязать заказы к конкретному пользователю.</p>
+
+<p>После ввода кода система автоматически предложит создать <strong>пароль</strong> для защиты аккаунта, хотя вход через SMS-код также остается доступным вариантом. Если вы ранее совершали покупки как гость, вам будет предложено <strong>привязать</strong> старые заказы к новому профилю, чтобы не потерять историю и бонусные баллы. Это критически важно для корректного отображения вашей текущей скидки на сундуке.</p>
+
+<p>Важно проверять корректность введенных данных, особенно номера телефона, так как именно он используется для восстановления доступа и уведомления о статусе доставки. Ошибка в одной цифре может привести к тому, что код подтверждения не дойдет, или бонусы не будут начислены.</p>
+
+<blockquote>⚠️ Внимание: Убедитесь, что номер телефона, указанный при регистрации, активен и доступен для приема SMS-сообщений, так как это единственный способ быстрой авторизации и сброса пароля.</blockquote>
+
+<p>Для тех, кто предпочитает использование социальных сетей, часто доступен вход через <strong>Google</strong> или <strong>Яндекс</strong> ID, что позволяет синхронизировать данные между устройствами без повторного ввода паролей. Однако мобильный номер остается ключевым идентификатором в системе лояльности сервиса.</p>
+
+<h2 id="управление-подпиской-кофе-в-подарок">Управление подпиской «Кофе в подарок»</h2>
+
+<p>Центральная функция личного кабинета — это сервис <em>подписки</em>, который позволяет получать свежий кофе регулярно без необходимости каждый раз совершать поиски и оплату. Эта модель идеально подходит для тех, кто ценит стабильность и хочет всегда иметь под рукой свежую <strong>обжарку</strong>. Система автоматически формирует заказ на указанную вами дату и списывает средства с привязанной карты.</p>
+
+<p>В разделе <code>Моя подписка</code> вы можете гибко настраивать параметры доставки: менять сорт зерен, тип помола (если вы используете кофемашину <em>Krups</em> или <em>De'Longhi</em>), частоту отправки и время доставки. Это дает полную свободу выбора, сохраняя при этом выгодное ценовое предложение, недоступное при разовой покупке.</p>
+
+<p>Особое внимание стоит уделить возможности <strong>модификации</strong> заказа перед его отправкой. Если вы вдруг решили сменить профиль вкуса или временно приостановить доставку (например, уезжаете в отпуск), это можно сделать в любое время через интерфейс управления подпиской.</p>
+
+<div class="checklist-block"><h4>☑️ Настройка идеальной подписки</h4><label class="check-item"><input type="checkbox"><span>Выбрать сорт кофе и помол</span></label><label class="check-item"><input type="checkbox"><span>Определить частоту доставки</span></label><label class="check-item"><input type="checkbox"><span>Привязать карту для оплаты</span></label><label class="check-item"><input type="checkbox"><span>Указать точный адрес доставки</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<p>Система уведомляет вас о предстоящем списании средств и формировании заказа заранее, позволяя внести коррективы, если ваши вкусы изменились. Это отличает сервис от классических подписных коробок, где состав часто фиксирован и неизменен.</p>
+
+<details class="faq-item"><summary>Как работает автоматическое продление подписки?</summary><div class="faq-answer"><p>Подписка действует до тех пор, пока вы не отмените её вручную или не закончатся средства на привязанной карте. Вы можете изменить условия в любой момент до момента формирования заказа на следующую дату.</p></div></details>
+
+<p>Если вы хотите попробовать новый сорт, но не хотите отказываться от текущего, система позволяет добавлять «дополнительные» заказы к основной подписке без нарушения её графика. Это удобно для тех, кто экспериментирует с разными регионами и процессами обжарки.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Подписка позволяет не просто покупать кофе дешевле, но и гарантирует, что вы никогда не останетесь без любимого напитка, получая его точно в срок без лишних действий.</p></div>
+
+<h2 id="настройка-профиля-и-управление-бонусами">Настройка профиля и управление бонусами</h2>
+
+<p>В разделе <code>Профиль</code> хранится вся информация о вас: контактные данные, адреса доставки и история транзакций. Здесь же находится визуализация вашей текущей скидки, которая рассчитывается на основе суммы всех покупок. Чем больше вы покупаете, тем выше уровень <strong>скидки</strong> на весь ассортимент магазина.</p>
+
+<p>Бонусная система работает по принципу накопления баллов, которые можно тратить на покупку кофе. Баллы начисляются за каждый заказ и за отзывы, что стимулирует активных пользователей. Важно отслеживать срок действия баллов, так как они могут сгорать при длительном отсутствии активности, если это прописано в текущих правилах программы лояльности.</p>
+
+<p>В личном кабинете также можно управлять <strong>адресами доставки</strong>, добавляя рабочие места, дачу или адреса родственников. Это избавляет от необходимости каждый раз вручную вводить данные при оформлении заказа, если вы заказываете кофе в разных местах.</p>
+
+<table>
+<thead>
+<tr>
+<th>Уровень скидки</th>
+<th>Накопленная сумма</th>
+<th>Бонусы за отзыв</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Старт</td>
+<td>0 - 3000 ₽</td>
+<td>50 баллов</td>
+</tr>
+<tr>
+<td>Любитель</td>
+<td>3001 - 10000 ₽</td>
+<td>100 баллов</td>
+</tr>
+<tr>
+<td>Гурман</td>
+<td>10001 - 30000 ₽</td>
+<td>200 баллов</td>
+</tr>
+<tr>
+<td>Эксперт</td>
+<td>Более 30000 ₽</td>
+<td>300 баллов</td>
+</tr>
+</tbody>
+</table>
+
+<p>Обратите внимание, что скидка применяется автоматически к корзине при оформлении заказа, если вы авторизованы. Вам не нужно вводить промокоды или активировать специальные предложения вручную — система сама подберет лучший тариф.</p>
+
+<div class="poll-widget" id="poll-47d038de"><div class="poll-widget-question">📊 Как часто вы используете подписку?</div><div class="poll-widget-option" data-poll="47d038de" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в месяц</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="47d038de" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в две недели</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="47d038de" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Никогда, только разовые покупки</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="47d038de" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не пользуюсь сервисом</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="отслеживание-статуса-заказа-и-доставки">Отслеживание статуса заказа и доставки</h2>
+
+<p>Раздел <code>Мои заказы</code> предоставляет детальную информацию о каждом вашем действии. Здесь отображается текущий статус: «Обработка», «Сборка», «Передан курьеру» или «Доставлен». Это позволяет планировать свое время и быть уверенным, что заказ не задержится.</p>
+
+<p>Если вы заказываете кофе по подписке, здесь виден график будущих отправлений. Вы можете увидеть, когда именно будет сформирован ваш следующий заказ и когда он будет передан в службу доставки. Такая прозрачность процесса — ключевое преимущество перед покупкой в обычных магазинах.</p>
+
+<p>Для каждого заказа доступен детальный чек, где прописаны не только стоимость, но и индивидуальные характеристики: дата обжарки, регион происхождения зерна и тип помола. Это важно для тех, кто следит за качеством и свежестью продукта.</p>
+
+<blockquote>⚠️ Внимание: Статус заказа может измениться в любой момент, поэтому не рекомендуется покидать город без согласования времени доставки, если курьер должен вручить посылку лично в руки.</blockquote>
+
+<p>В случае возникновения проблем с доставкой или отсутствия товара на складе, служба поддержки связывается с вами через указанные контакты. В личном кабинете также доступен чат с оператором, где можно быстро решить спорные вопросы.</p>
+
+<h2 id="безопасность-аккаунта-и-смена-данных">Безопасность аккаунта и смена данных</h2>
+
+<p>Вопросы безопасности в личном кабинете решаются через смену пароля и привязку телефона. Если вы подозреваете несанкционированный доступ, немедленно смените пароль и проверьте историю входа. Сервис хранит логи действий, что помогает выявить подозрительную активность.</p>
+
+<p>Для защиты от мошенничества рекомендуется использовать <strong>сложные пароли</strong> и не передавать SMS-коды третьим лицам. Даже если вы доверяете курьеру или менеджеру, никогда не сообщайте коды подтверждения, так как они дают полный доступ к вашим средствам и данным.</p>
+
+<p>При смене номера телефона необходимо обязательно обновить этот параметр в настройках профиля, иначе вы потеряете доступ к аккаунту. Процесс изменения номера требует подтверждения через старый и новый номер, что обеспечивает дополнительный уровень защиты.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярно проверяйте раздел «История заказов» и «Подписки», чтобы убедиться, что все списания и доставки соответствуют вашим ожиданиям и не было случайных ошибок.</p></div>
+
+<h2 id="частые-вопросы-пользователей">Частые вопросы пользователей</h2>
+
+<details>
+<summary>Как отменить подписку, если я временно не хочу получать кофе?</summary>
+<p>Отмена подписки производится в разделе «Моя подписка» нажатием кнопки «Прервать подписку». Важно сделать это до момента формирования следующего заказа, иначе списание средств произойдет автоматически. Вы сможете возобновить подписку в любой момент.</p>
+</details>
+
+<details>
+<summary>Можно ли получить бонусы за покупку, если я забыл авторизоваться?</summary>
+<p>Да, в некоторых случаях можно добавить номер телефона при оформлении гостевого заказа. Однако для автоматического начисления баллов и накопления скидки необходимо входить в систему под своим аккаунтом перед оплатой.</p>
+</details>
+
+<details>
+<summary>Как изменить адрес доставки уже оплаченного заказа?</summary>
+<p>Изменение адреса возможно только до момента передачи заказа в службу доставки. Если статус заказа «В обработке», вы можете связаться с поддержкой через чат в личном кабинете для внесения изменений. После передачи курьеру изменить адрес нельзя.</p>
+</details>
+
+<details>
+<summary>Где посмотреть дату обжарки моего кофе?</summary>
+<p>Дата обжарки указывается в карточке каждого товара в разделе «История заказов». Вы также можете найти эту информацию на этикетке пачки, которая придет вам на почту или будет отражена в деталях заказа.</p>
+</details>
+
+<details>
+<summary>Что делать, если я не получаю уведомления о предстоящем заказе по подписке?</summary>
+<p>Проверьте настройки уведомлений в личном кабинете и спам-папку в почте. Убедитесь, что номер телефона указан верно. Если уведомления все еще не приходят, свяжитесь с поддержкой для проверки настроек вашей учетной записи.</p>
+</details>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Личный кабинет — это не просто форма для заказа, а мощный инструмент управления вашими кофейными привычками, позволяющий экономить, контролировать качество и получать персонализированный сервис.</p></div></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#первый-вход-и-регистрация-аккаунта">Первый вход и регистрация аккаунта</a></li><li><a href="#управление-подпиской-кофе-в-подарок">Управление подпиской «Кофе в подарок»</a></li><li><a href="#настройка-профиля-и-управление-бонусами">Настройка профиля и управление бонусами</a></li><li><a href="#отслеживание-статуса-заказа-и-доставки">Отслеживание статуса заказа и доставки</a></li><li><a href="#безопасность-аккаунта-и-смена-данных">Безопасность аккаунта и смена данных</a></li><li><a href="#частые-вопросы-пользователей">Частые вопросы пользователей</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/p/pr/prigotovit-vkusnyj-kofe-v-domashnikh-usloviyakh.html" class="related-card">Как приготовить идеальный кофе дома: секреты бариста и методы заваривания</a></li><li><a href="/articles/k/ko/kompanii-po-obzharke-kofe.html" class="related-card">ТОП компаний по обжарке кофе: как выбрать лучшего поставщика зерна</a></li><li><a href="/articles/p/pr/pri-prigotovlenii-naturalnogo-molotogo-kofe-v-turke.html" class="related-card">Секреты идеального кофе в турке: температура, помол и процесс</a></li><li><a href="/articles/o/ob/obzharka-zelenogo-kofe-v-domashnikh-usloviyakh.html" class="related-card">Обжарка зеленого кофе дома: способы, температура и секреты</a></li><li><a href="/articles/k/ka/kakoj-kofe-ispolzuyut-dlya-gejzernoj-kofevarki.html" class="related-card">Какой кофе выбрать для гейзерной кофеварки: помол, сорта и лучшие бренды</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/p/pr/prigotovit-vkusnyj-kofe-v-domashnikh-usloviyakh.html" class="related-bottom-card"><span class="related-bottom-title">Как приготовить идеальный кофе дома: секреты бариста и методы заваривания</span><span class="related-bottom-desc">Узнайте, как сварить вкусный кофе в домашних условиях. Полный гид по выбору зерна, помолу, температу</span></a><a href="/articles/k/ko/kompanii-po-obzharke-kofe.html" class="related-bottom-card"><span class="related-bottom-title">ТОП компаний по обжарке кофе: как выбрать лучшего поставщика зерна</span><span class="related-bottom-desc">Обзор ведущих компаний по обжарке кофе. Критерии выбора, типы обжарки, сравнение брендов и советы по</span></a><a href="/articles/p/pr/pri-prigotovlenii-naturalnogo-molotogo-kofe-v-turke.html" class="related-bottom-card"><span class="related-bottom-title">Секреты идеального кофе в турке: температура, помол и процесс</span><span class="related-bottom-desc">Полное руководство по приготовлению натурального молотого кофе в турке. Узнайте о правильном размере</span></a><a href="/articles/o/ob/obzharka-zelenogo-kofe-v-domashnikh-usloviyakh.html" class="related-bottom-card"><span class="related-bottom-title">Обжарка зеленого кофе дома: способы, температура и секреты</span><span class="related-bottom-desc">Как самостоятельно обжарить зеленый кофе в домашних условиях: методы на сковороде, в духовке и рожко</span></a><a href="/articles/k/ka/kakoj-kofe-ispolzuyut-dlya-gejzernoj-kofevarki.html" class="related-bottom-card"><span class="related-bottom-title">Какой кофе выбрать для гейзерной кофеварки: помол, сорта и лучшие бренды</span><span class="related-bottom-desc">Полное руководство по выбору кофе для гейзерной кофеварки. Узнайте идеальный помол, лучшие сорта ара</span></a><a href="/articles/s/sk/skolko-gr-kofe-idet-na-portsiyu-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Сколько грамм кофе на порцию в кофемашине: норма для эспрессо и других напитков</span><span class="related-bottom-desc">Узнайте точное количество кофе на порцию для эспрессо, американо и капучино. Нормы для рожковых, кап</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Barchart Coffee C: Трейдинг зерном кофе на бирже — Кофини</title>
+    <meta name="description" content="Разбор фьючерсов Coffee C на Barchart. Как читать котировки, анализировать графики и использовать данные для торговли кофейными активами.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/b/ba/barchart-coffee-c.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Barchart Coffee C: Трейдинг зерном кофе на бирже">
+    <meta property="og:description" content="Разбор фьючерсов Coffee C на Barchart. Как читать котировки, анализировать графики и использовать данные для торговли кофейными активами.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/drugoe/">Другое</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Barchart Coffee C: Трейдинг зерном кофе на бирже</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Анализ фьючерсов Coffee C на Barchart: Гид для трейдеров</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#что-такое-контракт-coffee-c-и-как-он-торгуется">Что такое контракт Coffee C и как он торгуется</a></li><li><a href="#навигация-по-данным-на-barchart-ключевые-метрики">Навигация по данным на Barchart: Ключевые метрики</a></li><li><a href="#факторы-влияющие-на-динамику-цен-coffee-c">Факторы, влияющие на динамику цен Coffee C</a></li><li><a href="#таблица-основных-характеристик-контракта">Таблица основных характеристик контракта</a></li><li><a href="#технический-анализ-и-инструменты-barchart">Технический анализ и инструменты Barchart</a></li><li><a href="#риски-и-управление-капиталом-при-торговле-кофе">Риски и управление капиталом при торговле кофе</a></li><li><a href="#практическое-применение-данных-для-бизнеса">Практическое применение данных для бизнеса</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Мировой рынок кофе — это динамичная площадка, где цены формируются под влиянием погоды в Бразилии, логистических цепочек и глобального спроса. Для профессиональных участников торговли и инвесторов ключевым инструментом мониторинга является <strong>фьючерсный контракт Coffee C</strong>. Этот актив отражает стоимость фунта арабики и служит глобальным бенчмарком для отрасли.</p>
+
+<p>Платформа <em>Barchart</em> предоставляет один из самых детализированных наборов данных для анализа этого контракта. Здесь можно найти не только текущие котировки, но и глубокие исторические данные, объемы торгов и открытые позиции. Понимание того, как интерпретировать эти цифры, критически важно для принятия взвешенных решений в условиях высокой волатильности.</p>
+
+<h2 id="что-такое-контракт-coffee-c-и-как-он-торгуется">Что такое контракт Coffee C и как он торгуется</h2>
+<p>Контракт <strong>Coffee C</strong> (код <code>KC</code>) является стандартизированным фьючерсом на бирже ICE (Intercontinental Exchange). Он торгуется в долларах США за фунт кофе-сырца сорта арабика. Размер одного стандартного контракта составляет 37 500 фунтов. Именно этот параметр определяет лотность и влияет на размер маржинальных требований.</p>
+
+<p>Трейдеры используют этот инструмент как для хеджирования рисков производителями, так и для спекулятивных операций. На платформе Barchart вы можете отслеживать <strong>спред</strong> между месячными контрактами, что позволяет прогнозировать сезонные колебания цен. Важно различать спот-цены и фьючерсные кривые, так как они могут существенно расходиться в периоды дефицита или перепроизводства.</p>
+
+<p>Специфика контракта заключается в его высокой чувствительности к макроэкономическим факторам. Даже небольшие изменения в курсе доллара или отчеты о запасах могут вызвать резкие движения графика. Barchart агрегирует эти данные в удобные таблицы, позволяя отфильтровать по дате или типу сделки.</p>
+
+<blockquote>
+<p>⚠️ <strong>Внимание:</strong> Торговля фьючерсами на кофе несет высокие риски из-за сильной волатильности. Ценовые скачки в 5-10% за сессию — не редкость в сезоны уборки урожая. Используйте стоп-лоссы.</p>
+</blockquote>
+
+<h2 id="навигация-по-данным-на-barchart-ключевые-метрики">Навигация по данным на Barchart: Ключевые метрики</h2>
+<p>При входе в раздел <code>Coffee C Futures</code> на Barchart перед вами открывается обширный массив информации. Самыми важными показателями являются <strong>Last</strong> (последняя сделка), <strong>Change</strong> (изменение цены) и <strong>Volume</strong> (объем торгов). Эти данные обновляются в реальном времени во время торговой сессии, что дает мгновенную картину рыночной активности.</p>
+
+<p>Не менее важным параметром является <em>Open Interest</em> (открытый интерес). Он показывает количество действующих контрактов, которые еще не были закрыты или поставлены. Рост открытого интереса при растущих ценах часто сигнализирует о сильном бычьем тренде, когда новые игроки активно входят в рынок.</p>
+
+<p>Платформа также предлагает инструменты для технического анализа, такие как <strong>индикаторы RSI</strong> и <strong>скользящие средние</strong>. Они накладываются на график котировок, помогая определить точки перекупленности или перепроданности. Для глубокого анализа рекомендуется смотреть не только на дневные, но и на недельные таймфреймы.</p>
+
+<div class="poll-widget" id="poll-a56af195"><div class="poll-widget-question">📊 Какой инструмент анализа для кофе вы используете чаще?</div><div class="poll-widget-option" data-poll="a56af195" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Технический анализ</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="a56af195" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Фундаментальный анализ</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="a56af195" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Панели новостей</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="a56af195" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Данные по открытому интересу</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Настройте алерты на платформе Barchart по ключевым уровням поддержки и сопротивления, чтобы не пропустить разворот цены во время отсутствия за компьютером.</p></div>
+
+<h2 id="факторы-влияющие-на-динамику-цен-coffee-c">Факторы, влияющие на динамику цен Coffee C</h2>
+<p>Ценообразование на кофе — это сложный процесс, зависящий от множества переменных. Главным фактором остается <strong>погода в Бразилии</strong>, которая является крупнейшим производителем арабики. Засуха или заморозки могут уничтожить значительную часть урожая, вызывая взлет цен на фьючерсы.</p>
+
+<p>Вторым по значимости фактором является логистика и валютные курсы. Поскольку контракты номинированы в долларах, укрепление американской валюты часто оказывает давление на цену кофе, делая его более дорогим для импортеров из других стран. Кроме того, проблемы с фрахтом судов могут создать локальные дефициты.</p>
+
+<p>Инвесторам также стоит уделять внимание отчетам о запасах кофе на складах в портах. <em>Избыток предложения</em> на складах обычно давит на цены, тогда как их истощение служит сигналом к росту. Barchart предоставляет доступ к историческим данным по запасам, что позволяет выявлять долгосрочные тренды.</p>
+
+<blockquote>
+<p>⚠️ <strong>Внимание:</strong> Данные о запасах и урожае могут меняться быстрее, чем вы успеваете принять решение. Всегда проверяйте актуальные отчеты производителей и биржевые сводки перед открытием крупной позиции.</p>
+</blockquote>
+
+<h2 id="таблица-основных-характеристик-контракта">Таблица основных характеристик контракта</h2>
+<p>Для наглядности представим ключевые параметры контракта в виде таблицы. Эти данные фиксированы биржей и служат основой для расчета маржи и комиссии. Изучите их перед началом торговли, чтобы избежать ошибок в управлении капиталом.</p>
+
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Тикер</td>
+<td>KC</td>
+<td>Код контракта на ICE</td>
+</tr>
+<tr>
+<td>Размер контракта</td>
+<td>37 500 фунтов</td>
+<td>Объем одного лота</td>
+</tr>
+<tr>
+<td>Минимальное колебание (Tick)</td>
+<td>0.05 цента/фунт</td>
+<td>$18.75 за тик</td>
+</tr>
+<tr>
+<td>Время торговли</td>
+<td>03:00 - 14:00 EST</td>
+<td>С перерывом на обед</td>
+</tr>
+<tr>
+<td>Метод расчета</td>
+<td>Физическая поставка</td>
+<td>Возможна поставка товара</td>
+</tr>
+</tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Размер контракта в 37 500 фунтов означает, что даже минимальное движение цены на один пункт (tick) стоит $18.75, что требует серьезного управления рисками.</p></div>
+
+<h2 id="технический-анализ-и-инструменты-barchart">Технический анализ и инструменты Barchart</h2>
+<p>Платформа Barchart предлагает мощный набор инструментов для технического анализа фьючерсов Coffee C. Вы можете строить графики с применением различных типов свечей: японские свечи, бары или линейные графики. Это позволяет выбрать наиболее удобный формат для визуализации ценовых движений.</p>
+
+<p>Особое внимание стоит уделить <strong>уровням Фибоначчи</strong> и <strong>каналам Доу-Джонса</strong>. Они помогают определить потенциальные точки разворота тренда. Также на Barchart доступны готовые сценарии, где алгоритм сам подсказывает уровни поддержки и сопротивления на основе исторических максимумов и минимумов.</p>
+
+<p>Для тех, кто предпочитает количественный анализ, доступны <em>градиенты волатильности</em>. Они показывают, насколько сильно менялась цена в прошлом и могут ли повториться подобные скачки. Это особенно полезно в периоды перед публикацией важных экономических отчетов или погодных данных.</p>
+
+<div class="checklist-block"><h4>☑️ Подготовка к анализу</h4><label class="check-item"><input type="checkbox"><span>Открыть график Coffee C на Barchart</span></label><label class="check-item"><input type="checkbox"><span>Включить индикаторы RSI и MACD</span></label><label class="check-item"><input type="checkbox"><span>Проверить объем торгов за неделю</span></label><label class="check-item"><input type="checkbox"><span>Отметить ключевые уровни поддержки</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<details class="faq-item"><summary>Чем отличается спред от цены открытия?</summary><div class="faq-answer"><p>Спред — это разница между ценой покупки и продажи. Цена открытия — это уровень, с которого начинается торговля в новый день. Спред может расширяться при низкой ликвидности.</p></div></details>
+
+<h2 id="риски-и-управление-капиталом-при-торговле-кофе">Риски и управление капиталом при торговле кофе</h2>
+<p>Торговля фьючерсами на кофе — это не только возможности, но и серьезные риски. Высокая волатильность может привести к быстрой потере депозита, если не использовать защитные механизмы. <strong>Плечо</strong>, предоставляемое брокером, усиливает как прибыль, так и убытки.</p>
+
+<p>Одной из главных ошибок новичков является игнорирование <em>маржин-коллов</em>. Если цена против вашей позиции, брокер может потребовать немедленного пополнения счета или принудительно закрыть сделку. На Barchart можно следить за уровнем маржинального обеспечения, чтобы оставаться в рамках допустимого риска.</p>
+
+<p>Рекомендуется использовать стратегию <strong>диверсификации</strong>, не вкладывая все средства в один актив. Также важно учитывать сезонность: во время сбора урожая в Бразилии волатильность обычно снижается, а в периоды засухи — резко возрастает. Планируйте свои сделки с учетом этих циклов.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Никогда не торгуйте кофе"на всю котлету" — всегда оставляйте запас маржи на случай резких движений рынка, характерных для сырьевых рынков.</p></div>
+
+<h2 id="практическое-применение-данных-для-бизнеса">Практическое применение данных для бизнеса</h2>
+<p>Представители кофейного бизнеса используют данные Barchart для планирования закупок и ценообразования. Если вы владелец кофейной сети, мониторинг <strong>контрактов на поставку</strong> поможет вам зафиксировать цену на кофе заранее, защитив себя от будущих скачков.</p>
+
+<p>Аналитика позволяет прогнозировать изменения в розничных ценах на эспрессо и капучино. Рост фьючерсов Coffee C на 10-15% обычно приводит к удорожанию напитка в чашке через 1-2 месяца. Это знание помогает менеджерам корректировать прайс-листы и маркетинговые стратегии.</p>
+
+<p>Кроме того, данные о <em>глобальных запасах</em> помогают оптимизировать складские логистические цепочки. Если ожидается дефицит, имеет смысл увеличить складские запасы заранее. Barchart предоставляет исторические данные, которые позволяют моделировать такие сценарии с высокой точностью.</p>
+
+<blockquote>
+<p>⚠️ <strong>Внимание:</strong> Фьючерсные цены не всегда точно прогнозируют розничные цены в вашей стране из-за локальных налогов, пошлин и логистических издержек. Учитывайте эти факторы при планировании бюджета.</p>
+</blockquote>
+
+<h2 id="часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</h2>
+
+<details>
+<summary>Как часто обновляются данные на Barchart для Coffee C?</summary>
+<p>Данные обновляются в режиме реального времени во время торгов на бирже ICE. После закрытия сессии публикуются финальные отчеты по объему и открытому интересу.</p>
+</details>
+
+<details>
+<summary>Можно ли торговать кофе без фьючерсного счета через Barchart?</summary>
+<p>Да, Barchart предоставляет данные, но для прямой торговли вам потребуется счет у брокера. Платформа также предлагает симуляторы и аналитику для подготовки к торговле.</p>
+</details>
+
+<details>
+<summary>Что означает"экспирация" контракта Coffee C?</summary>
+<p>Это дата окончания срока действия контракта. В этот момент происходит либо поставка физического товара, либо денежное урегулирование. Торговля этим конкретным контрактом прекращается.</p>
+</details>
+
+<details>
+<summary>Влияет ли курс доллара на цену Coffee C?</summary>
+<p>Да, поскольку контракты номинированы в долларах, укрепление доллара обычно ведет к снижению цены кофе в пересчете на другие валюты, что может снизить спрос и давление на котировки.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#что-такое-контракт-coffee-c-и-как-он-торгуется">Что такое контракт Coffee C и как он торгуется</a></li><li><a href="#навигация-по-данным-на-barchart-ключевые-метрики">Навигация по данным на Barchart: Ключевые метрики</a></li><li><a href="#факторы-влияющие-на-динамику-цен-coffee-c">Факторы, влияющие на динамику цен Coffee C</a></li><li><a href="#таблица-основных-характеристик-контракта">Таблица основных характеристик контракта</a></li><li><a href="#технический-анализ-и-инструменты-barchart">Технический анализ и инструменты Barchart</a></li><li><a href="#риски-и-управление-капиталом-при-торговле-кофе">Риски и управление капиталом при торговле кофе</a></li><li><a href="#практическое-применение-данных-для-бизнеса">Практическое применение данных для бизнеса</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/d/du/dubajskij-shokolad-sostav-nachinki.html" class="related-card">Дубайский шоколад: состав начинки, калорийность и секреты рецепта</a></li><li><a href="/articles/p/pr/prigotovlenie-kofe-v-kofemashine.html" class="related-card">Как правильно готовить кофе в кофемашине: полные инструкции и советы</a></li><li><a href="/articles/s/sk/skolko-stoyat-olivki.html" class="related-card">Сколько стоят оливки: цены, сорта и как не переплатить</a></li><li><a href="/articles/k/ka/kakogo-tsveta-dolzhen-byt-pol-esli-dveri-tsveta-kapuchino.html" class="related-card">Какого цвета пол выбрать под двери капучино: 5 идеальных сочетаний</a></li><li><a href="/articles/k/ka/kak-legko-rastopit-shokolad.html" class="related-card">Как легко растопить шоколад: 5 проверенных способов без комков</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/d/du/dubajskij-shokolad-sostav-nachinki.html" class="related-bottom-card"><span class="related-bottom-title">Дубайский шоколад: состав начинки, калорийность и секреты рецепта</span><span class="related-bottom-desc">Подробный разбор состава начинки дубайского шоколада. Узнайте про тахини, фисташковую пасту и хрустя</span></a><a href="/articles/p/pr/prigotovlenie-kofe-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно готовить кофе в кофемашине: полные инструкции и советы</span><span class="related-bottom-desc">Полное руководство по приготовлению эспрессо, капучино и латте. Настройка помола, выбор зерна, настр</span></a><a href="/articles/s/sk/skolko-stoyat-olivki.html" class="related-bottom-card"><span class="related-bottom-title">Сколько стоят оливки: цены, сорта и как не переплатить</span><span class="related-bottom-desc">Актуальные цены на оливки в 2026 году. Влияние сорта, страны и упаковки на стоимость. Сравнение цен </span></a><a href="/articles/k/ka/kakogo-tsveta-dolzhen-byt-pol-esli-dveri-tsveta-kapuchino.html" class="related-bottom-card"><span class="related-bottom-title">Какого цвета пол выбрать под двери капучино: 5 идеальных сочетаний</span><span class="related-bottom-desc">Полное руководство по подбору напольного покрытия к дверям цвета капучино. Разбор гармонии, контраст</span></a><a href="/articles/k/ka/kak-legko-rastopit-shokolad.html" class="related-bottom-card"><span class="related-bottom-title">Как легко растопить шоколад: 5 проверенных способов без комков</span><span class="related-bottom-desc">Узнайте, как правильно растопить шоколад в микроволновке, на водяной бане и в духовке. Секреты идеал</span></a><a href="/articles/t/th/the-taste-futbolki.html" class="related-bottom-card"><span class="related-bottom-title">The Taste футболки: обзор бренда, состав ткани и выбор размера</span><span class="related-bottom-desc">Полный разбор бренда The Taste: состав хлопка, качество принтов, размеры и уход за одеждой. Узнайте,</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Что такое PID в кофемашине: принцип работы и влияние на вкус — Кофини</title>
+    <meta name="description" content="Разбираем технологию PID-регулятора в кофемашинах. Узнайте, как точное управление температурой улучшает экстракцию и вкус эспрессо.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/c/ch/chto-takoe-pid-v-kofemashine.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Что такое PID в кофемашине: принцип работы и влияние на вкус">
+    <meta property="og:description" content="Разбираем технологию PID-регулятора в кофемашинах. Узнайте, как точное управление температурой улучшает экстракцию и вкус эспрессо.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Что такое PID в кофемашине: принцип работы и влияние на вкус</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Что такое PID в кофемашине: принцип работы и влияние на вкус</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение">Введение</a></li><li><a href="#суть-технологии-pid-регулятора">Суть технологии PID-регулятора</a></li><li><a href="#как-работает-алгоритм-управления-температурой">Как работает алгоритм управления температурой</a></li><li><a href="#влияние-стабильности-температуры-на-вкус-эспрессо">Влияние стабильности температуры на вкус эспрессо</a></li><li><a href="#сравнение-pid-против-обычного-термостата">Сравнение: PID против обычного термостата</a></li><li><a href="#модернизация-старых-кофемашин">Модернизация старых кофемашин</a></li><li><a href="#маркетинговые-уловки-и-реальные-возможности">Маркетинговые уловки и реальные возможности</a></li><li><a href="#частые-вопросы-о-pid-системах">Частые вопросы о PID-системах</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение">Введение</h2>
+<p>Вы когда-нибудь замечали, что одна и та же порция кофе может получиться горькой или кислой, даже если вы используете одни и те же зерна? Часто проблема кроется не в качестве зерен, а в нестабильности температуры воды внутри вашей машины. Именно здесь на сцену выходит технология, ставшая золотым стандартом для гурманов и профессионалов — <strong>PID-регулятор</strong>.</p>
+<p>Многие пользователи слышат это слово при выборе новой техники, но далеко не все понимают, как именно электроника влияет на вкус напитка. Без точного контроля нагрева даже самое дорогое оборудование может выдавать посредственные результаты из-за колебаний всего в пару градусов.</p>
+<p>В этой статье мы разберем, что скрывается за аббревиатурой <strong>PID</strong>, как работает алгоритм пропорционально-интегрально-дифференцирующего управления и почему наличие этого модуля критически важно для получения идеального эспрессо с плотной crema.</p>
+
+<h2 id="суть-технологии-pid-регулятора">Суть технологии PID-регулятора</h2>
+<p>Аббревиатура <strong>PID</strong> расшифровывается как Proportional-Integral-Derivative (Пропорционально-Интегрально-Дифференцирующий). Это сложный математический алгоритм, встроенный в микроконтроллер кофемашины, который отвечает за поддержание заданной температуры с минимальной погрешностью.</p>
+<p>В отличие от простых термостатов, которые просто включают и выключают нагрев при достижении порога, <strong>PID-система</strong> постоянно анализирует текущее состояние и предсказывает будущее отклонение. Она не ждет, пока вода остынет, а плавно снижает мощность нагревателя заранее, предотвращая резкие скачки.</p>
+<p>Для кофемашины это означает, что температура воды при прохождении через кофейную таблетку остается практически неизменной. Такая стабильность позволяет полностью раскрыть <strong>ароматические масла</strong> и избежать экстракции нежелательных горелых нот, которые появляются при перегреве.</p>
+
+<blockquote>⚠️ Внимание: Многие производители указывают наличие PID в характеристиках, но иногда это лишь маркетинговый ход. Убедитесь, что система реально управляет температурой в группе, а не просто поддерживает тепло в бойлере во время простоя.</blockquote>
+
+<h2 id="как-работает-алгоритм-управления-температурой">Как работает алгоритм управления температурой</h2>
+<p>Чтобы понять магию PID, нужно рассмотреть его три составляющие. Пропорциональная часть (P) реагирует на текущую разницу между заданной и фактической температурой: чем больше отклонение, тем сильнее корректировка.</p>
+<p>Интегральная часть (I) накапливает прошлые ошибки. Если температура постоянно была чуть ниже нормы, система увеличит мощность, чтобы компенсировать этот дефицит. Дифференциальная часть (D) смотрит в будущее, оценивая скорость изменения температуры, чтобы предотвратить перегрев до того, как он случится.</p>
+<p>Именно сочетание этих трех компонентов позволяет достичь <strong>точности до 0,1 градуса</strong>. Обычный термостат может допускать колебания в 3-5 градусов, что для тонкого профиля эспрессо является фатальным, так как меняет экстракцию растворимых веществ.</p>
+<p>В современных моделях, таких как <em>Rancilio Silvia Pro</em> или <em>Lelit Bianca</em>, вы можете вручную настраивать эти параметры, подстраивая машину под конкретный сорт зерен. Это дает вам контроль над уровнем экстракции, недоступный в бюджетных аппаратах.</p>
+
+<div class="poll-widget" id="poll-aab1f3f3"><div class="poll-widget-question">📊 Насколько важна для вас точность температуры при заваривании?</div><div class="poll-widget-option" data-poll="aab1f3f3" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Критически важна для вкуса</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="aab1f3f3" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Немного влияет на результат</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="aab1f3f3" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Важна только для белого кофе</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="aab1f3f3" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не знаю, что это влияет</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="влияние-стабильности-температуры-на-вкус-эспрессо">Влияние стабильности температуры на вкус эспрессо</h2>
+<p>Кофеин и ароматические соединения экстрагируются при разных температурах. <strong>Кислинка</strong> чаще всего проявляется при более низких температурах, тогда как <strong>горечь</strong> и терпкость доминируют при перегреве. Если температура воды "скачет" во время пролива, вы получаете напиток с дисбалансом вкусов.</p>
+<p>Система PID обеспечивает ровный профиль пролива. Это значит, что первые секунды, когда извлекаются яркие фруктовые ноты, и последние секунды, когда вытягиваются тяжелые тела, проходят в одинаковых температурных условиях.</p>
+<p>Для светлых обжарок это особенно важно: они требуют точного нагрева, чтобы избежать "кипячения" тонких кислот. В то же время для темных обжарок PID позволяет избежать появления жженого привкуса, который часто возникает из-за инерции простых нагревателей.</p>
+<p>Эксперты по кофе называют PID-регулятор главным фактором, отличающим домашнюю <strong>эспрессо-машину</strong> от профессионального оборудования в кафе. Без него получить стабильный результат "из дня в день" практически невозможно.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Если вы любите экспериментировать, попробуйте изменить температуру на 1-2 градуса вверх или вниз для одного и того же сорта. Часто даже небольшое изменение кардинально меняет восприятие напитка, и PID делает этот процесс предсказуемым.</p></div>
+
+<h2 id="сравнение-pid-против-обычного-термостата">Сравнение: PID против обычного термостата</h2>
+<p>Давайте наглядно сравним работу двух популярных систем нагрева. Обычный <strong>термостат</strong> работает по принципу гистерезиса: вода нагревается до верхнего предела, термостат отключает ТЭН, температура падает, и цикл повторяется. В момент пролива температура может упасть на 5-8 градусов.</p>
+<p>PID-регулятор, напротив, не отключает нагрев резко. Он плавно меняет мощность, поддерживая температуру в узком коридоре. Это особенно заметно при приготовлении нескольких чашек подряд: во второй и третьей чашке вкус останется идентичным первому.</p>
+
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Обычный термостат</th>
+<th>PID-регулятор</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Точность поддержания</td>
+<td>±3–5°C</td>
+<td>±0.1–0.5°C</td>
+</tr>
+<tr>
+<td>Реакция на пролив</td>
+<td>Резкое падение температуры</td>
+<td>Мгновенная компенсация</td>
+</tr>
+<tr>
+<td>Стабильность вкуса</td>
+<td>Ухудшается с каждой чашкой</td>
+<td>Одинаковая на протяжении сеанса</td>
+</tr>
+<tr>
+<td>Возможность настройки</td>
+<td>Отсутствует или ограничена</td>
+<td>Полная ручная настройка</td>
+</tr>
+<tr>
+<td>Стоимость оборудования</td>
+<td>Низкая</td>
+<td>Выше средней</td>
+</tr>
+</tbody>
+</table>
+
+<p>Разница в стоимости оправдана, если вы планируете готовить более 2-3 чашек в день. Экономия на температуре часто приводит к тому, что дорогие зерна раскрываются не полностью, и вы переплачиваете за продукт, который не чувствуете.</p>
+
+<details class="faq-item"><summary>Миф о "перегреве" PID</summary><div class="faq-answer"><p> Существует мнение, что PID всегда перегревается. Это неверно. Качественный PID настроен так, чтобы предотвращать перегрев, используя дифференциальную составляющую для замедления нагрева при приближении к цели.</p></div></details>
+
+<h2 id="модернизация-старых-кофемашин">Модернизация старых кофемашин</h2>
+<p>У вас уже есть любимая кофемашина, но в ней нет PID? Хорошая новость: во многих случаях эту систему можно установить самостоятельно или с помощью мастера. Это популярная процедура, известная как "PID-мод" или <strong>модификация термостата</strong>.</p>
+<p>Процесс обычно involves замену старого биметаллического термостата на электронный блок PID и соответствующий датчик температуры. Часто вместе с этим устанавливают более мощный нагреватель и меняют прошивку платы управления.</p>
+<p>Это позволяет превратить бюджетную машину, например, <em>DeLonghi Dedica</em> или старую <em>Rancilio Silvia</em>, в аппарат, соперничающий по качеству с новыми моделями среднего ценового сегмента.</p>
+
+<div class="checklist-block"><h4>☑️ Критерии для установки PID</h4><label class="check-item"><input type="checkbox"><span>Есть ли свободное место в корпусе</span></label><label class="check-item"><input type="checkbox"><span>Совместимость датчика с группой</span></label><label class="check-item"><input type="checkbox"><span>Наличие свободных портов на плате</span></label><label class="check-item"><input type="checkbox"><span>Профессиональные навыки пайки</span></label><label class="check-item"><input type="checkbox"><span>Бюджет на комплектующие</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<blockquote>⚠️ Внимание: Установка PID своими руками может привести к потере гарантии. Если ваша машина еще на гарантии, лучше обратиться в авторизованный сервис, чтобы не нарушить условия договора.</blockquote>
+
+<p>Однако, перед началом работ обязательно проверьте совместимость компонентов. Разные модели требуют разных типов нагревателей и датчиков, и ошибка в подборе может вывести электронику из строя окончательно.</p>
+
+<h2 id="маркетинговые-уловки-и-реальные-возможности">Маркетинговые уловки и реальные возможности</h2>
+<p>Производители часто используют термин "PID" как маркетинговое клише. Иногда в инструкции написано, что система есть, но на практике она работает в упрощенном режиме или отвечает только за бойлер, игнорируя группу.</p>
+<p>Настоящий <strong>PID-контроль</strong> должен управлять температурой непосредственно в голове группы (group head) или в потоке воды перед фильтром. Если датчик стоит далеко от места экстракции, реакция системы будет запаздывать.</p>
+<p>Всегда читайте обзоры на конкретную модель, а не только технические характеристики. Реальные тесты показывают, как температура ведет себя в момент нажатия кнопки "Start" и во время пролива.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Наличие PID не гарантирует идеальный кофе само по себе, но обеспечивает стабильную базу, на которой вы можете строить свои рецепты без риска температурных скачков.</p></div>
+
+<h2 id="частые-вопросы-о-pid-системах">Частые вопросы о PID-системах</h2>
+
+<details>
+<summary>Обязательно ли наличие PID для домашнего использования?</summary>
+<p>Не обязательно, если вы пьете не более одной чашки в день и не являетесь гурманом. Однако для любителей качественной эспрессо-культуры PID становится незаменимым инструментом достижения стабильного результата.</p>
+</details>
+
+<details>
+<summary>Можно ли настроить температуру через PID?</summary>
+<p>Да, большинство систем с PID позволяют пользователю задавать температуру с шагом в 0.1 или 1 градус. Это позволяет подстраивать машину под разные сорта зерен и степень обжарки.</p>
+</details>
+
+<details>
+<summary>Потребляет ли PID больше электроэнергии?</summary>
+<p>Нет, PID часто потребляет меньше энергии, так как он предотвращает циклы частого включения и выключения мощных нагревателей, работая в более экономичном режиме поддержания температуры.</p>
+</details>
+
+<details>
+<summary>Что делать, если после установки PID температура "гуляет"?</summary>
+<p>Скорее всего, проблема в неправильной настройке коэффициентов P, I и D. Потребуется провести процедуру калибровки или обратиться к специалисту для тонкой настройки алгоритма под вашу конкретную машину.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение">Введение</a></li><li><a href="#суть-технологии-pid-регулятора">Суть технологии PID-регулятора</a></li><li><a href="#как-работает-алгоритм-управления-температурой">Как работает алгоритм управления температурой</a></li><li><a href="#влияние-стабильности-температуры-на-вкус-эспрессо">Влияние стабильности температуры на вкус эспрессо</a></li><li><a href="#сравнение-pid-против-обычного-термостата">Сравнение: PID против обычного термостата</a></li><li><a href="#модернизация-старых-кофемашин">Модернизация старых кофемашин</a></li><li><a href="#маркетинговые-уловки-и-реальные-возможности">Маркетинговые уловки и реальные возможности</a></li><li><a href="#частые-вопросы-о-pid-системах">Частые вопросы о PID-системах</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ko/kofemashina-kak-ubrat-vozdushnuyu-probku.html" class="related-card">Как убрать воздушную пробку в кофемашине: полное руководство</a></li><li><a href="/articles/k/ka/kak-myt-kofemashinu-philips.html" class="related-card">Как мыть кофемашину Philips: полная инструкция по уходу и декальцинации</a></li><li><a href="/articles/c/ch/chem-pochistit-kofemashinu-ot-nakipi-v-domashnikh-usloviyakh-delongi-magnifika.html" class="related-card">Чем почистить кофемашину DeLonghi Magnifica от накипи: лучшие средства и методы</a></li><li><a href="/articles/k/ka/kak-chasto-nuzhno-obsluzhivat-kofemashinu.html" class="related-card">Как часто обслуживать кофемашину: график и правила ухода</a></li><li><a href="/articles/k/ka/kak-raskrutit-kofemolku-bosh-video.html" class="related-card">Как продлить жизнь кофемолке Bosch: видео-инструкции и советы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ko/kofemashina-kak-ubrat-vozdushnuyu-probku.html" class="related-bottom-card"><span class="related-bottom-title">Как убрать воздушную пробку в кофемашине: полное руководство</span><span class="related-bottom-desc">Пошаговая инструкция по удалению воздуха из системы заваривания. Причины завоздушивания, методы прок</span></a><a href="/articles/k/ka/kak-myt-kofemashinu-philips.html" class="related-bottom-card"><span class="related-bottom-title">Как мыть кофемашину Philips: полная инструкция по уходу и декальцинации</span><span class="related-bottom-desc">Пошаговое руководство: как правильно мыть заварочный блок, проводить декальцинацию и очищать контейн</span></a><a href="/articles/c/ch/chem-pochistit-kofemashinu-ot-nakipi-v-domashnikh-usloviyakh-delongi-magnifika.html" class="related-bottom-card"><span class="related-bottom-title">Чем почистить кофемашину DeLonghi Magnifica от накипи: лучшие средства и методы</span><span class="related-bottom-desc">Полная инструкция: чем удалять накипь в DeLonghi Magnifica. Обзор оригинальных средств, лимонной кис</span></a><a href="/articles/k/ka/kak-chasto-nuzhno-obsluzhivat-kofemashinu.html" class="related-bottom-card"><span class="related-bottom-title">Как часто обслуживать кофемашину: график и правила ухода</span><span class="related-bottom-desc">Определите точный график обслуживания кофемашины. Узнайте, когда нужно проводить декальцинацию, чист</span></a><a href="/articles/k/ka/kak-raskrutit-kofemolku-bosh-video.html" class="related-bottom-card"><span class="related-bottom-title">Как продлить жизнь кофемолке Bosch: видео-инструкции и советы</span><span class="related-bottom-desc">Узнайте, как правильно обслуживать и устранять неполадки кофемолок Bosch. Видео-гиды, разбор частых </span></a><a href="/articles/p/po/pochemu-kofemashina-ne-propuskaet-vodu.html" class="related-bottom-card"><span class="related-bottom-title">Кофемашина не пропускает воду: причины, диагностика и ремонт</span><span class="related-bottom-desc">Почему кофемашина не пропускает воду? Разбираем основные поломки: от засоров до поломки насоса. Поша</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

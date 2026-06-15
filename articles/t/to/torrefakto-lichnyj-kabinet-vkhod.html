@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Торрефакто личный кабинет: вход, регистрация и управление заказом кофе — Кофини</title>
+    <meta name="description" content="Инструкция по входу в личный кабинет Торрефакто. Регистрация, восстановление доступа, управление подпиской на кофе и отслеживание статуса доставки.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/t/to/torrefakto-lichnyj-kabinet-vkhod.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Торрефакто личный кабинет: вход, регистрация и управление заказом кофе">
+    <meta property="og:description" content="Инструкция по входу в личный кабинет Торрефакто. Регистрация, восстановление доступа, управление подпиской на кофе и отслеживание статуса доставки.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/zerna-i-pomol/">Зерна и помол</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Торрефакто личный кабинет: вход, регистрация и управление заказом кофе</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Личный кабинет Торрефакто: полный путеводитель по управлению заказами</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-экосистему-торрефакто">Введение в экосистему Торрефакто</a></li><li><a href="#процедура-авторизации-в-системе">Процедура авторизации в системе</a></li><li><a href="#первая-регистрация-и-создание-профиля">Первая регистрация и создание профиля</a></li><li><a href="#управление-подпиской-и-настройка-заказов">Управление подпиской и настройка заказов</a></li><li><a href="#история-заказов-и-финансовая-статистика">История заказов и финансовая статистика</a></li><li><a href="#восстановление-доступа-и-безопасность">Восстановление доступа и безопасность</a></li><li><a href="#частые-вопросы-и-возможные-проблемы">Частые вопросы и возможные проблемы</a></li><li><a href="#заключительные-рекомендации">Заключительные рекомендации</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-экосистему-торрефакто">Введение в экосистему Торрефакто</h2>
+
+<p>Покупка свежеобжаренного кофе — это не просто транзакция, а начало глубокого погружения в мир кофейной культуры. Для постоянных клиентов сервиса <strong>Торрефакто</strong> существует удобная цифровая среда, которая позволяет автоматизировать процесс получения любимого зерна. <em>Личный кабинет</em> становится вашим персональным смотрителем, где можно контролировать все аспекты взаимодействия с брендом, от подбора профиля обжарки до настройки частоты доставки.</p>
+
+<p>Многие пользователи сталкиваются с необходимостью быстрого доступа к своим данным, но не знают, как правильно сориентироваться в интерфейсе. <strong>Вход в систему</strong> — это первый шаг к управлению вашим кофейным запасом без лишних звонков и ожидания в очереди. Здесь вы можете изменить параметры подписки, если ваш распорядок дня изменился, или отследить, где именно находится ваша посылка в данный момент.</p>
+
+<p>Важно понимать, что платформа постоянно совершенствуется, предлагая новые функции для <strong>клиентов Торрефакто</strong>. Отслеживание истории покупок позволяет анализировать свои вкусовые предпочтения и выбирать наиболее подходящие сорта. <em>Удобство использования</em> ставится во главу угла при разработке любого функционала, поэтому навигация интуитивно понятна даже для новичков в мире онлайн-заказов.</p>
+
+<h2 id="процедура-авторизации-в-системе">Процедура авторизации в системе</h2>
+
+<p>Чтобы попасть в свой аккаунт, вам необходимо перейти на официальный сайт сервиса и найти кнопку входа в правом верхнем углу экрана. Обычно это выглядит как иконка силуэта человека или надпись <code>Войти</code>. После нажатия откроется форма, где от вас потребуется ввести номер телефона или адрес электронной почты, который использовался при регистрации.</p>
+
+<p>Система безопасности Торрефакто предусматривает использование одноразовых кодов для подтверждения личности. Вы не будете вводить пароль в привычном понимании, так как это упрощает процесс входа и снижает риск утечки данных. На указанное вами устройство придет СМС-сообщение или Push-уведомление с цифровым кодом.</p>
+
+<p>Введите полученный код в соответствующее поле на сайте. После успешной верификации вы мгновенно попадете на главную страницу личного кабинета. <strong>Авторизация</strong> занимает всего несколько секунд, если у вас стабильное подключение к интернету и вы помните свой номер телефона.</p>
+
+<p>Если вы ранее не использовали сервис, кнопка входа может перенаправить вас на форму регистрации. Это не ошибка, а логичный шаг для новых пользователей. Вам предложат создать профиль, чтобы начать пользоваться всеми преимуществами <em>подписки на кофе</em> и накопительными бонусами.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Никогда не вводите код подтверждения от входа в аккаунт на сторонних сайтах или в ответ на звонки неизвестных номеров. Официальные сотрудники никогда не запрашивают эти данные по телефону.</p>
+</blockquote>
+
+<div class="poll-widget" id="poll-4e8c161e"><div class="poll-widget-question">📊 Как часто вы заказываете кофе?</div><div class="poll-widget-option" data-poll="4e8c161e" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в неделю</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="4e8c161e" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в две недели</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="4e8c161e" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в месяц</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="4e8c161e" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Нерегулярно</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="первая-регистрация-и-создание-профиля">Первая регистрация и создание профиля</h2>
+
+<p>Если вы впервые посещаете сайт и решили воспользоваться сервисом доставки, процедура создания аккаунта максимально упрощена. Вам не нужно заполнять сложные анкеты или загружать документы. Достаточно указать основной контактный номер, на который будет осуществляться доставка и отправка уведомлений.</p>
+
+<p>После ввода номера телефона и получения кода подтверждения, система предложит вам заполнить базовую информацию. Здесь вы можете указать ваше имя, город доставки и предпочтения по времени получения заказов. Это поможет курьерам доставлять <strong>свежую обжарку</strong> именно тогда, когда вы будете дома.</p>
+
+<p>Особое внимание уделите настройкам подписки, если вы планируете заказывать кофе регулярно. Вы сможете выбрать конкретные сорта, указать желаемый помол для вашей кофемашины и задать график доставки. <em>Гибкость настроек</em> позволяет адаптировать сервис под любые изменения в вашем ритме жизни.</p>
+
+<p>Завершите регистрацию, подтвердив согласие с правилами сервиса. Теперь ваш профиль активен, и вы можете сразу переходить к выбору товаров. В будущем вы сможете добавить адресные книги для доставки в разные точки или изменить контактные данные в любой момент.</p>
+
+<div class="checklist-block"><h4>☑️ Регистрация в Торрефакто</h4><label class="check-item"><input type="checkbox"><span>Ввести номер телефона</span></label><label class="check-item"><input type="checkbox"><span>Получить код в СМС</span></label><label class="check-item"><input type="checkbox"><span>Ввести код подтверждения</span></label><label class="check-item"><input type="checkbox"><span>Настроить профиль доставки</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="управление-подпиской-и-настройка-заказов">Управление подпиской и настройка заказов</h2>
+
+<p>Главное преимущество личного кабинета Торрефакто — это возможность управлять автоматической подпиской. Вам больше не нужно каждый раз заново искать нужный сорт и добавлять его в корзину. Система сама предложит вам отгрузку в соответствии с выбранным графиком.</p>
+
+<p>В разделе <code>Моя подписка</code> вы можете внести изменения в текущий заказ. Это может быть необходимость сменить сорт кофе, если вы устали от предыдущего или хотите попробовать что-то новое. Также доступно изменение объема упаковки (250 г или 1 кг) и типа помола.</p>
+
+<ul>
+<li>🔄 Смена сорта: выберите любой доступный в ассортименте вид зерна.</li>
+<li>📦 Изменение частоты: перенастройте доставку с еженедельной на ежемесячную.</li>
+<li>⏸️ Пауза: приотставьте подписку, если уезжаете в отпуск или на дачу.</li>
+</ul>
+
+<p>Важно сделать изменения до момента формирования заказа на складе, иначе следующая отправка пройдет по старым параметрам. <strong>Время обработки</strong> обычно занимает от 1 до 3 дней, поэтому планируйте свои корректировки заранее.</p>
+
+<p>Если вы забыли, когда именно должна прийти ваша посылка, статус заказа всегда отображается в реальном времени. Вы увидите, находится ли он на стадии сборки, передан ли курьеру или уже доставлен в пункт выдачи. Это избавляет от тревоги и лишних вопросов о месте нахождения груза.</p>
+
+<details class="faq-item"><summary>Что такое автопродление подписки?</summary><div class="faq-answer"><p>Автопродление позволяет автоматически формировать и выставлять счет на оплату следующего заказа в соответствии с выбранным графиком, если у вас подключена услуга автоматического списания средств.</p></div></details>
+
+<h2 id="история-заказов-и-финансовая-статистика">История заказов и финансовая статистика</h2>
+
+<p>Раздел истории покупок в личном кабинете — это полезный инструмент для анализа ваших расходов и вкусовых предпочтений. Здесь хранится полная информация о всех совершенных транзакциях, включая названия сортов, даты оплаты и суммы чеков. Вы можете посмотреть, какой кофе вы заказывали полгода назад, чтобы повторить удачную покупку.</p>
+
+<p>Статистика помогает понять, сколько вы тратите на кофе в месяц или за год. Это особенно полезно при планировании семейного бюджета или при сравнении стоимости разных сортов. <strong>Финансовый отчет</strong> позволяет увидеть динамику потребления и скорректировать заказ, если расходы превышают ожидаемые.</p>
+
+<p>Для каждого заказа доступен детальный просмотр со списком товаров. Вы увидите, какой помол был выбран, была ли добавлена специя или сироп к заказу. Если требуется возврат или обмен товара, эта информация станет основным доказательством при обращении в службу поддержки.</p>
+
+<p>Система также сохраняет данные о промокодах и скидках, которые вы использовали. Это позволяет отследить, как часто вы получали выгоду и какие акции приносили наибольшую экономию. <em>Прозрачность</em> финансовых операций является стандартом для сервиса.</p>
+
+<table>
+<thead>
+<tr>
+<th>Статус заказа</th>
+<th>Описание процесса</th>
+<th>Действия пользователя</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Обработка</td>
+<td>Заказ передан на склад, идет сборка</td>
+<td>Можно внести изменения в состав</td>
+</tr>
+<tr>
+<td>Отправлен</td>
+<td>Посылка передана в службу доставки</td>
+<td>Отслеживание по трек-номеру</td>
+</tr>
+<tr>
+<td>В пути</td>
+<td>Груз находится в логистическом центре</td>
+<td>Ожидание уведомления о прибытии</td>
+</tr>
+<tr>
+<td>Доставлен</td>
+<td>Заказ получен в пункте выдачи или курьером</td>
+<td>Проверка целостности упаковки</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="восстановление-доступа-и-безопасность">Восстановление доступа и безопасность</h2>
+
+<p>Иногда возникают ситуации, когда доступ к аккаунту теряется, например, при смене номера телефона или утере устройства. В этом случае не стоит паниковать, так как у сервиса есть четкие алгоритмы восстановления. Вам потребуется связаться со службой поддержки через форму обратной связи или по телефону.</p>
+
+<p>Процесс восстановления включает в себя верификацию личности. Оператор может попросить назвать последние совершенные заказы, сумму их стоимости или адрес доставки, который был указан ранее. Это стандартная мера защиты от несанкционированного доступа к <strong>персональным данным</strong>.</p>
+
+<p>После подтверждения личности вам предложат привязать новый номер телефона или электронную почту. После этого вы сможете войти в систему, используя новый контактный способ. <em>Безопасность</em> ваших данных является приоритетом, поэтому процедура может занять от 30 минут до нескольких часов.</p>
+
+<p>Рекомендуется регулярно обновлять контактные данные в профиле, чтобы не столкнуться с проблемами доступа в будущем. Также стоит сохранять чеки и уведомления о заказах до момента их получения, они могут стать дополнительным подтверждением при спорах.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если вы сменили номер телефона, обязательно обновите его в настройках профиля заранее. Иначе вы не сможете получить код подтверждения для входа в аккаунт.</p>
+</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Сохраняйте скриншоты уведомлений о доставке и трек-номера в отдельной папке на телефоне, это упростит решение спорных вопросов с логистической службой.</p></div>
+
+<h2 id="частые-вопросы-и-возможные-проблемы">Частые вопросы и возможные проблемы</h2>
+
+<p>Пользователи часто сталкиваются с вопросами, связанными с техническими аспектами работы личного кабинета. Например, может возникнуть проблема с некорректным отображением статуса доставки или ошибками при входе через мобильное приложение. В большинстве случаев эти проблемы решаются простой перезагрузкой страницы или очисткой кэша браузера.</p>
+
+<p>Другой частый вопрос касается невозможности изменить параметры подписки. Это обычно связано с тем, что заказ уже находится на стадии отгрузки. В таком случае изменение возможно только для следующей отправки. <strong>Технические ограничения</strong> объясняются процессами на складе, где упаковка уже началась.</p>
+
+<p>Иногда пользователи забывают, какой именно номер телефона был указан при регистрации. В этом случае попробуйте войти с другими вашими номерами или обратитесь в поддержку для уточнения данных. </p>
+
+<p>Для решения сложных проблем, которые не описаны в инструкции, всегда доступна служба поддержки. Операторы работают в режиме онлайн и готовы помочь с любым вопросом, от настройки профиля до возврата средств за некачественный товар. <em>Компетентность</em> сотрудников гарантирует быстрое решение проблемы.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Интерфейс личного кабинета может обновляться без предварительного уведомления. Если вы не можете найти привычную кнопку, проверьте наличие обновлений приложения или поищите новый раздел в меню.</p>
+</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярный вход в личный кабинет позволяет контролировать статус подписки и вовремя вносить изменения в график доставки, избегая простоев в запасах кофе.</p></div>
+
+<h2 id="заключительные-рекомендации">Заключительные рекомендации</h2>
+
+<p>Использование личного кабинета Торрефакто значительно упрощает жизнь кофеманов, делая процесс получения любимого напитка автоматическим и предсказуемым. Вы экономите время на поиске товаров и оформлении заказов, получая свежую обжарку прямо к двери. <strong>Комфорт</strong> и удобство — главные преимущества такого формата взаимодействия.</p>
+
+<p>Не пренебрегайте настройками уведомлений, чтобы быть в курсе всех этапов доставки. Это поможет вам избежать недоразумений с курьерами и гарантированно получить заказ в назначенное время. <em>Внимание к деталям</em> в настройках профиля окупится отсутствием стресса при получении посылки.</p>
+
+<p>Пользуйтесь историей заказов для экспериментов с разными сортами и профилями обжарки. Система поможет вам найти идеальный баланс между кислинкой и горчинкой, который подходит именно вашему вкусу. Постоянное совершенствование ваших предпочтений — это часть удовольствия от кофейной культуры.</p>
+
+<p>Надеюсь, что данная статья помогла вам разобраться во всех нюансах работы с личным кабинетом. Если возникнут новые вопросы, всегда можно обратиться к официальной документации или в поддержку сервиса. Приятного кофепития и удачных заказов!</p>
+
+<details>
+<summary>Как восстановить доступ, если потерял доступ к номеру телефона?</summary>
+<p>Вам необходимо обратиться в службу поддержки Торрефакто через форму обратной связи на сайте. Оператор запросит информацию о последних заказах для подтверждения вашей личности, после чего привяжет к аккаунту новый номер.</p>
+</details>
+
+<details>
+<summary>Можно ли изменить помол кофе уже после оформления заказа?</summary>
+<p>Это возможно только в том случае, если заказ еще не передан на сборку на складе. Проверьте статус в личном кабинете: если статус "Обработка", можно внести изменения, если "Отправлен" — изменение возможно только для следующего заказа.</p>
+</details>
+
+<details>
+<summary>Где посмотреть трек-номер для отслеживания посылки?</summary>
+<p>Трек-номер отображается в разделе "История заказов" в личном кабинете после того, как статус заказа изменится на "Отправлен". Ссылка на трек-трекер также приходит на электронную почту и в SMS.</p>
+</details>
+
+<details>
+<summary>Как отменить подписку полностью?</summary>
+<p>Для отмены подписки зайдите в раздел "Моя подписка" в личном кабинете и выберите опцию "Завершить подписку". После этого автоматические отгрузки прекратятся, и вы сможете заказывать кофе разово.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-экосистему-торрефакто">Введение в экосистему Торрефакто</a></li><li><a href="#процедура-авторизации-в-системе">Процедура авторизации в системе</a></li><li><a href="#первая-регистрация-и-создание-профиля">Первая регистрация и создание профиля</a></li><li><a href="#управление-подпиской-и-настройка-заказов">Управление подпиской и настройка заказов</a></li><li><a href="#история-заказов-и-финансовая-статистика">История заказов и финансовая статистика</a></li><li><a href="#восстановление-доступа-и-безопасность">Восстановление доступа и безопасность</a></li><li><a href="#частые-вопросы-и-возможные-проблемы">Частые вопросы и возможные проблемы</a></li><li><a href="#заключительные-рекомендации">Заключительные рекомендации</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/c/ch/chem-otlichaetsya-arabika-ot-robusty-chto-luchshe.html" class="related-card">Арабика и Робуста: главные отличия и что лучше выбрать</a></li><li><a href="/articles/d/dr/drip-kofe-optom.html" class="related-card">Дрип кофе оптом: цены, поставщики и выбор для бизнеса</a></li><li><a href="/articles/s/sk/skolko-sortov-kofe-sushchestvuet-v-mire-nazvaniya.html" class="related-card">Сколько сортов кофе существует в мире: названия и виды</a></li><li><a href="/articles/k/ka/kak-uznat-kakoj-pomol-u-kofe.html" class="related-card">Как узнать помол кофе: 5 способов определить размер зерен</a></li><li><a href="/articles/k/ko/kofe-kakie-byvayut-nazvaniya.html" class="related-card">Виды и названия кофе: от зерен до готовых напитков</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/c/ch/chem-otlichaetsya-arabika-ot-robusty-chto-luchshe.html" class="related-bottom-card"><span class="related-bottom-title">Арабика и Робуста: главные отличия и что лучше выбрать</span><span class="related-bottom-desc">Полное сравнение сортов кофе: вкус, аромат, содержание кофеина и цена. Узнайте, какой сорт подойдет </span></a><a href="/articles/d/dr/drip-kofe-optom.html" class="related-bottom-card"><span class="related-bottom-title">Дрип кофе оптом: цены, поставщики и выбор для бизнеса</span><span class="related-bottom-desc">Полное руководство по закупке дрип кофе оптом. Сравнение поставщиков, расчет маржинальности, критери</span></a><a href="/articles/s/sk/skolko-sortov-kofe-sushchestvuet-v-mire-nazvaniya.html" class="related-bottom-card"><span class="related-bottom-title">Сколько сортов кофе существует в мире: названия и виды</span><span class="related-bottom-desc">Узнайте, сколько сортов кофе растет на планете. Полный список названий арабики и робусты, ботаническ</span></a><a href="/articles/k/ka/kak-uznat-kakoj-pomol-u-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Как узнать помол кофе: 5 способов определить размер зерен</span><span class="related-bottom-desc">Узнайте, как определить степень помола кофе визуально и на ощупь. Таблица соответствия помол и кофев</span></a><a href="/articles/k/ko/kofe-kakie-byvayut-nazvaniya.html" class="related-bottom-card"><span class="related-bottom-title">Виды и названия кофе: от зерен до готовых напитков</span><span class="related-bottom-desc">Полный гид по названиям кофе. Узнайте разницу между эспрессо, американо и латте, виды обжарки и сорт</span></a><a href="/articles/c/ch/chto-takoe-filtrovannoe-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Что такое фильтрованное кофе: методы, оборудование и секреты вкуса</span><span class="related-bottom-desc">Узнайте всё о фильтрованном кофе: от капельных кофеварок до пуроверов. Разбор методов, выбор зерен и</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

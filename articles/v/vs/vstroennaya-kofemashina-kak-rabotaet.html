@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как работает встроенная кофемашина: принцип действия и устройство — Кофини</title>
+    <meta name="description" content="Подробный разбор того, как работает встроенная кофемашина. Изучите устройство заварочного блока, систему заваривания и нюансы интеграции в мебель.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/v/vs/vstroennaya-kofemashina-kak-rabotaet.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как работает встроенная кофемашина: принцип действия и устройство">
+    <meta property="og:description" content="Подробный разбор того, как работает встроенная кофемашина. Изучите устройство заварочного блока, систему заваривания и нюансы интеграции в мебель.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/vybor-kofemashin/">Выбор кофемашин</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как работает встроенная кофемашина: принцип действия и устройство</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Принцип работы встроенной кофемашины: от зерна до чашки</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-мир-автоматизации-кофе">Введение в мир автоматизации кофе</a></li><li><a href="#ключевые-узлы-и-общая-схема-работы">Ключевые узлы и общая схема работы</a></li><li><a href="#процесс-заваривания-шаг-за-шагом">Процесс заваривания: шаг за шагом</a></li><li><a href="#интеграция-в-мебель-и-системы-питания">Интеграция в мебель и системы питания</a></li><li><a href="#система-управления-и-настройки">Система управления и настройки</a></li><li><a href="#обслуживание-и-профилактика-поломок">Обслуживание и профилактика поломок</a></li><li><a href="#сравнение-встроенных-и-отдельно-стоящих-моделей">Сравнение встроенных и отдельно стоящих моделей</a></li><li><a href="#частые-вопросы-пользователей">Частые вопросы пользователей</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-мир-автоматизации-кофе">Введение в мир автоматизации кофе</h2>
+
+<p>Встроенная кофемашина превращает обычный кухонный гарнитур в профессиональную кофейню, скрывая сложнейшую технику за фасадами мебели. В отличие от отдельно стоящих аналогов, она работает в полной гармонии с интерьером, не занимая полезного пространства столешницы. Это решение выбирают те, кто ценит эстетику и готовность к идеальному напитку в одно касание.</p>
+
+<p>Многие пользователи ошибочно полагают, что встроенные модели отличаются от настольных только размерами. На самом деле, их <strong>архитектура</strong> существенно сложнее, так как требует специальных каналов для подачи воды и отвода отходов. <em>Встроенная техника</em> часто оснащается более мощными помпами и расширенными системами управления, чтобы компенсировать отсутствие прямого доступа к кнопкам.</p>
+
+<p>Понимание того, как работает этот механизм, поможет вам правильно эксплуатировать устройство и избегать распространенных ошибок при обслуживании. Знание устройства заварочного блока и системы нагрева даст вам преимущество в создании идеального <strong>эспрессо</strong> или капучино каждый день.</p>
+
+<h2 id="ключевые-узлы-и-общая-схема-работы">Ключевые узлы и общая схема работы</h2>
+
+<p>В основе работы любой автоматической кофемашины лежит цикл, который повторяется при каждой чашке. Однако встроенные модели имеют уникальную особенность: управление часто осуществляется через <strong>сенсорную панель</strong> на фасаде, а не на самом корпусе. Вода поступает из центральной магистрали или из отдельного резервуара, скрытого внутри шкафа.</p>
+
+<p>Первым этапом всегда является забор воды и ее подготовка. Система фильтрации, встроенная в <code>входной патрубок</code>, убирает известковый налет и хлор, что критически важно для долговечности <strong>теплообменника</strong>. Затем вода проходит через помпу высокого давления, которая толкает ее к группе заваривания.</p>
+
+<p>Заварочный блок — это сердце всей системы. В нем происходит магия превращения молотого зерна в густой эликсир. Механизм <strong>высыпания</strong> кофе, его трамбовка и непосредственное прохождение горячей воды под давлением — все это происходит за считанные секунды. Встроенные модели часто оснащаются съемными блоками для удобства промывки.</p>
+
+<h2 id="процесс-заваривания-шаг-за-шагом">Процесс заваривания: шаг за шагом</h2>
+
+<p>Когда вы нажимаете кнопку выбора напитка, запускается сложный алгоритм действий. Сначала жернова <em>молотого кофе</em> измельчают зерна до заданной фракции. Точность помола влияет на экстракцию: слишком мелкий помол может забить фильтр, а слишком крупный — сделать напиток водянистым.</p>
+
+<p>Далее порция кофе попадает в заварочную камеру, где она уплотняется специальным поршнем. В этот момент важно, чтобы давление пролива было стабильным, обычно оно составляет 15 бар. Система управления контролирует <strong>температуру</strong> воды, чтобы она не кипела, а находилась в идеальном диапазоне для раскрытия аромата.</p>
+
+<p>После пролива готовый напиток стекает в чашку, а жмых формируется в таблетку и выбрасывается в специальный отсек. Весь процесс занимает от 30 секунд до минуты, в зависимости от типа напитка. <em>Автоматическая</em> промывка системы после каждого цикла предотвращает смешивание вкусов разных напитков.</p>
+
+<div class="poll-widget" id="poll-292e51c2"><div class="poll-widget-question">📊 Какой тип заваривания вам ближе?</div><div class="poll-widget-option" data-poll="292e51c2" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Традиционный эспрессо</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="292e51c2" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Капучино с густой пенкой</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="292e51c2" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Американо длинной экстракции</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="292e51c2" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Кофе с молоком</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="интеграция-в-мебель-и-системы-питания">Интеграция в мебель и системы питания</h2>
+
+<p>Главное отличие встроенной техники — это способ подключения к коммуникациям. В отличие от стационарных аналогов, здесь часто используется прямое подключение к водопроводу через гибкие шланги. Это избавляет от необходимости постоянно заполнять пластиковый бачок вручную.</p>
+
+<p>Система отвода воды также имеет свои особенности. Использованная вода и промывочные растворы уходят в канализацию через специальный сифон. Важно правильно рассчитать <strong>угол наклона</strong> сливного шланга, чтобы избежать обратного тока жидкости и застоя запахов.</p>
+
+<p>Электрическое подключение требует осторожности. Встроенная кофемашина потребляет значительную мощность во время нагрева, поэтому лучше использовать отдельную линию с заземлением. Расположение розетки должно быть таким, чтобы не перекрывать доступ к сервисным отсекам.</p>
+
+<div class="checklist-block"><h4>☑️ Подготовка места для встройки</h4><label class="check-item"><input type="checkbox"><span>Проверить расстояние до стены</span></label><label class="check-item"><input type="checkbox"><span>Оценить наличие водопровода</span></label><label class="check-item"><input type="checkbox"><span>Подготовить канал для слива</span></label><label class="check-item"><input type="checkbox"><span>Проверить уровень пола</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: При подключении к водопроводу обязательно используйте фильтр грубой очистки перед кофемашиной. Жесткость воды напрямую влияет на частоту обслуживания и работу <strong>термоблока</strong>.</p>
+</blockquote>
+
+<h2 id="система-управления-и-настройки">Система управления и настройки</h2>
+
+<p>Управление встроенными моделями часто выносится на фасад мебели или осуществляется через удаленное приложение. Это позволяет настроить крепость напитка, объем воды и температуру без визуального контакта с самой машиной. Программное обеспечение позволяет сохранять <strong>персональные профили</strong> для каждого члена семьи.</p>
+
+<p>Электронный контроллер отслеживает состояние всех узлов: от уровня молока до остаточного ресурса жерновов. Если система обнаруживает сбой, например, засор в канале подачи молока, она выведет код ошибки на дисплей. Это позволяет быстро локализовать проблему без вызова мастера.</p>
+
+<p>Некоторые продвинутые модели поддерживают функцию самоочистки всей системы после приготовления молочных напитков. Это критически важно для предотвращения размножения бактерий в <em>латте-системе</em>. Пользователь лишь нажимает кнопку, а машина сама прогоняет через трубки горячую воду и моющий состав.</p>
+
+<details class="faq-item"><summary>Скрытые функции управления</summary><div class="faq-answer"><p>Встроенные кофемашины часто имеют скрытое сервисное меню, доступ к которому получают через комбинацию кнопок на панели. Там можно калибровать помпу, менять язык интерфейса и сбрасывать счетчики обслуживания. Будьте осторожны: изменение неправильных параметров может привести к поломке устройства.</p></div></details>
+
+<h2 id="обслуживание-и-профилактика-поломок">Обслуживание и профилактика поломок</h2>
+
+<p>Долговечность устройства зависит от регулярного ухода. Заварочный блок требует извлечения и промывки под струей воды не реже одного раза в неделю. Без этого остатки кофейного масла затвердеют и нарушат герметичность уплотнений.</p>
+
+<p>Система декольцинации — обязательная процедура, которую нельзя игнорировать. Специальный раствор растворяет отложения минералов внутри трубок и теплообменника. Частота проведения зависит от жесткости вашей воды и объема приготовления напитков.</p>
+
+<p>Жернова кофемолки также нуждаются в обслуживании. Их следует очищать от мелких частиц и масел, используя специальные таблетки для чистки. Иначе качество помола ухудшится, и кофе станет горчить. <strong>Регулярность</strong> таких процедур продлевает жизнь механизму на годы.</p>
+
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: Никогда не используйте агрессивные моющие средства, не предназначенные для кофемашин. Они могут разъесть уплотнительные резинки и привести к протечкам внутри корпуса, что недопустимо при встраивании.</p>
+</blockquote>
+
+<h2 id="сравнение-встроенных-и-отдельно-стоящих-моделей">Сравнение встроенных и отдельно стоящих моделей</h2>
+
+<p>Выбор между встроенной и настольной техникой зависит от ваших приоритетов. Встроенные модели предлагают более мощный <strong>насос</strong> и больший резервуар для воды, так как место ограничено только размерами ниши. Они тише работают, так как корпус мебели служит дополнительной звукоизоляцией.</p>
+
+<p>Отдельно стоящие агрегаты гибче в плане расположения, но часто уступают в производительности и функционале заварочных групп. Встроенные решения дороже в монтаже, но экономят место на рабочей поверхности и выглядят дороже. Это инвестиция в комфорт и дизайн интерьера.</p>
+
+<p>В следующей таблице представлены основные различия, которые помогут определиться с выбором:</p>
+
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Встроенная кофемашина</th>
+<th>Отдельно стоящая модель</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Место установки</td>
+<td>В кухонную нишу (шкаф)</td>
+<td>На столешницу</td>
+</tr>
+<tr>
+<td>Подключение воды</td>
+<td>Чаще всего прямое (от водопровода)</td>
+<td>Резервуар (бачок)</td>
+</tr>
+<tr>
+<td>Уровень шума</td>
+<td>Ниже (звук глушится мебелью)</td>
+<td>Выше (нет шумоизоляции)</td>
+</tr>
+<tr>
+<td>Монтаж</td>
+<td>Требует профессиональной встройки</td>
+<td>Подключение «включил и работай»</td>
+</tr>
+<tr>
+<td>Стоимость обслуживания</td>
+<td>Выше (сложнее доступ к узлам)</td>
+<td>Низкая (легкий доступ ко всем деталям)</td>
+</tr>
+</tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед встройкой обязательно проверьте глубину ниши. Даже если модель заявлена как «компактная», задние патрубки и шланги могут требовать дополнительного пространства, которого нет в стандартном шкафу.</p></div>
+
+<h2 id="частые-вопросы-пользователей">Частые вопросы пользователей</h2>
+
+<details>
+<summary>Можно ли перевести встроенную кофемашину на резервуар?</summary>
+<p>Да, большинство моделей позволяют переключить подачу воды с центрального водопровода на встроенный резервуар. Для этого нужно отключить шланг подачи и установить пластиковый бак в отведенное место, следуя инструкции производителя.</p>
+</details>
+
+<details>
+<summary>Как часто нужно чистить молочную систему?</summary>
+<p>Молочную систему необходимо промывать сразу после каждого приготовления напитка с молоком. Раз в неделю проводится полная автоматическая очистка с использованием специальных средств, чтобы избежать засорения капилляров густым молоком.</p>
+</details>
+
+<details>
+<summary>Что делать, если машина пишет ошибку «Забит слив»?</summary>
+<p>Проверьте сифон в канализации, куда уходит сливной шланг. Часто проблема не в самой машине, а в засоре в трубе кухни. Отсоедините шланг и продуйте или промойте сифон.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать кофемашину в ванной комнате?</summary>
+<p>Категорически не рекомендуется. Высокая влажность в ванной может вызвать коррозию электронных компонентов и короткое замыкание, даже если корпус имеет защиту от брызг.</p>
+</details>
+
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: Для поддержания гарантии требуется использовать только оригинальные расходные материалы и сервисные наборы. Самостоятельная замена узлов на неоригинальные аналоги может привести к отказу в гарантийном обслуживании.</p>
+</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Встроенная кофемашина — это сложная инженерная система, требующая профессионального монтажа и регулярного, но несложного ухода. Правильная эксплуатация гарантирует годы безупречной работы и вкуснейший кофе.</p></div>
+
+<p>Понимание принципов работы устройства позволяет не только наслаждаться напитками, но и вовремя замечать малейшие отклонения в работе. Регулярное внимание к деталям, таким как чистота жерновов и промывка трубок, является залогом стабильной работы вашей техники.</p>
+
+<p>Внедрение такой техники в интерьер требует серьезного подхода к планированию, но результат того стоит. Представьте, что каждое утро вы начинаете с чашки идеально приготовленного кофе, который делает умная машина, скрытая в вашем кухонном гарнитуре.</p>
+
+<p>Технологии не стоят на месте, и современные модели становятся все умнее, адаптируясь под вкусы пользователя. Главное — помнить, что даже самая совершенная техника нуждается в заботе и правильном обращении со стороны владельца.</p></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-мир-автоматизации-кофе">Введение в мир автоматизации кофе</a></li><li><a href="#ключевые-узлы-и-общая-схема-работы">Ключевые узлы и общая схема работы</a></li><li><a href="#процесс-заваривания-шаг-за-шагом">Процесс заваривания: шаг за шагом</a></li><li><a href="#интеграция-в-мебель-и-системы-питания">Интеграция в мебель и системы питания</a></li><li><a href="#система-управления-и-настройки">Система управления и настройки</a></li><li><a href="#обслуживание-и-профилактика-поломок">Обслуживание и профилактика поломок</a></li><li><a href="#сравнение-встроенных-и-отдельно-стоящих-моделей">Сравнение встроенных и отдельно стоящих моделей</a></li><li><a href="#частые-вопросы-пользователей">Частые вопросы пользователей</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-proverit-kapelnuyu-kofevarku-pri-pokupke.html" class="related-card">Как проверить капельную кофеварку при покупке: чек-лист</a></li><li><a href="/articles/c/ch/chto-takoe-ruchnaya-kofevarka.html" class="related-card">Что такое ручная кофеварка: виды, принцип работы и выбор</a></li><li><a href="/articles/n/na/na-skolko-chashek-kofe-rasschitana-kofemashina-delonghi.html" class="related-card">На сколько чашек кофе рассчитана кофемашина DeLonghi: полный гид</a></li><li><a href="/articles/k/ka/kak-varit-kofe-v-kofevarke-skarlet-video.html" class="related-card">Как варить кофе в кофеварке Scarlett: пошаговая инструкция и видео</a></li><li><a href="/articles/k/ko/kofevarka-kakuyu-kupit-dlya-doma.html" class="related-card">Какую кофеварку купить для дома: полный гид по выбору 2026</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-proverit-kapelnuyu-kofevarku-pri-pokupke.html" class="related-bottom-card"><span class="related-bottom-title">Как проверить капельную кофеварку при покупке: чек-лист</span><span class="related-bottom-desc">Пошаговая инструкция: как протестировать капельную кофеварку в магазине, проверить герметичность, шу</span></a><a href="/articles/c/ch/chto-takoe-ruchnaya-kofevarka.html" class="related-bottom-card"><span class="related-bottom-title">Что такое ручная кофеварка: виды, принцип работы и выбор</span><span class="related-bottom-desc">Ручная кофеварка — это устройство для приготовления эспрессо без электричества. Узнайте про гейзерны</span></a><a href="/articles/n/na/na-skolko-chashek-kofe-rasschitana-kofemashina-delonghi.html" class="related-bottom-card"><span class="related-bottom-title">На сколько чашек кофе рассчитана кофемашина DeLonghi: полный гид</span><span class="related-bottom-desc">Узнайте, на какое количество чашек рассчитаны кофемашины DeLonghi. Сравнение емкостей резервуаров, а</span></a><a href="/articles/k/ka/kak-varit-kofe-v-kofevarke-skarlet-video.html" class="related-bottom-card"><span class="related-bottom-title">Как варить кофе в кофеварке Scarlett: пошаговая инструкция и видео</span><span class="related-bottom-desc">Узнайте, как правильно готовить кофе в кофеварах Scarlett. Подробная инструкция по завариванию, выбо</span></a><a href="/articles/k/ko/kofevarka-kakuyu-kupit-dlya-doma.html" class="related-bottom-card"><span class="related-bottom-title">Какую кофеварку купить для дома: полный гид по выбору 2026</span><span class="related-bottom-desc">Узнайте, какую кофеварку лучше выбрать для дома: рожковую, капсульную или автоматическую. Сравнение </span></a><a href="/articles/k/ko/kofemashina-kotoraya-delaet-mokachino-kupit.html" class="related-bottom-card"><span class="related-bottom-title">Как выбрать и купить кофемашину для приготовления мокачино: гид по моделям</span><span class="related-bottom-desc">Ищете, где купить кофемашину для идеального мокачино? Обзор функций, сравнение автоматических и рожк</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

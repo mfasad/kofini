@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Проблемы с кофемашиной: диагностика, ремонт и устранение неисправностей — Кофини</title>
+    <meta name="description" content="Узнайте, как диагностировать и устранить частые проблемы с кофемашиной. Полное руководство по сбоям заварочного блока, помпы и системы прогрева.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/p/pr/problema-s-kofemashinoj.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Проблемы с кофемашиной: диагностика, ремонт и устранение неисправностей">
+    <meta property="og:description" content="Узнайте, как диагностировать и устранить частые проблемы с кофемашиной. Полное руководство по сбоям заварочного блока, помпы и системы прогрева.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Проблемы с кофемашиной: диагностика, ремонт и устранение неисправностей</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Диагностика и решение проблем с кофемашиной: полный гид</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#типичные-симптомы-звук-запах-и-качество-напитка">Типичные симптомы: звук, запах и качество напитка</a></li><li><a href="#проблемы-с-заварочным-блоком-и-механикой">Проблемы с заварочным блоком и механикой</a></li><li><a href="#сбои-в-системе-нагрева-и-давления">Сбои в системе нагрева и давления</a></li><li><a href="#электронные-ошибки-и-дисплей">Электронные ошибки и дисплей</a></li><li><a href="#чистка-и-обслуживание-профилактика-сбоев">Чистка и обслуживание: профилактика сбоев</a></li><li><a href="#когда-стоит-обратиться-к-мастеру">Когда стоит обратиться к мастеру?</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Внезапный отказ любимой техники способен испортить настроение даже самому спокойному человеку. Когда утром вместо ароматного эспрессо из <em>DeLonghi</em> или <em>Jura</em> вы слышите лишь тоскливое гудение или видите ошибку на дисплее, возникает паника. Однако прежде чем вызывать мастера или искать новый прибор в магазине, стоит понять природу сбоя.</p>
+<p>Большинство <strong>неисправностей кофемашин</strong> связаны с неправильной эксплуатацией или отсутствием регулярного обслуживания. Вода, используемая в бытовых приборах, оставляет известковый налет, а кофейные масла со временем затвердевают внутри заварочного узла. Знание базовых принципов работы вашей техники позволяет самостоятельно устранить многие критические сбои.</p>
+<p>В этой статье мы разберем самые распространенные причины, по которым устройство перестает работать корректно. Мы поговорим о том, как правильно провести <strong>диагностику помпы</strong>, почему заварочный блок может заклинить и какие ошибки чаще всего появляются на панели управления. Вы узнаете, когда ремонт возможен своими руками, а когда требуется профессиональное вмешательство.</p>
+
+<h2 id="типичные-симптомы-звук-запах-и-качество-напитка">Типичные симптомы: звук, запах и качество напитка</h2>
+
+<p>Первым сигналом о проблемах часто становится изменение акустического фона работы агрегата. Если раньше помпа работала мягко и ровно, а теперь издает громкие щелчки или свист, это верный признак наличия воздушной пробки или износ механизма. Игнорирование таких звуков может привести к перегоранию электродвигателя.</p>
+<p>Второй тревожный маркер — изменение вкуса и консистенции напитка. Появление горечи, кислинки или водянистости указывает на проблемы с температурным режимом или <strong>заварочным блоком</strong>. Если эспрессо получается слишком жидким, возможно, давление в системе упало ниже критических показателей. В таких случаях нужно проверить герметичность уплотнительных колец и состояние термоблока.</p>
+<p>Также обратите внимание на запахи. Если при включении вы чувствуете запах гари или жженого пластика, немедленно прекратите использование. Это может свидетельствовать о перегреве <strong>нагревательного элемента</strong> (ТЭНа) или коротком замыкании в проводке. Не пытайтесь спасти устройство, продолжая его включать — это опасно для вашей безопасности.</p>
+
+<blockquote>⚠️ Внимание: Если вы чувствуете запах гари, немедленно отключите прибор от сети и не пытайтесь сушить его феном или дуть внутрь. Это может усугубить возгорание изоляции.</blockquote>
+
+<p>Иногда проблема кроется в неочевидных вещах, например, в качестве воды или типа используемых зерен. Использование слишком мелких фракций может забить фильтры, а мягкая вода — привести к отсутствию пенки. Всегда сверяйтесь с рекомендациями производителя по параметрам воды и помола.</p>
+
+<h2 id="проблемы-с-заварочным-блоком-и-механикой">Проблемы с заварочным блоком и механикой</h2>
+
+<p>Заварочный блок — это сердце любой автоматической кофемашины, и именно он чаще всего выходит из строя. Самая распространенная проблема — заклинивание механизма из-за скопления кофеина и жировой пленки. Если блок не выдвигается или не входит обратно, не применяйте физическую силу. Это может сломать пластиковые шестерни.</p>
+<p>Для устранения заедания необходимо извлечь узел, промыть его под теплой водой без моющих средств и смазать специальным силиконовым маслом. В некоторых моделях, таких как <em>Melitta</em> или <em>Saeco</em>, блок можно снять полностью, а в других — только открыть крышку для доступа. Регулярная очистка предотвращает <strong>засорение каналов</strong> и продлевает жизнь механизму.</p>
+<p>Иногда ошибка возникает из-за неправильной установки блока после чистки. Убедитесь, что он надежно зафиксирован в пазы и слышен характерный щелчок. Если датчик положения не сработает, электроника не даст запустить цикл варки.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка заварочного блока</h4><label class="check-item"><input type="checkbox"><span>Извлечь механизм</span></label><label class="check-item"><input type="checkbox"><span>Промыть под водой</span></label><label class="check-item"><input type="checkbox"><span>Смазать силиконом</span></label><label class="check-item"><input type="checkbox"><span>Проверить шестерни</span></label><label class="check-item"><input type="checkbox"><span>Установить на место</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<p>Особое внимание стоит уделить состоянию уплотнительных резинок. Со временем они дубеют и трескаются, что приводит к протечкам и падению давления. Если вы видите мокрые следы внутри корпуса вокруг места установки блока, скорее всего, пора менять уплотнители.</p>
+
+<details class="faq-item"><summary>Как смазывать заварочный блок?
+<p>Для смазки используйте только специальное силиконовое масло для кофемашин. Обычные пищевые масла или вазелин не подходят, так как они могут растворить пластик или забить систему. Наносите масло тонким слоем на шестерни и направляющие, избегая попадания на платформу, где находится кофейная таблетка.--></p>
+
+<h2 id="сбои-в-системе-нагрева-и-давления">Сбои в системе нагрева и давления</h2>
+
+<p>Если машина нагревается слишком долго или не достигает нужной температуры, проблема может быть в термостате или термоблоке. В современных моделях используется проточная система нагрева, где вода проходит через мощный ТЭН за доли секунды. Если на стенках канала образовался слой накипи, теплообмен нарушается.</p>
+<p>Накипь — главный враг любой кофемашины. Она не только снижает эффективность, но и может полностью заблокировать поток воды. В результате система защиты отключает нагрев, и вы получаете ошибку. Регулярная процедура <strong>декальцинации</strong> обязательна, даже если вы используете фильтрованную воду. Накипь образуется иначе, но все равно накапливается.</p>
+<p>Проблемы с давлением часто связаны с <strong>помпой вибрационного типа</strong>. Она может работать с перебоями, если подача воды из резервуара затруднена. Проверьте, не пережат ли шланг, и не забит ли фильтр на входе в резервуар. Также стоит осмотреть обратный клапан, который удерживает давление в системе после остановки цикла.</p>
+
+<!--WIDGET</summary><div class="faq-answer"><p>tip:Перед процедурой декальцинации обязательно извлеките заварочный блок и очистите его вручную. Химические растворы могут повредить резиновые уплотнения внутри узла, если они не промыты перед обработкой.</p></div></details>
+
+<p>Иногда ошибка давления возникает из-за использования зерен с добавками масел или слишком мелкого помола. Если кофе слишком плотный, помпа не может протолкнуть через него воду, и давление резко скачет. Попробуйте изменить степень помола или сменить сорт зерен на менее маслянистый.</p>
+
+<h2 id="электронные-ошибки-и-дисплей">Электронные ошибки и дисплей</h2>
+
+<p>Современные кофемашины оснащены сложной электроникой, которая контролирует каждый этап работы. Ошибки на дисплее часто выглядят запутанно, но у каждой есть свой код и логика возникновения. Например, мигание индикатора "Сброс" или "Чистка" говорит о том, что машина требует проведения регламентных работ. Игнорирование этих сигналов ведет к блокировке дальнейшей эксплуатации.</p>
+<p>Коды ошибок различаются у разных производителей, поэтому важно знать свою модель. У <em>Philips</em> это может быть ошибка "3101", указывающая на проблему с датчиком воды, а у <em>Nespresso</em> — мигающий красный индикатор, сигнализирующий о низком уровне давления. Изучите руководство пользователя, где расшифрованы все возможные коды.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип ошибки</th>
+<th>Вероятная причина</th>
+<th>Способ устранения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Негреет воду</td>
+<td>Накипь, неисправный ТЭН</td>
+<td>Декальцинация, замена элемента</td>
+</tr>
+<tr>
+<td>Не подает воду</td>
+<td>Воздушная пробка, засор</td>
+<td>Продувка системы, чистка фильтров</td>
+</tr>
+<tr>
+<td>Ошибка помпы</td>
+<td>Заедание механизма, перегрев</td>
+<td>Смазка, проверка напряжения</td>
+</tr>
+<tr>
+<td>Протечка</td>
+<td>Поврежденные уплотнители</td>
+<td>Замена резинок, герметизация</td>
+</tr>
+</tbody>
+</table>
+
+<p>Иногда "глюк" электроники решается простым перезапуском. Отключите прибор от сети на 10-15 минут, чтобы сбросить временные ошибки контроллера. Если проблема повторяется после перезагрузки, значит, неисправность носит аппаратный характер и требует диагностики.</p>
+
+<blockquote>⚠️ Внимание: Не пытайтесь самостоятельно вскрывать корпус кофемашины для ремонта электроники, если гарантийный срок еще не истек. Это автоматически аннулирует гарантию производителя.</blockquote>
+
+<div class="poll-widget" id="poll-53c330f8"><div class="poll-widget-question">📊 Как часто вы проводите декальцинацию?</div><div class="poll-widget-option" data-poll="53c330f8" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в месяц</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="53c330f8" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в полгода</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="53c330f8" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Только когда загорается индикатор</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="53c330f8" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Никогда не проводил</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="чистка-и-обслуживание-профилактика-сбоев">Чистка и обслуживание: профилактика сбоев</h2>
+
+<p>Профилактика всегда дешевле и проще, чем ремонт. Регулярная чистка — это не просто рекомендация, а необходимость. Оптимальный график включает ежедневное опорожнение поддона для жмыха, еженедельную промывку системы и ежемесячную чистку заварочного блока.</p>
+<p>Используйте только специальные средства для чистки и декальцинации. Бытовые моющие средства могут содержать агрессивные компоненты, которые разъедают пластик или оставляют токсичные остатки, влияющие на вкус кофе. Кислоты для удаления накипи должны быть безопасны для пищевых систем.</p>
+<p>Особое внимание уделяйте капучинатору и трубкам для подачи молока. Если вы не смываете остатки молока сразу после использования, бактерии начинают бурно размножаться, а жиры затвердевают, перекрывая каналы. Промывайте систему паром перед каждым использованием и тщательно мойте детали после.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная чистка и использование правильных расходных материалов продлевают срок службы кофемашины в 2-3 раза по сравнению с техникой без обслуживания.</p></div>
+
+
+<p>Снимите насадку с подающей трубки. Промойте её в горячей воде с мягким моющим средством. Используйте ершик для чистки внутренних channels. Обязательно продуйте систему паром после промывки, чтобы удалить остатки воды и предотвратить образование плесени.--></p>
+
+<h2 id="когда-стоит-обратиться-к-мастеру">Когда стоит обратиться к мастеру?</h2>
+
+<p>Несмотря на все старания, некоторые неисправности невозможно устранить в домашних условиях. Если вы слышите скрежет внутри корпуса, наблюдаете сильные протечки, из которых не удается найти источник, или машина просто не включается — это повод вызвать специалиста.</p>
+<p>Профессиональный мастер имеет доступ к оригинальным запчастям и диагностическому оборудованию. Он сможет точно определить, какой именно датчик вышел из строя или нужно ли менять насос. Попытка ремонта своими руками сложных электронных узлов часто приводит к удорожанию ремонта в будущем.</p>
+<p>Стоит также обратиться к мастеру, если после всех процедур чистки и перезагрузки проблема не исчезла. Это может указывать на скрытые дефекты, такие как микротрещины в теплообменнике или износ подшипников двигателя. Своевременный визит к профессионалу сэкономит вам деньги и нервы.</p>
+
+<blockquote>⚠️ Внимание: Если вы не уверены в своих силах, лучше доверить сложный ремонт профессионалу. Неправильная сборка корпуса может привести к короткому замыканию и поломке всей электроники.</blockquote>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+
+<details>
+<summary>Что делать, если кофемашина не включается?</summary>
+<p>Проверьте подключение к розетке и целостность шнура питания. Убедитесь, что кнопка включения нажата до конца. Если проблем с электрикой нет, возможно, сработала защита от перегрева или неисправен блок питания.</p>
+</details>
+
+<details>
+<summary>Почему кофе получается слишком холодным?</summary>
+<p>Скорее всего, проблема в накипи или неисправности термоблока. Проведите декальцинацию. Если это не помогло, возможно, вышел из строя температурный датчик или ТЭН, и потребуется замена.</p>
+</details>
+
+<details>
+<summary>Как часто нужно менять фильтр для воды?</summary>
+<p>Производители рекомендуют менять фильтр каждые 2 месяца или после 50 литров воды, в зависимости от модели. Регулярная замена фильтра снижает образование накипи и улучшает вкус напитка.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать обычную водопроводную воду?</summary>
+<p>Не рекомендуется. Водопроводная вода содержит много минералов, что ведет к быстрому образованию накипи. Используйте бутилированную или фильтрованную воду для продления срока службы прибора.</p>
+</details>
+
+<details>
+<summary>Что означает мигающий индикатор "Сброс"?</summary>
+<p>Это сигнал о необходимости сброса счетчика чашек или проведения процедуры декальцинации/полной очистки. Следуйте инструкции в руководстве пользователя для сброса ошибки.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#типичные-симптомы-звук-запах-и-качество-напитка">Типичные симптомы: звук, запах и качество напитка</a></li><li><a href="#проблемы-с-заварочным-блоком-и-механикой">Проблемы с заварочным блоком и механикой</a></li><li><a href="#сбои-в-системе-нагрева-и-давления">Сбои в системе нагрева и давления</a></li><li><a href="#электронные-ошибки-и-дисплей">Электронные ошибки и дисплей</a></li><li><a href="#чистка-и-обслуживание-профилактика-сбоев">Чистка и обслуживание: профилактика сбоев</a></li><li><a href="#когда-стоит-обратиться-к-мастеру">Когда стоит обратиться к мастеру?</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-ochistit-kofemashinu-ot-kofejnykh-zeren.html" class="related-card">Как очистить кофемашину от застрявших кофейных зерен: полное руководство</a></li><li><a href="/articles/s/sa/saeko-kofemashiny-kak-pochistit.html" class="related-card">Как почистить кофемашину Saeco: Полная инструкция по декальцинации</a></li><li><a href="/articles/k/ka/kak-podogret-moloko-v-kofemashine.html" class="related-card">Как подогреть молоко в кофемашине: 5 способов и советы</a></li><li><a href="/articles/c/ch/chem-luchshe-chistit-kofemashinu-ot-nakipi.html" class="related-card">Чем лучше чистить кофемашину от накипи: обзор средств и инструкций</a></li><li><a href="/articles/k/ka/kak-myt-kofemashinu-saeco-lirika.html" class="related-card">Как правильно мыть кофемашину Saeco Lirika: полная инструкция по очистке</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-ochistit-kofemashinu-ot-kofejnykh-zeren.html" class="related-bottom-card"><span class="related-bottom-title">Как очистить кофемашину от застрявших кофейных зерен: полное руководство</span><span class="related-bottom-desc">Пошаговая инструкция по удалению застрявших зерен из бункера и жерновов. Методы для кофемашин DeLong</span></a><a href="/articles/s/sa/saeko-kofemashiny-kak-pochistit.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Saeco: Полная инструкция по декальцинации</span><span class="related-bottom-desc">Пошаговое руководство по очистке кофемашин Saeco. Как снять и промыть заварочный блок, провести дека</span></a><a href="/articles/k/ka/kak-podogret-moloko-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Как подогреть молоко в кофемашине: 5 способов и советы</span><span class="related-bottom-desc">Полное руководство по созданию идеальной молочной пены. Инструкция для автоматических, рожковых и ка</span></a><a href="/articles/c/ch/chem-luchshe-chistit-kofemashinu-ot-nakipi.html" class="related-bottom-card"><span class="related-bottom-title">Чем лучше чистить кофемашину от накипи: обзор средств и инструкций</span><span class="related-bottom-desc">Полный гид по декальцинации: чем лучше чистить кофемашину от накипи? Сравнение кислот, средств произ</span></a><a href="/articles/k/ka/kak-myt-kofemashinu-saeco-lirika.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно мыть кофемашину Saeco Lirika: полная инструкция по очистке</span><span class="related-bottom-desc">Пошаговая инструкция по декальцинации, промывке бойлера и очистке жомбокса для Saeco Lirika. Узнайте</span></a><a href="/articles/k/ka/kapuchinator-ne-vspenivaet-moloko.html" class="related-bottom-card"><span class="related-bottom-title">Капучинатор не вспенивает молоко: причины поломки и быстрая чистка</span><span class="related-bottom-desc">Кофемашина не взбивает молоко? Узнайте, почему капучинатор перестал работать, как устранить засор и </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

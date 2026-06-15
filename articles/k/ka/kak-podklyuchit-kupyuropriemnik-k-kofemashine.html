@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как подключить купюроприемник к кофемашине: пошаговая инструкция — Кофини</title>
+    <meta name="description" content="Подробное руководство по интеграции купюроприемника с кофемашиной. Виды интерфейсов, настройка протоколов, диагностика ошибок и рекомендации по установке.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-podklyuchit-kupyuropriemnik-k-kofemashine.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как подключить купюроприемник к кофемашине: пошаговая инструкция">
+    <meta property="og:description" content="Подробное руководство по интеграции купюроприемника с кофемашиной. Виды интерфейсов, настройка протоколов, диагностика ошибок и рекомендации по установке.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как подключить купюроприемник к кофемашине: пошаговая инструкция</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Подключение купюроприемника к кофемашине: полное руководство</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#выбор-совместимого-оборудования-и-интерфейсов">Выбор совместимого оборудования и интерфейсов</a></li><li><a href="#механическая-установка-и-прокладка-кабелей">Механическая установка и прокладка кабелей</a></li><li><a href="#настройка-протоколов-связи-и-адресации">Настройка протоколов связи и адресации</a></li><li><a href="#калибровка-приемных-каналов-и-валют">Калибровка приемных каналов и валют</a></li><li><a href="#таблица-соответствия-интерфейсов-и-параметров">Таблица соответствия интерфейсов и параметров</a></li><li><a href="#тестирование-и-диагностика-ошибок">Тестирование и диагностика ошибок</a></li><li><a href="#распространенные-проблемы-и-их-решение">Распространенные проблемы и их решение</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Установка платежного терминала превращает стандартную домашнюю или офисную кофемашину в полноценный вендинговый аппарат, способный генерировать пассивный доход. Этот процесс требует не только механического монтажа, но и глубокого понимания логики обмена данными между двумя устройствами. Ошибки на этапе конфигурации могут привести к невозможности приема средств или зависанию диспенсера напитков.</p>
+
+<p>Большинство владельцев кофейных точек сталкиваются с проблемой совместимости интерфейсов. Кофемашины выпускаются с разными контроллерами, а купюроприемники имеют собственные протоколы передачи сигналов. Без корректного сопряжения система будет работать в аварийном режиме, выдавая ошибки при каждой попытке оплаты.</p>
+
+<p>В этой статье мы разберем технические нюансы подключения, от выбора подходящей модели терминала до настройки значений в <code>Service Menu</code> кофемашины. Вы узнаете, как избежать частых ошибок при калибровке и какие параметры необходимо изменить для стабильной работы.</p>
+
+<h2 id="выбор-совместимого-оборудования-и-интерфейсов">Выбор совместимого оборудования и интерфейсов</h2>
+
+<p>Первым шагом является определение типа интерфейса, поддерживаемого вашей кофемашиной. Современные вендинговые системы используют стандарты <em>MDB (Multi-Drop Bus)</em> или <em>DCP (Dispenser Control Protocol)</em>. Устаревшие модели могут поддерживать только простой интерфейс импульсного типа, что значительно ограничивает выбор актуальных терминалов.</p>
+
+<p>Если ваша кофемашина оснащена разъемом <strong>MDB</strong>, вам потребуется адаптер, преобразующий сигнал в формат, понятный терминалу. Для моделей с протоколом <strong>DCP</strong> выбор терминалов еще уже, так как этот стандарт чаще встречается в специфическом промышленном оборудовании. Важно проверить спецификацию контроллера до покупки.</p>
+
+<p>При выборе самого купюроприемника обращайте внимание на его пропускную способность и скорость срабатывания. Терминалы с поддержкой <em>Coin Acceptance Protocol</em> обеспечивают быструю обработку нажатий, что критично для высокой проходимости точки. Не экономьте на модуле чтения — дешевые модели часто ошибочно распознают помятые банкноты.</p>
+
+<blockquote>⚠️ Внимание: Перед покупкой обязательно сверьте список совместимых устройств в документации к вашей кофемашине. Использование несовместимого контроллера может привести к отказу в гарантийном обслуживании электроники.</blockquote>
+
+<h2 id="механическая-установка-и-прокладка-кабелей">Механическая установка и прокладка кабелей</h2>
+
+<p>Процесс монтажа начинается с отключения основного питания кофемашины. Это обязательное условие безопасности, так как работа с низковольтной электроникой внутри корпуса требует полной изоляции от сети. Снимите переднюю панель и освободите место для установки терминала.</p>
+
+<p>Терминал должен быть закреплен так, чтобы доступ к купюроприемнику был удобным для клиента, но защищенным от случайных механических воздействий. Используйте специальные монтажные кронштейны, идущие в комплекте с оборудованием. Крепление на саморезы без изоляции может повредить корпус и вызвать короткое замыкание.</p>
+
+<p>Прокладка кабеля связи требует внимательности. Провод должен быть экранированным, чтобы избежать наводок от нагревательных элементов. Маршрут прокладывайте вдали от жгутов высокого напряжения, питающих бойлеры и помпы. Скрутки проводов использовать запрещено — только обжимные клеммы или пайка.</p>
+
+<div class="checklist-block"><h4>☑️ Этапы механической установки</h4><label class="check-item"><input type="checkbox"><span>Отключить питание от сети</span></label><label class="check-item"><input type="checkbox"><span>Снять декоративные панели</span></label><label class="check-item"><input type="checkbox"><span>Закрепить терминал на кронштейне</span></label><label class="check-item"><input type="checkbox"><span>Проложить экранированный кабель</span></label><label class="check-item"><input type="checkbox"><span>Подключить разъемы MDB</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<h2 id="настройка-протоколов-связи-и-адресации">Настройка протоколов связи и адресации</h2>
+
+<p>После физического подключения необходимо настроить логическое взаимодействие. В меню кофемашины найдите раздел <code>Периферия</code> или <code>Настройки оплаты</code>. Здесь нужно выбрать тип подключенного устройства: <strong>MDB</strong> или <strong>Impulse</strong>. Неправильный выбор протокола приведет к тому, что кофемашина не увидит терминал.</p>
+
+<p>Для корректной работы требуется установить уникальный адрес для каждого устройства в шине. В стандартной конфигурации кофемашина имеет адрес 1, а купюроприемник — адрес 2. Если вы подключаете еще и монетоприемник, его адрес должен отличаться от адреса купюроприемника. Конфликт адресов блокирует работу всей платежной системы.</p>
+
+<p>Настройте уровень напряжения на шине данных. Стандартное значение составляет <code>12 Вольт</code>, но некоторые модели требуют точной калибровки. Используйте мультиметр для проверки напряжения на контактах разъема при включенном питании. Отклонение более чем на 5% может вызвать нестабильную передачу данных.</p>
+
+<blockquote>⚠️ Внимание: При настройке адресов следите, чтобы значения не совпадали. Повторение адресов в одной шине вызывает коллизии, из-за которых система зависает и требует перезагрузки.</blockquote>
+
+<div class="poll-widget" id="poll-5fe56507"><div class="poll-widget-question">📊 Какой протокол связи используется в вашем оборудовании?</div><div class="poll-widget-option" data-poll="5fe56507" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">MDB</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="5fe56507" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">DCP</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="5fe56507" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Impulse (импульсный)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="5fe56507" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не знаю, нужно проверить</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="калибровка-приемных-каналов-и-валют">Калибровка приемных каналов и валют</h2>
+
+<p>Купюроприемник необходимо обучить распознавать банкноты, которые вы планируете принимать. В большинстве случаев это делается автоматически при первом запуске, но для точности лучше провести ручную калибровку. Вставьте чистые банкноты каждой номинальной стоимости по очереди, следуя инструкциям на дисплее терминала.</p>
+
+<p>Важно настроить номиналы в <strong>Service Menu</strong> кофемашины. Если терминал принимает 50 рублей, а в настройках кофемашины это значение равно 100, система будет выдавать неверный остаток. Проверьте таблицу соответствия номиналов в <code>Unit Configuration</code>. Ошибки здесь приводят к финансовым потерям или отказу в выдаче напитка.</p>
+
+<p>Проверьте чувствительность датчиков загрязнения. Терминалы часто блокируют прием, если датчики нечисты. Используйте сжатый воздух для очистки оптических сенсоров перед финальной калибровкой. Регулярная чистка предотвращает ложные срабатывания.</p>
+
+<h2 id="таблица-соответствия-интерфейсов-и-параметров">Таблица соответствия интерфейсов и параметров</h2>
+
+<p>Для быстрого ориентирования в настройках используйте таблицу ниже. Она поможет сопоставить типы разъемов и необходимые параметры для распространенных моделей кофемашин и терминалов.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип интерфейса</th>
+<th>Разъем на кофемашине</th>
+<th>Напряжение (В)</th>
+<th>Тип данных</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MDB</td>
+<td>5-контактный (Molex)</td>
+<td>12 ± 5%</td>
+<td>Цифровой протокол</td>
+</tr>
+<tr>
+<td>DCP</td>
+<td>8-контактный (RJ-45)</td>
+<td>5-24 (адаптивно)</td>
+<td>Двоичный код</td>
+</tr>
+<tr>
+<td>Impulse</td>
+<td>2-контактный (зажимы)</td>
+<td>5-12</td>
+<td>Импульсный сигнал</td>
+</tr>
+<tr>
+<td>RS-232</td>
+<td>9-контактный (D-Sub)</td>
+<td>12</td>
+<td>Последовательный порт</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>⚠️ Внимание: Если вы используете переходники с RS-232 на MDB, обязательно проверьте полярность линий данных. Неправильная полярность может мгновенно вывести из строя контроллер терминала.</blockquote>
+
+<details class="faq-item"><summary>Что делать при ошибке связи "No Response"?</summary><div class="faq-answer"><p>Если кофемашина выдает ошибку отсутствия ответа от терминала, проверьте целостность кабеля. Часто проблема кроется в поврежденной изоляции или окислившихся контактах разъема. Попробуйте заменить кабель на заведомо исправный и перезагрузить оба устройства.</p></div></details>
+
+<h2 id="тестирование-и-диагностика-ошибок">Тестирование и диагностика ошибок</h2>
+
+<p>После завершения настроек проведите комплексное тестирование. Вставьте купюру и убедитесь, что сумма отображается на дисплее кофемашины корректно. Нажмите кнопку выбора напитка — система должна выдать команду на приготовление и вернуть сдачу, если это предусмотрено программой.</p>
+
+<p>Проверьте работу функции <strong>Validation</strong>. Имитируйте попытку подделки или вставьте грязную банкноту. Терминал должен отклонить её и не передать сигнал кофемашине. Это критически важный этап безопасности, предотвращающий кражу оборудования.</p>
+
+<p>Если система работает нестабильно, включите режим логирования ошибок. В меню <code>Diagnostics</code> можно увидеть историю взаимодействий. Ошибки с кодом <em>Timeout</em> указывают на проблемы с кабелем, а <em>Invalid Command</em> — на несовместимость протоколов.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная проверка лог-файлов позволяет выявить нарастающие проблемы с подключением до того, как они приведут к простоям оборудования и потере выручки.</p></div>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Используйте защитные чехлы для купюроприемника в пыльных помещениях, чтобы избежать частых отказов сенсоров и необходимости в частой чистке.</p></div>
+
+<h2 id="распространенные-проблемы-и-их-решение">Распространенные проблемы и их решение</h2>
+
+<p>Одной из частых проблем является "залипание" купюры в приемном канале. Это происходит из-за износа роликов или неправильной настройки натяжения пружин. Регулярно проводите профилактику, заменяя резиновые элементы роликов на новые.</p>
+
+<p>Другая проблема — отсутствие связи при включении питания. Проверьте, что заземление кофемашины выполнено корректно. Статическое электричество может блокировать работу цифровой шины. Убедитесь, что все провода заземления соединены в одну точку.</p>
+
+<p>Иногда кофемашина не видит терминал после прошивки. В этом случае необходимо сбросить настройки периферии до заводских и выполнить процедуру обнаружения устройств заново. Не игнорируйте обновления прошивки контроллера, так как они часто содержат исправления багов совместимости.</p>
+
+<details>
+<summary>Что делать, если купюроприемник принимает деньги, но напиток не выдается?</summary>
+<p>Это указывает на разрыв в цепи управления. Проверьте настройки сигнала "Ready to Accept". В некоторых режимах кофемашина переводит терминал в состояние ожидания, если внутренние резервуары пусты или двигатель перегрет. Устраните неисправность в механике кофемашины, и терминал автоматически вернется в рабочий режим.</p>
+</details>
+
+<details>
+<summary>Можно ли подключить несколько терминалов к одной кофемашине?</summary>
+<p>Технически это возможно, но требует сложной настройки адресной шины и использования специальных контроллеров-расширителей. В стандартных вендинговых конфигурациях используется только один купюроприемник. Подключение второго устройства без профессионального оборудования приведет к конфликтам в системе.</p>
+</details>
+
+<details>
+<summary>Как часто нужно проводить калибровку купюроприемника?</summary>
+<p>Рекомендуется проводить полную калибровку раз в 3-6 месяцев или при смене типа используемых банкнот. Если вы заметили рост количества отклоненных настоящих купюр, это сигнал к немедленной проверке и перенастройке сенсоров.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать терминал от вендинга для домашней кофемашины?</summary>
+<p>Да, но только если вы установите соответствующий адаптер. Стандартные домашние кофемашины не имеют встроенного интерфейса MDB. Понадобится внешний контроллер-преобразователь, который будет транслировать сигнал с купюроприемника в команды для диспенсера.</p>
+</details>
+
+<details>
+<summary>Какие купюры лучше всего распознаются современными терминалами?</summary>
+<p>Современные оптические и магнитные сенсоры отлично распознают новые серии банкнот с защитными элементами. Старые, сильно потрепанные или залитые чернилами купюры часто вызывают ошибки считывания. Рекомендуется устанавливать лимит на возраст банкнот в настройках терминала.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#выбор-совместимого-оборудования-и-интерфейсов">Выбор совместимого оборудования и интерфейсов</a></li><li><a href="#механическая-установка-и-прокладка-кабелей">Механическая установка и прокладка кабелей</a></li><li><a href="#настройка-протоколов-связи-и-адресации">Настройка протоколов связи и адресации</a></li><li><a href="#калибровка-приемных-каналов-и-валют">Калибровка приемных каналов и валют</a></li><li><a href="#таблица-соответствия-интерфейсов-и-параметров">Таблица соответствия интерфейсов и параметров</a></li><li><a href="#тестирование-и-диагностика-ошибок">Тестирование и диагностика ошибок</a></li><li><a href="#распространенные-проблемы-и-их-решение">Распространенные проблемы и их решение</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-dostat-iz-kofemashiny-filips-varochnyj-blok.html" class="related-card">Как достать варочный блок из кофемашины Philips: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-proverit-elektrodvigatel-kofemolki.html" class="related-card">Как проверить электродвигатель кофемолки: диагностика и ремонт</a></li><li><a href="/articles/k/ka/kak-perezagruzit-kofemashinu-saeko.html" class="related-card">Как перезагрузить кофемашину Saeco: полный гайд по сбросу и перезапуску</a></li><li><a href="/articles/k/ka/kak-izvlech-zavarochnyj-uzel-iz-kofemashiny-delonghi-magnifica-s-video.html" class="related-card">Как извлечь заварочный узел Delonghi Magnifica S: Пошаговая инструкция и видео</a></li><li><a href="/articles/k/ka/kak-ochistit-kapsulnuyu-kofemashinu-nespresso-ot-nakipi-instruktsiya.html" class="related-card">Как очистить кофемашину Nespresso от накипи: пошаговая инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-dostat-iz-kofemashiny-filips-varochnyj-blok.html" class="related-bottom-card"><span class="related-bottom-title">Как достать варочный блок из кофемашины Philips: пошаговая инструкция</span><span class="related-bottom-desc">Подробный гид по извлечению варочного блока кофемашин Philips Saeco. Этапы подготовки, нюансы для ра</span></a><a href="/articles/k/ka/kak-proverit-elektrodvigatel-kofemolki.html" class="related-bottom-card"><span class="related-bottom-title">Как проверить электродвигатель кофемолки: диагностика и ремонт</span><span class="related-bottom-desc">Полное руководство по диагностике мотора кофемолки. Узнайте, как найти обрыв, проверить щетки и устр</span></a><a href="/articles/k/ka/kak-perezagruzit-kofemashinu-saeko.html" class="related-bottom-card"><span class="related-bottom-title">Как перезагрузить кофемашину Saeco: полный гайд по сбросу и перезапуску</span><span class="related-bottom-desc">Пошаговая инструкция: как выполнить мягкую и полную перезагрузку кофемашин Saeco. Решение ошибок, сб</span></a><a href="/articles/k/ka/kak-izvlech-zavarochnyj-uzel-iz-kofemashiny-delonghi-magnifica-s-video.html" class="related-bottom-card"><span class="related-bottom-title">Как извлечь заварочный узел Delonghi Magnifica S: Пошаговая инструкция и видео</span><span class="related-bottom-desc">Подробный гайд по извлечению заварочного блока из кофемашин DeLonghi Magnifica S. Узнайте, как прави</span></a><a href="/articles/k/ka/kak-ochistit-kapsulnuyu-kofemashinu-nespresso-ot-nakipi-instruktsiya.html" class="related-bottom-card"><span class="related-bottom-title">Как очистить кофемашину Nespresso от накипи: пошаговая инструкция</span><span class="related-bottom-desc">Полная инструкция по декальцинации кофемашин Nespresso. Узнайте, как правильно удалить накипь, какие</span></a><a href="/articles/s/sr/sredstvo-dlya-udaleniya-nakipi-nespresso.html" class="related-bottom-card"><span class="related-bottom-title">Средство для удаления накипи Nespresso: выбор, инструкция и ошибки</span><span class="related-bottom-desc">Какое средство для удаления накипи Nespresso выбрать? Обзор official и аналогов, пошаговая инструкци</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

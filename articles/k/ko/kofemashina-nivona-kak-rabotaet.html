@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как работает кофемашина Nivona: принцип действия и технология — Кофини</title>
+    <meta name="description" content="Подробный разбор технологии Nivona: как работает система заваривания, подогрев молока и управление. Узнайте о нюансах работы Brewer-системы.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ko/kofemashina-nivona-kak-rabotaet.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как работает кофемашина Nivona: принцип действия и технология">
+    <meta property="og:description" content="Подробный разбор технологии Nivona: как работает система заваривания, подогрев молока и управление. Узнайте о нюансах работы Brewer-системы.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как работает кофемашина Nivona: принцип действия и технология</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Принцип работы кофемашин Nivona: технология заваривания и обслуживания</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#сердце-аппарата-система-заваривания-brewer">Сердце аппарата: система заваривания Brewer</a></li><li><a href="#управление-помолом-и-дозировкой">Управление помолом и дозировкой</a></li><li><a href="#технология-подачи-молока-и-вспенивание">Технология подачи молока и вспенивание</a></li><li><a href="#таблица-характеристик-работы-основных-серий">Таблица характеристик работы основных серий</a></li><li><a href="#подготовка-воды-и-кальциевые-фильтры">Подготовка воды и кальциевые фильтры</a></li><li><a href="#программное-обеспечение-и-диагностика">Программное обеспечение и диагностика</a></li><li><a href="#рекомендации-по-эксплуатации-и-уходу">Рекомендации по эксплуатации и уходу</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Владельцы техники из Германии часто задаются вопросом о том, как работает кофемашина Nivona на самом глубоком уровне. В отличие от простых капельных устройств, эти аппараты представляют собой сложные инженерные системы, где каждый элемент — от помпы до заварочного блока — выполняет строго отлаженную функцию. Понимание внутренней механики поможет вам не только получать идеальный эспрессо, но и продлить срок службы дорогостоящего устройства.</p>
+
+<p>Секрет безупречного вкуса кроется в уникальной конструкции <strong>заварочного механизма</strong>, который разработан специально для этих брендов. Именно здесь происходит магия превращения молотых зерен в ароматную жидкость под высоким давлением. Давайте разберем по шагам, что происходит внутри корпуса, когда вы нажимаете кнопку запуска.</p>
+
+<h2 id="сердце-аппарата-система-заваривания-brewer">Сердце аппарата: система заваривания Brewer</h2>
+
+<p>В основе работы любых автоматических кофемашин Nivona лежит запатентованная система <em>Brewer</em>. Это полностью съемный модуль, который извлекается для регулярной чистки и находится в центре всего процесса приготовления напитка. В отличие от конкурентов, у которых заварочный блок часто встроен намертво, здесь технология позволяет поддерживать идеальную гигиену без сложных разборок.</p>
+
+<p>Процесс начинается с подачи воды из резервуара через <strong>термоблок</strong> или бойлер (в зависимости от серии). Вода нагревается до точно заданной температуры, которая критически важна для раскрытия вкуса зерен разных сортов. Затем она подается в заварочную камеру под давлением около 15 бар, создаваемым вибрационной помпой.</p>
+
+<p><blockquote>⚠️ Внимание: Давление в системе Nivona достигает 15 бар, поэтому никогда не пытайтесь разобрать помпу или заварочный блок, не отключив прибор от сети и не пустив остатки воды через систему слива.</blockquote></p>
+
+<p>Зерна попадают в камеру с помолом, который вы настроили ранее. <strong>Система заваривания</strong> Nivona использует метод предварительного смачивания (pre-infusion). Это означает, что на кофе сначала подается небольшое количество воды для набухания, а затем уже идет основной поток. Такой подход предотвращает появление «кислого» привкуса и обеспечивает равномерную экстракцию эфирных масел.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Главная особенность заварочного блока Nivona — его полная съемность и наличие функции предварительного смачивания для лучшей экстракции вкуса.</p></div>
+
+<h2 id="управление-помолом-и-дозировкой">Управление помолом и дозировкой</h2>
+
+<p>Качество напитка напрямую зависит от того, как работает кофемашина Nivona на этапе помола. Внутри устройства установлен жерновой кофемолка, обычно керамическая, которая обеспечивает стабильную работу даже при высоких нагрузках. Пользователь может регулировать степень помола с помощью специального регулятора, доступ к которому осуществляется через верхнюю часть корпуса.</p>
+
+<p>Система контроля веса или объема (в зависимости от модели) определяет количество кофе для одной чашки. Современные модели серии <em>Nivona 700</em> или <em>800</em> используют сложные алгоритмы для подсчета оборотов жерновов, чтобы выдать точную дозу в граммах. Это позволяет вам варьировать крепость напитка от легкого американо до насыщенного ристретто.</p>
+
+<ul>
+<li>🌱 Керамические жернова долговечнее стальных и не нагреваются при работе, сохраняя аромат кофе</li>
+<li>⚙️ Регулировка помола производится на работающем устройстве без необходимости полной разборки</li>
+<li>📉 Система автоматически очищает жернова после каждого помола, предотвращая смешивание остатков</li>
+</ul>
+
+<p>Важно отметить, что <strong>система дозировки</strong> работает в связке с датчиками уровня воды и кофе. Если резервуар пуст или закончились зерна, аппарат приостанавливает работу и выдает сообщение на дисплей. Это защищает мотор от перегрузки и сухого хода.</p>
+
+<details class="faq-item"><summary>Как часто менять жернова?|Керамические жернова в Nivona рассчитаны на 20 000 чашек, но при использовании очень жестких или обжаренных до состояния «масла» зерен срок службы может сократиться. Рекомендуется проверять остроту помола раз в год.-->
+
+<h2 id="технология-подачи-молока-и-вспенивание">Технология подачи молока и вспенивание</h2>
+
+<p>Одной из сильных сторон бренда является работа с молочной пенкой. Модели с автоматическим капучинатором (например, серии <em>Nivona 795</em> или <em>990</em>) оснащены сложной системой подачи пара и воздуха. Вода в термоблоке нагревается до температуры кипения, превращаясь в сухой пар, который направляется в молоко.</p>
+
+<p>Процесс начинается с подачи воздуха в молоко через специальную трубку, создавая микро-пузырьки. Затем пар нагревает смесь, формируя густую, кремообразную пену. В некоторых продвинутых моделях используется технология <strong>Perfect Milk Foam System</strong>, которая позволяет регулировать плотность пены и температуру напитка отдельно.</p>
+
+<p>После приготовления напитка система автоматически промывает молочный контур. Это критически важный этап, так как остатки молока — идеальная среда для размножения бактерий. Аппарат прогоняет горячую воду и пар через трубки, чтобы исключить засорение и неприятный запах.</p>
+
+<blockquote>⚠️ Внимание</summary><div class="faq-answer"><p> Если вы не используете молоко несколько дней, обязательно запустите ручную программу промывки молочного контура, даже если автоматика сработала после последнего стакана.</blockquote>
+
+<p>Для моделей с ручным капучинатором пользователь должен самостоятельно поместить трубку в стакан с молоком. Здесь важно правильно отрегулировать угол погружения, чтобы получить густую пену, а не просто горячее молоко. <strong>Регулировка текстуры</strong> зависит от навыка оператора и температуры самого молока.</p>
+
+
+
+<h2 id="таблица-характеристик-работы-основных-серий">Таблица характеристик работы основных серий</h2>
+
+<p>Разные серии кофемашин Nivona имеют отличия в конструктиве и функционале. Чтобы понять, как работает конкретная модель, стоит обратить внимание на технические особенности, приведенные ниже.</p>
+
+<table>
+<thead>
+<tr>
+<th>Серия</th>
+<th>Тип заварочного блока</th>
+<th>Особенности системы</th>
+<th>Макс. давление</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nicera (700-900)</td>
+<td>Съемный Brewer</td>
+<td>Pre-Infusion, регулятор крепости</td>
+<td>15 бар</td>
+</tr>
+<tr>
+<td>Romancia (500-600)</td>
+<td>Съемный Brewer</td>
+<td>Упрощенный капучинатор, 1 кнопка</td>
+<td>15 бар</td>
+</tr>
+<tr>
+<td>Minimal (100-200)</td>
+<td>Фиксированный</td>
+<td>Базовый функционал, ручное регулирование</td>
+<td>15 бар</td>
+</tr>
+<tr>
+<td>Magnifica (1200)</td>
+<td>Съемный Brewer</td>
+<td>Двойной бойлер, сенсорное управление</td>
+<td>15 бар</td>
+</tr>
+</tbody>
+</table>
+
+<p>Как видно из таблицы, даже в бюджетных моделях сохраняется ключевая особенность — система заваривания под высоким давлением. Однако в сериях <em>Magnifica</em> и топовых версиях <em>Nicera</em> применяются двойные бойлеры, что позволяет одновременно готовить эспрессо и вспенивать молоко, не теряя время на переключение температур.</p>
+
+<h2 id="подготовка-воды-и-кальциевые-фильтры">Подготовка воды и кальциевые фильтры</h2>
+
+<p>Работа кофемашины Nivona напрямую зависит от качества воды. Устройство оснащено встроенной системой фильтрации, куда устанавливается специальная карта <em>Clean & Soft</em>. Этот фильтр не только очищает воду от хлора и примесей, но и регулирует её жесткость.</p>
+
+<p>Фильтр работает как ионообменник, заменяя ионы кальция и магния на ионы водорода. Это предотвращает образование накипи внутри <strong>термоблока</strong> и парогенератора. Без использования фильтра или при игнорировании его замены, аппарат может уйти в режим защиты от накипи, что приведет к остановке работы.</p>
+
+<p>Система сама отслеживает ресурсы фильтра и напоминает о замене. Обычно это происходит через 2 месяца или после прохождения определенного объема воды. <strong>Система очистки</strong> также требует периодического использования специальных таблеток для удаления жира и кофейных масел, которые оседают в трубках.</p>
+
+<div class="checklist-block"><h4>☑️ Подготовка к работе с водой</h4><label class="check-item"><input type="checkbox"><span>Установить фильтр C&S в резервуар</span></label><label class="check-item"><input type="checkbox"><span>Замочить фильтр на 5 минут перед установкой</span></label><label class="check-item"><input type="checkbox"><span>Заполнить резервуар свежей водой</span></label><label class="check-item"><input type="checkbox"><span>Запустить режим промывки перед первым использованием</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<p>Если в вашем регионе вода очень жесткая, рекомендуется использовать только бутилированную воду, прошедшую обратный осмос, или дополнительно установить внешний фильтр. Иначе процесс декальцинации придется запускать гораздо чаще.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Использование оригинальных фильтров C&S критически важно для защиты термоблока от накипи и сохранения гарантийных обязательств.</p></div>
+
+<h2 id="программное-обеспечение-и-диагностика">Программное обеспечение и диагностика</h2>
+
+<p>Современные Nivona — это не просто механика, а сложные компьютерные устройства. Внутри корпуса находится микроконтроллер, который управляет каждым этапом работы: от размола зерна до подачи пара. <strong>Электронная система</strong> постоянно мониторит параметры давления, температуры и расхода воды.</p>
+
+<p>При возникновении неисправностей, например, при засорении трубки или пустом контейнере для жмыха, на дисплей выводится ошибка с кодом. Это позволяет пользователю или мастеру быстро найти причину поломки без сложной диагностики. <strong>Самодиагностика</strong> — важная часть работы машины, предотвращающая выход из строя дорогостоящих узлов.</p>
+
+<ul>
+<li>🔍 Система автоматически проверяет работу помпы при каждом включении</li>
+<li>📊 Датчики температуры контролируют нагрев с точностью до 0,1 градуса</li>
+<li>🛡️ Программная защита блокирует запуск при отсутствии воды или закрытом сливном поддоне</li>
+</ul>
+
+<p>Некоторые модели поддерживают обновление прошивки через USB или Wi-Fi, что позволяет добавлять новые функции и улучшать алгоритмы работы. Например, апдейт может улучшить управление температурой для новых сортов кофе.</p>
+
+<details class="faq-item"><summary>Что делать при ошибке «No Water»?|Даже если резервуар полон, ошибка может возникать из-за поплавкового датчика или воздушной пробки. Попробуйте снять резервуар и медленно наполнить его, чтобы выпустить воздух.-->
+
+<p>Если машина перестала работать, сначала проверьте наличие ошибок в системе. Часто проблема решается простым сбросом настроек или заменой фильтра. Однако, если код ошибки указывает на механическую поломку, лучше обратиться в сервисный центр, чтобы не усугубить ситуацию самостоятельными попытками ремонта.</p>
+
+<h2 id="рекомендации-по-эксплуатации-и-уходу">Рекомендации по эксплуатации и уходу</h2>
+
+<p>Чтобы кофемашина Nivona работала стабильно долгие годы, необходимо соблюдать простые правила ухода. Главное правило — регулярность. Ежедневная очистка заварочного блока, еженедельное промывание капучинатора и ежемесячная декальцинация — это залог долгой службы.</p>
+
+<p>Не забывайте очищать контейнер для жмыха и поддон для капель. Если уровень отходов превышен, датчики могут заблокировать запуск цикла приготовления. <strong>Система оповещения</strong> на дисплее подскажет, когда нужно опустошить контейнер, игнорировать эти сигналы нельзя.</p>
+
+<p>Важно также следить за состоянием уплотнительных резинок и сальников. Со временем они могут дубеть или трескаться, что приведет к протечкам. При замене заварочного блока или других манипуляциях проверяйте целостность этих элементов.</p>
+
+<!--WIDGET</summary><div class="faq-answer"><p>tip:Храните контейнер для жмыха закрытым и сухим, чтобы избежать появления плесени и неприятного запаха, который может проникнуть в аромат готового кофе.</p></div></details>
+
+<blockquote>⚠️ Внимание: Никогда не используйте агрессивные моющие средства, не предназначенные для кофемашин, так как они могут повредить пластиковые детали и уплотнители системы Brewer.</blockquote>
+
+<p>Если вы путешествуете и не планируете использовать кофемашину длительное время, обязательно промойте её от накипи, очистите заварочный блок и слейте всю воду из системы. Это предотвратит высыхание резиновых уплотнителей и развитие бактерий внутри труб.</p>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+
+<details>
+<summary>Почему кофемашина Nivona издает громкие звуки при работе?</summary>
+<p>Это может быть нормально при работе помпы, но если звук стал слишком громким или посторонним (скрежет, стук), возможно, в систему попал воздух или засорился заварочный блок. Попробуйте запустить цикл промывки. Если шум не исчез, проверьте наличие накипи.</p>
+</details>
+
+<details>
+<summary>Как часто нужно менять фильтр для воды C&S?</summary>
+<p>Рекомендуется менять фильтр каждые 2 месяца или после использования 50 литров воды, в зависимости от того, что наступит раньше. Производитель указывает срок службы на упаковке фильтра.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать молотый кофе без зерна?</summary>
+<p>Да, большинство моделей Nivona имеют отдельное отверстие для подачи молотого кофе. В этом случае кофемолка не включается, и устройство использует только предварительно размолотый порошок. Важно не использовать слишком мелкий помол, чтобы избежать засоров.</p>
+</details>
+
+<details>
+<summary>Что делать, если пар не идет из капучинатора?</summary>
+<p>Проверьте, не закрыт ли клапан подачи пара. Возможно, в трубке образовался засор от засохшего молока. Запустите программу промывки молочного контура или прочистите трубку специальной иглой.</p>
+</details>
+
+<details>
+<summary>Как правильно утилизировать использованный кофе?</summary>
+<p>Кофейная гуща является отличным удобрением для растений. Вы можете выбрасывать её в компост или добавлять в почву комнатных цветов, предварительно просушив и смешав с землей.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#сердце-аппарата-система-заваривания-brewer">Сердце аппарата: система заваривания Brewer</a></li><li><a href="#управление-помолом-и-дозировкой">Управление помолом и дозировкой</a></li><li><a href="#технология-подачи-молока-и-вспенивание">Технология подачи молока и вспенивание</a></li><li><a href="#таблица-характеристик-работы-основных-серий">Таблица характеристик работы основных серий</a></li><li><a href="#подготовка-воды-и-кальциевые-фильтры">Подготовка воды и кальциевые фильтры</a></li><li><a href="#программное-обеспечение-и-диагностика">Программное обеспечение и диагностика</a></li><li><a href="#рекомендации-по-эксплуатации-и-уходу">Рекомендации по эксплуатации и уходу</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-ot-nakipi-philips.html" class="related-card">Как почистить кофемашину Philips от накипи: Полная инструкция</a></li><li><a href="/articles/k/ka/kak-prigotovit-rastvor-dlya-dekaltsinatsii-kofemashiny.html" class="related-card">Как приготовить раствор для декальцинации кофемашины: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-vstavit-rozhok-v-kofevarku-supra.html" class="related-card">Как правильно вставить рожок в кофеварку Supra: Пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-pochistit-ot-nakipi-kofemashinu-dolce-gusto-infinissima.html" class="related-card">Как почистить Dolce Gusto Infinissima от накипи: пошаговая инструкция</a></li><li><a href="/articles/k/ko/kofemashina-krups-avtomaticheskaya-s-kapuchinatorom-kak-pochistit.html" class="related-card">Как почистить кофемашину Krupp автоматическую с капучинатором: полная инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-pochistit-kofemashinu-ot-nakipi-philips.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Philips от накипи: Полная инструкция</span><span class="related-bottom-desc">Пошаговая инструкция по удалению накипи в кофемашинах Philips. Обзор средств, алгоритм очистки модел</span></a><a href="/articles/k/ka/kak-prigotovit-rastvor-dlya-dekaltsinatsii-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Как приготовить раствор для декальцинации кофемашины: пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как правильно смешать средство для удаления накипи. Рецепты из лимонной кислоты, уксуса и г</span></a><a href="/articles/k/ka/kak-vstavit-rozhok-v-kofevarku-supra.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно вставить рожок в кофеварку Supra: Пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как вставить холдер в рожковую кофеварку Supra без ошибок. Пошаговая инструкция, настройка </span></a><a href="/articles/k/ka/kak-pochistit-ot-nakipi-kofemashinu-dolce-gusto-infinissima.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить Dolce Gusto Infinissima от накипи: пошаговая инструкция</span><span class="related-bottom-desc">Полное руководство по удалению накипи в кофемашине Dolce Gusto Infinissima. Официальные нормы, пропо</span></a><a href="/articles/k/ko/kofemashina-krups-avtomaticheskaya-s-kapuchinatorom-kak-pochistit.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Krupp автоматическую с капучинатором: полная инструкция</span><span class="related-bottom-desc">Пошаговое руководство по очистке автоматических кофемашин Krupp с капучинатором. Декольцинация, пром</span></a><a href="/articles/c/ch/chem-ochistit-sito-ot-kofevarki.html" class="related-bottom-card"><span class="related-bottom-title">Как очистить сито кофеварки от кофе: 5 проверенных способов</span><span class="related-bottom-desc">Узнайте, чем эффективно очистить сито от кофеварки от нагара и масла. Пошаговые инструкции, народные</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

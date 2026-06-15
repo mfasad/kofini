@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Ошибка Brew Unit в кофемашине Saeco: причины, диагностика и ремонт — Кофини</title>
+    <meta name="description" content="Кофемашина Saeco сообщает о проблеме с заварочным блоком? Узнайте, как своими руками снять блок, почистить механизм и исправить ошибку без визита в сервис.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/b/br/brew-unit-miss-kofemashina-saeco-chto-delat.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Ошибка Brew Unit в кофемашине Saeco: причины, диагностика и ремонт">
+    <meta property="og:description" content="Кофемашина Saeco сообщает о проблеме с заварочным блоком? Узнайте, как своими руками снять блок, почистить механизм и исправить ошибку без визита в сервис.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Ошибка Brew Unit в кофемашине Saeco: причины, диагностика и ремонт</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Ошибка Brew Unit в кофемашине Saeco: что делать и как починить</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#почему-кофемашина-теряет-заварочный-блок">Почему кофемашина теряет заварочный блок</a></li><li><a href="#первичная-диагностика-и-визуальный-осмотр">Первичная диагностика и визуальный осмотр</a></li><li><a href="#правильная-процедура-извлечения-и-очистки">Правильная процедура извлечения и очистки</a></li><li><a href="#смазка-механизма-ключевой-момент-ремонта">Смазка механизма: ключевой момент ремонта</a></li><li><a href="#сброс-ошибок-и-перезапуск-системы">Сброс ошибок и перезапуск системы</a></li><li><a href="#таблица-распространенных-ошибок-и-их-решений">Таблица распространенных ошибок и их решений</a></li><li><a href="#когда-требуется-замена-узла-или-сервис">Когда требуется замена узла или сервис</a></li><li><a href="#профилактика-и-уход-за-заварочным-блоком">Профилактика и уход за заварочным блоком</a></li><li><a href="#частые-вопросы-faq">Частые вопросы (FAQ)</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Неожиданно появившееся сообщение на дисплее, указывающее на неисправность заварочного блока, может испортить утренний ритуал с чашкой ароматного кофе. Система <em>Philips Saeco</em> обладает сложной механикой, и ошибка <strong>«Brew unit miss»</strong> (или аналогичная формулировка о потере блока) чаще всего сигнализирует о том, что сенсоры не видят узел в правильном положении. Это не всегда означает поломку, часто проблема кроется в накопившейся кофейной гуще или пересохшей смазке.</p>
+
+<p>Пользователи <em>Saeco Incanto</em>, <em>Exprelia</em> или <em>Intelcia</em> часто сталкиваются с тем, что машина перестает промывать блок или выдвигать его для очистки. Игнорирование подобного сигнала опасно: механизм может заклинить окончательно, что приведет к дорогостоящему ремонту мотора привода. Решение проблемы требует внимательности, наличия простых инструментов и аккуратности при разборке узла.</p>
+
+<p>В большинстве случаев ситуацию можно исправить самостоятельно, не прибегая к услугам мастерской. Ниже мы разберем пошаговый алгоритм действий, причины возникновения сбоя и нюансы обслуживания, которые продлят жизнь вашей технике.</p>
+
+<h2 id="почему-кофемашина-теряет-заварочный-блок">Почему кофемашина теряет заварочный блок</h2>
+
+<p>Проблема <strong>«Brew unit miss»</strong> возникает, когда микропереключатели, фиксирующие положение заварочного узла, не получают сигнал о его наличии или правильном расположении. Это может происходить из-за механического смещения, загрязнения контактов или сбоя в программе управления. Если вы недавно проводили чистку, возможно, блок был вставлен не до конца или с перекосом.</p>
+
+<p>Кроме того, влага и кофейные масла со временем создают липкую субстанцию вокруг направляющих. Эта грязь препятствует свободному ходу механизма, и мотор не может протолкнуть узел в исходную позицию. Электроника интерпретирует это как отсутствие блока или ошибку его позиционирования. <em>Philips</em> использует систему датчиков Холла, которые крайне чувствительны к внешним воздействиям.</p>
+
+<p>Иногда причина кроется в самом рычаге блокировки, который мог деформироваться или сломаться. Если рычаг не фиксируется в закрытом положении, машина не запустит цикл промывки и выдаст ошибку. Важно регулярно проверять состояние пластиковых деталей, так как они подвержены износу при интенсивном использовании.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Не пытайтесь силой вставить заварочный блок в машину, если он идет с затруднением. Это может привести к срыву зубьев шестеренок привода, что потребует полной замены мотора.</p>
+</blockquote>
+
+<h2 id="первичная-диагностика-и-визуальный-осмотр">Первичная диагностика и визуальный осмотр</h2>
+
+<p>Прежде чем разбирать корпус, выполните простую диагностику. Извлеките заварочный блок из машины и внимательно осмотрите его. Обратите внимание на состояние <strong>сердечника</strong> и <em>поршней</em>. Если они забиты спрессованной гущей, механизм просто не сможет сжаться до нужного размера для установки.</p>
+
+<p>Проверьте контакты на задней части блока. Они должны быть чистыми и не иметь следов окисления. Грязь на контактах может нарушить передачу сигнала о том, что блок установлен. Используйте ватную палочку, слегка смоченную в спирте, для аккуратной очистки. Убедитесь, что пружина механизма сжатия работает свободно и не застряла.</p>
+
+<p>Осмотрите отсек для блока внутри кофемашины. Там часто скапливается вода и гуща, особенно если вы забываете сушить машину после чистки. Загляните внутрь на предмет наличия посторонних предметов или сломанных пластиковых шестеренок, которые могут препятствовать движению.</p>
+
+<p>Если блок выглядит чистым и исправным, но ошибка сохраняется, проблема может быть в электронном модуле или проводке. Однако статистика показывает, что в 80% случаев виновата именно механика или загрязнение. Попробуйте вынуть блок, подождать пару минут и вставить его снова, дождавшись характерного щелчка.</p>
+
+<div class="poll-widget" id="poll-d6670754"><div class="poll-widget-question">📊 Как часто вы проводите чистку заварочного блока?</div><div class="poll-widget-option" data-poll="d6670754" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Ежедневно</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d6670754" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в неделю</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d6670754" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в месяц</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d6670754" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Никогда не чищу</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="правильная-процедура-извлечения-и-очистки">Правильная процедура извлечения и очистки</h2>
+
+<p>Для качественного обслуживания необходимо полностью извлечь <strong>заварочный узел</strong>. Включите машину, дождитесь завершения промывки, затем откройте сервисную крышку и нажмите на рычаг в сторону своего имени (или в противоположную, в зависимости от модели). Выдвиньте блок на себя.</p>
+
+<p>Разборка самого узла требует осторожности. Не разбирайте его полностью, если у вас нет опыта, так как собрать обратно без потери герметичности сложно. Достаточно промыть основные детали под теплой водой без моющих средств. Используйте мягкую щетку для очистки каналов от остатков кофе.</p>
+
+<p>После промывки критически важно высушить все детали. Влага внутри механизма может замкнуть контакты или вызвать коррозию. Оставьте блок на бумажном полотенце на 30-60 минут. Влажный блок — частая причина появления плесени и заедания.</p>
+
+<p>Для чистки отсека в машине используйте щетку и пылесос. Удалите всю видимую гущу и воду. Если есть доступ к датчикам положения, аккуратно протрите их сухой тканью. Чистота — залог точной работы сенсоров.</p>
+
+<div class="checklist-block"><h4>☑️ Подготовка к чистке</h4><label class="check-item"><input type="checkbox"><span>Отключить машину от сети</span></label><label class="check-item"><input type="checkbox"><span>Дать остыть заварочному блоку</span></label><label class="check-item"><input type="checkbox"><span>Вынуть капсулу жмыха</span></label><label class="check-item"><input type="checkbox"><span>Подготовить мягкую щетку</span></label><label class="check-item"><input type="checkbox"><span>Приготовить сухое полотенце</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<h2 id="смазка-механизма-ключевой-момент-ремонта">Смазка механизма: ключевой момент ремонта</h2>
+
+<p>Многие пользователи совершают ошибку, смазывая блок обычным растительным маслом или вазелином. Это категорически запрещено! Обычные масла со временем густеют, превращаясь в клейкую массу, которая притягивает пыль и кофейный сок. Это приводит к заклиниванию.</p>
+
+<p>Необходимо использовать только специальную <strong>силиконовую смазку</strong> для кофемашин. Она инертна к пищевым продуктам, не вымывается водой и сохраняет текучесть при низких и высоких температурах. Наносите смазку тонким слоем на все движущиеся части: направляющие, шестеренки, рычаги.</p>
+
+<p>Особое внимание уделите моментам трения. Если вы видите, что пластик начал стираться или появились задиры, смазка не поможет полностью, но замедлит износ. Регулярная смазка (раз в 2-3 месяца) предотвращает появление ошибки <em>Brew unit miss</em> на 90%.</p>
+
+<p>Наносите средство аккуратно, стараясь не попадать на резиновые уплотнители, так как некоторые виды смазки могут разрушать резину. Для удобства используйте шприц с тонкой насадкой. Излишки смазки лучше убрать салфеткой, чтобы они не пачкали белье или стол.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Использование неподходящей смазки (подсолнечное масло, WD-40, машинное масло) приведет к необратимому заклиниванию механизма и потере гарантии.</p>
+</blockquote>
+
+<h2 id="сброс-ошибок-и-перезапуск-системы">Сброс ошибок и перезапуск системы</h2>
+
+<p>После очистки и смазки нужно правильно установить блок обратно. Вставьте его в отсек до упора, пока не услышите четкий щелчок. Убедитесь, что рычаг блокировки находится в закрытом положении. Если рычаг не фиксируется, блок не встанет на место.</p>
+
+<p>Закройте крышку и включите кофемашину. Система начнет процесс инициализации. Если ошибка исчезла и машина начала промывку, значит проблема решена. Если дисплей продолжает мигать, попробуйте выполнить <strong>сброс ошибок</strong> через меню или путем отключения от сети.</p>
+
+<p>Для полного сброса отключите машину из розетки на 5-10 минут. Это позволит конденсаторам разрядиться и сбросить временные ошибки контроллера. После включения машина может снова попытаться найти блок. Если она нашла его и прошла инициализацию — успех.</p>
+
+<p>В некоторых моделях <em>Philips</em> существует скрытое меню для диагностики. Если стандартные методы не помогают, можно попробовать войти в сервисный режим, но это требует знания комбинации кнопок, специфичной для вашей модели. Будьте осторожны, чтобы не изменить системные настройки.</p>
+
+<details class="faq-item"><summary>Диагностические коды ошибок</summary><div class="faq-answer"><p>В сервисном режиме можно увидеть конкретный код ошибки (например, E02, E03), который указывает на проблему с конкретным датчиком или мотором. Это помогает сузить круг поиска неисправности без разборки электроники.</p></div></details>
+
+<h2 id="таблица-распространенных-ошибок-и-их-решений">Таблица распространенных ошибок и их решений</h2>
+
+<p>Чтобы быстрее сориентироваться в проблеме, используйте следующую таблицу. В ней собраны наиболее частые симптомы и способы их устранения для кофемашин <em>Saeco</em>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Вероятная причина</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>«Brew unit miss»</td>
+<td>Грязный блок или датчики</td>
+<td>Очистка и смазка</td>
+</tr>
+<tr>
+<td>Блок не выдвигается</td>
+<td>Неразблокированный рычаг</td>
+<td>Проверить рычаг блокировки</td>
+</tr>
+<tr>
+<td>Машина гудит, но не работает</td>
+<td>Заклинивший мотор</td>
+<td>Ремонт или замена привода</td>
+</tr>
+<tr>
+<td>Ошибка при вставке</td>
+<td>Неправильная ориентация</td>
+<td>Перевернуть блок и вставить заново</td>
+</tr>
+<tr>
+<td>Вода капает из блока</td>
+<td>Износ уплотнителей</td>
+<td>Замена уплотнительных колец</td>
+</tr>
+</tbody>
+</table>
+
+<p>Обращайте внимание на характер звука при попытке инициализации. Если мотор издает жужжание, но блок не двигается, значит, механическое сопротивление слишком велико. Если звука нет вообще — проблема может быть в электрике. Внимательное наблюдение за поведением машины экономит время на ремонт.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед первичной чисткой сфотографируйте, как именно вставлен рычаг и шестеренки — это поможет собрать механизм правильно, если вы решите его разобрать полностью.</p></div>
+
+<h2 id="когда-требуется-замена-узла-или-сервис">Когда требуется замена узла или сервис</h2>
+
+<p>Иногда чистка и смазка не помогают, и ошибка <strong>«Brew unit miss»</strong> возвращается. В этом случае возможно физическое повреждение пластиковых шестеренок внутри блока. Если зубья стерлись или один из поршней сломан, узел придется заменить.</p>
+
+<p>Также проблема может крыться в повреждении проводов внутри машины, ведущих к платине датчиков. Если вы видите оборванные жилы или следы окисления на контактах внутри корпуса, потребуется пайка или замена жгута. Это уже уровень профессионального ремонта.</p>
+
+<p>Если после всех манипуляций машина по-прежнему не видит блок, возможно, вышел из строя сам <strong>контроллер</strong> или мотор привода. В таких случаях самостоятельный ремонт может привести к полному выходу техники из строя. Лучше обратиться в авторизованный сервисный центр <em>Saeco</em>.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если вы слышите скрежет металла о пластик при включении, немедленно отключите машину от сети. Продолжение работы приведет к разрушению редуктора и дорогостоящему ремонту.</p>
+</blockquote>
+
+<h2 id="профилактика-и-уход-за-заварочным-блоком">Профилактика и уход за заварочным блоком</h2>
+
+<p>Чтобы избежать повторения ситуации с ошибкой <em>Brew unit miss</em>, необходимо соблюдать регулярный график обслуживания. Раз в неделю извлекайте блок и промывайте его под теплой водой. Это предотвратит затвердевание кофейных остатков.</p>
+
+<p>Раз в 1-2 месяца наносите свежую порцию силиконовой смазки. Это займет всего 5 минут, но продлит жизнь механизму на годы. Не забывайте также очищать контейнер для жмыха и промывать систему от накипи.</p>
+
+<p>Используйте только качественные зерна и правильно отрегулируйте помол. Слишком мелкий помол создает избыточное давление, что ускоряет износ поршней. Слишком крупный — приводит к плохому экстрагированию, но не ломает механизм. Оптимальный помол — это золотая середина.</p>
+
+<p>Если вы планируете долгий перерыв в использовании машины, извлеките заварочный блок, вымойте его, высушите и положите в отдельный пакет. Храните его в сухом месте, чтобы избежать деформации пластика и прорастания плесени. Это простая мера, о которой часто забывают.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная чистка и использование только специализированной силиконовой смазки — главные условия долгой службы заварочного блока без ошибок.</p></div>
+
+<h2 id="частые-вопросы-faq">Частые вопросы (FAQ)</h2>
+
+<details>
+<summary>Можно ли смазывать блок обычным маслом из кухни?</summary>
+<p>Категорически нельзя. Растительные и животные масла быстро окисляются, густеют и превращаются в липкую массу, которая притягивает грязь и приводит к заклиниванию механизма. Используйте только пищевую силиконовую смазку.</p>
+</details>
+
+<details>
+<summary>Что делать, если блок застрял и не вынимается?</summary>
+<p>Не применяйте силу. Попробуйте включить и выключить машину несколько раз, чтобы мотор попытался отпустить рычаг. Если не помогает, аккуратно покачивая блок, попробуйте освободить его. В крайнем случае, придется снять верхнюю крышку и вручную провернуть шестеренку мотора.</p>
+</details>
+
+<details>
+<summary>Как часто нужно чистить заварочный блок?</summary>
+<p>Рекомендуется извлекать и промывать блок под теплой водой не реже одного раза в неделю. Более частая мойка (после каждого использования) приветствуется, если у вас есть время. Это предотвратит образование твердой корки из кофейных масел.</p>
+</details>
+
+<details>
+<summary>Ошибка «Brew unit miss» означает поломку мотора?</summary>
+<p>Не всегда. Чаще всего это просто грязь или отсутствие смазки, из-за чего блок не может встать в нужную позицию. Но если после чистки и смазки проблема сохраняется, возможна неисправность датчика положения или самого мотора.</p>
+</details>
+
+<details>
+<summary>Можно ли эксплуатировать машину без заварочного блока?</summary>
+<p>Нет. Кофемашина <em>Saeco</em> не запустит цикл приготовления без установленного и правильно зафиксированного заварочного блока. Система безопасности заблокирует работу, чтобы избежать разлива воды и порчи электроники.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#почему-кофемашина-теряет-заварочный-блок">Почему кофемашина теряет заварочный блок</a></li><li><a href="#первичная-диагностика-и-визуальный-осмотр">Первичная диагностика и визуальный осмотр</a></li><li><a href="#правильная-процедура-извлечения-и-очистки">Правильная процедура извлечения и очистки</a></li><li><a href="#смазка-механизма-ключевой-момент-ремонта">Смазка механизма: ключевой момент ремонта</a></li><li><a href="#сброс-ошибок-и-перезапуск-системы">Сброс ошибок и перезапуск системы</a></li><li><a href="#таблица-распространенных-ошибок-и-их-решений">Таблица распространенных ошибок и их решений</a></li><li><a href="#когда-требуется-замена-узла-или-сервис">Когда требуется замена узла или сервис</a></li><li><a href="#профилактика-и-уход-за-заварочным-блоком">Профилактика и уход за заварочным блоком</a></li><li><a href="#частые-вопросы-faq">Частые вопросы (FAQ)</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/p/po/pochemu-kofemashina-stuchit.html" class="related-card">Почему стучит кофемашина: причины шума и способы устранения</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-ot-nakipi-v-domashnikh-usloviyakh.html" class="related-card">Как почистить кофемашину Delonghi от накипи: полная инструкция</a></li><li><a href="/articles/k/ka/kak-razobrat-kofemashinu-delonghi-magnifica-s-samostoyatelno-video-instruktsiya.html" class="related-card">Как разобрать кофемашину DeLonghi Magnifica S: видео инструкция и разборка</a></li><li><a href="/articles/n/ne/ne-rabotaet-kapuchinator-v-kofemashine-delongi-kak-ispravit.html" class="related-card">Капучинатор Delonghi не работает: причины и способы ремонта</a></li><li><a href="/articles/b/br/braun-kofemashina-kak-polzovatsya.html" class="related-card">Как пользоваться кофемашиной Braun: Полная инструкция по эксплуатации</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/p/po/pochemu-kofemashina-stuchit.html" class="related-bottom-card"><span class="related-bottom-title">Почему стучит кофемашина: причины шума и способы устранения</span><span class="related-bottom-desc">Кофемашина издает стук? Узнайте главные причины шума турбины, помпы или жерновов. Инструкция по диаг</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-ot-nakipi-v-domashnikh-usloviyakh.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Delonghi от накипи: полная инструкция</span><span class="related-bottom-desc">Пошаговая инструкция по удалению накипи в кофемашинах Delonghi. Обзор средств, режимов промывки и со</span></a><a href="/articles/k/ka/kak-razobrat-kofemashinu-delonghi-magnifica-s-samostoyatelno-video-instruktsiya.html" class="related-bottom-card"><span class="related-bottom-title">Как разобрать кофемашину DeLonghi Magnifica S: видео инструкция и разборка</span><span class="related-bottom-desc">Пошаговая инструкция по разборке кофемашины DeLonghi Magnifica S. Удаление накипи, замена уплотнител</span></a><a href="/articles/n/ne/ne-rabotaet-kapuchinator-v-kofemashine-delongi-kak-ispravit.html" class="related-bottom-card"><span class="related-bottom-title">Капучинатор Delonghi не работает: причины и способы ремонта</span><span class="related-bottom-desc">Капучинатор Delonghi перестал взбивать пенку? Узнайте основные причины поломки, пошаговые инструкции</span></a><a href="/articles/b/br/braun-kofemashina-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Braun: Полная инструкция по эксплуатации</span><span class="related-bottom-desc">Подробное руководство: как включить, настроить помол, сварить эспрессо и провести декальцинацию кофе</span></a><a href="/articles/k/ka/kak-razobrat-kofemolku-bosch-6000-video.html" class="related-bottom-card"><span class="related-bottom-title">Как разобрать кофемолку Bosch: видео-инструкция и пошаговый разбор</span><span class="related-bottom-desc">Подробная инструкция по разборке кофемолки Bosch для чистки и ремонта. Советы по замене ножей, устра</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

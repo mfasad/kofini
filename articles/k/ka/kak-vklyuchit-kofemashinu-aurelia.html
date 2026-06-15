@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как включить кофемашину Aurelia: пошаговая инструкция и тонкости запуска — Кофини</title>
+    <meta name="description" content="Подробное руководство по включению и первому запуску кофемашин Aurelia. Разбор панели управления, программ самоочистки и типичных ошибок при старте.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-vklyuchit-kofemashinu-aurelia.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как включить кофемашину Aurelia: пошаговая инструкция и тонкости запуска">
+    <meta property="og:description" content="Подробное руководство по включению и первому запуску кофемашин Aurelia. Разбор панели управления, программ самоочистки и типичных ошибок при старте.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как включить кофемашину Aurelia: пошаговая инструкция и тонкости запуска</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как включить кофемашину Aurelia: полное руководство по первому запуску и эксплуатации</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-мир-профессиональной-кофе-техники">Введение в мир профессиональной кофе-техники</a></li><li><a href="#подготовка-к-включению-проверка-воды-и-электричества">Подготовка к включению: проверка воды и электричества</a></li><li><a href="#процесс-включения-и-инициализация-системы">Процесс включения и инициализация системы</a></li><li><a href="#тонкости-первой-настройки-и-программная-самоочистка">Тонкости первой настройки и программная самоочистка</a></li><li><a href="#решение-частых-проблем-при-запуске">Решение частых проблем при запуске</a></li><li><a href="#особенности-управления-современными-моделями-aurelia">Особенности управления современными моделями Aurelia</a></li><li><a href="#заключительные-рекомендации-по-эксплуатации">Заключительные рекомендации по эксплуатации</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-мир-профессиональной-кофе-техники">Введение в мир профессиональной кофе-техники</h2>
+<p>
+<p>Кофемашина <em>Aurelia</em> представляет собой серьезный аппарат, требующий грамотного подхода к управлению, особенно в момент включения. В отличие от бытовых моделей, здесь система запуска объединяет механические действия с электронными проверками датчиков давления и температуры. <strong>Правильный порядок включения</strong> гарантирует долгую жизнь термоблоку и стабильное качество эспрессо с первого дня эксплуатации.</p>
+</p>
+<p>
+<p>Многие пользователи совершают ошибку, пытаясь форсировать процесс нагрева или игнорируя сигналы дисплея. <strong>Полный цикл инициализации</strong> может занять несколько минут, в течение которых машина выполняет сложные диагностические процедуры. <strong>Игнорирование этих этапов</strong> может привести к ложным срабатываниям защитных механизмов или ошибкам в работе бойлера.</p>
+</p>
+<p>
+<p>В этой статье мы детально разберем, как безопасно и эффективно запустить ваш <em>Aurelia</em>, учитывая особенности интерфейса и нюансы прошивки. Мы также коснемся вопросов подготовки воды и настройки параметров, которые напрямую влияют на вкус напитка.</p>
+</p>
+
+<h2 id="подготовка-к-включению-проверка-воды-и-электричества">Подготовка к включению: проверка воды и электричества</h2>
+<p>
+<p>Прежде чем нажимать главную кнопку, необходимо убедиться, что все внешние условия соответствуют требованиям производителя. <strong>Уровень воды в резервуаре</strong> должен быть достаточным для прохождения цикла промывки, так как сухая помпа может выйти из строя мгновенно. Проверьте также подключение к электросети: кабель должен быть плотно вставлен в розетку с заземлением, чтобы исключить скачки напряжения.</p>
+</p>
+<p>
+<p>Отдельного внимания заслуживает положение кранов подачи пара и горячей воды. Если перед выключением они оставались открытыми, давление в системе может быть нестабильным. <strong>Закрытие всех вентилей</strong> перед стартом предотвращает утечки пара и защищает уплотнительные кольца от преждевременного износа. Убедитесь, что капучинатор и носики чисты и не заблокированы остатками старого молока или кофейной гущи.</p>
+</p>
+<blockquote>
+<p>⚠️ Внимание: Если машина находится в режиме энергосбережения долгое время, первый запуск может сопровождаться громким звуком насоса. Это нормальное явление, свидетельствующее о заполнении контуров жидкостью.</p>
+</blockquote>
+<p>
+<p>Важно отметить, что для моделей с внешним бойлером процедура может отличаться от устройств с термоблоком. <strong>Внутренняя прошивка</strong> должна корректно считывать данные с датчиков уровня, прежде чем разрешить подачу питания на нагревательные элементы.</p>
+</p>
+
+<h2 id="процесс-включения-и-инициализация-системы">Процесс включения и инициализация системы</h2>
+<p>
+<p>Основной процесс запуска начинается с нажатия кнопки питания, обычно расположенной на лицевой панели или в правом верхнем углу дисплея. При нажатии вы услышите характерный щелчок реле и загорание индикаторов статуса. <strong>Звуковая индикация</strong> подтверждает, что электроника получила питание и начинает самотестирование. На экране могут появиться последовательные надписи, указывающие на проверку датчиков давления и температуры.</p>
+</p>
+<p>
+<p>В этот период <strong>не пытайтесь прервать процесс</strong>, даже если кажется, что машина "зависла". Система проводит сложные вычисления для калибровки термисторов и установки оптимальной точки срабатывания термореле. <strong>Калибровка давления</strong> — критический этап, при котором помпа создает пробный импульс для определения сопротивления гидравлической системы.</p>
+</p>
+<ul>
+<li>🔍 Проверьте наличие воды в баке перед нажатием кнопки.</li>
+<li>⚡ Убедитесь, что сетевой фильтр стабильно подает напряжение.</li>
+<li>🔧 Осмотрите краны на предмет закрытого положения.</li>
+<li>📱 Если есть приложение, проверьте статус подключения по Wi-Fi.</li>
+</ul>
+<p>
+<p>После завершения диагностических процедур на дисплее появится сообщение о готовности или загорится зеленый индикатор. <strong>Переход в рабочий режим</strong> означает, что бойлер начал нагрев до заданной температуры. Время ожидания зависит от начальной температуры воды и мощности нагревательного элемента.</p>
+</p>
+<div class="poll-widget" id="poll-320fbbcb"><div class="poll-widget-question">📊 Какую модель Aurelia вы используете?</div><div class="poll-widget-option" data-poll="320fbbcb" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Старая версия с кнопками</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="320fbbcb" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Новая версия с сенсором</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="320fbbcb" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Профессиональная серия</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="320fbbcb" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Пока не знаю</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="тонкости-первой-настройки-и-программная-самоочистка">Тонкости первой настройки и программная самоочистка</h2>
+<p>
+<p>Если вы включаете <em>Aurelia</em> впервые после покупки или длительного простоя, машина автоматически предложит запустить цикл промывки. <strong>Самоочистка системы</strong> необходима для удаления заводской смазки, пыли и возможных загрязнений из внутренних трубок. Пропускать этот этап категорически нельзя, так как это напрямую влияет на чистоту и вкус будущего кофе.</p>
+</p>
+<p>
+<p>В процессе промывки насос будет подавать воду через кофемолку и группу эспрессо, а также через паровой кран. <strong>Следуйте инструкциям на дисплее</strong>, меняя емкости под носиками по мере необходимости. Обычно требуется собрать около 0.5-1 литра воды, чтобы система гарантированно очистилась. После завершения процесса машина перезагрузится и перейдет в режим ожидания.</p>
+</p>
+<blockquote>
+<p>⚠️ Внимание: Во время цикла самоочистки нельзя нажимать кнопки приготовления напитков. Это может привести к сбоям в логике работы насоса и ошибкам давления.</p>
+</blockquote>
+<p>
+<p>Для моделей с возможностью настройки через меню, будет полезно сразу задать <strong>базовые параметры температуры</strong> и давления. Стандартные заводские настройки могут не подходить под ваши предпочтения или тип используемого зерна. <strong>Индивидуальная калибровка</strong> позволит вам получить именно тот вкус, который вы ожидаете от профессиональной машины.</p>
+</p>
+<div class="checklist-block"><h4>☑️ Подготовка к первому запуску</h4><label class="check-item"><input type="checkbox"><span>Проверить уровень воды</span></label><label class="check-item"><input type="checkbox"><span>Закрыть все краны</span></label><label class="check-item"><input type="checkbox"><span>Включить в розетку</span></label><label class="check-item"><input type="checkbox"><span>Дождаться полного цикла промывки</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="решение-частых-проблем-при-запуске">Решение частых проблем при запуске</h2>
+<p>
+<p>Иногда при попытке включения машина выдает ошибку или не подает признаков жизни. Самой частой проблемой является отсутствие воды в баке, которое фиксируется датчиком уровня. <strong>Добавление воды в резервуар</strong> и повторный перезапуск часто решает проблему мгновенно. Однако, если индикатор ошибки продолжает мигать, возможно, датчик засорился или вышел из строя.</p>
+</p>
+<p>
+<p>Другой распространенной ситуацией является застревание жмыха в варочной группе. Если <strong>группа не возвращает</strong> шнек в исходное положение, машина не позволит включиться в режим нагрева. В этом случае необходимо вручную открыть группу, удалить остатки кофе и убедиться, что механизм двигается свободно. <strong>Регулярное обслуживание</strong> группы предотвращает подобные ситуации.</p>
+</p>
+<p>
+<p>Ниже приведена таблица основных ошибок и способов их устранения при включении:</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Код ошибки / Симптом</th>
+<th>Возможная причина</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Мигает индикатор воды</td>
+<td>Пустой бак или неисправен датчик</td>
+<td>Заполнить бак, проверить контакты датчика</td>
+</tr>
+<tr>
+<td>Ошибка нагрева (Error H)</td>
+<td>Неисправность термистора или ТЭНа</td>
+<td>Требуется сервисное обслуживание</td>
+</tr>
+<tr>
+<td>Машина не включается</td>
+<td>Сбой питания или заблокированная группа</td>
+<td>Проверить розетку, открыть группу</td>
+</tr>
+<tr>
+<td>Резкий звук насоса</td>
+<td>Воздушная пробка в системе</td>
+<td>Запустить цикл промывки несколько раз</td>
+</tr>
+</tbody>
+</table>
+<details class="faq-item"><summary>Детали про ошибку H</summary><div class="faq-answer"><p>Ошибка нагрева часто возникает из-за окисления контактов термистора. В профессиональных условиях мастера используют мультиметр для проверки сопротивления датчика, но в домашних условиях лучше вызвать специалиста, чтобы не повредить электронику.</p></div></details>
+
+<h2 id="особенности-управления-современными-моделями-aurelia">Особенности управления современными моделями Aurelia</h2>
+<p>
+<p>Современные версии <em>Aurelia</em> оснащены сенсорными интерфейсами и сложными алгоритмами управления, которые требуют аккуратного обращения. <strong>Сенсорная панель</strong> может реагировать на прикосновения с задержкой, особенно если она загрязнена кофейными маслами или водой. <strong>Регулярная очистка экрана</strong> мягкой тканью обеспечит точность ввода команд.</p>
+</p>
+<p>
+<p>В меню настроек вы найдете разделы для управления <strong>автоматическим отключением</strong> и таймером ожидания. Эти функции позволяют оптимизировать энергопотребление и продлить срок службы нагревательных элементов. <strong>Настройка таймера</strong> особенно актуальна для офисов, где машина простаивает в ночное время.</p>
+</p>
+<blockquote>
+<p>⚠️ Внимание: Убедитесь, что вы не изменяете системные параметры давления выше заводских рекомендаций. Это может привести к разрыву патрубков или поломке помпы. Обновление прошивки может изменить доступные настройки, проверяйте актуальность параметров в официальном руководстве.</p>
+</blockquote>
+<p>
+<p>Для продвинутых пользователей доступна возможность <strong>прошивки обновлений</strong> via USB или Wi-Fi. Это позволяет исправить программные баки и получить новые функции. Однако перед обновлением обязательно сделайте резервную копию текущих настроек, если система это позволяет.</p>
+</p>
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Используйте дезинфицирующее средство для промывки системы раз в месяц, чтобы избежать накопления накипи и бактерий, даже если вы используете фильтрованную воду.</p></div>
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Правильная настройка таймера автоотключения и регулярная очистка сенсора — залог долгой и стабильной работы вашей Aurelia.</p></div>
+
+<h2 id="заключительные-рекомендации-по-эксплуатации">Заключительные рекомендации по эксплуатации</h2>
+<p>
+<p>После успешного включения и настройки <strong>первый приготовленный напиток</strong> лучше вылить. Это окончательно очистит систему от возможных остатков чистящих средств или смазки. Только убедившись, что вода и кофе не имеют посторонних привкусов, можно начинать полноценную работу. <strong>Качество воды</strong> играет решающую роль в долголетии машины, поэтому используйте специально подготовленную воду или фильтры.</p>
+</p>
+<p>
+<p>Помните, что <em>Aurelia</em> — это сложный механизм, требующий уважительного отношения. <strong>Своевременное обслуживание</strong> и соблюдение правил включения избавят вас от дорогостоящего ремонта. Если вы замечаете странное поведение машины, лучше обратиться к специалистам, чем пытаться исправить проблему самостоятельно.</p>
+</p>
+<p>
+<p>Следуя этим простым, но важным рекомендациям, вы сможете наслаждаться идеальным кофе каждый день. <strong>Стабильная работа</strong> машины — это результат грамотного запуска и правильного ухода.</p>
+</p>
+<details class="faq-item"><summary>Секрет идеального эспрессо</summary><div class="faq-answer"><p> Температура воды в группе должна быть стабильной. Если машина долго грелась, дайте ей постоять 2-3 минуты перед первым эспрессо, чтобы температура распределилась равномерно.</p></div></details>
+
+<h2 id="часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</h2>
+<details>
+<summary>Что делать, если кофемашина Aurelia не включается после отключения света?</summary>
+<p>Если после скачка напряжения машина не реагирует, проверьте автомат в щитке и целостность сетевого кабеля. В некоторых случаях требуется полная перезагрузка: отключите вилку из розетки на 5-10 минут, чтобы сбросить память контроллера, затем включите снова.</p>
+</details>
+<details>
+<summary>Сколько времени занимает полный цикл включения Aurelia?</summary>
+<p>Обычно процесс от момента нажатия кнопки до готовности занимает от 3 до 7 минут. Время зависит от начальной температуры воды, мощности бойлера и необходимости выполнения автоматической промывки.</p>
+</details>
+<details>
+<summary>Можно ли включать машину с пустым баком на короткое время?</summary>
+<p>Категорически не рекомендуется. Даже кратковременный запуск насоса без воды может привести к перегреву уплотнителей и поломке помпы. Всегда убеждайтесь, что бак заполнен, перед включением питания.</p>
+</details>
+<details>
+<summary>Как часто нужно запускать программу самоочистки после включения?</summary>
+<p>Программа самоочистки должна запускаться автоматически при первом включении после длительного простоя. В процессе ежедневной работы достаточно выполнять промывку группы перед началом и после окончания рабочего дня.</p>
+</details>
+<details>
+<summary>Почему машина издает странные звуки при включении?</summary>
+<p>Стук или гудение может быть вызвано наличием воздуха в системе. Запустите цикл промывки несколько раз, чтобы вытеснить воздух. Если звуки не прекращаются, возможно, проблема в помпе или клапанах, и требуется диагностика.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-мир-профессиональной-кофе-техники">Введение в мир профессиональной кофе-техники</a></li><li><a href="#подготовка-к-включению-проверка-воды-и-электричества">Подготовка к включению: проверка воды и электричества</a></li><li><a href="#процесс-включения-и-инициализация-системы">Процесс включения и инициализация системы</a></li><li><a href="#тонкости-первой-настройки-и-программная-самоочистка">Тонкости первой настройки и программная самоочистка</a></li><li><a href="#решение-частых-проблем-при-запуске">Решение частых проблем при запуске</a></li><li><a href="#особенности-управления-современными-моделями-aurelia">Особенности управления современными моделями Aurelia</a></li><li><a href="#заключительные-рекомендации-по-эксплуатации">Заключительные рекомендации по эксплуатации</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-promyt-kofevarku-filips-video.html" class="related-card">Как промыть кофеварку Philips: видео-инструкция и пошаговый разбор</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-yutub.html" class="related-card">Как почистить кофемашину DeLonghi: Пошаговая инструкция и видео советы</a></li><li><a href="/articles/m/mk/mkm-6000-kofemolka-kak-razobrat.html" class="related-card">Как разобрать кофемолку MKM 6000: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-franke.html" class="related-card">Как включить кофемашину Franke: пошаговая инструкция по запуску</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-vitek-1517.html" class="related-card">Как почистить кофемашину Vitek VT-1517: инструкция по декальцинации и промывке</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-promyt-kofevarku-filips-video.html" class="related-bottom-card"><span class="related-bottom-title">Как промыть кофеварку Philips: видео-инструкция и пошаговый разбор</span><span class="related-bottom-desc">Узнайте, как правильно промыть кофеварку Philips. Видео-гайд, инструкция по удалению накипи, очистке</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-yutub.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину DeLonghi: Пошаговая инструкция и видео советы</span><span class="related-bottom-desc">Узнайте, как правильно чистить кофемашину DeLonghi. Разбор программ промывки, декальцинации и разбор</span></a><a href="/articles/m/mk/mkm-6000-kofemolka-kak-razobrat.html" class="related-bottom-card"><span class="related-bottom-title">Как разобрать кофемолку MKM 6000: пошаговая инструкция</span><span class="related-bottom-desc">Подробное руководство по разборке жерновой кофемолки MKM 6000. Инструкция по чистке, замене жерновов</span></a><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-franke.html" class="related-bottom-card"><span class="related-bottom-title">Как включить кофемашину Franke: пошаговая инструкция по запуску</span><span class="related-bottom-desc">Полное руководство: как правильно включить автоматическую кофемашину Franke. Подготовка, первый запу</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-vitek-1517.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Vitek VT-1517: инструкция по декальцинации и промывке</span><span class="related-bottom-desc">Пошаговая инструкция по чистке кофемашины Vitek VT-1517. Как удалить накипь, промыть капучинатор и и</span></a><a href="/articles/k/ka/kak-polzovatsya-kofemashinoj-maunfeld.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Maunfeld: Полная инструкция по эксплуатации</span><span class="related-bottom-desc">Пошаговое руководство: как включить, настроить помол, приготовить эспрессо и провести декальцинацию </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

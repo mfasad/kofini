@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как зарядить кофеварку в Minecraft: руководство по механизмам — Кофини</title>
+    <meta name="description" content="Узнайте, как работает система зарядки кофеварки в Minecraft. Разбор модов, механик Redstone и использования поршней для автоматизации процесса.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-zaryadit-kofevarku-v-majnkraft.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как зарядить кофеварку в Minecraft: руководство по механизмам">
+    <meta property="og:description" content="Узнайте, как работает система зарядки кофеварки в Minecraft. Разбор модов, механик Redstone и использования поршней для автоматизации процесса.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/drugoe/">Другое</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как зарядить кофеварку в Minecraft: руководство по механизмам</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как зарядить кофеварку в Minecraft: полная инструкция по механикам</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#отсутствие-кофеварки-в-ванильном-minecraft">Отсутствие кофеварки в ванильном Minecraft</a></li><li><a href="#модификация-industrialcraft-2-и-электричество">Модификация IndustrialCraft 2 и электричество</a></li><li><a href="#мод-buildcraft-и-использование-жидкостей">Мод BuildCraft и использование жидкостей</a></li><li><a href="#магические-моды-thaumcraft-и-энергия-аффектов">Магические моды: Thaumcraft и энергия аффектов</a></li><li><a href="#специализированные-кофейные-моды">Специализированные кофейные моды</a></li><li><a href="#таблица-источников-энергии-для-кофеварок">Таблица источников энергии для кофеварок</a></li><li><a href="#решение-частых-проблем-с-запуском">Решение частых проблем с запуском</a></li><li><a href="#альтернативные-способы-автоматизации">Альтернативные способы автоматизации</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Многие игроки сталкиваются с неожиданным вопросом: как зарядить кофеварку в Minecraft? В ванильной версии игры, то есть в оригинальном Minecraft без дополнительных модификаций, предмета с названием «кофеварка» не существует, а следовательно, и механики её зарядки тоже нет. Однако сообщество мододелов создало множество расширений, где кофейные аппараты играют ключевую роль в выживании и автоматизации.</p>
+<p>В зависимости от установленного мода, процесс «зарядки» может подразумевать подключение к электросети, использование лавы, воды или даже магии. Понимание этих различий критически важно, чтобы не сломать дорогостоящее оборудование, созданное с помощью программных дополнений. В этой статье мы разберем самые популярные модификации и способы взаимодействия с кофейными механизмами.</p>
+
+<h2 id="отсутствие-кофеварки-в-ванильном-minecraft">Отсутствие кофеварки в ванильном Minecraft</h2>
+<p>Прежде чем пытаться найти способ подключить устройство, необходимо убедиться, что вы играете в правильную версию. В стандартном пакете игры <strong>Java Edition</strong> или <strong>Bedrock Edition</strong> нет блоков, имитирующих бытовую технику для приготовления напитков. Вы не найдете этот предмет в меню крафта или в инвентаре.</p>
+<p>Если вы видите кофеварку на сервере или в своем мире, это гарантированно результат работы стороннего программного обеспечения. Попытки использовать коды или команды вроде <code>/give @p coffee_maker</code> в чистой игре приведут к ошибке, так как этот идентификатор не прописан в базе данных игры.</p>
+<p>Игроки, которые случайно наткнулись на этот предмет, часто путают его с другими блоками, например, с варочными стойками или каминами. Важно различать эти объекты, чтобы не тратить ресурсы на поиски несуществующих механик в оригинальной игре.</p>
+
+<h2 id="модификация-industrialcraft-2-и-электричество">Модификация IndustrialCraft 2 и электричество</h2>
+<p>Одним из самых популярных модов, добавляющих технику, является <em>IndustrialCraft 2</em>. В некоторых его сборках или связанных аддонах (например, <em>GregTech</em>) могут встречаться блоки, напоминающие кофеварки или механизмы для обработки зерен. В этой экосистеме под «зарядкой» подразумевается подача энергии EU (Energy Units).</p>
+<p>Для работы такого устройства необходимо построить сеть <strong>электрических кабелей</strong>. Обычно используется медный кабель или изолированные провода, которые подключаются к генератору и ведут непосредственно к блоку кофеварки. Правильное напряжение критически важно для стабильной работы.</p>
+<p>Если вы используете <em>Transformer</em> для регулировки напряжения, убедитесь, что входное и выходное значения совпадают с требованиями устройства. Иначе блок может взорваться, если напряжение будет слишком высоким, либо работать неэффективно при низком уровне энергии.</p>
+<ul>
+<li>Проведите <strong>кабель</strong> от генератора или аккумулятора к кофеварке.</li>
+<li>Настройте <code>Transformer</code> на нужное значение EU/t для вашего устройства.</li>
+<li>Проверьте индикатор на блоке: он должен гореть зеленым или желтым цветом.</li>
+</ul>
+
+<h2 id="мод-buildcraft-и-использование-жидкостей">Мод BuildCraft и использование жидкостей</h2>
+<p>В моде <em>BuildCraft</em></em> концепция «зарядки» часто заменяется концепцией подачи ресурсов. Если мода с прямой реализацией кофеварки нет, игроки создают аналоги, используя <strong>кварцевые трубы</strong> и механизмы для смешивания жидкостей. Здесь «энергией» выступает вода или молоко, подаваемые под давлением.</p>
+<p>Для запуска процесса необходимо подключить <strong>Engine</strong> (двигатель) к насосу или трубам. Двигатель может работать на красном камне (Redstone Engine), нефти (Stirling Engine) или горячей лаве (Combustion Engine). Важно выбрать подходящий тип двигателя для вашей базы.</p>
+<p>Иногда игроки создают псевдо-кофеварку, используя печь для обжига зерен и механизм для смешивания ингредиентов. В этом случае «зарядка» означает просто запуск двигателя, который толкает поршень или активирует механизм. Не забудьте про <strong>Redstone</strong>, который является сердцем автоматизации.</p>
+
+<p> Если ваш двигатель работает нестабильно, проверьте наличие <code>Redstone Torch</code> или настройку переключателей в меню блока. Ошибки в логике часто приводят к остановке производства.</p>
+<blockquote>
+<p>⚠️ <strong>Внимание:</strong> Если вы используете двигатель на лаве, следите за уровнем топлива. Перегрев механизма может привести к его поломке и потере всех подключенных труб.</p>
+</blockquote>
+
+<div class="poll-widget" id="poll-46090352"><div class="poll-widget-question">📊 В каком моде вы чаще всего готовите кофе?</div><div class="poll-widget-option" data-poll="46090352" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">IndustrialCraft 2</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="46090352" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">BuildCraft</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="46090352" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Hardcore Ender Expansion</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="46090352" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Другой мод</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="магические-моды-thaumcraft-и-энергия-аффектов">Магические моды: Thaumcraft и энергия аффектов</h2>
+<p>В мире магии, представленном модом <em>Thaumcraft</em>, физическая электрическая «зарядка» не работает. Здесь механизмы питаются <strong>потенциальной энергией аффектов</strong> или жидкими эссенциями. Если в вашем мире есть кофеварка из этого мода, она, скорее всего, требует подвода специфических ресурсов через <strong>квантовые трубы</strong>.</p>
+<p>Для активации такого устройства необходимо создать поток <code>Aura</code> или направить поток эссенции (Essentia) к блоку. Это требует установки <strong>тесла-катушек</strong> или специальных кондукторов, которые передают магическую энергию. Без правильного подключения блок останется в неактивном состоянии.</p>
+<p>Иногда игроки сталкиваются с необходимостью использовать <strong>алхимию</strong> для создания специального топлива. Это может быть смесь воды, молока и эссенции редкости. Процесс создания такого топлива может занять время, но результат того стоит для стабильной работы.</p>
+<ul>
+<li>Установите <strong>квантовые кондукторы</strong> рядом с кофеваркой.</li>
+<li>Подсоедините трубу с эссенцией, используя <code>Wand</code> для настройки.</li>
+<li>Наблюдайте за свечением блока: синий цвет означает готовность к работе.</li>
+</ul>
+
+<p>В некоторых случаях требуется наличие <strong>кредитов</strong> или магических артефактов в инвентаре игрока, стоящего рядом. Это уникальная особенность многих модов на магию, где персональная связь с механизмом играет роль.</p>
+<details class="faq-item"><summary>Секреты работы с эссенцией</summary><div class="faq-answer"><p>Иногда эссенция может «утекать» из труб, если они повреждены. Используйте защитные чары для предотвращения потерь.</p></div></details>
+
+<h2 id="специализированные-кофейные-моды">Специализированные кофейные моды</h2>
+<p>Существуют редкие, но очень детализированные моды, такие как <em>CoffeeCraft</em> или <em>Roaster</em>, где кофеварка является полноценным производственным узлом. В таких случаях «зарядка» может означать загрузку топлива (угля, дерева) или подключение к водопроводу. <strong>Интерфейс</strong> таких блоков часто более сложен и требует настройки.</p>
+<p>В модификации <em>CoffeeCraft</em> процесс приготовления начинается с загрузки сырья в <strong>бункер</strong>. Затем необходимо активировать печь, используя кнопку в интерфейсе. Если устройство не запускается, проверьте наличие топлива и воды в соответствующих слотах.</p>
+<p>Некоторые версии модов требуют подключения к <strong>коммерческой сети</strong> или использования <strong>кредитов</strong> для доступа к функциям. Это редкая механика, но она может встречаться в серверных сборках с экономической системой. Убедитесь, что у вас есть доступ к необходимым ресурсам.</p>
+<blockquote>
+<p>⚠️ <strong>Внимание:</strong> В некоторых версиях модов требование топлива может измениться. Всегда проверяйте актуальную документацию мода перед началом строительства завода.</p>
+</blockquote>
+
+<div class="checklist-block"><h4>☑️ Проверка перед запуском</h4><label class="check-item"><input type="checkbox"><span>Установлен ли нужный мод?</span></label><label class="check-item"><input type="checkbox"><span>Подключена ли энергия или топливо?</span></label><label class="check-item"><input type="checkbox"><span>Есть ли сырье в бункере?</span></label><label class="check-item"><input type="checkbox"><span>Настроены ли параметры Redstone?</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="таблица-источников-энергии-для-кофеварок">Таблица источников энергии для кофеварок</h2>
+<p>Для удобства игроков мы составили сводную таблицу, показывающую, какой тип энергии требуется для разных типов кофеварок в популярных модах. Это поможет быстро определить, что именно нужно поставить рядом с вашим блоком для его активации.</p>
+
+<table>
+<thead>
+<tr>
+<th>Модификация</th>
+<th>Тип «зарядки»</th>
+<th>Необходимый блок</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IndustrialCraft 2</td>
+<td>Электричество (EU)</td>
+<td>Медный кабель</td>
+<td>Требует трансформации напряжения</td>
+</tr>
+<tr>
+<td>BuildCraft</td>
+<td>Механическая энергия</td>
+<td>Redstone Engine</td>
+<td>Работает только при наличии Redstone</td>
+</tr>
+<tr>
+<td>Thaumcraft</td>
+<td>Магическая энергия</td>
+<td>Тесла-катушка</td>
+<td>Требует эссенции аффектов</td>
+</tr>
+<tr>
+<td>CoffeeCraft</td>
+<td>Топливо (жар)</td>
+<td>Печь</td>
+<td>Нужна вода и углеродистое топливо</td>
+</tr>
+</tbody>
+</table>
+
+<p>Помните, что в некоторых случаях требуется комбинация источников. Например, электрическая кофеварка может также нуждаться в воде для охлаждения или паровой турбины. Изучите описание каждого блока в книге рецептов игры, чтобы избежать ошибок.</p>
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед постройкой большой кофейной станции сделайте резервную копию вашего мира, чтобы не потерять прогресс в случае взрыва блока.</p></div>
+
+<h2 id="решение-частых-проблем-с-запуском">Решение частых проблем с запуском</h2>
+<p>Если вы уверены, что все подключили правильно, но кофеварка все равно не работает, возможно, проблема в логике <strong>Redstone</strong>. Проверьте, не блокирует ли соседний блок выходную трубу или не перевернут ли механизм. Часто игроки забывают о направлении выхода ресурсов.</p>
+<p>Также стоит проверить версию мода. Разные версии могут иметь <strong>измененные крафты</strong> или требования к энергии. Если вы перешли на новую версию игры, старые настройки могут не сработать. Обновите мод до последней стабильной версии, чтобы исключить баги.</p>
+<p>Иногда проблема кроется в недостатке ресурсов. Убедитесь, что в инвентаре блока есть <strong>емкость</strong> для хранения готового продукта. Если место заполнено, процесс остановки автоматически. Очистите резервуары и попробуйте снова.</p>
+
+
+<blockquote>
+<p>⚠️ <strong>Внимание:</strong> Если вы используете сложный конвейер, убедитесь, что не происходит заторов на стыках труб. Это может привести к перегрузке системы и поломке двигателя.</p></p>
+</blockquote>
+
+<h2 id="альтернативные-способы-автоматизации">Альтернативные способы автоматизации</h2>
+<p>Если вы не хотите возиться с электричеством или магией, существуют простые способы автоматизации с помощью поршней и редстоуна. Вы можете создать механический пресс, который будет выдавливать сок из зерен, имитируя работу кофеварки. Это <strong>простой</strong> и надежный метод для новичков.</p>
+<p>Используйте <strong>поршни</strong> для перемещения ведер с водой и молоком в печь для смешивания. Хотя это и не настоящий кофе, это создает иллюзию автоматизации, которая отлично смотрится на сервере. Главное — правильно настроить таймеры.</p>
+<p>Для таких конструкций важна <strong>стабильность</strong> сигнала. Используйте повторители для усиления сигнала, если он проходит через большое расстояние. Это обеспечит бесперебойную работу вашего «кофейного автомата».</p>
+<p>В заключение, «зарядка» кофеварки в Minecraft — это понятие, которое полностью зависит от выбранной модификации. В одних случаях вам нужно подключить кабель, в других — подать воду или магическую эссенцию. Изучайте документацию и экспериментируйте, чтобы найти идеальный способ для вашей базы.</p>
+
+<details>
+<summary>Можно ли зарядить кофеварку солнечными панелями?</summary>
+<p>Да, в модах с энергетикой (например, IndustrialCraft 2 или Thermal Expansion) солнечные панели являются отличным источником энергии. Однако их эффективность зависит от времени суток и погоды.</p>
+</details>
+
+<details>
+<summary>Что делать, если кофеварка взорвалась после подключения?</summary>
+<p>Скорее всего, вы подали слишком высокое напряжение или использовали неподходящий тип топлива. Проверьте настройки трансформатора или замените двигатель на более мощный.</p>
+</details>
+
+<details>
+<summary>Нужен ли Redstone сигнал для запуска кофеварки?</summary>
+<p>В большинстве технических модов да, для активации механизма требуется сигнал Redstone. Используйте рычаг или кнопку для ручного запуска или подключите к авто-таймеру.</p>
+</details>
+
+<details>
+<summary>Как узнать, сколько энергии потребляет кофеварка?</summary>
+<p>Откройте интерфейс блока мода. Там обычно указан параметр EU/t (энергия в тик) или MJ/t. Также можно использовать специальные инструменты мода, например, Wrench или Screwdriver.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#отсутствие-кофеварки-в-ванильном-minecraft">Отсутствие кофеварки в ванильном Minecraft</a></li><li><a href="#модификация-industrialcraft-2-и-электричество">Модификация IndustrialCraft 2 и электричество</a></li><li><a href="#мод-buildcraft-и-использование-жидкостей">Мод BuildCraft и использование жидкостей</a></li><li><a href="#магические-моды-thaumcraft-и-энергия-аффектов">Магические моды: Thaumcraft и энергия аффектов</a></li><li><a href="#специализированные-кофейные-моды">Специализированные кофейные моды</a></li><li><a href="#таблица-источников-энергии-для-кофеварок">Таблица источников энергии для кофеварок</a></li><li><a href="#решение-частых-проблем-с-запуском">Решение частых проблем с запуском</a></li><li><a href="#альтернативные-способы-автоматизации">Альтернативные способы автоматизации</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/v/vo/vologodskij-plombir-otzyvy.html" class="related-card">Вологодский пломбир: отзывы, состав и где купить настоящий продукт</a></li><li><a href="/articles/k/ka/kak-oplatit-bonusami.html" class="related-card">Как оплатить бонусами: полное руководство по списанию баллов и скидок</a></li><li><a href="/articles/k/ka/kak-pravilno-pishetsya-slovo-vkusnoe.html" class="related-card">Как правильно пишется слово «вкусное»: орфография, правила и примеры</a></li><li><a href="/articles/d/da/da-baj-khao.html" class="related-card">Что значит «Да бай хао»: перевод, произношение и нюансы китайского языка</a></li><li><a href="/articles/r/ro/rossijskij-molochnyj-shokolad.html" class="related-card">Российский молочный шоколад: история, ГОСТ и лучшие производители</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/v/vo/vologodskij-plombir-otzyvy.html" class="related-bottom-card"><span class="related-bottom-title">Вологодский пломбир: отзывы, состав и где купить настоящий продукт</span><span class="related-bottom-desc">Честные отзывы о мороженом Вологодский пломбир. Разбор состава по ГОСТу, калорийность и советы как о</span></a><a href="/articles/k/ka/kak-oplatit-bonusami.html" class="related-bottom-card"><span class="related-bottom-title">Как оплатить бонусами: полное руководство по списанию баллов и скидок</span><span class="related-bottom-desc">Узнайте, как оплатить бонусами покупки в магазинах, ресторанах и онлайн-сервисах. Инструкция по акти</span></a><a href="/articles/k/ka/kak-pravilno-pishetsya-slovo-vkusnoe.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно пишется слово «вкусное»: орфография, правила и примеры</span><span class="related-bottom-desc">Узнайте, как правильно пишется слово «вкусное»: правила суффиксов прилагательных, когда пишется Н ил</span></a><a href="/articles/d/da/da-baj-khao.html" class="related-bottom-card"><span class="related-bottom-title">Что значит «Да бай хао»: перевод, произношение и нюансы китайского языка</span><span class="related-bottom-desc">Разбираем фразу «Да бай хао». Узнайте значение, правильную транскрипцию и как использовать это выраж</span></a><a href="/articles/r/ro/rossijskij-molochnyj-shokolad.html" class="related-bottom-card"><span class="related-bottom-title">Российский молочный шоколад: история, ГОСТ и лучшие производители</span><span class="related-bottom-desc">Всё о российском молочном шоколаде: от истории производства и ГОСТов до обзора топовых брендов. Как </span></a><a href="/articles/s/sp/splin-chto-ty-melesh-kofemolka.html" class="related-bottom-card"><span class="related-bottom-title">Сплин что ты мелешь: Кофемолка или сленг? Разбор запроса</span><span class="related-bottom-desc">Запрос &#x27;сплин что ты мелешь кофемолка&#x27; — это смешение сленга и техники. Разбираем, что такое сплин, </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

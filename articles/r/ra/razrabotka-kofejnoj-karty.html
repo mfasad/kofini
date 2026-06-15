@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Разработка кофейной карты: от зерна до цены в меню кофейни — Кофини</title>
+    <meta name="description" content="Руководство по созданию прибыльной кофейной карты. Расчет себестоимости, подбор зерен, инженерия напитков и управление продажами для владельцев бизнеса.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/r/ra/razrabotka-kofejnoj-karty.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Разработка кофейной карты: от зерна до цены в меню кофейни">
+    <meta property="og:description" content="Руководство по созданию прибыльной кофейной карты. Расчет себестоимости, подбор зерен, инженерия напитков и управление продажами для владельцев бизнеса.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/zerna-i-pomol/">Зерна и помол</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Разработка кофейной карты: от зерна до цены в меню кофейни</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как разработать успешную и прибыльную кофейную карту</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#анализ-целевой-аудитории-и-позиционирование">Анализ целевой аудитории и позиционирование</a></li><li><a href="#структура-меню-классика-и-авторские-решения">Структура меню: классика и авторские решения</a></li><li><a href="#расчет-себестоимости-и-формирование-цены">Расчет себестоимости и формирование цены</a></li><li><a href="#технические-стандарты-и-регламентация-рецептов">Технические стандарты и регламентация рецептов</a></li><li><a href="#визуальное-оформление-и-описание-напитков">Визуальное оформление и описание напитков</a></li><li><a href="#управление-ассортиментом-и-аналитика-продаж">Управление ассортиментом и аналитика продаж</a></li><li><a href="#обучение-персонала-и-контроль-качества">Обучение персонала и контроль качества</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Создание кофейной карты — это не просто список напитков с ценами, а фундаментальный инструмент управления бизнесом, который напрямую влияет на прибыль и репутацию заведения. Правильно составленное меню должно балансировать между кулинарным творчеством, экономической эффективностью и ожиданиями гостя, превращая простую покупку кофе в запоминающийся опыт.</p>
+
+<p>Многие владельцы кофеен совершают ошибку, копируя меню конкурентов без учета собственной <strong>себестоимости</strong> и специфики <strong>кофейного зерна</strong>. В результате карта получается перегруженной, а маржинальность падает, так как сложные авторские напитки часто оказываются убыточными при неправильном расчете.</p>
+
+<h2 id="анализ-целевой-аудитории-и-позиционирование">Анализ целевой аудитории и позиционирование</h2>
+
+<p>Прежде чем писать название первого латте, необходимо четко определить, кто будет вашим клиентом. Будет ли это спешелти-кофейня, где ценители оценивают <strong>оригинальность вкуса</strong> и район произрастания зерна, или сетевой формат, ориентированный на скорость и привычные вкусы массового потребителя?</p>
+
+<p>Позиционирование диктует структуру меню. В премиальном сегменте вы можете позволить себе редкие сорта <em>Эфиопии Иргачефф</em> и сложные технологии обжарки, тогда как в формате «кофе с собой» приоритетом становится стабильность вкуса и скорость приготовления, поэтому акцент делается на крепкие <strong>эспрессо-основы</strong>.</p>
+
+<p>Вам нужно понять, готовы ли ваши гости платить за эксперименты или они ищут предсказуемый вкус. Если вы предложите сложный фильтр-кофе в районе с быстрым трафиком офисных работников, вы рискуете потерять продажи, так как люди там хотят быстро получить заряд бодрости, а не изучать <strong>дескрипторы</strong> вкуса.</p>
+
+<h2 id="структура-меню-классика-и-авторские-решения">Структура меню: классика и авторские решения</h2>
+
+<p>Идеальная кофейная карта строится по принципу пирамиды, где в основании лежит проверенный временем классический ассортимент, а на вершине — сезонные и авторские предложения. Классика, такая как <strong>капучино</strong>, <strong>флэт уайт</strong> и <strong>эспрессо</strong>, должна составлять не менее 60% продаж, так как это точки входа для новых клиентов.</p>
+
+<p>Авторская карта должна быть лаконичной и обновляться сезонно, чтобы стимулировать повторные визиты. Используйте сезонные фрукты, специи и сиропы, но убедитесь, что они дополняют, а не перебивают вкус основного <strong>кофейного зерна</strong>. Перегруженность меню сложными напитками замедляет работу бариста и увеличивает время ожидания.</p>
+
+<p>Необходимо четко разграничить категории напитков: горячие, холодные, десертные и безкофеиновые. Это помогает гостю быстрее сориентироваться и снижает когнитивную нагрузку при выборе. Важно, чтобы названия были понятными, но при этом интригующими, подчеркивающими <strong>уникальность рецепта</strong>.</p>
+
+<blockquote>⚠️ Внимание: Чрезмерное расширение меню может привести к тому, что вы будете иметь в наличии много просроченных ингредиентов, что увеличит <strong>фудкост</strong> и снизит общую рентабельность заведения.</blockquote>
+
+<div class="poll-widget" id="poll-39647b58"><div class="poll-widget-question">📊 Что важнее для вашей кофейной карты?</div><div class="poll-widget-option" data-poll="39647b58" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Классический ассортимент</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="39647b58" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Авторские напитки</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="39647b58" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Сезонные лимитированные позиции</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="39647b58" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Безкофеиновые альтернативы</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="расчет-себестоимости-и-формирование-цены">Расчет себестоимости и формирование цены</h2>
+
+<p>Математика кофейного бизнеса не прощает ошибок в расчетах. Каждая чашка должна приносить прибыль, поэтому ключевым этапом является точный расчет <strong>себестоимости</strong> каждого напитка. В нее входит не только стоимость зерна, но и молоко, сиропы, стакан, крышка, перчатки и даже электроэнергия.</p>
+
+<p>Для правильного ценообразования используйте формулу, учитывающую желаемую маржинальность. Стандартная наценка на кофе в спешелти-кофейнях составляет от 300% до 500%, но в зависимости от локации и концепции эти цифры могут варьироваться. Никогда не устанавливайте цену «на глаз», опираясь только на интуицию.</p>
+
+<p>Рассчитывайте стоимость порции <strong>эспрессо</strong> тщательно, так как это база для всех остальных напитков. Ошибка в граммах кофе на порцию или в объеме молока при масштабировании на тысячи чашек в месяц может стоить вам десятков тысяч рублей чистой прибыли.</p>
+
+<p>Особое внимание уделите расчету фудкоста (Food Cost) для сложных напитков с добавками. Сиропы и топпинги часто занимают значительную долю в себестоимости, поэтому их дозировка должна быть строго регламентирована.</p>
+
+<table>
+<thead>
+<tr>
+<th>Напиток</th>
+<th>Себестоимость (руб.)</th>
+<th>Рекомендуемая цена (руб.)</th>
+<th>Маржинальность (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Эспрессо (30 мл)</td>
+<td>12</td>
+<td>90</td>
+<td>86</td>
+</tr>
+<tr>
+<td>Капучино (300 мл)</td>
+<td>45</td>
+<td>220</td>
+<td>79</td>
+</tr>
+<tr>
+<td>Раф с сиропом</td>
+<td>65</td>
+<td>290</td>
+<td>77</td>
+</tr>
+<tr>
+<td>Фильтр-кофе (200 мл)</td>
+<td>18</td>
+<td>150</td>
+<td>88</td>
+</tr>
+<tr>
+<td>Авторский латте со специями</td>
+<td>85</td>
+<td>350</td>
+<td>75</td>
+</tr>
+</tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Всегда закладывайте в расчет себестоимости 5-10% на усушку и утруску продуктов, а также на возможные ошибки бариста при приготовлении.</p></div>
+
+<h2 id="технические-стандарты-и-регламентация-рецептов">Технические стандарты и регламентация рецептов</h2>
+
+<p>Чтобы вкус напитка был одинаковым в любой день и при любом бариста, необходимо внедрить строгие стандарты приготовления. Это называется <strong>технологической картой</strong>, где прописаны все параметры: вес кофе в корзине, температура молока, время экстракции и последовательность действий.</p>
+
+<p>Используйте <em>весовые дозаторы</em> и <strong>тарированные стаканы</strong> для контроля качества. Визуальная оценка объема молока или «на глаз» добавление сиропа недопустимы в профессиональной среде. Это прямой путь к потере качества и недовольству гостей.</p>
+
+<p>Для каждого напитка в карте должен быть закреплен конкретный рецепт, который не меняется без согласования с управляющим. Если вы решили изменить <strong>зерновой микс</strong>, это должно автоматически повлечь за собой пересмотр рецептуры всех напитков на его основе.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка стандартов рецепта</h4><label class="check-item"><input type="checkbox"><span>Точный вес кофе на порцию</span></label><label class="check-item"><input type="checkbox"><span>Температура подачи молока</span></label><label class="check-item"><input type="checkbox"><span>Рекомендуемый размер порции</span></label><label class="check-item"><input type="checkbox"><span>Порядок слоя ингредиентов</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="визуальное-оформление-и-описание-напитков">Визуальное оформление и описание напитков</h2>
+
+<p>Описание напитков в кофейной карте — это мощный маркетинговый инструмент, который может увеличить продажи на 15-20%. Вместо сухого перечисления ингредиентов используйте сенсорные описания, вызывающие ассоциации: «бодрящий эспрессо с нотками темного шоколада и цитрусовой кислотностью».</p>
+
+<p>Избегайте клише и сложных терминов, если ваша аудитория — новички, но не бойтесь использовать профессиональную лексику для ценителей. Указывайте происхождение зерна, способ обработки и профиль вкуса. Это добавляет ценность напитку и обосновывает его цену.</p>
+
+<p>Визуальная подача меню также важна. Используйте грамотную иерархию шрифтов, выделяйте <strong>хиты продаж</strong> и сезонные позиции. Графики и иконки помогают быстро сканировать карту глазами, направляя внимание на самые маржинальные позиции.</p>
+
+<blockquote>⚠️ Внимание: Избегайте использования жирного шрифта или выделения для всех позиций подряд — это превращает меню в «кашу», где невозможно выделить главное. Выделяйте только то, что хотите продать.</blockquote>
+
+<p>Добавьте в описание информацию о наличии альтернативного молока. Это не только расширяет аудиторию, но и позволяет отработать дополнительные продажи на более дорогих <strong>растительных напитках</strong>, таких как овсяное или миндальное молоко.</p>
+
+<details class="faq-item"><summary>Секрет описания</summary><div class="faq-answer"><p>Как описать вкус? Используйте метод «от общего к частному»: сначала базовая характеристика (сладкий, кислый), затем вкусовые ноты (орехи, ягоды), и в конце — послевкусие. Это помогает гостю сформировать ментальный образ напитка.</p></div></details>
+
+<h2 id="управление-ассортиментом-и-аналитика-продаж">Управление ассортиментом и аналитика продаж</h2>
+
+<p>Кофейная карта — это живой организм, который требует постоянного анализа и корректировок. Регулярно проводите ABC-анализ продаж, чтобы выявить лидеров и аутсайдеров. Напитки, которые долго не продаются или имеют низкую маржу, нужно либо переписывать, либо убирать из меню.</p>
+
+<p>Следите за <strong>трендами индустрии</strong>, но внедряйте их обдуманно. То, что популярно в столице, может не прижиться в вашем городе. Тестируйте новые позиции в течение ограниченного периода (например, две недели), собирайте обратную связь и только потом решайте, включать ли их в постоянную карту.</p>
+
+<p>Используйте данные из вашей POS-системы для отслеживания сезонности. Летом продажи холодных напитков растут, а зимой — горячих. Гибкость в управлении меню позволяет максимизировать прибыль в любой период года.</p>
+
+<p> Иногда низкие продажи связаны не с плохим вкусом, а с тем, что напиток неправильно представлен или бариста не умеет его готовить. Проведите аудит процессов перед тем, как вычеркивать позицию.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярный анализ продаж и отзывчивость к трендам позволяют поддерживать актуальность меню и максимизировать рентабельность каждой позиции в карте.</p></div>
+
+<h2 id="обучение-персонала-и-контроль-качества">Обучение персонала и контроль качества</h2>
+
+<p>Даже самая гениальная кофейная карта не сработает, если персонал не умеет её реализовывать. Обучение бариста должно включать не только технику приготовления, но и навыки продаж. Бариста должен уметь рекомендовать напиток, основываясь на предпочтениях гостя.</p>
+
+<p>Проводите регулярные дегустации и теоретические занятия, чтобы персонал знал о характеристиках <strong>кофейного зерна</strong>, которое вы используете. Уверенный бариста, который может рассказать историю происхождения зерна, повышает ценность напитка в глазах клиента.</p>
+
+<p>Внедрите систему контрольных точек: проверка чашек перед выдачей, таймер для приготовления, сверка остатков. Это дисциплинирует команду и гарантирует стабильное качество, которое является основой репутации заведения.</p>
+
+<p>Мотивируйте сотрудников предлагать <strong>дополнительные опции</strong> (сиропы, выпечку). Это увеличивает средний чек и делает работу бариста более интересной и прибыльной для всех участников процесса.</p>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+
+<details>
+<summary>Сколько позиций должно быть в идеальной кофейной карте?</summary>
+<p>Оптимальное количество позиций для старта — 15-20 напитков. Это позволяет держать склад оптимизированным, а персонал — обученным качественно готовить каждое изделие. Перегруженное меню (>30 позиций) часто приводит к ошибкам и падению скорости обслуживания.</p>
+</details>
+
+<details>
+<summary>Как часто нужно обновлять кофейную карту?</summary>
+<p>Рекомендуется обновлять сезонные предложения раз в 3-4 месяца. Базовое меню (классика) должно оставаться стабильным, но вы можете менять акценты, например, предлагать холодные напитки летом и согревающие — зимой.</p>
+</details>
+
+<details>
+<summary>Что важнее: вкус или цена?</summary>
+<p>В спешелти-кофейнях вкус и качество зерна являются приоритетом, так как аудитория готова платить за уникальный продукт. В масс-маркете цена и скорость часто становятся решающими факторами, но вкус не должен быть низким, иначе клиент не вернется.</p>
+</details>
+
+<details>
+<summary>Как правильно вводить новый напиток в меню?</summary>
+<p>Начните с тестирования на персонале и лояльных клиентах. Соберите обратную связь, откорректируйте рецепт, рассчитайте себестоимость и только потом запускайте в продажу с активным продвижением через социальные сети и мерч.</p>
+</details>
+
+<blockquote>⚠️ Внимание: Учитывайте, что цены на сырье и логистика могут меняться. Пересматривайте себестоимость минимум раз в квартал, чтобы избежать скрытых убытков.</blockquote></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#анализ-целевой-аудитории-и-позиционирование">Анализ целевой аудитории и позиционирование</a></li><li><a href="#структура-меню-классика-и-авторские-решения">Структура меню: классика и авторские решения</a></li><li><a href="#расчет-себестоимости-и-формирование-цены">Расчет себестоимости и формирование цены</a></li><li><a href="#технические-стандарты-и-регламентация-рецептов">Технические стандарты и регламентация рецептов</a></li><li><a href="#визуальное-оформление-и-описание-напитков">Визуальное оформление и описание напитков</a></li><li><a href="#управление-ассортиментом-и-аналитика-продаж">Управление ассортиментом и аналитика продаж</a></li><li><a href="#обучение-персонала-и-контроль-качества">Обучение персонала и контроль качества</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/o/ot/otlichie-kofe-arabika-ot-robusty.html" class="related-card">Арабика против Робусты: главные отличия, вкус и применение</a></li><li><a href="/articles/t/te/temperatura-vody-dlya-espresso.html" class="related-card">Идеальная температура воды для эспрессо: секреты баланса вкуса</a></li><li><a href="/articles/k/ko/kofe-v-zernakh-kg.html" class="related-card">Кофе в зернах кг: выбор, хранение и лучшие сорта для кофемашины</a></li><li><a href="/articles/s/sk/skolko-vesit-kofejnoe-zerno.html" class="related-card">Сколько весит кофейное зерно: вес сырых и обжаренных зерен</a></li><li><a href="/articles/k/kh/khoroshie-zerna-kofe.html" class="related-card">Как выбрать хорошие зерна кофе: сорта, обжарка и свежесть</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/o/ot/otlichie-kofe-arabika-ot-robusty.html" class="related-bottom-card"><span class="related-bottom-title">Арабика против Робусты: главные отличия, вкус и применение</span><span class="related-bottom-desc">Полное сравнение сортов кофе. Узнайте разницу во вкусе, содержании кофеина и цене. Как выбрать зерно</span></a><a href="/articles/t/te/temperatura-vody-dlya-espresso.html" class="related-bottom-card"><span class="related-bottom-title">Идеальная температура воды для эспрессо: секреты баланса вкуса</span><span class="related-bottom-desc">Узнайте, какая температура воды нужна для приготовления эспрессо. Разбор влияния градусов на экстрак</span></a><a href="/articles/k/ko/kofe-v-zernakh-kg.html" class="related-bottom-card"><span class="related-bottom-title">Кофе в зернах кг: выбор, хранение и лучшие сорта для кофемашины</span><span class="related-bottom-desc">Почему покупать кофе в зернах кг выгоднее и качественнее? Полный гид по выбору сортов, обжарке и пра</span></a><a href="/articles/s/sk/skolko-vesit-kofejnoe-zerno.html" class="related-bottom-card"><span class="related-bottom-title">Сколько весит кофейное зерно: вес сырых и обжаренных зерен</span><span class="related-bottom-desc">Узнайте точный вес кофейного зерна в граммах и фунтах. Влияние обжарки, сорта и влажности на массу. </span></a><a href="/articles/k/kh/khoroshie-zerna-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Как выбрать хорошие зерна кофе: сорта, обжарка и свежесть</span><span class="related-bottom-desc">Руководство по выбору качественных кофейных зерен. Разбираем арабику и робусту, степени обжарки, спо</span></a><a href="/articles/k/kt/kto-delaet-kofe-lyuvak.html" class="related-bottom-card"><span class="related-bottom-title">Кто делает кофе лювак и как производят этот редкий напиток</span><span class="related-bottom-desc">Узнайте, кто делает кофе лювак: от диких циветт до ферм Индонезии. Секреты производства, этика и как</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

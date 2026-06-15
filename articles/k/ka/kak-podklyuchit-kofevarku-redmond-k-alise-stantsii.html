@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как подключить кофеварку Redmond к Алисе: Полная инструкция по настройке — Кофини</title>
+    <meta name="description" content="Пошаговое руководство по интеграции умной кофеварки Redmond с Яндекс Алисой. Настройка сценариев, голосового управления и устранение ошибок.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-podklyuchit-kofevarku-redmond-k-alise-stantsii.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как подключить кофеварку Redmond к Алисе: Полная инструкция по настройке">
+    <meta property="og:description" content="Пошаговое руководство по интеграции умной кофеварки Redmond с Яндекс Алисой. Настройка сценариев, голосового управления и устранение ошибок.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/aksessuary-i-instrumenty/">Аксессуары и инструменты</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как подключить кофеварку Redmond к Алисе: Полная инструкция по настройке</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как подключить кофеварку Redmond к Алисе: Полная инструкция по настройке</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#подготовка-устройства-и-проверка-совместимости">Подготовка устройства и проверка совместимости</a></li><li><a href="#установка-и-первичная-настройка-приложения-ready-for-sky">Установка и первичная настройка приложения Ready for Sky</a></li><li><a href="#подключение-кофеварки-к-wi-fi-сети">Подключение кофеварки к Wi-Fi сети</a></li><li><a href="#интеграция-с-экосистемой-яндекс">Интеграция с экосистемой Яндекс</a></li><li><a href="#управление-кофеваркой-голосовыми-командами">Управление кофеваркой голосовыми командами</a></li><li><a href="#создание-сценариев-умного-дома">Создание сценариев умного дома</a></li><li><a href="#решение-типичных-проблем-и-ошибок">Решение типичных проблем и ошибок</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Вопреки распространенному мнению, управление кофеваркой с помощью голосового помощника не требует сложного программирования или покупки дополнительных хабов. Современные устройства бренда <em>Redmond</em> обладают встроенным модулем Wi-Fi, который позволяет интегрировать их в экосистему <strong>Яндекс Станции</strong> всего за несколько минут. Это открывает возможность готовить свежий кофе, не вставая с кровати, или запускать процесс, пока вы чистите зубы.</p>
+<p>Однако сам по себе факт наличия Wi-Fi-модуля не гарантирует мгновенного подключения. Корректная работа зависит от правильной последовательности действий в мобильных приложениях и наличия стабильного сетевого окружения. Если вы только что распаковали устройство или столкнулись с ошибкой при привязке, данная инструкция поможет избежать типичных проблем и запустить голосовое управление в штатном режиме.</p>
+<p>Процесс интеграции строится на обмене данными между сервисом <em>Redmond</em> и платформой <strong>Яндекс</strong>. Вам потребуется синхронизировать аккаунты, чтобы виртуальный ассистент мог отправлять команды на конкретное устройство в вашем доме. Давайте разберем каждый этап детально, от подготовки смартфона до создания удобных сценариев утреннего пробуждения.</p>
+
+<h2 id="подготовка-устройства-и-проверка-совместимости">Подготовка устройства и проверка совместимости</h2>
+<p>Перед началом настройки убедитесь, что ваша модель кофеварки поддерживает функцию <strong>Smart Home</strong>. Не все устройства линейки <em>Redmond</em> оснащены модулем беспроводной связи, поэтому проверка паспорта изделия или наличие значка Wi-Fi на корпусе станет первым критическим шагом. Если на передней панели отсутствует индикатор беспроводного подключения, голосовое управление через Алису будет недоступно без использования сторонних умных розеток, которые не поддерживают точное управление режимами варки.</p>
+<p>Важно также проверить версию прошивки устройства. <em>Redmond</em> регулярно выпускает обновления, которые улучшают стабильность соединения и добавляют новые сценарии работы. Устаревшее программное обеспечение может привести к тому, что устройство не увидит сеть или не ответит на голосовую команду. Обновление обычно происходит автоматически при подключении к приложению, но лучше убедиться в этом заранее.</p>
+<p>Для успешной настройки вам потребуется смартфон с современным операционным решением (iOS или Android), стабильный доступ к интернету и, конечно же, сама <strong>Яндекс Станция</strong> или колонка с встроенным голосовым помощником. Убедитесь, что ваш роутер раздает сеть в диапазоне частот <code>2.4 ГГц</code>, так как большинство умных бытовых приборов не поддерживают стандарт <code>5 ГГц</code> для первичной конфигурации.</p>
+<blockquote>⚠️ Внимание: Убедитесь, что ваш Wi-Fi роутер раздает сеть именно в диапазоне <code>2.4 ГГц</code>. Многие современные кофеварки <em>Redmond</em> не могут подключиться к сети <code>5 ГГц</code> на этапе первичной настройки, что приведет к ошибке синхронизации.</blockquote>
+
+<h2 id="установка-и-первичная-настройка-приложения-ready-for-sky">Установка и первичная настройка приложения Ready for Sky</h2>
+<p>Фундаментом всего процесса является установка официального приложения <em>Ready for Sky</em>. Именно через этот сервис происходит первоначальная регистрация устройства и передача его в облако, откуда Яндекс заберет данные для управления. Скачайте утилиту из официального магазина приложений вашего смартфона, чтобы избежать установки нелицензионных версий с вредоносным кодом.</p>
+<p>Запустите приложение и создайте учетную запись, используя номер телефона или электронную почту. После входа в систему перейдите в раздел добавления нового устройства. Нажмите на значок «плюс» в правом верхнем углу и выберите категорию «Кухня», затем найдите вашу модель кофеварки в списке или воспользуйтесь функцией поиска. Если устройство не отображается в списке, попробуйте ввести его точное название, указанное на шильдике на дне корпуса.</p>
+<p>Следуйте инструкциям на экране для перевода кофеварки в режим настройки. Обычно это делается путем одновременного нажатия комбинации кнопок, например, <code>Power</code> и <code>Wi-Fi</code>, или удержания кнопки включения до начала мигания индикатора. Мигание означает, что устройство активно ищет сеть и готово принять конфигурационные данные. В этот момент телефон должен находиться в непосредственной близости от кофеварки.</p>
+<div class="checklist-block"><h4>☑️ Подготовка к настройке</h4><label class="check-item"><input type="checkbox"><span>Зарядить смартфон</span></label><label class="check-item"><input type="checkbox"><span>Установить приложение Ready for Sky</span></label><label class="check-item"><input type="checkbox"><span>Включить геолокацию</span></label><label class="check-item"><input type="checkbox"><span>Подготовить пароль от Wi-Fi</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="подключение-кофеварки-к-wi-fi-сети">Подключение кофеварки к Wi-Fi сети</h2>
+<p>После того как приложение обнаружило устройство, оно предложит выбрать вашу домашнюю сеть Wi-Fi из доступного списка. Выберите нужное имя сети (SSID) и введите пароль. Здесь важно быть предельно внимательным: ошибка даже в одной символе пароля приведет к тому, что кофеварка не сможет выйти в интернет. Система автоматически определит тип шифрования, но лучше убедиться, что используется стандарт <code>WPA2</code>, который является наиболее стабильным для умного дома.</p>
+<p>Процесс подключения может занять от 30 секунд до двух минут. В это время индикатор на кофеварке будет менять свой цвет или режим мигания. Не выключайте устройство и не закрывайте приложение до тех пор, пока не появится сообщение об успешном подключении. Если соединение не удалось, приложение предложит повторить попытку или проверить настройки роутера.</p>
+<details class="faq-item"><summary>Почему не подключается к Wi-Fi?</summary><div class="faq-answer"><p>Чаще всего проблема кроется в скрытой сети SSID или слишком сложном пароле, содержащем спецсимволы, которые приложение не может корректно передать устройству. Попробуйте временно создать гостевую сеть с простым английским паролем для тестирования.</p></div></details>
+<p>После успешного подключения проверьте статус устройства в приложении. Оно должно отображаться как «Онлайн» и реагировать на команды запуска программ. Теперь кофеварка готова к интеграции со сторонними сервисами, включая экосистему Яндекса. Это ключевой этап, без которого голосовое управление невозможно.</p>
+<blockquote>⚠️ Внимание: Если вы переподключаете кофеварку к новой сети, обязательно выполните полный сброс настроек Wi-Fi на самом устройстве перед попыткой повторной привязки, иначе старые данные могут конфликтовать с новыми.</blockquote>
+
+<h2 id="интеграция-с-экосистемой-яндекс">Интеграция с экосистемой Яндекс</h2>
+<p>Теперь, когда кофеварка работает и подключена к интернету через приложение <em>Ready for Sky</em>, необходимо связать этот сервис с аккаунтом Яндекса. Откройте приложение «Яндекс» или «Дом с Алисой» на своем смартфоне. Перейдите в настройки умного дома, которые обычно находятся в разделе «Устройства» или «Настройки» в виде значка шестеренки. Найдите кнопку «Добавить устройство» и выберите опцию поиска сервисов.</p>
+<p>В списке доступных производителей найдите <em>Redmond</em>. Система предложит авторизоваться в вашем аккаунте <em>Ready for Sky</em>. Введите те же логин и пароль, которые вы использовали ранее для настройки кофеварки. Это действие разрешает Яндексу видеть ваши устройства и отправлять им команды. После успешной авторизации приложение автоматически просканирует ваш аккаунт и найдет все подключенные устройства.</p>
+<p>Как только кофеварка появится в списке устройств Яндекса, ей можно присвоить понятное имя, например, «Кофеварка на кухне» или «Моя любимая машина». Это имя будет использоваться для голосовых команд. Убедитесь, что имя не содержит сложных слов, которые Алиса может неправильно услышать или интерпретировать. После присвоения имени устройство готово к работе.</p>
+<div class="poll-widget" id="poll-b6ea803a"><div class="poll-widget-question">📊 Как часто вы используете голосовые команды?</div><div class="poll-widget-option" data-poll="b6ea803a" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Каждое утро</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="b6ea803a" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Только по выходным</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="b6ea803a" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Редко, когда занят</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="b6ea803a" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Никогда, только руками</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="управление-кофеваркой-голосовыми-командами">Управление кофеваркой голосовыми командами</h2>
+<p>После завершения настройки вы можете управлять процессом приготовления кофе, просто разговаривая со своей колонкой. Базовые команды работают интуитивно: скажите <code>Алиса, включи кофеварку</code> или <code>Алиса, выключи кофеварку</code>. Для более точного управления программой варки вы можете использовать названия режимов, которые отображаются в приложении <em>Ready for Sky</em>, например, <code>Алиса, приготовь кофе капучино</code> или <code>Алиса, запустить программу эспрессо</code>.</p>
+<p>Важно понимать, что голосовой помощник может выполнять только те действия, которые разрешены через API приложения производителя. Если в приложении есть возможность изменить крепость кофе или температуру воды, Алиса может не иметь прямого доступа к этим тонким настройкам без создания сложных сценариев. Однако базовая функциональность запуска, остановки и выбора предустановленных режимов обычно работает безупречно.</p>
+<p>Вы также можете создавать временные метки или напоминания. Например, попросите Алису напомнить вам, что кофе уже готов, через 15 минут, если вы заняты другими делами. Это удобно, когда вы настраиваете кофеварку на длительную варку или когда просто хотите контролировать процесс, не находясь рядом с устройством.</p>
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Голосовое управление работает только при наличии активного интернета на кофеварке. Если сеть пропадет, команда не будет передана, и устройство останется в предыдущем состоянии.</p></div>
+
+<h2 id="создание-сценариев-умного-дома">Создание сценариев умного дома</h2>
+<p>Самая мощная функция интеграции — это создание автоматических сценариев. В приложении «Дом с Алисой» есть раздел «Сценарии», где можно настроить цепочку действий. Например, вы можете создать сценарий «Доброе утро», который будет запускать кофеварку в определенное время, включать свет в кухне и включать приятную музыку. Это превращает обычный процесс в полноценное шоу.</p>
+<p>Для создания сценария нажмите кнопку «Создать» и выберите условие запуска, например, время или фразу. Затем добавьте действие — выбрать ваше устройство (кофеварку) и команду. Вы можете настроить несколько условий: например, запускать кофеварку только по будням или только если дома есть кто-то из членов семьи (используя геолокацию телефона).</p>
+<p>Удобство сценариев заключается в том, что вам не нужно запоминать сложные цепочки команд. Достаточно сказать «Алиса, доброе утро», и весь процесс начнется автоматически. Это экономит время и добавляет комфорта, делая кухню по-настоящему умным пространством. Экспериментируйте с настройками, чтобы найти идеальный баланс для вашего ритма жизни.</p>
+<table>
+<thead>
+<tr>
+<th>Тип команды</th>
+<th>Пример фразы</th>
+<th>Действие устройства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Базовое управление</td>
+<td><code>Алиса, включи кофеварку</code></td>
+<td>Подача питания, запуск дежурного режима</td>
+</tr>
+<tr>
+<td>Выбор программы</td>
+<td><code>Алиса, налей эспрессо</code></td>
+<td>Запуск выбранного цикла варки</td>
+</tr>
+<tr>
+<td>Остановка</td>
+<td><code>Алиса, выключи кофеварку</code></td>
+<td>Прекращение нагрева, отключение</td>
+</tr>
+<tr>
+<td>Вопрос о статусе</td>
+<td><code>Алиса, работает кофеварка?</code></td>
+<td>Алиса сообщает текущее состояние</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="решение-типичных-проблем-и-ошибок">Решение типичных проблем и ошибок</h2>
+<p>Иногда процесс интеграции может столкнуться с препятствиями. Самая частая проблема — устройство пропадает из списка или перестает отвечать на команды. В этом случае первым делом проверьте статус подключения в приложении <em>Ready for Sky</em>. Если там статус «Офлайн», проблема точно в сети Wi-Fi или питании самого устройства.</p>
+<p>Другая распространенная ошибка — Алиса говорит: «Я не знаю такого устройства». Это значит, что синхронизация аккаунтов была разорвана или произошла сбой. Попробуйте удалить устройство из списка в приложении Яндекса и добавить его заново, повторив процедуру авторизации. В редких случаях помогает полная перезагрузка роутера и самой кофеварки.</p>
+<p>Также стоит учитывать, что некоторые старые модели <em>Redmond</em> могут иметь устаревшие протоколы связи, которые Яндекс перестал поддерживать в новых обновлениях. Если ничего не помогает, обратитесь в техническую поддержку производителя или в службу поддержки Яндекса, предоставив серийный номер устройства для уточнения совместимости.</p>
+<blockquote>⚠️ Внимание: Если кофеварка перестала отвечать, но Wi-Fi на роутере работает, попробуйте сбросить настройки устройства до заводских (обычно через комбинацию кнопок) и настроить заново. Это часто решает проблемы с «зависшими» сессиями.</blockquote>
+
+<details>
+<summary>Что делать, если Алиса не слышит команду «включить кофеварку»?</summary>
+<p>Убедитесь, что вы называете устройство именно тем именем, которое присвоили ему в приложении Яндекса. Если вы назвали его «Кофеварка», а в списке оно «Кухонная кофеварка», команда не сработает. Переименуйте устройство в простое и понятное имя.</p>
+</details>
+
+<details>
+<summary>Можно ли управлять кофеваркой из другого города?</summary>
+<p>Да, если кофеварка подключена к интернету и вы авторизованы в приложении <em>Ready for Sky</em> и Яндексе, вы можете управлять ею из любой точки мира, где есть интернет. Голосовые команды через колонку работают только локально, но приложение сработает из любой точки.</p>
+</details>
+
+<details>
+<summary>Почему кофеварка не включается по расписанию?</summary>
+<p>Убедитесь, что функция таймера включена в настройках самой кофеварки через приложение. Некоторые модели требуют активации режима «Sleep» или «Standby» для корректного срабатывания по таймеру, а не полной отключки от сети.</p>
+</details>
+
+<details>
+<summary>Как перевести кофеварку в режим настройки заново?</summary>
+<p>Обычно нужно зажать кнопку включения и кнопку Wi-Fi одновременно на 5-7 секунд, пока индикатор не начнет быстро мигать. Точная комбинация зависит от модели, поэтому сверьтесь с инструкцией в приложении.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#подготовка-устройства-и-проверка-совместимости">Подготовка устройства и проверка совместимости</a></li><li><a href="#установка-и-первичная-настройка-приложения-ready-for-sky">Установка и первичная настройка приложения Ready for Sky</a></li><li><a href="#подключение-кофеварки-к-wi-fi-сети">Подключение кофеварки к Wi-Fi сети</a></li><li><a href="#интеграция-с-экосистемой-яндекс">Интеграция с экосистемой Яндекс</a></li><li><a href="#управление-кофеваркой-голосовыми-командами">Управление кофеваркой голосовыми командами</a></li><li><a href="#создание-сценариев-умного-дома">Создание сценариев умного дома</a></li><li><a href="#решение-типичных-проблем-и-ошибок">Решение типичных проблем и ошибок</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/t/ts/tsvet-kapuchino-eto-kakoj-tsvet-foto-tkan.html" class="related-card">Цвет капучино: фото ткани, оттенки и нюансы сочетания в интерьере</a></li><li><a href="/articles/k/ka/kak-vklyuchaetsya-kofemolka-vitek.html" class="related-card">Как включить кофемолку Vitek: пошаговая инструкция и ошибки</a></li><li><a href="/articles/d/dl/dlya-vzbitiya-moloka-dlya-kapuchino.html" class="related-card">Как взбивать молоко для капучино: инструменты, температура и секреты</a></li><li><a href="/articles/c/ch/chashki-na-stole.html" class="related-card">Чашки на столе: выбор, расстановка и сервис кофейного стола</a></li><li><a href="/articles/t/tu/turka-kak-polzovatsya.html" class="related-card">Как пользоваться туркой: полная инструкция по варке кофе</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/t/ts/tsvet-kapuchino-eto-kakoj-tsvet-foto-tkan.html" class="related-bottom-card"><span class="related-bottom-title">Цвет капучино: фото ткани, оттенки и нюансы сочетания в интерьере</span><span class="related-bottom-desc">Узнайте, какой именно оттенок называется цветом капучино. Обзор палитры, фото тканей, рекомендации п</span></a><a href="/articles/k/ka/kak-vklyuchaetsya-kofemolka-vitek.html" class="related-bottom-card"><span class="related-bottom-title">Как включить кофемолку Vitek: пошаговая инструкция и ошибки</span><span class="related-bottom-desc">Полное руководство по запуску кофемолок Vitek. Узнайте, как включить модель, настроить помол, устран</span></a><a href="/articles/d/dl/dlya-vzbitiya-moloka-dlya-kapuchino.html" class="related-bottom-card"><span class="related-bottom-title">Как взбивать молоко для капучино: инструменты, температура и секреты</span><span class="related-bottom-desc">Полное руководство по взбиванию молока: выбор пены, техника работы с капучинатором и ошибки, которые</span></a><a href="/articles/c/ch/chashki-na-stole.html" class="related-bottom-card"><span class="related-bottom-title">Чашки на столе: выбор, расстановка и сервис кофейного стола</span><span class="related-bottom-desc">Как правильно выбирать чашки для кофейного стола, расставлять посуду и соблюдать этикет. Обзор матер</span></a><a href="/articles/t/tu/turka-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться туркой: полная инструкция по варке кофе</span><span class="related-bottom-desc">Узнайте, как правильно пользоваться туркой для идеального кофе. Секреты выбора помолa, температуры и</span></a><a href="/articles/k/ka/kak-vspenit-moloko-dlya-kapuchino-v-domashnikh-usloviyakh-bez-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Как вспенить молоко для капучино без кофемашины: 5 лучших способов</span><span class="related-bottom-desc">Узнайте, как получить густую молочную пенку для капучино дома без эспрессо-машины. Секреты френч-пре</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как устроена кофемашина: внутреннее устройство, принцип работы и узлы — Кофини</title>
+    <meta name="description" content="Подробный разбор устройства кофемашины: от помпы до заварочного блока. Узнайте принцип работы, виды систем и как ухаживать за техникой.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-eto-ustroeno-kofemashina.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как устроена кофемашина: внутреннее устройство, принцип работы и узлы">
+    <meta property="og:description" content="Подробный разбор устройства кофемашины: от помпы до заварочного блока. Узнайте принцип работы, виды систем и как ухаживать за техникой.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/vybor-kofemashin/">Выбор кофемашин</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как устроена кофемашина: внутреннее устройство, принцип работы и узлы</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как устроена кофемашина: полный разбор внутреннего устройства</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-мир-автоматизированной-кофейной-техники">Введение в мир автоматизированной кофейной техники</a></li><li><a href="#сердце-системы-помпа-и-гидравлическая-магистраль">Сердце системы: помпа и гидравлическая магистраль</a></li><li><a href="#тепловой-модуль-бойлер-против-термоблока">Тепловой модуль: бойлер против термоблока</a></li><li><a href="#заварочный-механизм-сердце-приготовления-напитка">Заварочный механизм: сердце приготовления напитка</a></li><li><a href="#системы-управления-и-электроника">Системы управления и электроника</a></li><li><a href="#актуальные-стандарты-и-обновления-прошивок">Актуальные стандарты и обновления прошивок</a></li><li><a href="#таблица-сравнение-основных-узлов-устройства">Таблица: Сравнение основных узлов устройства</a></li><li><a href="#распространенные-проблемы-и-их-причины">Распространенные проблемы и их причины</a></li><li><a href="#faq-частые-вопросы-о-внутреннем-устройстве">FAQ: Частые вопросы о внутреннем устройстве</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-мир-автоматизированной-кофейной-техники">Введение в мир автоматизированной кофейной техники</h2>
+
+<p>Многие владельцы эспрессо-машин даже не задумываются о том, что происходит внутри корпуса устройства после нажатия кнопки. Для большинства это просто «черный ящик», который за считанные секунды превращает горсть молотых зерен в ароматный напиток. Однако понимание принципа работы позволяет не только осознанно выбрать прибор, но и правильно за ним ухаживать, продлевая срок службы на годы.</p>
+
+<p>Современная <strong>кофемашина</strong> — это сложный инженерный агрегат, сочетающий в себе механику, гидравлику и электронику. Внутри происходит настоящая симфония процессов: от точного дозирования воды до создания высокого давления. Каждый узел, будь то <em>термоблок</em> или заварочный механизм, играет свою роль в формировании идеального вкуса. Разобравшись в конструкции, вы перестанете бояться сервисного обслуживания и сможете самостоятельно устранять мелкие неисправности.</p>
+
+<p>В этой статье мы детально изучим внутреннее устройство различных типов аппаратов. Мы затронем вопросы гидравлической системы, работы нагревательного элемента и логики управления процессом экстракции. Знание того, как именно работает ваша техника, поможет вам избежать типичных ошибок при эксплуатации и сохранить стабильное качество напитков.</p>
+
+<h2 id="сердце-системы-помпа-и-гидравлическая-магистраль">Сердце системы: помпа и гидравлическая магистраль</h2>
+
+<p>Любой процесс приготовления эспрессо начинается с подачи воды. За это отвечает <strong>помпа</strong>, которая является одним из самых критичных узлов в конструкции. Именно она создает необходимое давление, проталкивая воду через спрессованную таблетку кофе. Без стабильного давления невозможно получить правильную эмульсию и кремовую пенку (крема) на поверхности напитка.</p>
+
+<p>Существует два основных типа насосов, используемых в бытовых и полупрофессиональных моделях. Вибрационные помпы работают за счет электромагнита, который толкает поршень вперед и назад с высокой частотой. Они компактны, дешевы и часто встречаются в аппаратах начального уровня, но могут быть шумными и менее долговечными при непрерывной работе.</p>
+
+<p>Второй тип — <em>роторные помпы</em>. Они используют вращающийся механизм для создания давления. Такие устройства работают тише, обеспечивают более стабильный поток воды и рассчитаны на большие нагрузки. Именно роторные насосы устанавливаются в профессиональные и полупрофессиональные машины, где требуется непрерывная варка большого количества напитков.</p>
+
+<p>Важно понимать, что давление в системе не должно быть фиксированным на всех этапах. Идеальный процесс начинается с промывки фильтра при низком давлении, затем следует резкий скачок до 9 бар для экстракции, и завершается сбросом. Электроника управляет этим процессом, регулируя работу помпы и открывая клапаны в нужный момент.</p>
+
+<blockquote>⚠️ Внимание: Никогда не включайте помпу всухую! Это может привести к мгновенному разрушению рабочих элементов насоса и выходу гидравлической системы из строя. Всегда следите за уровнем воды в резервуаре.</blockquote>
+
+<h2 id="тепловой-модуль-бойлер-против-термоблока">Тепловой модуль: бойлер против термоблока</h2>
+
+<p>Нагреть воду до точной температуры — задача не менее сложная, чем создать давление. Здесь инженеры используют две разные философии: накопление тепла или мгновенный нагрев. Выбор между <strong>бойлером</strong> и <em>термоблоком</em> напрямую влияет на скорость приготовления, стабильность температуры и стоимость обслуживания устройства.</p>
+
+<p>Бойлерная система представляет собой металлический бак, в котором вода нагревается до заданной температуры и хранится там. Это обеспечивает высокую стабильность нагрева, так как объем воды всегда имеет одну и ту же температуру. Однако такой подход имеет недостатки: машина долго греется при запуске, а при приготовлении нескольких напитков подряд температура может падать, если не используется система двойного бойлера.</p>
+
+<p>Термоблок (или проточный нагреватель) работает по принципу «мгновенного нагрева». Вода проходит через тонкие каналы внутри мощного нагревательного элемента и нагревается за доли секунды. Преимущество термоблока в скорости: машину можно использовать сразу после включения. Кроме того, такие системы компактнее и занимают меньше места внутри корпуса.</p>
+
+<p>Критически важным параметром является точность поддержания температуры. Если вода будет слишком горячей, напиток станет горьким; если холодной — кислым. Современные контроллеры постоянно мониторят температуру на выходе из термоблока или бойлера и корректируют мощность нагрева в реальном времени. <strong>Термостабилизация</strong> — ключевой показатель качества аппарата.</p>
+
+<p>Стоит отметить, что в дорогих моделях часто применяются медные бойлеры, которые лучше удерживают тепло, в то время как дешевые аналоги используют сталь. Материал корпуса нагревателя влияет на скорость реакции системы и риск образования накипи.</p>
+
+<div class="poll-widget" id="poll-eb7e1ff6"><div class="poll-widget-question">📊 Что для вас важнее в кофемашине?</div><div class="poll-widget-option" data-poll="eb7e1ff6" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Скорость приготовления</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="eb7e1ff6" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Стабильная температура</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="eb7e1ff6" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Тишина работы</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="eb7e1ff6" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Долговечность помпы</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="заварочный-механизм-сердце-приготовления-напитка">Заварочный механизм: сердце приготовления напитка</h2>
+
+<p>Заварочный блок — это место, где происходит магия превращения молотого кофе в эспрессо. Это сложное механическое устройство, которое должно обеспечить идеальную прессовку порошка, пролив воды и извлечение жмыха. В автоматических кофемашинах этот процесс полностью автоматизирован и управляется сервоприводами.</p>
+
+<p>Различают съемные и несъемные заварочные блоки. Съемные модули, характерные для брендов вроде <em>De'Longhi</em> или <em>Jura</em>, позволяют владельцу регулярно промывать механизм под краном, удаляя остатки кофе и масла. Несъемные блоки требуют профессиональной чистки и более сложного обслуживания, но часто обеспечивают более высокую герметичность системы.</p>
+
+<p>Внутри блока происходит несколько последовательных действий: дозатор насыпает определенное количество кофе, прижимной поршень уплотняет его в таблетку, и только затем подается горячая вода под давлением. После завершения экстракции механизм автоматически выбрасывает использованную таблетку в контейнер для жмыха. Этот цикл повторяется для каждой чашки с хирургической точностью.</p>
+
+<p>Важным параметром является размер таблетки. Регулировка дозы и степени уплотнения позволяет адаптировать машину под разные сорта зерен. Если вы используете очень светлую обжарку, вам может потребоваться более плотная таблетка для лучшего извлечения вкуса. В некоторых моделях этот процесс настраивается через меню, в других — регулируется механически.</p>
+
+<div class="checklist-block"><h4>☑️ Ежедневный уход за заварочным блоком</h4><label class="check-item"><input type="checkbox"><span>Включить режим промывки</span></label><label class="check-item"><input type="checkbox"><span>Проверить контейнер для жмыха</span></label><label class="check-item"><input type="checkbox"><span>Осмотреть уплотнительные резинки</span></label><label class="check-item"><input type="checkbox"><span>Выполнить визуальный осмотр</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="системы-управления-и-электроника">Системы управления и электроника</h2>
+
+<p>Современная кофемашина — это не просто набор механических деталей, а сложный компьютер. Микроконтроллер управляет каждым аспектом работы: от времени прогрева до последовательности открытия клапанов. Электронная плата получает данные с датчиков (температуры, давления, уровня воды) и принимает решения в миллисекунды.</p>
+
+<p>Пользовательский интерфейс обычно представлен сенсорным экраном или набором механических кнопок. Через меню можно настроить множество параметров: крепость напитка (количество воды и кофе), температуру, объем пены от вспенивателя молока. В премиальных моделях доступна даже настройка профиля экстракции для каждого вида кофе.</p>
+
+<p>Электроника также отвечает за системы безопасности. Датчики протечки мгновенно отключат питание при попадании воды на плату. Термостаты предотвратят перегрев бойлера, а датчики давления остановят помпу, если в системе произошло засорение. Именно «мозги» машины отличают качественный прибор от дешевого аналога, который работает хаотично.</p>
+
+<blockquote>⚠️ Внимание: При попадании влаги на электронную плату или при самостоятельном вмешательстве в электронику гарантия аннулируется. Большинство поломок в сервисных центрах связаны именно с некорректным воздействием на электронные компоненты.</blockquote>
+
+<h2 id="актуальные-стандарты-и-обновления-прошивок">Актуальные стандарты и обновления прошивок</h2>
+
+<p>Производители регулярно выпускают обновления программного обеспечения для своих кофемашин. Эти обновления могут исправить ошибки в работе алгоритмов прогрева, улучшить логику работы жерновов или добавить новые функции. Важно следить за актуальностью версии прошивки, особенно если вы приобрели недавно выпущенную модель.</p>
+
+<p>Обновление часто производится через USB-накопитель или по сети Wi-Fi, если аппарат поддерживает подключение к интернету. В процессе обновления категорически нельзя отключать питание устройства, так как это может привести к «окирпичиванию» контроллера и необходимости сложного ремонта. Всегда проверяйте заряд аккумулятора или стабильность напряжения в сети перед началом процедуры.</p>
+
+<p>Иногда владельцы сталкиваются с тем, что кнопка обновления активна, но процесс не запускается. В таких случаях стоит обратиться к официальным инструкциям на сайте производителя. <strong>Версия ПО</strong> может влиять на совместимость с новыми типами капсул или настройками жесткости воды.</p>
+
+<p>Обратите внимание, что условия обновления и доступность новых функций могут изменяться в зависимости от региона и модели. Всегда сверяйте информацию в личном кабинете производителя или на официальном сайте перед началом любых манипуляций с программным обеспечением.</p>
+
+<details class="faq-item"><summary>Как часто нужно обновлять ПО?Обновления выходят редко, обычно раз в год или при выявлении критических багов. Если ваша машина работает стабильно, принудительное обновление не обязательно, но рекомендуется для новых моделей.-->
+
+<h2 id="таблица-сравнение-основных-узлов-устройства">Таблица</summary><div class="faq-answer"><p> Сравнение основных узлов устройства</h2>
+
+<p>Для наглядности сравним ключевые компоненты двух популярных типов систем нагрева и заваривания. Это поможет понять, какой принцип работы подходит именно вам.</p>
+
+<table>
+ <thead>
+  <tr>
+   <th>Компонент</th>
+   <th>Бойлерная система</th>
+   <th>Термоблок</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Время прогрева</td>
+   <td>Длительное (15-40 мин)</td>
+   <td>Быстрое (3-10 мин)</td>
+  </tr>
+  <tr>
+   <td>Стабильность температуры</td>
+   <td>Высокая</td>
+   <td>Средняя (зависит от потока)</td>
+  </tr>
+  <tr>
+   <td>Габариты</td>
+   <td>Крупные</td>
+   <td>Компактные</td>
+  </tr>
+  <tr>
+   <td>Стоимость обслуживания</td>
+   <td>Выше (сложнее чистка)</td>
+   <td>Ниже (простая конструкция)</td>
+  </tr>
+ </tbody>
+</table>
+
+<p>Выбор между этими системами зависит от ваших приоритетов. Если вы пьете много кофе за короткое время, бойлер с двумя емкостями обеспечит бесперебойную работу. Если же вам нужна машина для одной чашки утром и вечером, компактный термоблок будет более экономичным и быстрым решением.</p>
+
+
+
+<h2 id="распространенные-проблемы-и-их-причины">Распространенные проблемы и их причины</h2>
+
+<p>Понимание устройства кофемашины помогает быстро диагностировать проблемы. Если прибор перестает греть воду, чаще всего виноват термодатчик или перегорел нагревательный элемент. Если же машина издает громкие звуки и не качает воду, проблема может быть в забитом фильтре или неисправности помпы.</p>
+
+<p>Частой проблемой является образование накипи. Минеральные соли, содержащиеся в воде, оседают на стенках термоблока и бойлера, перекрывая каналы и снижая теплопроводность. <strong>Декальцинация</strong> — обязательная процедура, которую нужно проводить регулярно. Игнорирование этого процесса ведет к дорогостоящему ремонту.</p>
+
+<p>Другая проблема — забивание жерновов. Если вы используете зерна с добавлением ароматизаторов или масел, жернова могут слепиться. Это приводит к неправильному помолу и, как следствие, к плохому вкусу напитка. Регулярная чистка жерновов специальными таблетками должна стать нормой.</p>
+
+<p>Также стоит следить за состоянием уплотнительных резинок. Со временем они дубеют и начинают пропускать воду, что приводит к протечкам внутри корпуса. Замена этих деталей стоит недорого, но предотвращает серьезные поломки электроники.</p>
+
+<p> Используйте фильтрованную воду для продления жизни вашего аппарата.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Для профилактики засоров промывайте заварочный блок под проточной водой раз в неделю, даже если машина имеет функцию самоочистки. Это значительно продлит срок службы уплотнителей.</p></div>
+
+<h2 id="faq-частые-вопросы-о-внутреннем-устройстве">FAQ: Частые вопросы о внутреннем устройстве</h2>
+
+<details>
+ <summary>Сколько прослужит помпа при ежедневном использовании?</summary>
+ <p>Вибрационная помпа обычно рассчитана на 2000-3000 чашек, тогда как роторная может выдержать до 10000 и более циклов. Срок службы также зависит от качества воды и регулярности обслуживания.</p>
+</details>
+
+<details>
+ <summary>Можно ли использовать обычную водопроводную воду?</summary>
+ <p>Не рекомендуется. Водопроводная вода содержит много солей, которые быстро образуют накипь. Лучше использовать фильтрованную или бутилированную воду с мягким составом.</p>
+</details>
+
+<details>
+ <summary>Что делать, если машина перестала вымывать жмых?</summary>
+ <p>Скорее всего, контейнер для жмыха переполнен или механизм выброса загрязнился. Очистите контейнер и промойте заварочный блок. Если проблема не исчезла, возможно, сломался датчик переполнения.</p>
+</details>
+
+<details>
+ <summary>Как часто нужно менять фильтры для воды?</summary>
+ <p>Фильтр в резервуаре для воды рекомендуется менять каждые 2 месяца или после приготовления 500-600 чашек, в зависимости от жесткости исходной воды и модели аппарата.</p>
+</details>
+
+<details>
+ <summary>Почему машина шумит при работе?</summary>
+ <p>Шум при работе помпы и вибрация — это нормальное явление. Однако, если звук стал резким или скрежещущим, это может указывать на износ подшипников помпы или попадание постороннего предмета в жернова.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-мир-автоматизированной-кофейной-техники">Введение в мир автоматизированной кофейной техники</a></li><li><a href="#сердце-системы-помпа-и-гидравлическая-магистраль">Сердце системы: помпа и гидравлическая магистраль</a></li><li><a href="#тепловой-модуль-бойлер-против-термоблока">Тепловой модуль: бойлер против термоблока</a></li><li><a href="#заварочный-механизм-сердце-приготовления-напитка">Заварочный механизм: сердце приготовления напитка</a></li><li><a href="#системы-управления-и-электроника">Системы управления и электроника</a></li><li><a href="#актуальные-стандарты-и-обновления-прошивок">Актуальные стандарты и обновления прошивок</a></li><li><a href="#таблица-сравнение-основных-узлов-устройства">Таблица: Сравнение основных узлов устройства</a></li><li><a href="#распространенные-проблемы-и-их-причины">Распространенные проблемы и их причины</a></li><li><a href="#faq-частые-вопросы-о-внутреннем-устройстве">FAQ: Частые вопросы о внутреннем устройстве</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/e/ex/extra-shot-v-avtomaticheskikh-kofemashinakh-eto-chto-znachit.html" class="related-card">Extra Shot в кофемашине: что это, как работает и когда включать</a></li><li><a href="/articles/k/ka/kakaya-kofemashina-luchshe-elektricheskaya-ili-ruchnaya.html" class="related-card">Электрическая или ручная кофемашина: что лучше выбрать в 2026?</a></li><li><a href="/articles/k/ko/kofevarka-rozhkovaya-davlenie.html" class="related-card">Давление в рожковой кофеварке: норма, проблемы и настройка</a></li><li><a href="/articles/p/po/pochemu-professionalnye-kofemashiny-takie-dorogie.html" class="related-card">Почему профессиональные кофемашины стоят так дорого: разбор цен</a></li><li><a href="/articles/o/ob/obzor-kofemashin-dlya-doma-kakuyu-luchshe-vybrat.html" class="related-card">Лучшая кофемашина для дома: полный обзор и советы по выбору</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/e/ex/extra-shot-v-avtomaticheskikh-kofemashinakh-eto-chto-znachit.html" class="related-bottom-card"><span class="related-bottom-title">Extra Shot в кофемашине: что это, как работает и когда включать</span><span class="related-bottom-desc">Разбираем функцию Extra Shot в автоматических кофемашинах. Узнайте, как получить двойную порцию эспр</span></a><a href="/articles/k/ka/kakaya-kofemashina-luchshe-elektricheskaya-ili-ruchnaya.html" class="related-bottom-card"><span class="related-bottom-title">Электрическая или ручная кофемашина: что лучше выбрать в 2026?</span><span class="related-bottom-desc">Сравниваем электрические и ручные кофемашины по качеству кофе, цене и удобству. Узнайте, какой тип п</span></a><a href="/articles/k/ko/kofevarka-rozhkovaya-davlenie.html" class="related-bottom-card"><span class="related-bottom-title">Давление в рожковой кофеварке: норма, проблемы и настройка</span><span class="related-bottom-desc">Какое давление нужно для идеального эспрессо? Разбор стандарта 9 бар, влияние на вкус и способы диаг</span></a><a href="/articles/p/po/pochemu-professionalnye-kofemashiny-takie-dorogie.html" class="related-bottom-card"><span class="related-bottom-title">Почему профессиональные кофемашины стоят так дорого: разбор цен</span><span class="related-bottom-desc">Узнайте, из чего складывается цена профессиональных кофе-баров. Анализ компонентов, надежности и эко</span></a><a href="/articles/o/ob/obzor-kofemashin-dlya-doma-kakuyu-luchshe-vybrat.html" class="related-bottom-card"><span class="related-bottom-title">Лучшая кофемашина для дома: полный обзор и советы по выбору</span><span class="related-bottom-desc">Как выбрать кофемашину для дома? Сравнение автоматических, рожковых и капсульных устройств. Рейтинг </span></a><a href="/articles/k/ka/kak-vybrat-avtomaticheskuyu-kofevarku.html" class="related-bottom-card"><span class="related-bottom-title">Как выбрать автоматическую кофеварку: гид по параметрам и брендам</span><span class="related-bottom-desc">Узнайте, как подобрать идеальную кофемашину: сравните помол, заварочный блок, давление и бренды. Под</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

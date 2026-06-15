@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как проверить двигатель кофемолки мультиметром: пошаговая диагностика — Кофини</title>
+    <meta name="description" content="Узнайте, как самостоятельно протестировать электродвигатель кофемолки мультиметром. Пошаговая инструкция, таблица норм сопротивления и устранение поломок.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-proverit-dvigatel-kofemolki-multimetrom.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как проверить двигатель кофемолки мультиметром: пошаговая диагностика">
+    <meta property="og:description" content="Узнайте, как самостоятельно протестировать электродвигатель кофемолки мультиметром. Пошаговая инструкция, таблица норм сопротивления и устранение поломок.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как проверить двигатель кофемолки мультиметром: пошаговая диагностика</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Диагностика электродвигателя кофемолки мультиметром: полное руководство</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#подготовка-рабочего-места-и-необходимые-инструменты">Подготовка рабочего места и необходимые инструменты</a></li><li><a href="#визуальный-осмотр-и-поиск-явных-повреждений">Визуальный осмотр и поиск явных повреждений</a></li><li><a href="#настройка-мультиметра-и-выбор-режима-измерения">Настройка мультиметра и выбор режима измерения</a></li><li><a href="#пошаговая-процедура-проверки-обмотки-двигателя">Пошаговая процедура проверки обмотки двигателя</a></li><li><a href="#интерпретация-результатов-и-таблица-норм">Интерпретация результатов и таблица норм</a></li><li><a href="#диагностика-пусковых-конденсаторов-и-термореле">Диагностика пусковых конденсаторов и термореле</a></li><li><a href="#безопасность-и-финальные-рекомендации">Безопасность и финальные рекомендации</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Когда кофемолка внезапно перестает работать или начинает издавать странный скрежет, первым подозрением становится неисправность <strong>электродвигателя</strong>. Многие владельцы техники <em>Baratza</em> или <em>Mahlkönig</em> сразу стремятся в сервис, но часто проблема решается простой проверкой контактов или обмотки. Самостоятельная диагностика позволяет сэкономить время и деньги, а также понять реальное состояние <strong>ротора</strong> и <strong>статора</strong> вашего устройства.</p>
+
+<p>Использование <strong>мультиметра</strong> — это наиболее надежный способ определить, произошел ли обрыв цепи или же проблема кроется в перегоревших щетках. В этой статье мы подробно разберем, как безопасно разобрать корпус, найти выводы обмотки и правильно интерпретировать показания прибора. <mark>Критически </mark></p>
+
+<h2 id="подготовка-рабочего-места-и-необходимые-инструменты">Подготовка рабочего места и необходимые инструменты</h2>
+
+<p>Прежде чем приступать к разборке, убедитесь, что у вас есть все необходимое для безопасной работы. Вам понадобится не только <strong>мультиметр</strong>, но и набор отверток, включая крестовые и плоские, а также пинцет для извлечения мелких деталей. Рабочая поверхность должна быть чистой и хорошо освещенной, чтобы вы могли видеть маркировку на <em>компонентах</em> платы управления или корпуса мотора.</p>
+
+<p>Первым шагом всегда должно быть полное обесточивание устройства. Выдерните вилку из розетки и подождите несколько минут, чтобы конденсаторы разрядились. Это исключит риск удара током даже при ошибочном касании контактов. Если вы работаете с кофемолкой с асинхронным приводом, обратите внимание на наличие <strong>тепловой защиты</strong>, которая иногда отключается при перегреве.</p>
+
+<p>Не забудьте подготовить емкость для винтов и мелких деталей, чтобы не потерять их при сборке. Порядок разборки может отличаться для моделей <em>Rancilio</em> и <em>Electrolux</em>, поэтому перед началом стоит найти мануал именно для вашей модели. В некоторых корпусах используются скрытые фиксаторы, которые нужно аккуратно поддевать.</p>
+
+<blockquote>⚠️ Внимание: Не пытайтесь разобрать корпус кофемолки, если она находится на гарантии. Это действие автоматически аннулирует гарантийное обслуживание и лишит вас права на бесплатный ремонт.</blockquote>
+
+<h2 id="визуальный-осмотр-и-поиск-явных-повреждений">Визуальный осмотр и поиск явных повреждений</h2>
+
+<p>До того как брать в руки измерительный прибор, проведите тщательный визуальный осмотр. Часто проблема лежит на поверхности: перегоревший провод, оплавленная изоляция или окисленные контакты. Осмотрите место ввода кабеля питания в корпус устройства, так как именно здесь чаще всего происходит нарушение <strong>контакта</strong> из-за постоянного изгиба провода.</p>
+
+<p>Если вы добрались до самого двигателя, обратите внимание на состояние коллектора и щеток. Углеродные <strong>щетки</strong> со временем стираются и перестают обеспечивать надежный контакт с ротором. Если они короче 5 мм или имеют сколы, их необходимо заменить, но сначала стоит проверить, не вращается ли ротор свободно вручную.</p>
+
+<ul>
+ <li>🔍 Проверьте целостность изоляции проводов, ведущих к обмотке статора.</li>
+ <li>🔍 Оцените состояние подшипников: если вал заедает, мотор будет перегреваться.</li>
+ <li>🔍 Ищите следы гари или копоти на корпусе двигателя и вокруг контактов.</li>
+</ul>
+
+<p>В некоторых случаях проблема может быть не в самом двигателе, а в термореле. Это устройство размыкает цепь при достижении критической температуры. Если реле "залипло" в открытом состоянии, цепь не замкнется, и мотор не запустится, несмотря на исправность обмоток. Прозвонка термореле — следующий логичный шаг, если визуально ничего не найдено.</p>
+
+<div class="poll-widget" id="poll-a536756d"><div class="poll-widget-question">📊 Какой тип кофемолки у вас?</div><div class="poll-widget-option" data-poll="a536756d" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Жерновая с асинхронным мотором</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="a536756d" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Жерновая с коллекторным мотором</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="a536756d" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Ножовая кофемолка</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="a536756d" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Турка/Кофемолка без мотора</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="настройка-мультиметра-и-выбор-режима-измерения">Настройка мультиметра и выбор режима измерения</h2>
+
+<p>Для проверки целостности цепи и сопротивления обмоток вам нужно правильно настроить прибор. Переключите <strong>мультиметр</strong> в режим измерения сопротивления (Ом, обозначается символом <code>Ω</code>). Выбирайте диапазон, который охватывает ожидаемые значения: обычно это диапазон 200 Ом или 2000 Ом для бытовых приборов. Если вы поставите режим "прозвонки" с звуковым сигналом, это ускорит поиск обрывов.</p>
+
+<p>Перед началом измерений обязательно проверьте исправность самого мультиметра. Замкните щупы между собой: прибор должен показать значение близкое к нулю (0.1–0.5 Ом) и издать звуковой сигнал в режиме прозвонки. Это подтвердит, что провода щупов целы, а батарейка прибора работает корректно. Ошибка в показаниях может привести к неверному диагнозу.</p>
+
+<p>Важно учитывать, что сопротивление обмотки может незначительно изменяться в зависимости от температуры. Холодный двигатель будет иметь чуть меньшее сопротивление, чем прогретый. Для получения точных данных проводите измерения на остывшем устройстве. Не пытайтесь замерять сопротивление под напряжением — это гарантированно выведет прибор из строя.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка перед замерами</h4><label class="check-item"><input type="checkbox"><span>Убедиться, что кофемолка отключена от сети</span></label><label class="check-item"><input type="checkbox"><span>Снять защитный кожух двигателя</span></label><label class="check-item"><input type="checkbox"><span>Найти два контакта обмотки</span></label><label class="check-item"><input type="checkbox"><span>Установить диапазон 200 Ом на мультиметре</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="пошаговая-процедура-проверки-обмотки-двигателя">Пошаговая процедура проверки обмотки двигателя</h2>
+
+<p>Процесс измерения начинается с доступа к контактам обмотки. В коллекторных двигателях это часто два провода, идущие непосредственно от статора к щеткам или плате. В асинхронных моторах может быть больше выводов, включая центральную точку звезды. Найдите места пайки проводов к корпусу мотора или плате управления. Очистите их от нагара или окислов, чтобы обеспечить хороший контакт щупов.</p>
+
+<p>Приложите щупы мультиметра к двум концам обмотки статора. Если прибор показывает значение в пределах диапазона сопротивления (например, 50–150 Ом), то цепь цела. Если дисплей показывает "1" или "OL" (Over Limit), это означает <strong>обрыв</strong> провода внутри катушки. В таком случае двигатель требует перематывания или замены, что часто нерентабельно для бытовых моделей.</p>
+
+<p>Также необходимо проверить отсутствие короткого замыкания на корпус. Один щуп приложите к выводу обмотки, а второй к металлическому корпусу двигателя или валу. Прибор должен показать бесконечное сопротивление. Если вы видите хоть какое-то значение (например, 10 кОм или меньше), значит изоляция нарушена, и существует риск утечки тока на корпус.</p>
+
+<details class="faq-item"><summary>Скрытые тонкости проверки коллекторных моторов</summary><div class="faq-answer"><p>В коллекторных двигателях часто проверяют не только статор, но и ротор. Для этого нужно снять щетки и замерить сопротивление между ламелями коллектора. Сопротивление между соседними ламелями должно быть одинаковым, а между противоположными — отличаться в два раза (при наличии щеток). Разница в показаниях указывает на межвитковое замыкание в секциях ротора.</p></div></details>
+
+<blockquote>⚠️ Внимание: Если вы обнаружили короткое замыкание на корпус, эксплуатация устройства категорически запрещена до устранения неисправности, так как это создает прямую угрозу поражения электрическим током.</blockquote>
+
+<h2 id="интерпретация-результатов-и-таблица-норм">Интерпретация результатов и таблица норм</h2>
+
+<p>Результаты измерений нужно сравнивать с базовыми нормами для типовых двигателей. Приведенная ниже таблица поможет вам понять, в каком состоянии находится ваша техника. Цифры являются ориентировочными и могут варьироваться в зависимости от мощности конкретного <em>двигателя</em>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип неисправности</th>
+<th>Показание мультиметра</th>
+<th>Диагноз</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Норма (целостность)</td>
+<td>10 – 250 Ом</td>
+<td>Обмотка исправна, цепь замкнута</td>
+</tr>
+<tr>
+<td>Обрыв цепи</td>
+<td>1 или OL (бесконечность)</td>
+<td>Сгорела обмотка или отошел провод</td>
+</tr>
+<tr>
+<td>КЗ на корпус</td>
+<td>0 – 20 кОм</td>
+<td>Повреждена изоляция, утечка на корпус</td>
+</tr>
+<tr>
+<td>Межвитковое замыкание</td>
+<td>Значительно ниже нормы (0-5 Ом)</td>
+<td>Замыкание витков внутри катушки</td>
+</tr>
+</tbody>
+</table>
+
+<p>Важно понимать, что низкое сопротивление не всегда означает поломку. У мощных промышленных <strong>кофемолок</strong> сопротивление может быть очень низким, но стабильным. Главное — чтобы оно не было нулевым (короткое замыкание) или бесконечным (обрыв). Если показания скачут при легком покачивании проводов, значит, где-то есть плохой контакт или надлом провода.</p>
+
+<p>Если вы видите значения, близкие к нулю, но не равные ему, это может указывать на снижение сопротивления из-за деградации изоляции. В таких случаях двигатель может работать нестабильно, перегреваться или выдавать меньшую мощность. Для точной диагностики часто требуется проверка под нагрузкой, но это уже задача для профессионального сервиса.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Если мультиметр показывает обрыв, двигатель требует замены или сложного ремонта. В большинстве бытовых устройств дешевле заменить мотор целиком, чем перематывать его.</p></div>
+
+<h2 id="диагностика-пусковых-конденсаторов-и-термореле">Диагностика пусковых конденсаторов и термореле</h2>
+
+<p>Часто двигатель не запускается не из-за сгоревшей обмотки, а из-за выхода из строя пускового <strong>конденсатора</strong>. Этот элемент находится в цепи запуска и помогает раскрутить ротор. Проверьте его емкость мультиметром, если у прибора есть соответствующий режим (F или Capacitance). Номинальная емкость обычно указана на корпусе конденсатора (например, 2 мкФ).</p>
+
+<p>Если конденсатор имеет емкость значительно ниже номинала или показывает разряд (в режиме прозвонки он должен сначала показать низкое сопротивление, затем бесконечность), его нужно заменить. Неисправный <em>конденсатор</em> приводит к тому, что двигатель гудит, но не вращается, что может быстро привести к перегреву обмоток.</p>
+
+<p>Термореле также является частым виновником проблем. Оно должно иметь нулевое сопротивление в рабочем (холодном) состоянии. Если при холодном двигателе термореле показывает бесконечность, значит, оно сработало и не сбросилось, или просто вышло из строя. Попробуйте аккуратно нажать на его рычажок или подождать полного остывания.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед заменой термореле или конденсатора попробуйте аккуратно нажать на кнопку сброса термореле (если она есть снаружи корпуса) и подождать 5 минут. Иногда устройство просто ушло в защиту из-за перегрева.</p></div>
+
+<h2 id="безопасность-и-финальные-рекомендации">Безопасность и финальные рекомендации</h2>
+
+<p>После проведения всех измерений и выявления неисправности, обязательно соберите устройство в обратном порядке. Убедитесь, что все провода закреплены так, чтобы они не касались вращающихся частей или острых кромок металла. Внутреннее пространство кофемолки часто заполнено кофейной пылью, которая может быть электропроводной, поэтому тщательно очистите корпус перед сборкой.</p>
+
+<p>Запускать кофемолку после ремонта нужно с особой осторожностью. Включите её в розетку, но не подавайте сразу нагрузку (зерна). Дайте двигателю поработать на холостом ходу 10-15 секунд. Прислушайтесь к звуку: он должен быть ровным, без посторонних стуков или свиста. Если запах гари появился снова — немедленно выключите устройство.</p>
+
+<p>Помните, что электрическая часть кофемолок требует аккуратности. Даже если вы успешно проверили двигатель, неправильная сборка может привести к новым проблемам. Используйте оригинальные запчасти или качественные аналоги, чтобы обеспечить долгую работу вашего оборудования.</p>
+
+<blockquote>⚠️ Внимание: Если после замены деталей проблема сохраняется, возможно, неисправна плата управления или блок питания. В этом случае дальнейшая диагностика требует специализированного оборудования и навыков работы с электроникой.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная чистка кофемолки от кофейной пыли предотвращает замыкание контактов и перегрев двигателя, продлевая срок его службы.</p></div>
+
+<details>
+<summary>Что делать, если мультиметр показывает обрыв, но двигатель работает?</summary>
+<p>Если при отключенном питании прибор показывает бесконечное сопротивление, но при включении двигатель запускается, возможно, проблема в плохом контакте. Контакты могут окислиться или окислиться, но под напряжением пробивается. Попробуйте зачистить контакты и перепаять их. Также возможно, что вы замеряли не ту цепь.</p>
+</details>
+
+<details>
+<summary>Можно ли проверить двигатель без разборки кофемолки?</summary>
+<p>В большинстве случаев нет. Для доступа к выводам обмотки статора или щеток необходимо снять внешний кожух. Однако, если у вас есть доступ к контактам на вилке или плате, можно измерить общее сопротивление цепи, но это даст лишь общую картину, а не точный диагноз конкретного компонента.</p>
+</details>
+
+<details>
+<summary>Какой мультиметр лучше купить для проверки кофемолки?</summary>
+<p>Для бытовых нужд подойдет любой цифровой мультиметр с функцией измерения сопротивления до 2000 Ом и звуковой прозвонкой. Популярные модели от брендов <em>Fluke</em>, <em>Uni-T</em> или <em>Resanta</em> справятся с этой задачей прекрасно. Главное — чтобы щупы были удобными и контакт надежным.</p>
+</details>
+
+<details>
+<summary>Почему двигатель гудит, но не крутится?</summary>
+<p>Чаще всего это признак неисправности пускового конденсатора или заклинившего ротора. Если конденсатор не создает пусковой фазовый сдвиг, ротор не может преодолеть инерцию. Попробуйте раскрутить вал вручную — если он туго ходит, проблема в механике (подшипники, пыль). Если ходит легко — меняйте конденсатор.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#подготовка-рабочего-места-и-необходимые-инструменты">Подготовка рабочего места и необходимые инструменты</a></li><li><a href="#визуальный-осмотр-и-поиск-явных-повреждений">Визуальный осмотр и поиск явных повреждений</a></li><li><a href="#настройка-мультиметра-и-выбор-режима-измерения">Настройка мультиметра и выбор режима измерения</a></li><li><a href="#пошаговая-процедура-проверки-обмотки-двигателя">Пошаговая процедура проверки обмотки двигателя</a></li><li><a href="#интерпретация-результатов-и-таблица-норм">Интерпретация результатов и таблица норм</a></li><li><a href="#диагностика-пусковых-конденсаторов-и-термореле">Диагностика пусковых конденсаторов и термореле</a></li><li><a href="#безопасность-и-финальные-рекомендации">Безопасность и финальные рекомендации</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-ochistit-ot-nakipi-kofemashinu-delongi-instruktsiya.html" class="related-card">Как очистить кофемашину De&#x27;Longhi от накипи: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-zapustit-kofemashinu-delonghi-magnifika.html" class="related-card">Как запустить кофемашину DeLonghi Magnifica: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-ukhazhivat-za-kofemashinoj-philips-saeco.html" class="related-card">Пошаговая инструкция: как ухаживать за кофемашиной Philips Saeco</a></li><li><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-nivona-767.html" class="related-card">Как включить кофемашину Nivona 767: пошаговая инструкция запуска</a></li><li><a href="/articles/k/ko/kofemashina-delongi-kak-promyt-ot-nakipi.html" class="related-card">Как промыть кофемашину DeLonghi от накипи: пошаговая инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-ochistit-ot-nakipi-kofemashinu-delongi-instruktsiya.html" class="related-bottom-card"><span class="related-bottom-title">Как очистить кофемашину De&#x27;Longhi от накипи: пошаговая инструкция</span><span class="related-bottom-desc">Полная инструкция по удалению накипи в кофемашинах De&#x27;Longhi. Выбор средств, пошаговый алгоритм, оши</span></a><a href="/articles/k/ka/kak-zapustit-kofemashinu-delonghi-magnifika.html" class="related-bottom-card"><span class="related-bottom-title">Как запустить кофемашину DeLonghi Magnifica: пошаговая инструкция</span><span class="related-bottom-desc">Полное руководство по запуску, настройке и первому использованию кофемашин DeLonghi Magnifica. Разбо</span></a><a href="/articles/k/ka/kak-ukhazhivat-za-kofemashinoj-philips-saeco.html" class="related-bottom-card"><span class="related-bottom-title">Пошаговая инструкция: как ухаживать за кофемашиной Philips Saeco</span><span class="related-bottom-desc">Полный гид по обслуживанию кофемашин Philips Saeco: декальцинация, очистка заварочного блока, промыв</span></a><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-nivona-767.html" class="related-bottom-card"><span class="related-bottom-title">Как включить кофемашину Nivona 767: пошаговая инструкция запуска</span><span class="related-bottom-desc">Полный гайд по включению и первому запуску кофемашины Nivona 767. Разбор панели управления, инициали</span></a><a href="/articles/k/ko/kofemashina-delongi-kak-promyt-ot-nakipi.html" class="related-bottom-card"><span class="related-bottom-title">Как промыть кофемашину DeLonghi от накипи: пошаговая инструкция</span><span class="related-bottom-desc">Пошаговое руководство по удалению накипи в кофемашинах DeLonghi. Выбор средств, режимы промывки, оши</span></a><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-polaris.html" class="related-bottom-card"><span class="related-bottom-title">Как включить кофемашину Polaris: пошаговая инструкция и настройки</span><span class="related-bottom-desc">Узнайте, как правильно включить кофемашину Polaris, выполнить первичную подготовку и настроить парам</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

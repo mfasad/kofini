@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как работает манометр в кофемашине: принцип и диагностика — Кофини</title>
+    <meta name="description" content="Узнайте принцип работы манометра в кофемашине. Как расшифровать показания давления при помолке и извлечении эспрессо. Диагностика неисправностей.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-rabotaet-manometr-v-kofemashine.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как работает манометр в кофемашине: принцип и диагностика">
+    <meta property="og:description" content="Узнайте принцип работы манометра в кофемашине. Как расшифровать показания давления при помолке и извлечении эспрессо. Диагностика неисправностей.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как работает манометр в кофемашине: принцип и диагностика</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Принцип работы и расшифровка показателей манометра в кофемашине</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#физика-процесса-что-регулирует-насос-и-где-возникает-сопротивление">Физика процесса: что регулирует насос и где возникает сопротивление</a></li><li><a href="#режим-ожидания-и-холостой-ход-как-выглядит-нормальное-давление">Режим ожидания и холостой ход: как выглядит нормальное давление</a></li><li><a href="#экстракция-эспрессо-идеальная-траектория-стрелки-и-отклонения">Экстракция эспрессо: идеальная траектория стрелки и отклонения</a></li><li><a href="#распространенные-проблемы-и-их-расшифровка-по-шкале">Распространенные проблемы и их расшифровка по шкале</a></li><li><a href="#особенности-манометров-в-рожковых-и-автоматических-машинах">Особенности манометров в рожковых и автоматических машинах</a></li><li><a href="#диагностика-и-калибровка-когда-пора-к-мастеру">Диагностика и калибровка: когда пора к мастеру</a></li><li><a href="#faq-частые-вопросы-о-манометрах-кофемашин">FAQ: Частые вопросы о манометрах кофемашин</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>При взгляде на панель управления профессиональной или полупрофессиональной кофемашины вы наверняка замечали круглый циферблат со стрелкой. Это не просто декоративный элемент, а важнейший диагностический инструмент, называемый <strong>манометром</strong>. Он отображает реальное давление воды в системе, позволяя бариста мгновенно оценить состояние оборудования и качество завариваемого напитка.</p>
+
+<p>Без понимания того, что показывают эти цифры, выработка стабильного <strong>эспрессо</strong> становится делом случая. Стрелка прибора реагирует на изменения гидравлического сопротивления в <strong>группе заваривания</strong>, подсказывая, правильно ли вы распределен <strong>помол кофе</strong> или требуется ли чистка системы. В этой статье мы разберем физику процесса, нормы давления и методы диагностики по показаниям.</p>
+
+<h2 id="физика-процесса-что-регулирует-насос-и-где-возникает-сопротивление">Физика процесса: что регулирует насос и где возникает сопротивление</h2>
+
+<p>В основе работы любой эспрессо-кофемашины лежит создание определенного давления. Насос, будь то <em>вибрационный</em> или <em>ротативный</em>, подает воду из резервуара или водопровода. Однако само по себе создание давления еще не гарантирует качество напитка. Ключевым фактором является сопротивление, которое оказывает спрессованная таблетка кофе.</p>
+
+<p>Когда вода под давлением проходит через слой молотого кофе, она встречает сопротивление зерен. Чем плотнее <strong>таблетка</strong> и чем мельче <strong>помол</strong>, тем выше сопротивление. Манометр фиксирует именно это сопротивление. Если кофе распределен плохо, вода найдет путь наименьшего сопротивления, и давление упадет, что приведет к «водянистому» вкусу.</p>
+
+<p>Стандартная рабочая температура и давление для классического эспрессо составляют 9 бар. Именно это значение считается золотым стандартом экстракции. При давлении ниже 7 бар экстракция будет неполной, а при давлении выше 10-11 бар возможны проблемы с перенаполнением и горечью. <strong>Группа заваривания</strong> должна обеспечивать стабильность этого параметра на протяжении всего цикла извлечения.</p>
+
+<blockquote>⚠️ Внимание: Показания манометра могут немного отличаться в зависимости от модели насоса и типа системы. Всегда сверяйте реальные показатели с технической документацией вашего оборудования, так как допустимые отклонения варьируются.</blockquote>
+
+<p>Некоторые современные модели оснащены электронными датчиками, которые передают данные на дисплей, но механические манометры остаются стандартом индустрии благодаря наглядности и отсутствию зависимости от электроники. Понимание механики стрелки поможет вам быстрее находить проблемы с помпом или прокладками.</p>
+
+<div class="poll-widget" id="poll-d3181a3a"><div class="poll-widget-question">📊 Что вы чаще всего проверяете по манометру?</div><div class="poll-widget-option" data-poll="d3181a3a" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Давление в холостом ходе</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d3181a3a" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Стабильность давления при экстракции</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d3181a3a" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Давление пара</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d3181a3a" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Состояние насоса</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d3181a3a" data-idx="4" onclick="pbPollVote(this)"><span class="poll-widget-label">Не слежу за показателями</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="режим-ожидания-и-холостой-ход-как-выглядит-нормальное-давление">Режим ожидания и холостой ход: как выглядит нормальное давление</h2>
+
+<p>Прежде чем приступать к приготовлению напитка, важно понимать, что показывает манометр в состоянии покоя. В большинстве кофемашин при выключенном насосе стрелка должна находиться в нулевой позиции или на минимальной отметке. Это означает, что в заварочной группе нет избыточного давления.</p>
+
+<p>Однако, если вы только что включили аппарат и он нагрелся, стрелка может показывать небольшое давление (обычно около 1-1,5 бар) даже без нажатия кнопки. Это связано с тепловым расширением воды в бойлере. Вибрационный насос в режиме ожидания часто создает скачки давления, которые манометр может фиксировать как небольшие колебания стрелки.</p>
+
+<p>Если стрелка в выключенном состоянии показывает высокие значения (более 2 бар) без работы насоса, это тревожный сигнал. Вероятно, неисправен обратный клапан или система сброса давления. В таком случае необходимо проверить <strong>клапан сброса</strong> и убедиться, что вода не давит обратно в систему подачи.</p>
+
+<p>Важно отметить разницу между показаниями на холодном и горячем аппарате. При нагреве давление в бойлере растет, и манометр, подключенный к контуру заваривания, может отреагировать на это изменение. Убедитесь, что стрелка возвращается в исходное положение после остывания машины.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед началом рабочего дня всегда проверяйте, возвращается ли стрелка манометра в ноль после остывания машины. Это простой способ проверить целостность обратного клапана.</p></div>
+
+<h2 id="экстракция-эспрессо-идеальная-траектория-стрелки-и-отклонения">Экстракция эспрессо: идеальная траектория стрелки и отклонения</h2>
+
+<p>Самый важный момент для бариста — это процесс экстракции. Когда вы вдавливаете рычаг или нажимаете кнопку, вода попадает в <strong>корзинку</strong> с кофе. В идеале стрелка манометра должна плавно подняться до отметки 9 бар и держаться там стабильно на протяжении всего времени извлечения (обычно 25-30 секунд).</p>
+
+<p>Если стрелка резко поднимается до максимума (12+ бар) и застревает там, а поток кофе идет тонкой капелькой или не идет вовсе, это признак чрезмерного сопротивления. Скорее всего, помол слишком мелкий или вы слишком сильно утрамбовали кофе. Вода не может пройти через плотную таблетку, и давление в системе растет.</p>
+
+<p>И наоборот, если стрелка едва поднимается над нулем (3-4 бар), а кофе вытекает очень быстро и тонкой струей, значит, сопротивление слишком низкое. Это может быть вызвано слишком крупным помолом, недостаточным весом закладки или <strong>каналлингом</strong> (образованием каналов для воды в таблетке).</p>
+
+<p>Идеальная экстракция выглядит как плавный подъем стрелки с небольшим выходом на плато. Наблюдение за манометром позволяет корректировать помол «на лету», не дожидаясь дегустации напитка. Это экономит время и зерно.</p>
+
+<div class="checklist-block"><h4>☑️ Диагностика давления при экстракции</h4><label class="check-item"><input type="checkbox"><span>Стрелка плавно поднимается до 9 бар</span></label><label class="check-item"><input type="checkbox"><span>Давление стабильно в течение всего цикла</span></label><label class="check-item"><input type="checkbox"><span>Отсутствуют резкие скачки вверх или вниз</span></label><label class="check-item"><input type="checkbox"><span>После остановки стрелка быстро падает в ноль</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="распространенные-проблемы-и-их-расшифровка-по-шкале">Распространенные проблемы и их расшифровка по шкале</h2>
+
+<p>Понимание того, как ведет себя стрелка при различных неисправностях, позволяет проводить быструю диагностику без разборки аппарата. Ниже приведена таблица основных проблем и соответствующих им показаний манометра.</p>
+
+<table>
+<thead>
+<tr>
+<th>Симптом на манометре</th>
+<th>Вероятная причина</th>
+<th>Рекомендуемое действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Стрелка не поднимается выше 3-4 бар</td>
+<td>Слишком крупный помол или каналлинг</td>
+<td>Уменьшить размер помола, проверить распределение</td>
+</tr>
+<tr>
+<td>Стрелка застревает на 12-15 бар</td>
+<td>Слишком мелкий помол или забитая сетка</td>
+<td>Увеличить помол, почистить корзинку</td>
+</tr>
+<tr>
+<td>Стрелка скачет вверх-вниз</td>
+<td>Воздух в магистральной линии</td>
+<td>Сделать пролив воды без кофе для удаления воздуха</td>
+</tr>
+<tr>
+<td>Давление не падает в ноль после остановки</td>
+<td>Неисправность обратного клапана</td>
+<td>Заменить обратный клапан или прокладку</td>
+</tr>
+<tr>
+<td>Стрелка дергается на холостом ходу</td>
+<td>Износ вибрационного насоса</td>
+<td>Проверить подкачку насоса или заменить его</td>
+</tr>
+</tbody>
+</table>
+
+<p>Особое внимание стоит уделить скачкам давления. Если при работе насоса стрелка начинает хаотично перемещаться, это часто свидетельствует о наличии воздушной пробки в системе. Воздух сжимается иначе, чем вода, что приводит к нестабильному давлению.</p>
+
+<blockquote>⚠️ Внимание: Резкие скачки стрелки вверх до красной зоны могут привести к разрыву уплотнительных прокладок или даже повреждению корпуса группы заваривания. Немедленно прекратите работу и проверьте систему.</blockquote>
+
+<p>Также стоит учитывать, что износ <strong>насоса</strong> может проявляться в неспособности удерживать нужное давление. Старый насос может выдавать требуемые 9 бар только при малом расходе, но при увеличении потока давление резко падает.</p>
+
+<details class="faq-item"><summary>Скрытая причина нестабильности давления</summary><div class="faq-answer"><p>Часто проблема кроется не в самом насосе, а в накипи на внутренних стенках трубок подачи. Накипь сужает проходное сечение, создавая ложное сопротивление, которое манометр воспринимает как высокое давление, хотя поток воды на самом деле слабый.</p></div></details>
+
+<h2 id="особенности-манометров-в-рожковых-и-автоматических-машинах">Особенности манометров в рожковых и автоматических машинах</h2>
+
+<p>Важно понимать, что манометры устанавливаются не во всех кофемашинах. В бытовых полных автоматах, таких как <em>DeLonghi Magnifica</em> или <em>Jura</em>, манометры встречаются крайне редко. Производитель полагается на электронные датчики, которые передают данные в процессор, а пользователь видит лишь готовый результат.</p>
+
+<p>В рожковых (полуавтоматических) машинах механический манометр является стандартом. Он подключается непосредственно к выходу из насоса перед группой заваривания. В некоторых моделях, например, в <em>Lelit Anna</em> или <em>Rancilio Silvia</em>, манометр может показывать два режима: давление для заваривания и давление для пара (когда переключатель находится в соответствующем положении).</p>
+
+<p>В профессиональных двухконтурных аппаратах часто встречаются два манометра. Один показывает давление в контуре заваривания, второй — давление в бойлере для пара (обычно 1-1,2 бар). Это позволяет оператору контролировать оба процесса независимо друг от друга.</p>
+
+<p>Некоторые бюджетные модели оснащаются имитацией манометра — это просто нарисованная шкала без реального датчика. В таких случаях стрелка двигается синхронно с работой насоса, но не отражает реальное давление. Всегда проверяйте, имеет ли прибор подвижную стрелку и реагирует ли она на изменение потока.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Наличие реального манометра — ключевое преимущество для контроля качества экстракции. Если вы планируете серьезно заниматься приготовлением эспрессо, выбирайте модели с механическим индикатором давления.</p></div>
+
+<h2 id="диагностика-и-калибровка-когда-пора-к-мастеру">Диагностика и калибровка: когда пора к мастеру</h2>
+
+<p>Если вы заметили, что показания манометра не соответствуют действительности (например, давление низкое, а кофе течет быстро), проблема может быть в самом приборе. Стрелка может заклинить или сойти с места. В таком случае необходима калибровка или замена манометра.</p>
+
+<p>Для проверки точности манометра можно использовать специальный тестовый манометр-переходник, который вкручивается вместо корзины. Сравнив показания вашего встроенного прибора с эталонным, вы сможете понять, требует ли замена инструмент. Однако чаще всего проблема кроется в системе, а не в самом циферблате.</p>
+
+<p>Регулярная очистка манометра от кофейной пыли и накипи продлит его жизнь. Пыль может забить капиллярную трубку, соединяющую датчик с корпусом, что приведет к искажению показаний. Используйте мягкую влажную ткань для протирания стекла и корпуса.</p>
+
+<p>Если проблема связана с внутренними компонентами, такими как <strong>редуктор давления</strong>, самостоятельно вмешиваться в систему не рекомендуется. Неправильная настройка может привести к утечкам или повреждению бойлера. В таких случаях лучше обратиться к сертифицированному специалисту.</p>
+
+<blockquote>⚠️ Внимание: При самостоятельной замене манометра обязательно используйте ленту ФУМ или паклю для герметизации резьбы. Неплотное соединение приведет к потере давления и протечкам. Не перетягивайте фитинг, чтобы не сорвать резьбу.</blockquote>
+
+<h2 id="faq-частые-вопросы-о-манометрах-кофемашин">FAQ: Частые вопросы о манометрах кофемашин</h2>
+
+<details>
+<summary>Почему стрелка манометра дергается при приготовлении кофе?</summary>
+<p><p>Дерганье стрелки обычно указывает на нестабильность потока воды. Чаще всего это вызвано наличием воздуха в системе, неравномерным распределением кофе в корзинке (каналлингом) или износом мембраны вибрационного насоса. Попробуйте сделать несколько проливов воды без кофе и перераспределить помол.</p></p>
+</details>
+
+<details>
+<summary>Можно ли готовить эспрессо без манометра?</summary>
+<p><p>Технически да, многие бытовые машины не имеют манометра. Однако без него вы не сможете точно контролировать процесс экстракции. Вам придется полагаться только на время и вес напитка, что снижает предсказуемость результата и качество эспрессо.</p></p>
+</details>
+
+<details>
+<summary>Какое максимальное давление может показать манометр?</summary>
+<p><p>Большинство манометров для кофемашин имеют шкалу до 15 бар. Этого достаточно, так как рабочая зона находится в диапазоне 8-10 бар. Показание выше 12 бар обычно указывает на серьезную проблему с помпом или засором и требует немедленной остановки процесса.</p></p>
+</details>
+
+<details>
+<summary>Что означает красная зона на шкале манометра?</summary>
+<p><p>Красная зона на манометре обозначает критическое давление, при котором работа оборудования запрещена. Если стрелка заходит в эту зону, существует риск повреждения уплотнений, прорыва трубок или аварии в бойлере. Это сигнал к немедленному отключению насоса.</p></p>
+</details>
+
+<details>
+<summary>Влияет ли температура воды на показания манометра?</summary>
+<p><p>Да, температура влияет на давление. При нагреве вода расширяется, что может незначительно повысить давление в замкнутом контуре. Однако при активной экстракции основным фактором является сопротивление таблетки кофе, а не температурное расширение, поэтому влияние температуры на показания в процессе работы минимально.</p></p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#физика-процесса-что-регулирует-насос-и-где-возникает-сопротивление">Физика процесса: что регулирует насос и где возникает сопротивление</a></li><li><a href="#режим-ожидания-и-холостой-ход-как-выглядит-нормальное-давление">Режим ожидания и холостой ход: как выглядит нормальное давление</a></li><li><a href="#экстракция-эспрессо-идеальная-траектория-стрелки-и-отклонения">Экстракция эспрессо: идеальная траектория стрелки и отклонения</a></li><li><a href="#распространенные-проблемы-и-их-расшифровка-по-шкале">Распространенные проблемы и их расшифровка по шкале</a></li><li><a href="#особенности-манометров-в-рожковых-и-автоматических-машинах">Особенности манометров в рожковых и автоматических машинах</a></li><li><a href="#диагностика-и-калибровка-когда-пора-к-мастеру">Диагностика и калибровка: когда пора к мастеру</a></li><li><a href="#faq-частые-вопросы-о-манометрах-кофемашин">FAQ: Частые вопросы о манометрах кофемашин</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-chistit-dolche-gusto-ot-nakipi-kofemashinu.html" class="related-card">Как почистить кофемашину Dolce Gusto от накипи: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-pochistit-rozhkovuyu-kofemashinu-v-domashnikh-usloviyakh.html" class="related-card">Как почистить рожковую кофемашину дома: пошаговая инструкция</a></li><li><a href="/articles/k/ko/kofemashina-inhouse-kak-polzovatsya.html" class="related-card">Как пользоваться кофемашиной InHouse: полное руководство по эксплуатации</a></li><li><a href="/articles/k/ka/kak-promyt-kofevarku-filips.html" class="related-card">Как промыть кофеварку Philips: полная инструкция по очистке</a></li><li><a href="/articles/g/gd/gde-otremontirovat-kofemashinu-bosch.html" class="related-card">Где отремонтировать кофемашину Bosch: сервисные центры и советы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-chistit-dolche-gusto-ot-nakipi-kofemashinu.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Dolce Gusto от накипи: пошаговая инструкция</span><span class="related-bottom-desc">Полное руководство по декальцинации капсульных кофемашин Dolce Gusto. Узнайте, как выбрать средство,</span></a><a href="/articles/k/ka/kak-pochistit-rozhkovuyu-kofemashinu-v-domashnikh-usloviyakh.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить рожковую кофемашину дома: пошаговая инструкция</span><span class="related-bottom-desc">Полное руководство по декальцинации и промывке группы. Узнайте, как удалить накипь и остатки масла, </span></a><a href="/articles/k/ko/kofemashina-inhouse-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной InHouse: полное руководство по эксплуатации</span><span class="related-bottom-desc">Полная инструкция по использованию кофемашин InHouse. Настройка параметров, выбор помола, приготовле</span></a><a href="/articles/k/ka/kak-promyt-kofevarku-filips.html" class="related-bottom-card"><span class="related-bottom-title">Как промыть кофеварку Philips: полная инструкция по очистке</span><span class="related-bottom-desc">Пошаговая инструкция, как правильно промыть и очистить кофеварку Philips от накипи. Советы по выбору</span></a><a href="/articles/g/gd/gde-otremontirovat-kofemashinu-bosch.html" class="related-bottom-card"><span class="related-bottom-title">Где отремонтировать кофемашину Bosch: сервисные центры и советы</span><span class="related-bottom-desc">Ищете, где починить кофемашину Bosch? Полный гид по авторизованным сервисам, самостоятельному ремонт</span></a><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-chtoby-sdelat-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Как включить кофемашину: пошаговая инструкция запуска</span><span class="related-bottom-desc">Полный алгоритм: как правильно включить кофемашину, подготовить к работе и сварить первый эспрессо. </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

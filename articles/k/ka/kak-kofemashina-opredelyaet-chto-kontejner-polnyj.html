@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как кофемашина определяет полный контейнер для жмыха: 5 датчиков — Кофини</title>
+    <meta name="description" content="Узнайте, как работает датчик наполненности бункера. Разбор сенсоров, механических датчиков и причин ложных срабатываний в современных кофемашинах.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-kofemashina-opredelyaet-chto-kontejner-polnyj.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как кофемашина определяет полный контейнер для жмыха: 5 датчиков">
+    <meta property="og:description" content="Узнайте, как работает датчик наполненности бункера. Разбор сенсоров, механических датчиков и причин ложных срабатываний в современных кофемашинах.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как кофемашина определяет полный контейнер для жмыха: 5 датчиков</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Механизм определения наполненности контейнера для жмыха в кофемашине</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#принципы-работы-механических-датчиков-наполнения">Принципы работы механических датчиков наполнения</a></li><li><a href="#оптические-сенсоры-и-инфракрасные-лучи">Оптические сенсоры и инфракрасные лучи</a></li><li><a href="#программный-алгоритм-подсчета-порций">Программный алгоритм подсчета порций</a></li><li><a href="#влияние-температуры-и-влажности-на-датчики">Влияние температуры и влажности на датчики</a></li><li><a href="#типичные-неисправности-и-способы-диагностики">Типичные неисправности и способы диагностики</a></li><li><a href="#особенности-обслуживания-разных-брендов">Особенности обслуживания разных брендов</a></li><li><a href="#профилактика-ложных-срабатываний">Профилактика ложных срабатываний</a></li><li><a href="#когда-требуется-профессиональный-ремонт">Когда требуется профессиональный ремонт</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Многие пользователи сталкиваются с ситуацией, когда кофемашина сообщает о полном бункере для отработанного кофе, хотя визуально там есть место на десятки порций. Это явление часто вызывает раздражение и заводит в тупик неопытных владельцев техники. Понимание того, как именно агрегат отслеживает уровень отходов, позволяет избежать ненужных обращений в сервисный центр и самостоятельного ремонта.</p>
+
+<p>Современные устройства, такие как <em>DeLonghi Magnifica</em> или <em>Jura E8</em>, оснащены сложной системой контроля, которая не просто считает выпитые чашки. В основе работы лежит комбинация механических, оптических и программных алгоритмов. Если вы хотите продлить жизнь своему оборудованию, важно разобраться в принципах работы <strong>датчика наполнения</strong> и <strong>системы сброса</strong>.</p>
+
+<p>Главная задача системы — предупредить пользователя до того, как отработанный кофе пересыпется и заблокирует рабочую группу. Однако производители закладывают в алгоритмы определенные задержки и погрешности для предотвращения ложных срабатываний. Важно отличать реальный физический объем от логического наполнения, которое рассчитывает процессор.</p>
+
+<h2 id="принципы-работы-механических-датчиков-наполнения">Принципы работы механических датчиков наполнения</h2>
+
+<p>В большинстве бюджетных и среднебюджетных моделей используется простой механический принцип обнаружения. Внутри отсека для жмыха находится подвижный рычаг или пластиковая пластина, которая механически взаимодействует с контейнером при его вставлении. Когда вы извлекаете бункер, этот рычаг возвращается в исходное положение, посылая сигнал о сбросе счетчика.</p>
+
+<p>Если рычаг заклинило или на него налипли остатки кофейных масел, механизм перестает фиксировать факт извлечения. В таком случае кофемашина продолжает накапливать виртуальные чашки, даже если вы опорожняете контейнер ежедневно. Для устранения проблемы необходимо регулярно очищать зону контакта <strong>механического сенсора</strong> от кофейной гущи.</p>
+
+<p>Некоторые модели, например старые версии <em>Philips Series 2200</em>, используют пружинный механизм, который может со временем ослабевать. Это приводит к тому, что даже полностью опустошенный бункер не нажимает на переключатель с достаточной силой. В результате система не получает команду на обнуление счетчика.</p>
+
+<blockquote>⚠️ Внимание! Часто пользователи пытаются "подпереть" рычаг спичкой или скрепкой, чтобы обмануть датчик. Это категорически запрещено, так как может привести к короткому замыканию или поломке пластикового корпуса переключателя.</blockquote>
+
+<h2 id="оптические-сенсоры-и-инфракрасные-лучи">Оптические сенсоры и инфракрасные лучи</h2>
+
+<p>Более продвинутые устройства, такие как <em>Saeco Xelsis</em> или <em>Bosch VeroBar</em>, используют оптические датчики. В этом случае внутри корпуса кофемашины установлены излучатель и приемник инфракрасного света. Когда контейнер пуст, луч свободно проходит через прозрачное окно или щель. Как только уровень жмыха достигает определенной высоты, он перекрывает луч, и датчик фиксирует сигнал "Заполнено".</p>
+
+<p>Основная проблема таких систем — загрязнение линз. Даже тонкий слой кофейной пыли на оптическом окне может преломлять или поглощать свет, заставляя датчик думать, что луч перекрыт. Если вы заметили частые ложные срабатывания, проверьте состояние <strong>оптического стекла</strong> и очистите его ватной палочкой со спиртом.</p>
+
+<p>Иногда на приемник попадает посторонний свет или отражается от блестящих элементов внутри отсека. Это создает помехи, которые процессор интерпретирует как наличие отходов. В таких случаях помогает затемнение датчика или пересмотр расположения агрегата относительно ярких источников света.</p>
+
+<blockquote>⚠️ Внимание! Не используйте агрессивные химические средства для очистки оптических датчиков. Растворители могут помутнить пластик или линзу, сделав сенсор неработоспособным навсегда.</blockquote>
+
+<div class="poll-widget" id="poll-34a6b5ad"><div class="poll-widget-question">📊 Как часто вы очищаете контейнер для жмыха?</div><div class="poll-widget-option" data-poll="34a6b5ad" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">1 раз в день</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="34a6b5ad" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">2-3 раза в день</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="34a6b5ad" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Только когда загорится индикатор</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="34a6b5ad" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в неделю</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="программный-алгоритм-подсчета-порций">Программный алгоритм подсчета порций</h2>
+
+<p>Существует и третий тип определения наполненности — программный. В этом случае в кофемашине нет физических датчиков уровня в самом контейнере. Вместо этого процессор просто считает количество сваренных порций. Производители задают усредненный объем бункера, например, на 10 или 12 чашек эспрессо. Достигнув этого лимита, агрегат требует очистки.</p>
+
+<p>Система запоминает историю использования. Если вы сделали 10 чашек эспрессо, а затем вытащили и положили обратно контейнер, счетчик может не обнулиться мгновенно. <strong>Программная логика</strong> требует подтверждения, что бункер действительно был удален из машины на определенное время. Обычно это 30-60 секунд.</p>
+
+<p>Проблема возникает, если пользователь быстро вынимает и вставляет бункер, например, чтобы добавить сахар в напиток. В таком случае система считает, что отходы не были удалены, и продолжает накапливать счет. Это не поломка, а особенность алгоритма защиты от случайных манипуляций.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка работы программного сброса</h4><label class="check-item"><input type="checkbox"><span>Полностью извлеките контейнер</span></label><label class="check-item"><input type="checkbox"><span>Подождите 1 минуту</span></label><label class="check-item"><input type="checkbox"><span>Подойдите к машине</span></label><label class="check-item"><input type="checkbox"><span>Вставьте контейнер обратно</span></label><label class="check-item"><input type="checkbox"><span>Убедитесь, что индикатор погас</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<h2 id="влияние-температуры-и-влажности-на-датчики">Влияние температуры и влажности на датчики</h2>
+
+<p>Работа любых датчиков, будь то механических или оптических, зависит от условий эксплуатации. Высокая влажность и конденсат, образующийся на стенках отсека после варки горячего кофе, могут вызвать "слипание" механических частей или создать токопроводящую пленку на оптических элементах. Это критично для долговременной стабильности работы <strong>системы контроля</strong>.</p>
+
+<p>В зимний период, когда кофемашина стоит в холодном помещении, пластик датчиков может стать более хрупким. Резкое движение контейнера может привести к его деформации или поломке рычага. Рекомендуется давать машине прогреться перед активным использованием в холоде.</p>
+
+<p>Также стоит учитывать, что кофейный жмых со временем уплотняется и теряет влагу. Сухой жмых легче, влажный — тяжелее и объемнее. Разная плотность наполнения может влиять на срабатывание механических датчиков, если они настроены на определенный вес или объем.</p>
+
+<h2 id="типичные-неисправности-и-способы-диагностики">Типичные неисправности и способы диагностики</h2>
+
+<p>Если кофемашина постоянно требует очистки бункера, хотя вы делаете это регулярно, проблема может быть не в датчике, а в его подключении. Окисление контактов на плате управления или разрыв провода, идущего к сенсору, приводит к тому, что система постоянно видит сигнал "Заполнено".</p>
+
+<p>Для диагностики можно использовать режим самодиагностики, если он предусмотрен в вашей модели. В меню настроек часто есть пункт проверки всех датчиков. Переведите устройство в этот режим и наблюдайте за реакцией индикаторов при извлечении и вставке контейнера.</p>
+
+<p>В некоторых случаях помогает полный сброс настроек до заводских. Это вернет программный счетчик порций к нулю и может исправить ошибки логики, возникшие из-за сбоя прошивки. Однако, если проблема механическая, программный сброс не поможет.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип датчика</th>
+<th>Механизм действия</th>
+<th>Частая причина отказа</th>
+<th>Сложность ремонта</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Механический (рычаг)</td>
+<td>Нажатие на переключатель</td>
+<td>Загрязнение, заклинивание</td>
+<td>Низкая</td>
+</tr>
+<tr>
+<td>Оптический (ИК-луч)</td>
+<td>Блокировка светового потока</td>
+<td>Запыление линз, конденсат</td>
+<td>Средняя</td>
+</tr>
+<tr>
+<td>Программный (счетчик)</td>
+<td>Подсчет циклов варки</td>
+<td>Быстрая смена контейнера</td>
+<td>Низкая</td>
+</tr>
+<tr>
+<td>Магнитный (геркон)</td>
+<td>Реакция на магнит в крышке</td>
+<td>Смещение магнита</td>
+<td>Средняя</td>
+</tr>
+</tbody>
+</table>
+
+<details class="faq-item"><summary>Что делать, если датчик не видит пустой контейнер?</summary><div class="faq-answer"><p>Попробуйте очистить отсек от крошек. Если не помогло — аккуратно подвигайте рычаг датчика (если он механический) пинцетом, чтобы убедиться в свободном ходе. В крайнем случае потребуется разборка корпуса для проверки контактов.</p></div></details>
+
+<h2 id="особенности-обслуживания-разных-брендов">Особенности обслуживания разных брендов</h2>
+
+<p>Каждый производитель использует свои инженерные решения. Например, в агрегатах <em>Melitta</em> часто встречаются магнитные датчики, реагирующие на положение крышки контейнера. Если крышку закрыть не до щелчка, машина будет считать, что бункер не установлен. В то же время <em>Gaggia</em> часто полагается на строгий подсчет порций с обязательным временным интервалом отключения.</p>
+
+<p>У владельцев <em>Siemens</em> и <em>Bosch</em> иногда возникают проблемы с датчиками, расположенными в труднодоступных зонах. Доступ к ним может потребовать снятия верхней крышки корпуса, что усложняет самостоятельную чистку. Здесь важно соблюдать рекомендации по регулярной профилактике, чтобы не доводить до критического загрязнения.</p>
+
+<p>Важно понимать, что <strong>конструкция бункера</strong> также играет роль. Деформированный пластиковый контейнер может неплотно прилегать к датчику, создавая зазор, который система ошибочно трактует как пустоту или наоборот — препятствие. Использование неоригинальных бункеров часто приводит к таким сбоям.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярно мойте контейнер для жмыха теплой водой с мягким моющим средством, чтобы кофейные масла не затвердевали и не влияли на работу датчиков.</p></div>
+
+<h2 id="профилактика-ложных-срабатываний">Профилактика ложных срабатываний</h2>
+
+<p>Чтобы минимизировать риск ложных сигналов, необходимо соблюдать простую, но эффективную процедуру эксплуатации. Всегда вынимайте контейнер и оставляйте его открытым на столе минимум на минуту перед повторной установкой. Это обязательное условие для корректного сброса программных счетчиков.</p>
+
+<p>Никогда не вынимайте контейнер во время работы машины или сразу после завершения цикла варки. Дайте системе завершить отсчет и обновить статус. Попытка извлечь бункер в момент, когда кофемашина считает чашку, может привести к ошибкам в памяти устройства. <strong>Правильная последовательность</strong> действий критична.</p>
+
+<p>Если вы заметили, что индикатор загорается слишком рано, проверьте, не сдвинулся ли контейнер в отсеке. Иногда вибрация от работы помпы или жерновов приводит к смещению бункера. Убедитесь, что он установлен ровно и плотно прижат к стенкам корпуса.</p>
+
+<blockquote>⚠️ Внимание! Если вы отключали кофемашину от сети, не забудьте извлечь контейнер и вставить его заново после включения. Система может "забыть" состояние датчика и потребовать очистки сразу после старта.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная чистка датчика и правильное время ожидания при извлечении бункера — главные условия стабильной работы системы контроля наполнения.</p></div>
+
+<h2 id="когда-требуется-профессиональный-ремонт">Когда требуется профессиональный ремонт</h2>
+
+<p>Если все методы профилактики не помогают, и ошибка появляется даже после замены бункера и полной очистки отсека, проблема может быть в электронной плате управления. Перегоревший элемент цепи или окисленные дорожки требуют пайки и замены компонентов. Это работа для квалифицированного мастера.</p>
+
+<p>Также причиной может быть физическая поломка самого рычага датчика. Если пластик треснул, восстановить его работу клеем часто невозможно из-за высокой нагрузки. В этом случае потребуется полная замена блока датчика или всего отсека в сборе.</p>
+
+<p>Не стоит пытаться ремонтировать электронные узлы самостоятельно, если у вас нет соответствующего опыта и инструментов. Неправильные действия могут привести к выходу из строя всей кофемашины. В таком случае лучше обратиться в авторизованный сервисный центр для диагностики и ремонта.</p>
+
+<details>
+<summary>Вопрос: Почему кофемашина просит очистить бункер сразу после того, как я его вычистил?</summary>
+<p>Это может быть связано с тем, что вы не дали машине время "увидеть" пустой контейнер. Оставьте бункер вне машины на 1-2 минуты, пока кофемашина работает или в режиме ожидания, затем вставьте его обратно.</p>
+</details>
+
+<details>
+<summary>Вопрос: Можно ли использовать контейнер от другой модели кофемашины?</summary>
+<p>Крайне не рекомендуется. Размеры, расположение датчиков и форма крышек у разных моделей отличаются. Это приведет к постоянным ошибкам датчика наполнения и возможной поломке механизма.</p>
+</details>
+
+<details>
+<summary>Вопрос: Как часто нужно чистить оптический датчик?</summary>
+<p>Оптические датчики следует протирать мягкой сухой тканью или ватной палочкой при каждой очистке контейнера, то есть раз в 1-2 дня, в зависимости от интенсивности использования.</p>
+</details>
+
+<details>
+<summary>Вопрос: Что делать, если датчик заклинило кофейной гущей?</summary>
+<p>Тщательно промойте отсек теплой водой и используйте мягкую щетку для удаления застывших остатков. Если гуща слишком твердая, дайте воде размягчить ее, но не используйте острые предметы для поддевания.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#принципы-работы-механических-датчиков-наполнения">Принципы работы механических датчиков наполнения</a></li><li><a href="#оптические-сенсоры-и-инфракрасные-лучи">Оптические сенсоры и инфракрасные лучи</a></li><li><a href="#программный-алгоритм-подсчета-порций">Программный алгоритм подсчета порций</a></li><li><a href="#влияние-температуры-и-влажности-на-датчики">Влияние температуры и влажности на датчики</a></li><li><a href="#типичные-неисправности-и-способы-диагностики">Типичные неисправности и способы диагностики</a></li><li><a href="#особенности-обслуживания-разных-брендов">Особенности обслуживания разных брендов</a></li><li><a href="#профилактика-ложных-срабатываний">Профилактика ложных срабатываний</a></li><li><a href="#когда-требуется-профессиональный-ремонт">Когда требуется профессиональный ремонт</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-polzovatsya-kofevarkoj-futachi-japan.html" class="related-card">Как пользоваться кофеваркой Futachi Japan: инструкция и советы</a></li><li><a href="/articles/k/ka/kak-ispolzovat-kofemashinu-krups.html" class="related-card">Как использовать кофемашину Krups: Полное руководство по эксплуатации</a></li><li><a href="/articles/k/ka/kak-sobrat-kofemolku-bosch-mkm-6003-video.html" class="related-card">Как собрать кофемолку Bosch MKM 6003: пошаговая видео-инструкция</a></li><li><a href="/articles/d/de/delongi-magnifika-kofemashina-kak-polzovatsya.html" class="related-card">Делонги Магнифика: полная инструкция по эксплуатации и настройке</a></li><li><a href="/articles/k/ka/kak-pochistit-trubku-kapuchinatora.html" class="related-card">Как почистить трубку капучинатора: пошаговая инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-polzovatsya-kofevarkoj-futachi-japan.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофеваркой Futachi Japan: инструкция и советы</span><span class="related-bottom-desc">Полное руководство по эксплуатации кофеварок Futachi Japan. Настройка параметров, загрузка капсул, о</span></a><a href="/articles/k/ka/kak-ispolzovat-kofemashinu-krups.html" class="related-bottom-card"><span class="related-bottom-title">Как использовать кофемашину Krups: Полное руководство по эксплуатации</span><span class="related-bottom-desc">Пошаговая инструкция: от первой промывки до приготовления эспрессо. Советы по уходу, настройке помол</span></a><a href="/articles/k/ka/kak-sobrat-kofemolku-bosch-mkm-6003-video.html" class="related-bottom-card"><span class="related-bottom-title">Как собрать кофемолку Bosch MKM 6003: пошаговая видео-инструкция</span><span class="related-bottom-desc">Подробный гайд по сборке жерновой кофемолки Bosch MKM 6003. Разборка, чистка и правильная установка </span></a><a href="/articles/d/de/delongi-magnifika-kofemashina-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Делонги Магнифика: полная инструкция по эксплуатации и настройке</span><span class="related-bottom-desc">Подробное руководство: как пользоваться кофемашиной DeLonghi Magnifica. Настройка помола, программир</span></a><a href="/articles/k/ka/kak-pochistit-trubku-kapuchinatora.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить трубку капучинатора: пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как правильно чистить трубку капучинатора от засоров. Эффективные методы удаления накипи и </span></a><a href="/articles/k/ko/kofemashina-delonghi-esam-kak-dobratsya-do-porshnya-termobloka.html" class="related-bottom-card"><span class="related-bottom-title">Доступ к поршню термоблока Delonghi ESAM: пошаговая инструкция</span><span class="related-bottom-desc">Подробный гайд по разборке кофемашины DeLonghi ESAM. Узнайте, как добраться до поршня термоблока, оч</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

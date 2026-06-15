@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Что такое Drinker: обзор пуш-системы для кофеен — Кофини</title>
+    <meta name="description" content="Разбираем, что такое Drinker — автоматическая система дозирования напитков. Плюсы, минусы, стоимость и как это работает в кофейнях.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/c/ch/chto-takoe-drinkit.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Что такое Drinker: обзор пуш-системы для кофеен">
+    <meta property="og:description" content="Разбираем, что такое Drinker — автоматическая система дозирования напитков. Плюсы, минусы, стоимость и как это работает в кофейнях.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/aksessuary-i-instrumenty/">Аксессуары и инструменты</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Что такое Drinker: обзор пуш-системы для кофеен</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Что такое Drinker: полный разбор пуш-системы для автоматизации кофейни</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#суть-технологии-и-принцип-работы">Суть технологии и принцип работы</a></li><li><a href="#устройство-и-ключевые-компоненты">Устройство и ключевые компоненты</a></li><li><a href="#преимущества-внедрения-для-бизнеса">Преимущества внедрения для бизнеса</a></li><li><a href="#сравнение-с-традиционными-кофемашинами">Сравнение с традиционными кофемашинами</a></li><li><a href="#экономическая-эффективность-и-окупаемость">Экономическая эффективность и окупаемость</a></li><li><a href="#настройка-и-обслуживание">Настройка и обслуживание</a></li><li><a href="#перспективы-развития-рынка">Перспективы развития рынка</a></li><li><a href="#частые-вопросы-faq">Частые вопросы (FAQ)</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>В мире коммерческого кофеенного бизнеса термин <strong>Drinker</strong> часто вызывает путаницу, так как звучит как общее название для любого напитка. Однако в профессиональной среде под этим понимают конкретное технологическое решение — автоматизированную систему дозирования, которая позволяет бариста или клиентам самостоятельно получать напитки одним нажатием кнопки.</p>
+
+<p>Такая система кардинально меняет подход к сервису в точках самообслуживания и фаст-фудах. Вместо того чтобы ждать, пока бариста настроит эспрессо, взобьет молоко и смешает ингредиенты, пользователь взаимодействует с панелью управления, которая мгновенно выдает готовый продукт.</p>
+
+<p>Понимание того, как работает <em>Drinker</em>, необходимо владельцам бизнеса, планирующим масштабирование, и пользователям, желающим разобраться в качестве своего утреннего латте. Мы подробно разберем устройство, принципы работы и экономическую целесообразность внедрения подобных систем.</p>
+
+<h2 id="суть-технологии-и-принцип-работы">Суть технологии и принцип работы</h2>
+
+<p>В основе системы лежит сложный механизм дозирования компонентов. <strong>Автоматизация</strong> процесса достигается за счет точной синхронизации работы насосов и клапанов. Когда вы нажимаете на иконку на экране, система получает команду и открывает необходимые каналы подачи.</p>
+
+<p>Процесс начинается с заваривания эспрессо-основы. Затем, в зависимости от выбранной позиции меню, включаются дозаторы молока, воды, сиропов или шоколада. <strong>Точность дозирования</strong> является ключевым фактором качества напитка, ведь даже пара лишних миллилитров может испортить вкус.</p>
+
+<p>Современные <em>Drinker</em> системы оснащены сенсорами, которые контролируют наличие ингредиентов в емкостях. Если молоко заканчивается, устройство автоматически блокирует выдачу латте и сигнализирует оператору о необходимости пополнения запасов.</p>
+
+<p>Важно отметить, что такая система не просто смешивает ингредиенты, но и выдерживает температурный режим. <strong>Термостат</strong> поддерживает молоко и воду на нужной температуре, чтобы напиток был горячим сразу после выдачи.</p>
+
+<blockquote>⚠️ Внимание: Неправильная калибровка дозаторов может привести к быстрому истощению запасов дорогостоящих ингредиентов, таких как шоколад или сиропы, что напрямую ударит по маржинальности бизнеса.</blockquote>
+
+<div class="poll-widget" id="poll-836ab30b"><div class="poll-widget-question">📊 Как часто вы заказываете кофе на вынос?</div><div class="poll-widget-option" data-poll="836ab30b" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Каждый день</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="836ab30b" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">2-3 раза в неделю</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="836ab30b" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Только по выходным</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="836ab30b" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Редко</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="устройство-и-ключевые-компоненты">Устройство и ключевые компоненты</h2>
+
+<p>Конструктивно система представляет собой модульную сборку. Внутри корпуса скрыты десятки механических и электрических узлов. Главным элементом является <strong>блок управления</strong>, который координирует работу всех остальных частей.</p>
+
+<p>Заварочный блок отвечает за экстракцию кофе. В отличие от обычных кофемашин, здесь часто используется система быстрого пролива под высоким давлением. <strong>Дозаторы молока</strong> обычно представляют собой шприцевые механизмы или перистальтические насосы, обеспечивающие чистоту и точность.</p>
+
+<p>Отдельно стоит выделить систему промывки. После каждого цикла выдачи напитка внутренние трубки проходят процедуру самоочистки. Это предотвращает скисание остатков молока и появление бактерий. <strong>Гигиеничность</strong> — приоритет номер один для любой коммерческой точки.</p>
+
+<p>Некоторые модели имеют встраиваемые системы очистки воды, что критически важно для долговечности оборудования и вкуса кофе. <code>Фильтры обратного осмоса</code> часто интегрируются прямо в корпус устройства.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная очистка дозаторов сиропов специальными растворами предотвращает засыхание сахара и выход из строя клапанов, что является частой причиной поломок в жаркое время года.</p></div>
+
+<h2 id="преимущества-внедрения-для-бизнеса">Преимущества внедрения для бизнеса</h2>
+
+<p>Внедрение системы <em>Drinker</em> дает бизнесу несколько неоспоримых преимуществ. Первое и самое очевидное — это <strong>скорость обслуживания</strong>. Время подготовки одного напитка сокращается до 15-20 секунд, что позволяет обслуживать больше клиентов в час.</p>
+
+<p>Второй плюс — снижение зависимости от человеческого фактора. Вам не нужно искать бариста с высокой квалификацией, так как система сама готовит напиток по заданной программе. Это также снижает <strong>текучесть персонала</strong> и затраты на обучение.</p>
+
+<p>Третий аспект — стандартизация качества. Независимо от того, кто нажал кнопку, клиент всегда получит напиток с одинаковым вкусом и количеством ингредиентов. <strong>Стабильность вкуса</strong> — залог лояльности постоянных покупателей.</p>
+
+<p>Четвертое преимущество — возможность создания точек самообслуживания. Это позволяет открывать кофейные островки в торговых центрах или вокзалах с минимальным штатом сотрудников, часто всего с одним оператором на несколько автоматов.</p>
+
+<h2 id="сравнение-с-традиционными-кофемашинами">Сравнение с традиционными кофемашинами</h2>
+
+<p>Выбор между классической кофемашиной и системой <em>Drinker</em> зависит от типа бизнеса. Традиционные аппараты требуют участия человека для каждого шага: помол, трамбовка, взбивание пены. В то время как <strong>Drinker</strong> выполняет эти действия автономно.</p>
+
+<p>Ниже приведена таблица, сравнивающая ключевые характеристики обоих подходов:</p>
+
+<table>
+<thead>
+<tr>
+<th>Критерий</th>
+<th>Традиционная кофемашина</th>
+<th>Система Drinker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Скорость подачи</td>
+<td>1-2 минуты</td>
+<td>15-25 секунд</td>
+</tr>
+<tr>
+<td>Требования к персоналу</td>
+<td>Высокая квалификация</td>
+<td>Базовое обучение</td>
+</tr>
+<tr>
+<td>Стабильность вкуса</td>
+<td>Зависит от бариста</td>
+<td>Абсолютная</td>
+</tr>
+<tr>
+<td>Стоимость внедрения</td>
+<td>Ниже</td>
+<td>Выше</td>
+</tr>
+<tr>
+<td>Гибкость меню</td>
+<td>Высокая (творчество бариста)</td>
+<td>Ограничена программой</td>
+</tr>
+</tbody>
+</table>
+
+<p>Если ваша цель — создать атмосферу уюта, где бариста общается с гостем и творит искусство, то классический подход незаменим. Однако для формата "кофе с собой" (coffee to go) <strong>автоматизация</strong> выигрывает по всем параметрам.</p>
+
+<blockquote>⚠️ Внимание: Учтите, что системы типа Drinker требуют регулярного технического обслуживания и наличия запасных частей, так как сложная электроника более уязвима, чем механические рычаги классических машин.</blockquote>
+
+<div class="checklist-block"><h4>☑️ Критерии выбора системы</h4><label class="check-item"><input type="checkbox"><span>Пропускная способность в час</span></label><label class="check-item"><input type="checkbox"><span>Наличие сервисной поддержки</span></label><label class="check-item"><input type="checkbox"><span>Простота очистки</span></label><label class="check-item"><input type="checkbox"><span>Гибкость настройки меню</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="экономическая-эффективность-и-окупаемость">Экономическая эффективность и окупаемость</h2>
+
+<p>Многие предприниматели опасаются высокой стоимости <em>Drinker</em> систем. Действительно, первоначальные инвестиции могут быть значительными. Однако расчет <strong>себестоимости</strong> одной чашки обычно показывает, что автоматизированные системы дешевле в эксплуатации.</p>
+
+<p>Это достигается за счет точного дозирования ингредиентов. Нет перелива молока или перебора с сиропом, что часто случается при ручном приготовлении. Кроме того, сокращается фонд оплаты труда, так как один оператор может контролировать несколько точек.</p>
+
+<p>Окупаемость оборудования обычно наступает через 6-12 месяцев при высокой пропускной способности. В местах с большим трафиком, таких как бизнес-центры или аэропорты, возврат инвестиций происходит быстрее благодаря <strong>высокому обороту</strong>.</p>
+
+<p>Следует также учитывать стоимость расходных материалов. Специализированные капсулы или пакеты ингредиентов для таких систем могут стоить дороже, но их удобство и отсутствие отходов часто перевешивают эту разницу.</p>
+
+<blockquote>⚠️ Внимание: Тарифы на обслуживание и стоимость оригинальных расходных материалов могут меняться производителем. Обязательно уточняйте условия поддержки оборудования перед заключением договора поставки.</blockquote>
+
+<details class="faq-item"><summary>Что делать при поломке насоса?</summary><div class="faq-answer"><p>Если насос перестает качать молоко, система может выдать ошибку. В этом случае необходимо проверить фильтры на входе, убедиться в наличии жидкости и при необходимости вызвать сервисного инженера для замены мембраны.</p></div></details>
+
+<h2 id="настройка-и-обслуживание">Настройка и обслуживание</h2>
+
+<p>Эксплуатация системы требует строгого соблюдения регламентов. Ежедневно необходимо проводить <strong>прогрев</strong> и промывку головки заваривания. Это удаляет кофейные масла, которые могут прогоркнуть и испортить вкус следующего напитка.</p>
+
+<p>Раз в неделю требуется более глубокая чистка дозаторов сиропов и молока. Для этого используются специальные дезинфицирующие средства, которые подаются в систему вместо ингредиентов. <strong>Санитарная обработка</strong> обязательна для соблюдения норм СанПиН.</p>
+
+<p>Периодически нужно калибровать дозаторы. Со временем насосы могут терять точность, выдавая чуть больше или меньше жидкости. <code>Настройка объема</code> осуществляется через меню администратора с использованием мерного стакана.</p>
+
+<p>Важным этапом является контроль качества воды. Жесткая вода приводит к образованию накипи внутри теплообменников, что снижает эффективность нагрева и может привести к поломке котла. Используйте только <strong>фильтрованную воду</strong>.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Правильная калибровка дозаторов и регулярная чистка — залог стабильного вкуса напитка и долгой жизни дорогостоящего оборудования.</p></div>
+
+<h2 id="перспективы-развития-рынка">Перспективы развития рынка</h2>
+
+<p>Рынок автоматизации кофейного дела движется в сторону полной интеграции с мобильными приложениями. Современные <em>Drinker</em> системы уже умеют принимать заказы через смартфон, позволяя клиенту подойти к автомату в точно назначенное время.</p>
+
+<p>В будущем мы можем ожидать внедрения искусственного интеллекта, который будет анализировать предпочтения клиентов и предлагать индивидуальные рецепты. <strong>Персонализация</strong> станет стандартом для точек быстрого питания.</p>
+
+<p>Также развивается направление экологичности. Производители работают над системами, которые используют меньше пластика и воды при очистке. <strong>Энергоэффективность</strong> становится важным критерием выбора для крупных сетей.</p>
+
+<p>Таким образом, понятие <strong>Drinker</strong> эволюционирует от простого автомата к интеллектуальному серверу напитков, который является неотъемлемой частью цифровой экосистемы современной кофейни.</p>
+
+<h2 id="частые-вопросы-faq">Частые вопросы (FAQ)</h2>
+
+<details>
+<summary>Насколько сложно обслуживать систему Drinker?</summary>
+<p>Обслуживание не требует высокой квалификации, но требует дисциплины. Основные операции — это ежедневная промывка и еженедельная дезинфекция, которые выполняются по простому меню на экране.</p>
+</details>
+
+<details>
+<summary>Можно ли добавлять свои ингредиенты?</summary>
+<p>Да, большинство систем позволяют программировать свои сиропы или добавки, но для этого необходимо, чтобы они имели подходящую вязкость и не содержали крупных частиц, способных засорить дозатор.</p>
+</details>
+
+<details>
+<summary>Какая гарантия на оборудование?</summary>
+<p>Стандартная гарантия обычно составляет 12-24 месяца, но она действует только при условии выполнения всех регламентных работ и использования оригинальных расходных материалов.</p>
+</details>
+
+<details>
+<summary>Может ли система работать без электричества?</summary>
+<p>Нет, система полностью зависит от электроснабжения. При отключении света она перестает работать, поэтому для стабильной работы в публичных местах рекомендуется наличие резервного источника питания.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#суть-технологии-и-принцип-работы">Суть технологии и принцип работы</a></li><li><a href="#устройство-и-ключевые-компоненты">Устройство и ключевые компоненты</a></li><li><a href="#преимущества-внедрения-для-бизнеса">Преимущества внедрения для бизнеса</a></li><li><a href="#сравнение-с-традиционными-кофемашинами">Сравнение с традиционными кофемашинами</a></li><li><a href="#экономическая-эффективность-и-окупаемость">Экономическая эффективность и окупаемость</a></li><li><a href="#настройка-и-обслуживание">Настройка и обслуживание</a></li><li><a href="#перспективы-развития-рынка">Перспективы развития рынка</a></li><li><a href="#частые-вопросы-faq">Частые вопросы (FAQ)</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/c/ch/chto-mozhno-ispolzovat-vmesto-filtrov-dlya-kofevarki.html" class="related-card">Чем заменить фильтры для кофеварки: 7 безопасных альтернатив</a></li><li><a href="/articles/a/ar/art-latte-kak-narisovat.html" class="related-card">Как нарисовать арт-латте: пошаговое руководство по сиренам, листьям и сердцам</a></li><li><a href="/articles/k/ka/kapuchinator-ruchnoj-vspenivatel-moloka-kak-polzovatsya.html" class="related-card">Как пользоваться ручным капучинатором: инструкция по приготовлению идеальной пены</a></li><li><a href="/articles/g/ga/gazovaya-gorelka-tiamo.html" class="related-card">Газовая горелка Tiamo: обзор, модели и правила выбора для бариста</a></li><li><a href="/articles/r/re/rejting-ruchnykh-kofemolok-s-zhernovami.html" class="related-card">Топ-10 лучших ручных кофемолок с жерновами: рейтинг 2026</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/c/ch/chto-mozhno-ispolzovat-vmesto-filtrov-dlya-kofevarki.html" class="related-bottom-card"><span class="related-bottom-title">Чем заменить фильтры для кофеварки: 7 безопасных альтернатив</span><span class="related-bottom-desc">Ищете замену фильтру? Узнайте, из чего сделать аналог, как влияет бумажная салфетка на вкус и почему</span></a><a href="/articles/a/ar/art-latte-kak-narisovat.html" class="related-bottom-card"><span class="related-bottom-title">Как нарисовать арт-латте: пошаговое руководство по сиренам, листьям и сердцам</span><span class="related-bottom-desc">Учимся создавать арт на кофе: от базового рисования до сложных узоров. Техники, инструменты, выбор м</span></a><a href="/articles/k/ka/kapuchinator-ruchnoj-vspenivatel-moloka-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться ручным капучинатором: инструкция по приготовлению идеальной пены</span><span class="related-bottom-desc">Пошаговая инструкция: как правильно взбить молоко ручным капучинатором, выбрать режим и температуру.</span></a><a href="/articles/g/ga/gazovaya-gorelka-tiamo.html" class="related-bottom-card"><span class="related-bottom-title">Газовая горелка Tiamo: обзор, модели и правила выбора для бариста</span><span class="related-bottom-desc">Профессиональная газовая горелка Tiamo для кофейни и дома. Обзоры моделей, сравнение характеристик, </span></a><a href="/articles/r/re/rejting-ruchnykh-kofemolok-s-zhernovami.html" class="related-bottom-card"><span class="related-bottom-title">Топ-10 лучших ручных кофемолок с жерновами: рейтинг 2026</span><span class="related-bottom-desc">Сравнительный обзор лучших ручных кофемолок с керамическими и стальными жерновами. Как выбрать идеал</span></a><a href="/articles/k/ko/kofe-s-filtrom-dlya-zavarivaniya-v-chashke.html" class="related-bottom-card"><span class="related-bottom-title">Кофе с фильтром для чашки: выбор, использование и секреты вкуса</span><span class="related-bottom-desc">Узнайте все о фильтрах для заваривания кофе в чашке. Как выбрать правильный помол, температуру воды </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

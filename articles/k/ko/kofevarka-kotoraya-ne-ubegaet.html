@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Кофеварка с функцией автонаполнения: как работает система неубегающего кофе — Кофини</title>
+    <meta name="description" content="Разбираем технологии автоматического наполнения кофеварок. Почему некоторые модели исключают переполнение и как выбрать надежную машину.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ko/kofevarka-kotoraya-ne-ubegaet.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Кофеварка с функцией автонаполнения: как работает система неубегающего кофе">
+    <meta property="og:description" content="Разбираем технологии автоматического наполнения кофеварок. Почему некоторые модели исключают переполнение и как выбрать надежную машину.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/vybor-kofemashin/">Выбор кофемашин</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Кофеварка с функцией автонаполнения: как работает система неубегающего кофе</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Технология защиты от переполнения в современных кофеварках</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#принципы-работы-датчиков-уровня-жидкости">Принципы работы датчиков уровня жидкости</a></li><li><a href="#автоматическое-дозирование-и-программирование-объема">Автоматическое дозирование и программирование объема</a></li><li><a href="#механическая-защита-и-конструкция-поддона">Механическая защита и конструкция поддона</a></li><li><a href="#типы-кофеварок-с-защитой-от-перелива">Типы кофеварок с защитой от перелива</a></li><li><a href="#техническое-обслуживание-и-профилактика-сбоев">Техническое обслуживание и профилактика сбоев</a></li><li><a href="#выбор-идеальной-модели-для-вашей-кухни">Выбор идеальной модели для вашей кухни</a></li><li><a href="#решение-проблем-при-возникновении-сбоев">Решение проблем при возникновении сбоев</a></li><li><a href="#заключение-технологии-безопасности">Заключение: технологии безопасности</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Многие пользователи сталкиваются с неприятной ситуацией, когда любимая кофемашина внезапно начинает переливать воду или кофе за пределы чашки. Это явление, часто называемое в народе «убегающим кофе», может испортить не только напиток, но и интерьер кухни, а также механизм самого устройства. Современные производители внедрили ряд <strong>электронных сенсоров</strong> и механических блокировок, которые делают процесс приготовления полностью предсказуемым.</p>
+
+<p>Суть проблемы обычно кроется в дисбалансе между скоростью заваривания и объемом чашки. Если вы используете нестандартную посуду или забываете установить чашку по метке, вода просто переполняет сосуд. Однако новые модели, оснащенные <strong>системой автоматической остановки</strong>, решают эту задачу на уровне прошивки. Вам больше не нужно стоять рядом и таймером отсчитывать секунды заваривания.</p>
+
+<h2 id="принципы-работы-датчиков-уровня-жидкости">Принципы работы датчиков уровня жидкости</h2>
+
+<p>Сердцем любой кофеварки, которая «не убегает», является точная система измерения объема. В самых простых моделях это может быть механический поплавок, который перекрывает клапан при достижении критической отметки. В более продвинутых устройствах используются <strong>емкостные датчики</strong>, реагирующие на изменение электрического поля при приближении жидкости к сенсору.</p>
+
+<p>Некоторые бренды, такие как <em>DeLonghi</em> или <em>Breville</em>, интегрируют датчики непосредственно в поддон для чашек. Это позволяет аппарату определять высоту посуды еще до начала процесса. Если вы поставите высокую кружку вместо низкого стакана, система автоматически скорректирует количество воды, чтобы напиток не вылился через край.</p>
+
+<p>Особое внимание стоит уделить тому, как именно происходит сброс данных. Если датчик загрязнен кофейными маслами, он может давать ложные сигналы. Поэтому регулярная очистка сенсоров критически важна для их корректной работы.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Даже самая совершенная электроника может давать сбои, если на датчик уровня попала пена от взбитого молока или кофейная гуща. Всегда протирайте зону сенсора сухим полотенцем перед включением.</p>
+</blockquote>
+
+<h2 id="автоматическое-дозирование-и-программирование-объема">Автоматическое дозирование и программирование объема</h2>
+
+<p>Помимо физических датчиков, существует программный метод борьбы с переливом. Вы можете настроить желаемый объем напитка в меню управления. Для этого перейдите в раздел <code>Настройки → Напитки → Объем порции</code> и установите значение в миллилитрах. После этого <strong>контроллер заваривания</strong> будет отключать подачу воды строго по достижении заданного параметра.</p>
+
+<p>В моделях с сенсорным экраном, таких как <em>Philips 5400</em> или <em>Siemens EQ.6</em>, этот процесс интуитивно понятен. Вы просто перемещаете ползунок на дисплее, и машина запоминает новые значения для эспрессо, латте или американо. Это избавляет от необходимости гадать, сколько воды нальет аппарат «по умолчанию».</p>
+
+<p>Однако, если вы используете чашку с нестандартной формой, программное ограничение может быть недостаточным. В таких случаях лучше комбинировать программные настройки с физическим контролем высоты поддона.</p>
+
+<div class="poll-widget" id="poll-1b97377c"><div class="poll-widget-question">📊 Пользуетесь ли вы автоматическими настройками объема?</div><div class="poll-widget-option" data-poll="1b97377c" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Да, настраиваю каждый раз</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="1b97377c" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Только стандартные настройки</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="1b97377c" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Всегда доливаю воду вручную</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="1b97377c" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не знаю, как это сделать</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="механическая-защита-и-конструкция-поддона">Механическая защита и конструкция поддона</h2>
+
+<p>Далеко не все кофеварки полагается только на электронику. Надежная <strong>механическая блокировка</strong> часто становится последним рубежом обороны. Специальная конструкция поддона для чашек имеет регулируемый уровень. Вы можете опустить его вниз, чтобы вместить высокую кружку, или поднять, чтобы использовать низкий эспрессо-стаканчик.</p>
+
+<p>Важно отметить, что при неправильной установке поддона многие машины просто не запустят цикл заваривания. Это защита от «убегания» в зародыше. Если вы попытаетесь включить аппарат без чашки или с неправильной высотой, на дисплее появится ошибка, и <strong>нагревательный блок</strong> не активируется.</p>
+
+<p>Особый интерес представляют модели с выдвижным поддоном. Он позволяет не только менять высоту, но и выдвигать его полностью для мытья, что предотвращает накопление старых кофейных остатков, которые могут блокировать сливные отверстия и вызывать перелив в канализацию.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка перед завариванием</h4><label class="check-item"><input type="checkbox"><span>Убедиться в установке чашки</span></label><label class="check-item"><input type="checkbox"><span>Проверить уровень поддона</span></label><label class="check-item"><input type="checkbox"><span>Очистить датчики от накипи</span></label><label class="check-item"><input type="checkbox"><span>Выбрать нужный объем на дисплее</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="типы-кофеварок-с-защитой-от-перелива">Типы кофеварок с защитой от перелива</h2>
+
+<p>Не все устройства имеют одинаковую степень защиты. Давайте рассмотрим, какие типы машин наиболее надежны в этом плане. Ручные <strong>капсульные системы</strong>, такие как <em>Nespresso</em> или <em>Dolce Gusto</em>, обладают встроенным ограничителем объема капсулы. Физически невозможно получить больше жидкости, чем заложено в капсуле, если только вы не включите подачу воды принудительно.</p>
+
+<p>Автоматические кофемашины с керамической жерновом часто оснащаются более сложными алгоритмами контроля. Они анализируют не только объем, но и давление в системе. Если давление падает (например, из-за отсутствия чашки), цикл прерывается немедленно. Это делает их предпочтительным выбором для офисов, где пользователи могут быть небрежны.</p>
+
+<p>Капельные кофеварки (фильтр-машинки) традиционно считаются более уязвимыми к переливу, так как вода капает из фильтр-бункера непрерывно. Однако современные модели с функцией <strong>Auto-Off</strong> и датчиками уровня в колбе решают эту проблему, останавливая процесс, когда колба полна.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип кофеварки</th>
+<th>Механизм защиты</th>
+<th>Надежность</th>
+<th>Требования к пользователю</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Автоматические эспрессо-машины</td>
+<td>Сенсоры уровня + ПО</td>
+<td>Высокая</td>
+<td>Настройка объема</td>
+</tr>
+<tr>
+<td>Капсульные системы</td>
+<td>Объем капсулы</td>
+<td>Максимальная</td>
+<td>Нет</td>
+</tr>
+<tr>
+<td>Фильтр-кофеварки</td>
+<td>Поплавок в колбе</td>
+<td>Средняя</td>
+<td>Правильная установка колбы</td>
+</tr>
+<tr>
+<td>Ручные гейзерные</td>
+<td>Отсутствует</td>
+<td>Низкая</td>
+<td>Контроль нагрева</td>
+</tr>
+</tbody>
+</table>
+
+<details class="faq-item"><summary>Почему гейзерные кофеварки часто «убегают»?</summary><div class="faq-answer"><p>В гейзерных кофеварках давление создается за счет кипения воды в нижнем отсеке. Если верхний сосуд плохо прикручен или не имеет клапана сброса давления, пар может вытолкнуть кофе с избыточной силой, что приведет к переполнению и даже выбросу жидкости наружу.</p></div></details>
+
+<h2 id="техническое-обслуживание-и-профилактика-сбоев">Техническое обслуживание и профилактика сбоев</h2>
+
+<p>Даже самая надежная кофеварка со временем может начать вести себя непредсказуемо. Основная причина — это накопление минеральных отложений и кофейных масел на чувствительных элементах. Регулярное использование <strong>декальцифицирующих средств</strong> и специальных очистителей для кофейных масел обязательно для сохранения функциональности датчиков уровня.</p>
+
+<p>Если вы заметили, что машина начала переливать воду, первое действие — провести полный цикл очистки без зерна и капсул. Используйте режим <code>Промывка системы</code> из меню обслуживания. Это удалит остатки масел с сенсоров, которые могут блокировать их работу.</p>
+
+<p>Также не следует игнорировать звуки, издаваемые аппаратом. Стук клапанов или необычное гудение насоса могут указывать на то, что система не может правильно контролировать поток. Визуальный осмотр поддона на предмет трещин или деформаций также поможет выявить механические проблемы.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Если датчик уровня жидкости загрязнен, попробуйте аккуратно протереть его ватной палочкой, смоченной в слабом растворе уксуса, затем тщательно вытрите насухо. Это вернет чувствительность сенсору.</p></div>
+
+<blockquote>
+<p>⚠️ Внимание: Никогда не используйте абразивные губки или металлические щетки для очистки зоны сенсоров. Повреждение защитного покрытия датчика приведет к его полной неработоспособности и потребует дорогостоящего ремонта.</p>
+</blockquote>
+
+<h2 id="выбор-идеальной-модели-для-вашей-кухни">Выбор идеальной модели для вашей кухни</h2>
+
+<p>При выборе кофеварки, которая гарантированно не «убежит», обращайте внимание не только на бренд, но и на тип управления. Модели с <strong>цифровым дисплеем</strong> и возможностью сохранения программ обычно имеют более точные алгоритмы дозирования, чем механические аналоги с крутилками.</p>
+
+<p>Проверьте наличие функции «Память напитков». Если вы часто готовите разные объемы (например, утром двойной эспрессо, а днем большой латте), возможность сохранить эти настройки избавит вас от постоянных ручных вмешательств. Это также снижает риск человеческой ошибки, когда вы случайно выбираете неправильный объем.</p>
+
+<p>Для маленьких кухонь идеальным решением станут компактные капсульные машины. Они занимают минимум места и физически не могут налить больше, чем предусмотрено дизайном капсулы. Для больших семей лучше подойдут автоматические рожковые машины с широким поддоном и возможностью регулировки высоты.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Самый надежный способ избежать перелива — это комбинация правильной настройки объема в меню и регулярной очистки датчиков уровня жидкости от кофейных остатков.</p></div>
+
+<h2 id="решение-проблем-при-возникновении-сбоев">Решение проблем при возникновении сбоев</h2>
+
+<p>Что делать, если кофеварка начала переливать воду, несмотря на все настройки? Первое, что нужно сделать — это немедленно прервать цикл, нажав кнопку «Стоп» или отключив устройство от сети. Затем проверьте, не засорен ли сливной клапан. Иногда остатки кофейной гущи или накипь блокируют обратный клапан, не давая системе сбросить избыточное давление.</p>
+
+<p>Если проблема повторяется даже после чистки, возможно, неисправен сам датчик уровня. В дешевых моделях его замена может быть экономически нецелесообразной, и лучше будет рассмотреть покупку нового устройства. В премиальных аппаратах ремонт часто оправдан, так как замена датчика не является сложной процедурой для сервисного центра.</p>
+
+<p>Не стоит также забывать о качестве воды. Жесткая вода быстро образует накипь, которая может изолировать датчик от контакта с жидкостью. Использование фильтрованной воды или специальных капсул для смягчения воды продлит жизнь электронике вашей кофеварки.</p>
+
+<details class="faq-item"><summary>Как проверить работоспособность датчика уровня?</summary><div class="faq-answer"><p>Отключите машину от сети. Снимите поддон для чашек и найдите сенсоры (обычно это два металлических контакта или прозрачная пластиковая зона). Включите машину без чашки. Если дисплей показывает ошибку «Нет чашки» или «Ошибка датчика», сенсор работает. Если машина пытается начать заваривание — датчик неисправен.</p></div></details>
+
+<h2 id="заключение-технологии-безопасности">Заключение: технологии безопасности</h2>
+
+<p>Технологии защиты от перелива в кофемашинах прошли долгий путь от простых поплавков до сложных алгоритмов искусственного интеллекта. Сегодня «убегающий кофе» — это скорее исключение, чем правило, если вы выбираете устройство с современными функциями. Главное — помнить, что даже автоматика требует ухода и внимания со стороны пользователя.</p>
+
+<p>Правильная настройка, регулярная очистка и использование качественной воды — вот три кита, на которых держится стабильная работа вашей кофемашины. Не пренебрегайте рекомендациями производителя по обслуживанию, и ваш аппарат будет радовать вас идеальными чашками кофе долгие годы без неприятных инцидентов.</p>
+
+<p>В конце концов, комфорт приготовления кофе должен приносить радость, а не хлопоты. Выбирайте устройства с умными системами контроля, и вы забудете о проблеме переполнения навсегда.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если после всех процедур очистки и перенастройки проблема перелива сохраняется, обязательно обратитесь в авторизованный сервисный центр. Самостоятельный ремонт электронных модулей может привести к полной потере гарантии.</p>
+</blockquote>
+
+<details>
+<summary>Почему моя кофеварка переполняет чашку даже при минимальной настройке?</summary>
+<p>Это может быть связано с неисправностью клапана подачи воды, который не закрывается полностью, или с загрязнением датчика уровня. Попробуйте провести цикл очистки и проверить, не заклинило ли механическую часть клапана.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать любую чашку в кофеварке с защитой?</summary>
+<p>Нет. Если чашка слишком высокая или имеет нестандартную форму, датчик уровня может не сработать. Используйте чашки, рекомендованные производителем, или регулируйте высоту поддона.</p>
+</details>
+
+<details>
+<summary>Как часто нужно чистить датчики уровня жидкости?</summary>
+<p>Рекомендуется проводить очистку датчиков минимум раз в месяц при активном использовании машины, чтобы предотвратить накопление кофейных масел.</p>
+</details>
+
+<details>
+<summary>Что делать, если кофеварка не запускается из-за ошибки датчика?</summary>
+<p>Попробуйте отключить устройство от сети на 5 минут, затем включите снова. Если ошибка сохраняется, выполните полную очистку системы и проверьте, нет ли физических повреждений на поддоне.</p>
+</details>
+
+<details>
+<summary>Влияет ли жесткость воды на работу датчиков уровня?</summary>
+<p>Да, жесткая вода может образовывать накипь на сенсорах, что снижает их чувствительность и приводит к сбоям в работе. Используйте фильтрованную воду.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#принципы-работы-датчиков-уровня-жидкости">Принципы работы датчиков уровня жидкости</a></li><li><a href="#автоматическое-дозирование-и-программирование-объема">Автоматическое дозирование и программирование объема</a></li><li><a href="#механическая-защита-и-конструкция-поддона">Механическая защита и конструкция поддона</a></li><li><a href="#типы-кофеварок-с-защитой-от-перелива">Типы кофеварок с защитой от перелива</a></li><li><a href="#техническое-обслуживание-и-профилактика-сбоев">Техническое обслуживание и профилактика сбоев</a></li><li><a href="#выбор-идеальной-модели-для-вашей-кухни">Выбор идеальной модели для вашей кухни</a></li><li><a href="#решение-проблем-при-возникновении-сбоев">Решение проблем при возникновении сбоев</a></li><li><a href="#заключение-технологии-безопасности">Заключение: технологии безопасности</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/c/ch/chem-otlichaetsya-kapelnaya-kofevarka-ot-rozhkovoj-kofevarki.html" class="related-card">Капельная или рожковая кофеварка: полное сравнение и выбор</a></li><li><a href="/articles/g/gd/gde-posmotret-kofemashina.html" class="related-card">Где посмотреть и выбрать кофемашину: гид по магазинам и параметрам</a></li><li><a href="/articles/p/pr/pribory-dlya-prigotovleniya-kofe.html" class="related-card">Лучшие приборы для приготовления кофе: гид по выбору кофеварок и кофемашин</a></li><li><a href="/articles/k/ko/kogda-poyavilis-pervye-kofemashiny.html" class="related-card">История кофемашин: когда появились первые автоматические устройства</a></li><li><a href="/articles/k/ka/kak-pravilno-vybrat-kofevarku-domoj.html" class="related-card">Как выбрать кофеварку домой: полный гид по типам и функциям</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/c/ch/chem-otlichaetsya-kapelnaya-kofevarka-ot-rozhkovoj-kofevarki.html" class="related-bottom-card"><span class="related-bottom-title">Капельная или рожковая кофеварка: полное сравнение и выбор</span><span class="related-bottom-desc">Чем отличается капельная кофеварка от рожковой? Подробный разбор принципа работы, качества эспрессо,</span></a><a href="/articles/g/gd/gde-posmotret-kofemashina.html" class="related-bottom-card"><span class="related-bottom-title">Где посмотреть и выбрать кофемашину: гид по магазинам и параметрам</span><span class="related-bottom-desc">Ищете, где посмотреть кофемашину? Полный обзор онлайн-каталогов, профильных салонов и супермаркетов.</span></a><a href="/articles/p/pr/pribory-dlya-prigotovleniya-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Лучшие приборы для приготовления кофе: гид по выбору кофеварок и кофемашин</span><span class="related-bottom-desc">Подробный обзор устройств для кофемании: от турок до рожковых машин. Узнайте, как выбрать идеальный </span></a><a href="/articles/k/ko/kogda-poyavilis-pervye-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">История кофемашин: когда появились первые автоматические устройства</span><span class="related-bottom-desc">Узнайте, когда были изобретены первые кофемашины и как эволюционировала технология приготовления эсп</span></a><a href="/articles/k/ka/kak-pravilno-vybrat-kofevarku-domoj.html" class="related-bottom-card"><span class="related-bottom-title">Как выбрать кофеварку домой: полный гид по типам и функциям</span><span class="related-bottom-desc">Узнайте, как подобрать идеальную кофеварку для дома. Сравнение рожковых, капсульных и автоматических</span></a><a href="/articles/k/ka/kakaya-kofemashina-luchshe-mile-ili-yura.html" class="related-bottom-card"><span class="related-bottom-title">Miele или Jura: какая кофемашина лучше для дома и офиса в 2026? Полное сравнение</span><span class="related-bottom-desc">Глубокий разбор брендов Miele и Jura. Сравнение надежности, качества эспрессо, сервиса и цен. Узнайт</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

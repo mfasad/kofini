@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как работает кофемашина DeLongi: принцип действия, циклы и обслуживание — Кофини</title>
+    <meta name="description" content="Подробный разбор того, как работает кофемашина DeLongi. Изучите цикл заваривания, работу помпы, систему автоматической очистки и особенности термоблока.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-rabotaet-kofemashina-de-longi.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как работает кофемашина DeLongi: принцип действия, циклы и обслуживание">
+    <meta property="og:description" content="Подробный разбор того, как работает кофемашина DeLongi. Изучите цикл заваривания, работу помпы, систему автоматической очистки и особенности термоблока.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как работает кофемашина DeLongi: принцип действия, циклы и обслуживание</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как работает кофемашина DeLongi: полный разбор принципа действия</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#сердце-системы-гидравлика-и-помповый-узел">Сердце системы: гидравлика и помповый узел</a></li><li><a href="#магия-заваривания-цикл-работы-заварочного-блока">Магия заваривания: цикл работы заварочного блока</a></li><li><a href="#термодинамика-как-поддерживается-температура">Термодинамика: как поддерживается температура</a></li><li><a href="#система-автоматической-очистки-и-промывки">Система автоматической очистки и промывки</a></li><li><a href="#типичные-неисправности-и-диагностика">Типичные неисправности и диагностика</a></li><li><a href="#особенности-работы-с-разными-видами-кофе">Особенности работы с разными видами кофе</a></li><li><a href="#заключение-и-правильное-обслуживание">Заключение и правильное обслуживание</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Многие владельцы эспрессо-машин марки <em>DeLongi</em> наслаждаются ароматным напитком каждое утро, даже не задумываясь о сложных механических процессах, скрытых за стильным корпусом. Понимание того, как работает кофемашина DeLongi, позволяет не только правильно готовить кофе, но и грамотно обслуживать устройство, продлевая его жизнь на годы. Это не просто бытовой прибор, а инженерное решение, где каждый узел выполняет строго отведенную функцию.</p>
+<p>В отличие от простейших капельных кофеварок, автоматические машины бренда используют замкнутый цикл гидравлики и термодинамики. От момента нажатия кнопки до появления первой капли эспрессо происходит серия синхронизированных действий: подача воды, помол, трамбовка, нагрев и экстракция. Разберем эти этапы подробно, чтобы вы могли контролировать процесс приготовления.</p>
+
+<h2 id="сердце-системы-гидравлика-и-помповый-узел">Сердце системы: гидравлика и помповый узел</h2>
+<p>Вся работа устройства начинается с водоснабжения. Вода из резервуара подается в систему через специальный клапан, который отфильтровывает крупные частицы и предотвращает обратный ток жидкости. Основным двигателем этого процесса является <strong>вибрационная помпа</strong>. Именно она создает необходимое давление, прокачивая воду через узкие каналы и заварочный блок.</p>
+<p>В большинстве моделей <em>DeLongi</em> используется помпа, способная развивать давление 15 бар. Это значение является стандартом для качественной экстракции эспрессо, так как оно позволяет воде проникнуть вглубь спрессованной кофейной таблетки и растворить максимальное количество ароматических масел. Однако важно понимать, что рабочее давление внутри заварочной камеры может отличаться от паспортного значения помпы.</p>
+<p>Система управления давлением реализована через датчики и электронные контроллеры. Если вода не может пройти через кофе (например, из-за слишком мелкого помола), электроника зафиксирует скачок давления и может прервать цикл, чтобы избежать перегрузки механизма. Это критически важный элемент <strong>защиты насоса</strong> от гидроудара.</p>
+
+<h2 id="магия-заваривания-цикл-работы-заварочного-блока">Магия заваривания: цикл работы заварочного блока</h2>
+<p>Уникальной особенностью бренда является съемный <strong>заварочный блок</strong>. Это механическое устройство, которое самостоятельно дозирует молотый кофе, утрамбовывает его и пропускает через него горячую воду. Процесс начинается, когда вы выбираете напиток: сервопривод поворачивает механизм, и кофемолка (встроенная или отдельная) подает определенную порцию свежемолотых зерен в камеру заваривания.</p>
+<p>Затем происходит <strong>трамбовка</strong>. Поршень сжимает кофейную таблетку с усилием, достаточным для создания сопротивления потоку воды. Далее вода, нагретая до точной температуры, поступает в камеру. Длительность контакта воды с кофе регулируется объемом воды, который пропустит клапан. Именно здесь формируется вкус напитка: слишком быстрый проход сделает эспрессо кислым, а слишком медленный — горьким.</p>
+<p>После завершения экстракции блок автоматически выбрасывает использованную таблетку  в контейнер для жмыха. Этот процесс происходит бесшумно и незаметно для пользователя. В моделях с функцией <em>Thermoblock</em> нагрев воды происходит непосредственно перед подачей, обеспечивая стабильную температуру даже при приготовлении нескольких чашек подряд.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Никогда не пытайтесь извлечь заварочный блок, когда машина находится в рабочем цикле или сразу после приготовления горячего напитка. Остывание механизма занимает несколько минут, и попытка извлечения может привести к механическому повреждению шестеренок.</p>
+</blockquote>
+
+<div class="poll-widget" id="poll-926068ed"><div class="poll-widget-question">📊 Какой тип заваривания вы предпочитаете?</div><div class="poll-widget-option" data-poll="926068ed" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Автоматический блок</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="926068ed" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Ручная трамбовка</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="926068ed" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Капсульная система</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="926068ed" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не имею опыта</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="термодинамика-как-поддерживается-температура">Термодинамика: как поддерживается температура</h2>
+<p>Правильная температура воды — залог качественного кофе. В большинстве автоматических кофемашин <em>DeLongi</em> используется система <strong>термоблока</strong>. Это компактный нагревательный элемент с высокой тепловой инерцией, способный мгновенно нагреть холодную воду до нужных 90-93°C. Вода проходит через каналы внутри блока, обтекая нагревательный элемент, и сразу подается в заварочную камеру.</p>
+<p>В более дорогих моделях применяется <em>двойной бойлер</em> или система <strong>двойного термоблока</strong>. Это позволяет одновременно готовить эспрессо и взбивать молоко паром, не снижая температуру основного потока. В простых моделях между циклами приготовления кофе и взбивания пены требуется небольшая пауза для разогрева системы.</p>
+<p>Электроника постоянно мониторит температуру с помощью термодатчиков. Если датчик показывает отклонение, блок управления увеличивает или уменьшает мощность нагрева. Это обеспечивает стабильность вкуса даже при скачках напряжения в сети или изменении температуры воды в резервуаре.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Термоблок обеспечивает мгновенный нагрев воды, что критично для сохранения аромата кофе и экономии времени на приготовление.</p></div>
+
+<h2 id="система-автоматической-очистки-и-промывки">Система автоматической очистки и промывки</h2>
+<p>Одной из главных функций, которую необходимо понимать, является самоочистка. После каждого приготовления капучино или латте машина автоматически промывает систему взбивания молока. Вода проходит по трубкам парогенератора, вымывая остатки белковой пены, которые могут засохнуть и заблокировать каналы.</p>
+<p>Кроме того, существует цикл <strong>декальцинации</strong>. Когда датчики фиксируют накопление накипи (исходя из объема пропущенной воды и жесткости, установленной пользователем), машина запрашивает процедуру очистки. В резервуар заливается специальный раствор, который растворяет минеральные отложения внутри системы. Это обязательная процедура для сохранения работоспособности помпы и термоблока.</p>
+<p>Многие пользователи игнорируют сигналы о необходимости очистки, что в итоге приводит к дорогостоящему ремонту. Регулярная промывка заварочного блока под проточной водой (раз в 1-2 месяца) также является частью системы обслуживания. Это удаляет кофейные масла, которые накапливаются на стенках поршня и могут изменить вкус напитка.</p>
+
+<div class="checklist-block"><h4>☑️ Ежедневная проверка состояния</h4><label class="check-item"><input type="checkbox"><span>Проверить уровень воды</span></label><label class="check-item"><input type="checkbox"><span>Очистить контейнер для жмыха</span></label><label class="check-item"><input type="checkbox"><span>Промыть капучинатор</span></label><label class="check-item"><input type="checkbox"><span>Осмотреть уплотнители</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="типичные-неисправности-и-диагностика">Типичные неисправности и диагностика</h2>
+<p>Понимание принципа работы помогает самостоятельно диагностировать проблемы. Если машина издает громкий гул, но вода не идет, скорее всего, проблема в <strong>засорении заварочного блока</strong> или пустом резервуаре. Если же кофе получается слишком горячим или слишком холодным, возможно, нарушена калибровка термодатчика или вышел из строя термоблок.</p>
+<p>Частой ошибкой является использование слишком мелкого помола, что приводит к сильному давлению в системе. Машина может остановиться посередине цикла, выдав ошибку «Низкий напор» или просто молча сбросив таблетку. В таких случаях необходимо изменить настройки кофемолки на более крупные фракции.</p>
+<p>Иногда возникает проблема с застреванием таблетки в заварочном блоке. Это может случиться, если машина была выключена принудительно во время работы или если в кофе попал посторонний предмет. В этом случае требуется ручная очистка и проверка механизма выброса.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если на дисплее появляется код ошибки, не пытайтесь решить проблему, отключая машину от сети на длительное время. Электроника может потерять настройки калибровки, и процедура диагностики станет невозможной без сервисного оборудования.</p>
+</blockquote>
+
+<p>Для наглядности сравним основные характеристики различных режимов работы, которые может выполнять современная модель <em>DeLongi</em>:</p>
+
+<table>
+<thead>
+<tr>
+<th>Режим работы</th>
+<th>Давление (бар)</th>
+<th>Температура (°C)</th>
+<th>Время цикла</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Эспрессо</td>
+<td>15</td>
+<td>90-93</td>
+<td>20-25 сек</td>
+</tr>
+<tr>
+<td>Лунго</td>
+<td>15</td>
+<td>90-93</td>
+<td>40-50 сек</td>
+</tr>
+<tr>
+<td>Капучино (пар)</td>
+<td>1-1.5</td>
+<td>120+</td>
+<td>30-60 сек</td>
+</tr>
+<tr>
+<td>Самоочистка</td>
+<td>5-8</td>
+<td>70-80</td>
+<td>2-3 мин</td>
+</tr>
+</tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Всегда используйте мягкую воду или воду после фильтрации. Жесткая вода не только ускоряет образование накипи, но и влияет на вкус кофе, делая его плоским и безвкусным.</p></div>
+
+<h2 id="особенности-работы-с-разными-видами-кофе">Особенности работы с разными видами кофе</h2>
+<p>Автоматические машины <em>DeLongi</em> способны работать как с цельными зернами, так и с молотым кофе (через специальный отсек). При использовании молотого кофе система отключает встроенную кофемолку и использует внешний дозатор. Это удобно для приготовления дий-кофе или напитков с добавлением пряностей.</p>
+<p>При работе с <strong>арабикой</strong> и <strong>робустой</strong> в разных пропорциях машина автоматически корректирует время экстракции, если вы используете предустановленные профили. Однако для идеального результата часто требуется ручная настройка крепости и объема. Понимание того, как меняется сопротивление таблетки при изменении сорта, поможет вам настроить машину под свой вкус.</p>
+<p> Сахар плавится и забивает жернова, а сиропы могут повредить силиконовые уплотнители. Используйте такие добавки только после приготовления напитка в чашке.</p>
+
+<details class="faq-item"><summary>Что делать, если кофе течет слишком медленно?</summary><div class="faq-answer"><p>Если поток кофе очень медленный, попробуйте увеличить размер помола на одну-две ступени. Также проверьте, не слишком ли плотно вы утрамбовали таблетку вручную (если это возможно в вашей модели). Иногда проблема кроется в засорении ситечка диспенсера, которое нужно прочистить зубочисткой.</p></div></details>
+
+<h2 id="заключение-и-правильное-обслуживание">Заключение и правильное обслуживание</h2>
+<p>Работа кофемашины <em>DeLongi</em> — это баланс между механикой, электроникой и термодинамикой. Правильное понимание процессов, происходящих внутри корпуса, позволяет избежать большинства ошибок эксплуатации. Регулярная очистка, использование качественных зерен и своевременная декальцинация — вот формула долгой службы вашего агрегата.</p>
+<p>Не забывайте, что даже самая совершенная техника требует внимания. Внимательное отношение к сигналам машины и соблюдение рекомендаций по уходу гарантируют, что каждое утро вы будете получать чашку идеального кофе, а не проблемы с ремонтом.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная декальцинация и промывка заварочного блока — главные условия долгой жизни механизма и стабильного вкуса напитка.</p></div>
+
+<details>
+<summary>Как часто нужно проводить декальцинацию?</summary>
+<p>Частота зависит от жесткости воды, которую вы используете, и объема выпитого кофе. Обычно это рекомендуется делать каждые 2000-3000 чашек или при появлении соответствующего индикатора на дисплее. Если вода жесткая, процедуру лучше проводить чаще.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать молотый кофе в автоматической машине?</summary>
+<p>Да, большинство моделей <em>DeLongi</em> имеют специальный отсек для молотого кофе. В этом случае машина не использует кофемолку, а берет готовый порошок. Однако не используйте этот отсек для кофе с сахаром или добавками.</p>
+</details>
+
+<details>
+<summary>Почему машина издает странные звуки при включении?</summary>
+<p>Звуки могут быть вызваны запуском помпы, промывкой системы или движением заварочного блока. Если звуки стали громче или появились новые шумы, проверьте, не засорились ли каналы и не закончилась ли вода в резервуаре.</p>
+</details>
+
+<details>
+<summary>Что делать, если машина не выбрасывает жмых?</summary>
+<p>Сначала убедитесь, что контейнер для жмыха не переполнен и установлен до щелчка. Если проблема сохраняется, возможно, механизм выброса зажевал таблетку. В этом случае потребуется снять и вручную очистить заварочный блок.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#сердце-системы-гидравлика-и-помповый-узел">Сердце системы: гидравлика и помповый узел</a></li><li><a href="#магия-заваривания-цикл-работы-заварочного-блока">Магия заваривания: цикл работы заварочного блока</a></li><li><a href="#термодинамика-как-поддерживается-температура">Термодинамика: как поддерживается температура</a></li><li><a href="#система-автоматической-очистки-и-промывки">Система автоматической очистки и промывки</a></li><li><a href="#типичные-неисправности-и-диагностика">Типичные неисправности и диагностика</a></li><li><a href="#особенности-работы-с-разными-видами-кофе">Особенности работы с разными видами кофе</a></li><li><a href="#заключение-и-правильное-обслуживание">Заключение и правильное обслуживание</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-nastroit-kofemashinu-krups-quattro-force.html" class="related-card">Настройка кофемашины Krups Quattro Force: полное руководство</a></li><li><a href="/articles/k/ka/kak-snyat-nozh-s-kofemolki-delta.html" class="related-card">Как снять нож с кофемолки Delta: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-wmf-1500s.html" class="related-card">Как включить кофемашину WMF 1500s: пошаговая инструкция запуска</a></li><li><a href="/articles/k/ka/kak-zapustit-pervyj-raz-kofemashinu-delonghi.html" class="related-card">Как запустить кофемашину De&#x27;Longhi в первый раз: полная инструкция</a></li><li><a href="/articles/k/ka/kapuchinator-kofemashiny-filips-kak-polzovatsya.html" class="related-card">Как пользоваться капучинатором кофемашины Philips: Полная инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-nastroit-kofemashinu-krups-quattro-force.html" class="related-bottom-card"><span class="related-bottom-title">Настройка кофемашины Krups Quattro Force: полное руководство</span><span class="related-bottom-desc">Пошаговая инструкция по настройке Krups Quattro Force. Настройка крепости, температуры, объема, пром</span></a><a href="/articles/k/ka/kak-snyat-nozh-s-kofemolki-delta.html" class="related-bottom-card"><span class="related-bottom-title">Как снять нож с кофемолки Delta: пошаговая инструкция</span><span class="related-bottom-desc">Подробное руководство по демонтажу ножа кофемолки Delta. Узнайте, как правильно разобрать механизм, </span></a><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-wmf-1500s.html" class="related-bottom-card"><span class="related-bottom-title">Как включить кофемашину WMF 1500s: пошаговая инструкция запуска</span><span class="related-bottom-desc">Подробная инструкция по включению кофемашины WMF 1500s. Разбор панели управления, процедура прогрева</span></a><a href="/articles/k/ka/kak-zapustit-pervyj-raz-kofemashinu-delonghi.html" class="related-bottom-card"><span class="related-bottom-title">Как запустить кофемашину De&#x27;Longhi в первый раз: полная инструкция</span><span class="related-bottom-desc">Пошаговое руководство по первому запуску кофемашин De&#x27;Longhi. Очистка, декальцинация, настройка помо</span></a><a href="/articles/k/ka/kapuchinator-kofemashiny-filips-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться капучинатором кофемашины Philips: Полная инструкция</span><span class="related-bottom-desc">Подробное руководство: настройка, взбивание молока, очистка и устранение неполадок автокапучинатора </span></a><a href="/articles/o/op/open-tap-kofemashina-jura-chto.html" class="related-bottom-card"><span class="related-bottom-title">Что такое Open Tap в кофемашинах Jura: технология и настройка</span><span class="related-bottom-desc">Разбираем систему Open Tap от Jura: как работает технология, какие преимущества дает и как настраива</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

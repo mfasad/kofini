@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Теория для начинающего бариста: основы, помол и экстракция — Кофини</title>
+    <meta name="description" content="Полное руководство по теории бариста: температура, давление, помол и пропорции. Узнайте, как готовить идеальный эспрессо и понимать химию кофе.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/d/dl/dlya-nachinayushchego-barista-teoriya.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Теория для начинающего бариста: основы, помол и экстракция">
+    <meta property="og:description" content="Полное руководство по теории бариста: температура, давление, помол и пропорции. Узнайте, как готовить идеальный эспрессо и понимать химию кофе.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/zerna-i-pomol/">Зерна и помол</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Теория для начинающего бариста: основы, помол и экстракция</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Теория для начинающего бариста: фундаментальные основы профессии</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#физика-и-химия-экстракции-кофе">Физика и химия экстракции кофе</a></li><li><a href="#влияние-помола-на-вкус-напитка">Влияние помола на вкус напитка</a></li><li><a href="#дозировка-и-пропорции-ratio">Дозировка и пропорции (Ratio)</a></li><li><a href="#температурный-режим-и-давление">Температурный режим и давление</a></li><li><a href="#техника-взбивания-молока">Техника взбивания молока</a></li><li><a href="#чистота-и-обслуживание-оборудования">Чистота и обслуживание оборудования</a></li><li><a href="#параметры-воды-скрытый-ингредиент">Параметры воды: скрытый ингредиент</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Профессия бариста часто кажется романтичной и легкой, но за каждым идеально взбитым молоком и чашкой эспрессо стоит глубокое понимание физики и химии процессов. Вы не просто нажимаете кнопку на машине, вы управляете энергией, температурой и временем, чтобы раскрыть потенциал зерен. Без теоретической базы ваши действия будут хаотичными, а результат — непредсказуемым.</p>
+
+<p>Многие новички совершают ошибку, пытаясь сразу выучить рецепты сложных напитков. На самом деле, фундамент профессии лежит в понимании <strong>экстракции</strong> и <strong>профилирования</strong> вкуса. Если вы не знаете, как вода взаимодействует с кофейной таблеткой, вы не сможете исправить горчинку или кислотность в чашке. Теория — это ваш компас в мире кофе.</p>
+
+<h2 id="физика-и-химия-экстракции-кофе">Физика и химия экстракции кофе</h2>
+<p>Экстракция — это процесс растворения веществ из кофейной таблетки в горячей воде. Ваша главная задача как бариста — извлечь желаемые вкусовые соединения, оставив нежелательные. Идеальный баланс достигается, когда вы извлекаете около <strong>18-22%</strong> сухого вещества от веса кофе. Если меньше — напиток будет кислым и водянистым, если больше — горьким и вяжущим.</p>
+
+<p>На процесс влияют три ключевых фактора: температура, время и площадь поверхности контакта. Вода является растворителем, и ее способность растворять вещества меняется в зависимости от нагрева. Использование воды ниже <strong>88°C</strong> часто приводит к недодержке, где раскрываются только яркие кислотные ноты, но нет сладости.</p>
+
+<p>С другой стороны, слишком высокая температура может «сжечь» тонкие ароматические соединения. В профессиональной среде часто используется диапазон от <strong>90°C до 96°C</strong>. </p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Температура воды в бойлере и температура на выходе из группы могут отличаться. Всегда калибруйте оборудование, зная эти нюансы для идеального результата.</p></div>
+
+<h2 id="влияние-помола-на-вкус-напитка">Влияние помола на вкус напитка</h2>
+<p>Помол — это самый мощный инструмент настройки вкуса. Изменяя размер частиц, вы прямо влияете на скорость прохождения воды через таблетку. Мелкий помол увеличивает площадь контакта, замедляя экстракцию, тогда как крупный ускоряет ее. Это фундаментальное правило, которое нельзя нарушать.</p>
+
+<p>Однако важнее не просто размер, а <strong>равномерность</strong> помола. Если в вашей чаше для помола (hopper) много мелких частиц («пудры») и крупных кусочков, вода пойдет по пути наименьшего сопротивления. Она быстро пройдет через крупные каналы, не задев мелкие, что приведет к смешанному вкусу.</p>
+<blockquote><strong>⚠️ Внимание:</strong> Равномерность помола важнее общего размера. Неравномерный помол гарантированно испортит вкус, создав одновременно и горечь, и кислотность в одной чашке.</blockquote>
+
+<p>Для эспрессо используется тонкий помол, напоминающий мелкую соль или муку, но с ощущением зернистости. Для флэт уайта или американо помол будет чуть крупнее. Всегда проверяйте помол визуально и на ощупь перед началом смены, особенно если вы сменили сорт зерна.</p>
+
+<details class="faq-item"><summary>Как проверить равномерность помола?</summary><div class="faq-answer"><p>Разотрите щепотку кофе между пальцами. Если чувствуется много пыли и жестких крупин — жернова нужно чистить или регулировать. Идеальный помол должен быть однородным на ощупь.</p></div></details>
+
+<h2 id="дозировка-и-пропорции-ratio">Дозировка и пропорции (Ratio)</h2>
+<p>Пропорция кофе к воде — это математика вашего вкуса. В мире эспрессо стандартом считается <strong>1:2</strong>, то есть на 18 граммов сухого кофе вы получаете 36 граммов напитка. Это золотая середина, но она не является догмой. Вкусный кофе можно приготовить и в пропорции 1:1.5, и 1:2.5.</p>
+
+<p>Для приготовления напитков на основе молока часто используется более насыщенная доза. Здесь важно соблюдать баланс: слишком много кофе сделает напиток горьким, слишком мало — пресным. Используйте весы не только для взвешивания готового эспрессо, но и для контроля сухого веса.</p>
+
+<p>Вот основные пропорции для популярных напитков:</p>
+<ul>
+<li>📊 Эспрессо — классическая пропорция 1:2 (18г кофе : 36г напитка).</li>
+<li>📊 Лунго — длинный эспрессо, пропорция 1:3 или 1:4.</li>
+<li>📊 Ристретто — короткий, насыщенный эспрессо, пропорция 1:1 или 1:1.2.</li>
+</ul>
+
+<blockquote><strong>⚠️ Внимание:</strong> Не доверяйте «на глаз» или дозаторам кофемашин. Только точные весы позволяют воспроизвести вкус от чашки к чашке. Ошибка в 1 грамме может кардинально изменить баланс напитка.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Контроль веса сухого кофе и готового напитка — это единственный способ гарантировать стабильное качество обслуживания гостей.</p></div>
+
+<h2 id="температурный-режим-и-давление">Температурный режим и давление</h2>
+<p>Давление в группе кофемашины обычно устанавливается на уровне <strong>9 бар</strong>. Это давление необходимо для создания кремы и правильной эмульсии масел. Однако современные машины позволяют варьировать давление (преинфузия, промывка), что дает бариста больше контроля.</p>
+<p>Температурная стабильность критична. Если машина имеет одноконтурную систему, вы должны учитывать, что после приготовления эспрессо температура бойлера может упасть. В таких случаях необходимо выдерживать паузу или делать пролив воды без кофе, чтобы стабилизировать температуру.</p>
+<p>Для разных сортов кофе температура может варьироваться. Например, для <em>La Marzocco GS3</em> или <em>Synesso</em> часто настраивают температуру в <code>92-94°C</code> для светлой обжарки. Темная обжарка лучше раскрывается при <code>88-90°C</code>. Настройка температуры — это тонкая работа, требующая терпения и понимания термометрии.</p>
+
+<div class="poll-widget" id="poll-e1535be7"><div class="poll-widget-question">📊 Какой параметр для вас самый сложный?</div><div class="poll-widget-option" data-poll="e1535be7" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Взвешивание помола</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e1535be7" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Настройка температуры</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e1535be7" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Взбивание молока</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e1535be7" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Чистка машины</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="техника-взбивания-молока">Техника взбивания молока</h2>
+<p>Молоко — это не просто ингредиент, это основа текстуры напитка. Правильно взбитое молоко имеет консистенцию жидкой краски, без крупных пузырьков. Температура молока не должна превышать <strong>60-65°C</strong>, иначе лактоза разрушится, и молоко потеряет сладость.</p>
+<p>Процесс взбивания состоит из двух этапов: аэрация (насыщение воздухом) и вихрь (микросинтез). На первом этапе вы слышите характерный звук «ш-ш-ш», который должен быть коротким. На втором этапе пирог из молока должен крутиться в кувшине, перемешиваясь и нагреваясь равномерно.</p>
+<p>Ошибки на этапе аэрации приводят к появлению крупных пузырей, которые невозможно убрать. Ошибки на этапе вихря приводят к перегреву и расслоению молока. Идеальное молоко должно блестеть, как гляссированная глазурь.</p>
+
+<div class="checklist-block"><h4>☑️ Контроль качества молока</h4><label class="check-item"><input type="checkbox"><span>Слушать звук аэрации</span></label><label class="check-item"><input type="checkbox"><span>Создать вихрь</span></label><label class="check-item"><input type="checkbox"><span>Контролировать температуру (не выше 65°C)</span></label><label class="check-item"><input type="checkbox"><span>Проверить текстуру на блеск</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="чистота-и-обслуживание-оборудования">Чистота и обслуживание оборудования</h2>
+<p>Чистота — это не просто гигиена, это залог чистого вкуса. Остатки кофейного масла (кофейного дегтя) на жерновах или в группе быстро окисляются и придают напитку прогорклый вкус. Это «грязный» вкус, который невозможно исправить даже лучшим зерном.</p>
+<p>Регулярная чистка жерновов, проливка группы и обратная промывка (backflush) с использованием специальных таблеток обязательны. Используйте <code>Blind basket</code> для промывки, чтобы удалить остатки масла из уплотнителя.</p>
+
+<p>Вот базовый график обслуживания:</p>
+<ul>
+<li>🧹 Ежедневно: обратная промывка группы, чистка капучинатора, протирка дозатора.</li>
+<li>🧹 Еженедельно: чистка жерновов, мытье решетки группы, замена фильтров в воде.</li>
+<li>🧹 Ежемесячно: смазка механизмов, проверка давления, глубокое обслуживание бойлера.</li>
+</ul>
+
+<blockquote><strong>⚠️ Внимание:</strong> Даже если машина выглядит чистой, внутри могут скапливаться органические остатки. Игнорирование графика чистки приведет к поломке дорогостоящих узлов и потере клиентов из-за плохого вкуса.</blockquote>
+
+<h2 id="параметры-воды-скрытый-ингредиент">Параметры воды: скрытый ингредиент</h2>
+<p>Кофе на 98% состоит из воды. Если вода жесткая или содержит хлор, она испортит вкус даже самого дорогого зерна. Жесткая вода вызывает накипь и меняет химический состав экстракции, делая вкус плоским. Мягкая вода, наоборот, может дать слишком резкую кислотность.</p>
+<p>Идеальная вода для кофе должна иметь определенную жесткость и pH. Обычно используется система фильтрации с ионообменными смолами или обратным осмосом, где минералы добавляются обратно в нужных пропорциях. Стандарты SCA (Specialty Coffee Association) рекомендуют жесткость около <strong>50-75 ppm</strong> (мг/л).</p>
+
+<p>Таблица влияния минерализации воды на вкус:</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Низкий уровень</th>
+<th>Оптимальный уровень</th>
+<th>Высокий уровень</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Жесткость</td>
+<td>Слабая экстракция, кислый вкус</td>
+<td>Сбалансированный вкус, хорошая crema</td>
+<td>Горечь, накипь, плоский вкус</td>
+</tr>
+<tr>
+<td>pH</td>
+<td>Кислотность, резкость</td>
+<td>Нейтрально (6.5-7.5)</td>
+<td>Слабость, металлический привкус</td>
+</tr>
+<tr>
+<td>Хлор/Примеси</td>
+<td>Нет</td>
+<td>Отсутствуют</td>
+<td>Привкус химии, порча напитка</td>
+</tr>
+</tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Вода — это 98% вашего напитка. Без контроля качества воды невозможно приготовить профессиональный кофе.</p></div>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+
+<details>
+<summary>Как понять, что кофе перестал быть свежим?</summary>
+<p>Свежесть кофе определяется по наличию газа (CO2) и аромату. Если зерно обжарено более 3-4 недель назад, оно теряет большую часть ароматических масел. Признак старого кофе — отсутствие кремы (пены) на эспрессо и плоский, «картонный» вкус. Для эспрессо лучше всего использовать зерно в «дегазацию» (от 5 до 21 дня после обжарки).</p>
+</details>
+
+<details>
+<summary>Почему эспрессо течет слишком быстро?</summary>
+<p>Быстрый поток (менее 20 секунд) указывает на слишком крупный помол, недостаточную дозировку или слишком низкое давление. Вода проходит через таблетку слишком быстро, не успевая экстрагировать вкус. Решение: уменьшите размер помола или увеличьте дозировку на 0.5-1 грамм.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать одну и ту же дозировку для разных сортов?</summary>
+<p>Нет, это грубая ошибка. Разные сорта имеют разную плотность и пористость. Легкая обжарка плотнее и требует более мелкого помола и более длительной экстракции. Темная обжарка более рыхлая и легко переэкстрагируется. Всегда настраивайте помол под конкретный сорт, а не под машину.</p>
+</details>
+
+<details>
+<summary>Какую температуру воды выбрать для светлой обжарки?</summary>
+<p>Для светлой обжарки (Light Roast) используйте более высокую температуру воды, обычно в диапазоне <code>93-96°C</code>. Это необходимо, чтобы «разорвать» плотную структуру зерна и извлечь сладость и сложные ароматы. При низкой температуре светлый кофе будет слишком кислым.</p>
+</details>
+
+<details>
+<summary>Что такое «Channeling» (канализация) и как его избежать?</summary>
+<p>Канализация — это процесс, когда вода находит путь наименьшего сопротивления в таблетке и пробивает «каналы». На выходе это выглядит как «рыбий хвост» (рыжий струю) или неравномерный поток. Чтобы избежать этого, нужно идеально распределить помол (WDT technique) и утрамбовать его ровным давлением.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#физика-и-химия-экстракции-кофе">Физика и химия экстракции кофе</a></li><li><a href="#влияние-помола-на-вкус-напитка">Влияние помола на вкус напитка</a></li><li><a href="#дозировка-и-пропорции-ratio">Дозировка и пропорции (Ratio)</a></li><li><a href="#температурный-режим-и-давление">Температурный режим и давление</a></li><li><a href="#техника-взбивания-молока">Техника взбивания молока</a></li><li><a href="#чистота-и-обслуживание-оборудования">Чистота и обслуживание оборудования</a></li><li><a href="#параметры-воды-скрытый-ингредиент">Параметры воды: скрытый ингредиент</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/kt/kto-pervyj-poproboval-kofe.html" class="related-card">Кто первый попробовал кофе: История открытия и легенды Эфиопии</a></li><li><a href="/articles/s/sy/syre-dlya-kofejni.html" class="related-card">Сырье для кофейни: гид по выбору зерна, молока и добавок</a></li><li><a href="/articles/p/pr/proizvodstvo-chaya-i-kofe.html" class="related-card">Производство чая и кофе: от сырья до готового напитка</a></li><li><a href="/articles/t/ta/tasty-coffee-kakoj-vybrat-dlya-kofemashiny.html" class="related-card">Как выбрать кофейное зерно Tasty Coffee: гид для кофемашины</a></li><li><a href="/articles/s/su/surf-coffee-lichnyj-kabinet.html" class="related-card">Личный кабинет Surf Coffee: вход, бонусы и участие в программе лояльности</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/kt/kto-pervyj-poproboval-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Кто первый попробовал кофе: История открытия и легенды Эфиопии</span><span class="related-bottom-desc">Узнайте, кто первым открыл свойства кофейного зерна. Легенда о пастухе Калдими, истории арабских суф</span></a><a href="/articles/s/sy/syre-dlya-kofejni.html" class="related-bottom-card"><span class="related-bottom-title">Сырье для кофейни: гид по выбору зерна, молока и добавок</span><span class="related-bottom-desc">Какое сырье выбрать для успешной кофейни? Полный разбор сортов кофе, альтернативного молока и сиропо</span></a><a href="/articles/p/pr/proizvodstvo-chaya-i-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Производство чая и кофе: от сырья до готового напитка</span><span class="related-bottom-desc">Полный обзор технологий производства чая и кофе. Этапы обработки, обжарка, фасовка и контроль качест</span></a><a href="/articles/t/ta/tasty-coffee-kakoj-vybrat-dlya-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Как выбрать кофейное зерно Tasty Coffee: гид для кофемашины</span><span class="related-bottom-desc">Полный разбор линейки Tasty Coffee: какой помол выбрать для рожковой или автоматической кофемашины, </span></a><a href="/articles/s/su/surf-coffee-lichnyj-kabinet.html" class="related-bottom-card"><span class="related-bottom-title">Личный кабинет Surf Coffee: вход, бонусы и участие в программе лояльности</span><span class="related-bottom-desc">Как войти в личный кабинет Surf Coffee, проверить бонусный баланс, накопить баллы и оформить подписк</span></a><a href="/articles/k/ko/kofe-v-krasnoj-pachke.html" class="related-bottom-card"><span class="related-bottom-title">Кофе в красной пачке: история, вкус и где купить оригинал</span><span class="related-bottom-desc">Узнайте всё о легендарном кофе в красной пачке. История бренда, особенности вкуса, отличия подделок </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

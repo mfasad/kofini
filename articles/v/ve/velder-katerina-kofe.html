@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Велдер: как работает кофемашина Катерина и её особенности — Кофини</title>
+    <meta name="description" content="Разбираем феномен кофемашины Катерина от Welder. Обзор технических решений, помповых систем и уникальных функций для приготовления эспрессо.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/v/ve/velder-katerina-kofe.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Велдер: как работает кофемашина Катерина и её особенности">
+    <meta property="og:description" content="Разбираем феномен кофемашины Катерина от Welder. Обзор технических решений, помповых систем и уникальных функций для приготовления эспрессо.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Велдер: как работает кофемашина Катерина и её особенности</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Велдер Катерина: Революция в мире кофемашин</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#конструктивные-особенности-и-философия-бренда-welder">Конструктивные особенности и философия бренда Welder</a></li><li><a href="#технология-заваривания-и-группа-эспрессо">Технология заваривания и группа эспрессо</a></li><li><a href="#система-парогенерации-и-приготовление-напитков">Система парогенерации и приготовление напитков</a></li><li><a href="#помол-и-настройка-жерновов">Помол и настройка жерновов</a></li><li><a href="#обслуживание-и-типичные-неисправности">Обслуживание и типичные неисправности</a></li><li><a href="#сравнительные-характеристики-моделей">Сравнительные характеристики моделей</a></li><li><a href="#итоги-и-рекомендации-по-выбору">Итоги и рекомендации по выбору</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Мир профессионального и полупрофессионального оборудования для приготовления кофе постоянно эволюционирует, предлагая пользователям всё более изысканные решения. В последнее время на рынке заметный резонанс вызвала тема, связанная с брендом <strong>Welder</strong> и моделью, получившей народное название <em>Катерина</em>. Это устройство не просто еще одна кофемашина, а комплексное решение, объединяющее в себе надежность промышленных агрегатов и эстетику домашнего уюта.</p>
+
+<p>Многие пользователи ищут информацию о том, как <strong>Велдер</strong> интегрирует передовые технологии заваривания в компактный корпус. <em>Катерина</em> стала символом нового подхода к домашнему бариста, где каждая деталь корпуса и внутренний механизм продуманы до мелочей. Понимание принципов работы этой машины открывает двери в мир идеального эспрессо.</p>
+
+<h2 id="конструктивные-особенности-и-философия-бренда-welder">Конструктивные особенности и философия бренда Welder</h2>
+
+<p>Бренд <strong>Welder</strong> зарекомендовал себя как производитель, ставящий во главу угла долговечность и ремонтопригодность своих устройств. Модель <em>Катерина</em> является ярким примером этой философии, где инженеры отказались от пластиковых шестерней в пользу металлических аналогов, что существенно продлевает срок службы механизма помола.</p>
+
+<p>Особенностью конструкции является модульная система, позволяющая легко заменять изношенные детали без необходимости отправки всего аппарата в сервисный центр. Это критически важно для владельцев, которые хотят сохранить <strong>производительность</strong> машины на высоком уровне в течение многих лет. Внутренняя компоновка позволяет осуществлять быстрый доступ к бойлеру и термоблокам.</p>
+
+<p>Внешний вид <em>Катерина</em> выполнен в строгом стиле, который впишется как в интерьер кофейни, так и в кухню квартиры-студии. Использование матовых поверхностей и качественной стали делает устройство устойчивым к царапинам и отпечаткам пальцев. <strong>Эргономика</strong> панелей управления продумана так, чтобы даже новичок мог быстро освоить процесс настройки.</p>
+
+<h2 id="технология-заваривания-и-группа-эспрессо">Технология заваривания и группа эспрессо</h2>
+
+<p>Сердцем любой кофемашины является группа заваривания, и в случае с <strong>Welder Катерина</strong> инженеры применили классический насосный принцип с возможностью точной регулировки давления. Это позволяет извлекать из кофейной гущи максимальное количество вкусовых нот, сохраняя при этом чистоту аромата. Давление в <code>9 бар</code> является стандартом, но в этой модели возможен тонкий ремонт и калибровка.</p>
+
+<p>Процесс экстракции контролируется не только давлением, но и температурой, которая поддерживается с точностью до <code>0.5 градуса</code>. Такой контроль необходим для раскрытия потенциала дорогих сортов арабики. Если температура будет слишком высокой, напиток станет горьким, а при низкой — кислым и водянистым.</p>
+
+<p>Использование <strong>профессионального портальфильтра</strong> обеспечивает равномерное распределение воды по кофейной таблетке. Это исключает образование каналов, через которые пар проходит быстрее, не заваривая кофе должным образом. Результатом является плотная, насыщенная <em>крема</em> на поверхности эспрессо.</p>
+
+<blockquote>⚠️ Внимание: Регулярная очистка группы заваривания от остатков кофейного масла критически важна для предотвращения окисления и появления неприятного привкуса в напитках.</blockquote>
+
+<div class="poll-widget" id="poll-09546f9d"><div class="poll-widget-question">📊 Как часто вы готовите эспрессо дома?</div><div class="poll-widget-option" data-poll="09546f9d" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Утро и вечер</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="09546f9d" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Только утром</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="09546f9d" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Несколько раз в день</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="09546f9d" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Редко, по праздникам</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="система-парогенерации-и-приготовление-напитков">Система парогенерации и приготовление напитков</h2>
+
+<p>Помимо приготовления эспрессо, машина <em>Катерина</em> обладает мощной системой подачи пара, которая позволяет создавать идеальную микропену для капучино и латте. Паровой кран имеет эргономичную форму и защищенную рукоятку, предотвращающую ожоги при интенсивной работе. <strong>Мощность</strong> парогенератора достаточна для взбивания молока для нескольких напитков подряд без потери давления.</p>
+
+<p>Технология сухого пара гарантирует, что в молоко не попадают капли конденсата, что сохраняет текстуру пены нежной и шелковистой. Это особенно важно для тех, кто занимается приготовлением напитков с латте-артом. Управлять потоком пара удобно даже одной рукой, что освобождает второй для работы с кувшином.</p>
+
+<p>Некоторые модификации от <strong>Welder</strong> оснащены дополнительным термостатом для воды, что позволяет одновременно готовить эспрессо и взбивать молоко. Это существенно экономит время, особенно в часы пик в домашней или коммерческой обстановке. <strong>Скорость</strong> нагрева воды до рабочей температуры также является одним из ключевых показателей эффективности.</p>
+
+<h2 id="помол-и-настройка-жерновов">Помол и настройка жерновов</h2>
+
+<p>Качество помола напрямую влияет на вкус напитка, и в модели <em>Катерина</em> установлен конический жернов из нержавеющей стали. Такой тип жерновов меньше нагревает кофейные зерна в процессе измельчения, сохраняя их летучие ароматы. <strong>Настройка</strong> помола осуществляется с помощью регулировочного кольца, которое имеет четкие фиксаторы.</p>
+
+<p>Широкий диапазон регулировок позволяет подбирать параметры помола под любой сорт зерна: от мягкой арабики до жесткой робусты. Нельзя менять настройки на ходу, не протестировав результат в чашке.</p>
+
+<p>Для удобства пользователя предусмотрен таймер дозирования, который автоматически останавливает помол через заданное время. Это обеспечивает стабильность веса кофейной таблетки от одной чашки к другой. <strong>Точность</strong> дозирования позволяет избежать перерасхода дорогого сырья.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка жерновов перед использованием</h4><label class="check-item"><input type="checkbox"><span>Очистить от старых остатков</span></label><label class="check-item"><input type="checkbox"><span>Проверить зазор жерновов</span></label><label class="check-item"><input type="checkbox"><span>Убедиться в отсутствии трещин</span></label><label class="check-item"><input type="checkbox"><span>Проверить работу таймера</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="обслуживание-и-типичные-неисправности">Обслуживание и типичные неисправности</h2>
+
+<p>Как и любое сложное техническое устройство, кофемашина <strong>Welder</strong> требует регулярного обслуживания для поддержания работоспособности. Основная процедура — это декальцинация, которая удаляет накипь из внутренних каналов и бойлера. Игнорирование этой рекомендации может привести к выходу из строя нагревательного элемента.</p>
+
+<p>Частой проблемой, с которой сталкиваются владельцы, является закупорка форсунок парового крана. Это происходит из-за остатков молока, которые засыхают и перекрывают канал подачи пара. Регулярная промывка крана сразу после использования предотвращает эту проблему. <strong>Гигиена</strong> является залогом долгой службы оборудования.</p>
+
+<p>Иногда может потребоваться замена уплотнительных колец в группе заваривания, так как со временем резина дубеет и начинает пропускать воду. Это легко делается самостоятельно при наличии базового набора инструментов. Если же проблема связана с электроникой или насосом, лучше обратиться к специалистам.</p>
+
+<blockquote>⚠️ Внимание: Использование некачественных средств для декальцинации может разрушить внутренние резиновые уплотнители и алюминиевые детали бойлера.</blockquote>
+
+<h2 id="сравнительные-характеристики-моделей">Сравнительные характеристики моделей</h2>
+
+<p>Для наглядности сравним базовые параметры модели <em>Катерина</em> с аналогами на рынке. Это поможет понять, почему именно <strong>Welder</strong> выбирает множество кофейных энтузиастов.</p>
+
+<table>
+ <thead>
+  <tr>
+   <th>Параметр</th>
+   <th>Welder Катерина</th>
+   <th>Аналог A</th>
+   <th>Аналог B</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Тип бойлера</td>
+   <td>Медный, 1.5 л</td>
+   <td>Алюминиевый</td>
+   <td>Термоблок</td>
+  </tr>
+  <tr>
+   <td>Давление насоса</td>
+   <td><code>15 бар</code></td>
+   <td><code>15 бар</code></td>
+   <td><code>19 бар</code></td>
+  </tr>
+  <tr>
+   <td>Материал жерновов</td>
+   <td>Нержавеющая сталь</td>
+   <td>Керамика</td>
+   <td>Сталь</td>
+  </tr>
+  <tr>
+   <td>Ремонтопригодность</td>
+   <td>Высокая</td>
+   <td>Средняя</td>
+   <td>Низкая</td>
+  </tr>
+ </tbody>
+</table>
+
+<p>Как видно из таблицы, модель <em>Катерина</em> выделяется качеством материалов и доступностью обслуживания. Медный бойлер обеспечивает более стабильную температуру, чем алюминиевые аналоги. <strong>Надежность</strong> конструкции подтверждается годами эксплуатации в реальных условиях.</p>
+
+<p>Несмотря на кажущуюся простоту, внутренние схемы управления могут различаться в зависимости от года выпуска партии. Поэтому при покупке б/у устройства стоит уточнить серию и версию прошивки. Это поможет избежать несовместимости запасных частей при будущем ремонте.</p>
+
+<details class="faq-item"><summary>Секреты настройки температуры</summary><div class="faq-answer"><p>Внутри корпуса часто есть подстроечный резистор, позволяющий менять температуру нагрева воды на 2-3 градуса, что помогает адаптировать машину под разные сорта кофе без сложной перепрошивки.</p></div></details>
+
+<h2 id="итоги-и-рекомендации-по-выбору">Итоги и рекомендации по выбору</h2>
+
+<p>Выбирая кофемашину <strong>Welder Катерина</strong>, вы делаете ставку на качество и долговечность. Это устройство не требует постоянных вложений в ремонт, если соблюдать базовые правила эксплуатации. Оно станет отличным выбором для тех, кто ценит вкус настоящего эспрессо и не хочет переплачивать за бренд.</p>
+
+<p>Учитывая высокую ремонтопригодность и доступность комплектующих, <em>Катерина</em> будет служить вам верой и правдой долгие годы. Важно только не забывать о регулярном обслуживании и использовании качественной воды. <strong>Качество</strong> воды напрямую влияет на срок службы INTERNAL компонентов.</p>
+
+<p>В конечном счете, именно сочетание передовых технологий и классического подхода делает эту машину уникальной. Она подходит как для начинающих, так и для опытных бариста, желающих иметь под рукой надежный инструмент. <strong>Инвестиция</strong> в такое оборудование окупается отличным настроением и вкусом каждого выпитого кофе.</p>
+
+<blockquote>⚠️ Внимание: При заказе запчастей всегда сверяйте артикулы с официальным каталогом производителя, так как в разных партиях могут использоваться разные модификации деталей.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Кофемашина Welder Катерина — это выбор в пользу ремонтопригодности, качественных материалов и стабильного вкуса, без лишней электроники, которая может выйти из строя.</p></div>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Всегда используйте фильтрованную воду для заправки бачка — это продлит срок службы бойлера и улучшит вкус напитка, убрав лишние примеси.</p></div>
+
+<details>
+ <summary>Какой тип молока лучше всего подходит для этой машины?</summary>
+ <p>Для создания идеальной микропены на парогенераторе <strong>Welder</strong> лучше всего подходит цельное молоко с жирностью около 3.2-3.5%. Оно обеспечивает оптимальную структуру пены, которая держит форму и не оседает быстро.</p>
+</details>
+
+<details>
+ <summary>Как часто нужно проводить декальцинацию?</summary>
+ <p>Частота декальцинации зависит от жесткости воды в вашем регионе. При использовании водопроводной воды процедуру следует проводить раз в 1-2 месяца. Если используется бутилированная или фильтрованная вода, интервал можно увеличить до 3-4 месяцев.</p>
+</details>
+
+<details>
+ <summary>Можно ли использовать в машине кофейные зерна с добавками?</summary>
+ <p>Жернова <em>Катерины</em> рассчитаны на стандартные кофейные зерна. Зерна с шоколадными или карамельными добавками могут оставлять жирный налет на жерновах и в дозаторе, что со временем затруднит их работу и изменит вкус будущих порций.</p>
+</details>
+
+<details>
+ <summary>Что делать, если насос гудит, но не качает воду?</summary>
+ <p>Это может означать наличие воздушной пробки в системе или засорение фильтра. Попробуйте снять фильтр, залить воду в бачок и несколько раз включить и выключить машину в режиме парового крана, чтобы выгнать воздух. Если не помогает, возможно, требуется замена мембраны насоса.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#конструктивные-особенности-и-философия-бренда-welder">Конструктивные особенности и философия бренда Welder</a></li><li><a href="#технология-заваривания-и-группа-эспрессо">Технология заваривания и группа эспрессо</a></li><li><a href="#система-парогенерации-и-приготовление-напитков">Система парогенерации и приготовление напитков</a></li><li><a href="#помол-и-настройка-жерновов">Помол и настройка жерновов</a></li><li><a href="#обслуживание-и-типичные-неисправности">Обслуживание и типичные неисправности</a></li><li><a href="#сравнительные-характеристики-моделей">Сравнительные характеристики моделей</a></li><li><a href="#итоги-и-рекомендации-по-выбору">Итоги и рекомендации по выбору</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/c/ch/chem-myt-zavarochnyj-blok-kofemashiny.html" class="related-card">Чем мыть заварочный блок кофемашины: лучшие средства и методы</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-saeco-xsmall-ot-kofejnykh-masel.html" class="related-card">Как почистить кофемашину Saeco Xsmall от кофейных масел: полные инструкции</a></li><li><a href="/articles/k/ka/kak-pomenyat-pomol-na-kofemolke-fiorenzato-f64e.html" class="related-card">Как настроить помол на кофемолке Fiorenzato F64E: Пошаговая инструкция</a></li><li><a href="/articles/k/ko/kofemashina-dolche-gusto-ne-postupaet-voda-v-chem-delo.html" class="related-card">Кофемашина Dolce Gusto не поступает вода: причины и ремонт</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-jura-impressa-f90.html" class="related-card">Как почистить кофемашину Jura Impressa F90: Полная инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/c/ch/chem-myt-zavarochnyj-blok-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Чем мыть заварочный блок кофемашины: лучшие средства и методы</span><span class="related-bottom-desc">Подробный гид по очистке заварочного блока. Разбираем, чем мыть узел, как часто проводить декальцина</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-saeco-xsmall-ot-kofejnykh-masel.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Saeco Xsmall от кофейных масел: полные инструкции</span><span class="related-bottom-desc">Пошаговая очистка заварочного блока и поддонов от застывших масел в Saeco Xsmall. Узнайте, какие сре</span></a><a href="/articles/k/ka/kak-pomenyat-pomol-na-kofemolke-fiorenzato-f64e.html" class="related-bottom-card"><span class="related-bottom-title">Как настроить помол на кофемолке Fiorenzato F64E: Пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как правильно отрегулировать степень помола на профессиональной кофемолке Fiorenzato F64E. </span></a><a href="/articles/k/ko/kofemashina-dolche-gusto-ne-postupaet-voda-v-chem-delo.html" class="related-bottom-card"><span class="related-bottom-title">Кофемашина Dolce Gusto не поступает вода: причины и ремонт</span><span class="related-bottom-desc">Почему кофемашина Dolce Gusto не набирает воду? Полное руководство по диагностике: от дегазации до ч</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-jura-impressa-f90.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Jura Impressa F90: Полная инструкция</span><span class="related-bottom-desc">Подробный гид по очистке и декальцинации кофемашины Jura Impressa F90. Пошаговые инструкции, режимы </span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-nespresso-vertuo-next.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Nespresso Vertuo Next: Пошаговая инструкция</span><span class="related-bottom-desc">Полная инструкция по очистке и декальцинации кофемашин Nespresso Vertuo Next. Узнайте, как продлить </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

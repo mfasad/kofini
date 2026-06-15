@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Кофе мелется или молится: разбор ошибки помола и настройка кофемашин — Кофини</title>
+    <meta name="description" content="Разбираем частую ошибку при настройке кофемолки. Узнайте, почему кофе мелется, а не молится, как отрегулировать жернова и устранить шум.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ko/kofe-meletsya-ili-molitsya.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Кофе мелется или молится: разбор ошибки помола и настройка кофемашин">
+    <meta property="og:description" content="Разбираем частую ошибку при настройке кофемолки. Узнайте, почему кофе мелется, а не молится, как отрегулировать жернова и устранить шум.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/zerna-i-pomol/">Зерна и помол</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Кофе мелется или молится: разбор ошибки помола и настройка кофемашин</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Кофе мелется или молится: всё о настройке помола в кофемашине</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#физика-процесса-почему-зерна-должны-именно-мелиться">Физика процесса: почему зерна должны именно мелиться</a></li><li><a href="#основные-причины-по-которым-кофе-не-мелется">Основные причины, по которым кофе не мелется</a></li><li><a href="#как-правильно-регулировать-зазор-жерновов">Как правильно регулировать зазор жерновов</a></li><li><a href="#таблица-соответствия-настроек-и-результатов">Таблица соответствия настроек и результатов</a></li><li><a href="#устранение-посторонних-звуков-и-вибраций">Устранение посторонних звуков и вибраций</a></li><li><a href="#профессиональная-чистка-и-обслуживание">Профессиональная чистка и обслуживание</a></li><li><a href="#частые-вопросы-о-помоле-кофе">Частые вопросы о помоле кофе</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Фраза «кофе мелется или молится» звучит как забавная оговорка или результат казуса с автокоррекцией, но для владельца кофемашины это может быть сигналом о реальной неисправности. Когда вы слышите звук, напоминающий молитвенное бормотание, или видите, что зерно просто сыплется, не измельчаясь, проблема кроется в механике жерновов. Правильное понимание того, как работает процесс измельчения, поможет вам избежать поломки дорогостоящего оборудования и получить идеальный эспрессо.</p>
+
+<p>Многие пользователи сталкиваются с ситуацией, когда прибор издает странные звуки, но не выполняет свою главную функцию. Важно отличать нормальный технологический шум от признаков заклинивания механизма. Если вы слышите, что устройство будто «молится» — то есть издает периодические, прерывистые, тихие звуки вместо уверенного гула — это повод немедленно остановить работу и провести диагностику.</p>
+
+<h2 id="физика-процесса-почему-зерна-должны-именно-мелиться">Физика процесса: почему зерна должны именно мелиться</h2>
+
+<p>Основная задача жерновой кофемолки — не просто раздробить зерно, а расколоть его на частицы строго определенной фракции. Это достигается за счет сжатия между двумя коническими или плоскими поверхностями, которые вращаются с разной скоростью или под определенным углом. <strong>Конический жернов</strong> обеспечивает более равномерный помол, в то время как <strong>стальные плоские жернова</strong> часто встречаются в профессиональных аппаратах.</p>
+
+<p>Если механизм не может захватить зерно, оно проскальзывает или падает вниз без изменений. В таком случае вы не получите ни крема, ни правильного экстракта. <strong>Температура жерновов</strong> также играет критическую роль: перегретый металл может менять структуру кофе, делая его горьким. Именно поэтому современные модели оснащаются системами охлаждения.</p>
+
+<p>Звук работы правильной кофемолки — это ровный, низкочастотный гул. Когда вы слышите «молитвенный» шепот или щелчки, это означает, что сила трения недостаточна для прорыва оболочки зерна. <strong>Зазор между жерновами</strong> может быть слишком широким, либо механизм заблокирован посторонним предметом. В редких случаях проблема кроется в износе шестеренок редуктора.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Зерно не должно проскальзывать между жерновами — если слышен прерывистый звук, зазор слишком велик или механизм заклинило.</p></div>
+
+<h2 id="основные-причины-по-которым-кофе-не-мелется">Основные причины, по которым кофе не мелется</h2>
+
+<p>Самая частая причина, по которой кофе «молится» вместо того, чтобы мелиться — это слишком крупная настройка помола. Если вы выставили значение на максимум, жернова не соприкасаются достаточно близко, чтобы сжать зерно. В результате оно падает в бункер или сразу в группу, оставаясь целым. <strong>Настройка помола</strong> — это ювелирная работа, требующая терпения.</p>
+
+<p>Вторая распространенная проблема — наличие посторонних предметов. Камень, попавший в бункер вместе с зерном, может заклинить жернова. В этом случае двигатель пытается провернуть механизм, но натыкается на препятствие, издавая характерные ритмичные звуки. <strong>Система защиты двигателя</strong> может отключать питание, чтобы избежать перегрева, что выглядит как полная остановка процесса.</p>
+
+<p>Иногда проблема заключается в закупорке канала подачи. Старый, прогорклый кофе или спрессованная кофейная пыль могут создать пробку. В таком случае механизм работает вхолостую или с огромным усилием. <strong>Чистка кофемолки</strong> должна быть регулярной процедурой для любого владельца домашнего аппарата.</p>
+
+<details class="faq-item"><summary>Что делать, если заклинило жернова?</summary><div class="faq-answer"><p>Никогда не пытайтесь прокрутить жернова руками с полной силой. Используйте специальную щетку или командную таблетку для чистки. Если механизм не сдается, обратитесь в сервисный центр, чтобы не сломать шестерни.</p></div></details>
+
+<h2 id="как-правильно-регулировать-зазор-жерновов">Как правильно регулировать зазор жерновов</h2>
+
+<p>Регулировка производится на работающем двигателе, но только при наличии зерна в бункере. Попытка изменить настройку на пустом механизме может привести к повреждению жерновов или сбросу калибровки. Вам нужно найти <strong>регулятор помола</strong>, обычно это колесико или шестигранник внутри бункера.</p>
+
+<p>Поворачивайте регулятор в сторону более мелкого помола (обычно по часовой стрелке), пока не услышите изменение звука. Звук должен стать более низким и плотным. Если вы услышите скрежет, немедленно остановитесь и поверните назад на пол-оборота. <strong>Калибровка жерновов</strong> требует точности, так как шаг настройки может быть очень маленьким.</p>
+
+<p>После изменения настройки дайте аппарату поработать несколько секунд, чтобы отработать старое зерно. Только после этого можно варить напиток. Помните, что настройки могут меняться в зависимости от влажности воздуха и сорта зерен. <strong>Калибровка под сорт</strong> — это то, что отличает профессионала от любителя.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка настройки помола</h4><label class="check-item"><input type="checkbox"><span>Зерно должно быть в бункере</span></label><label class="check-item"><input type="checkbox"><span>Регулятор поворачивайте только на работающем двигателе</span></label><label class="check-item"><input type="checkbox"><span>Слушайте изменение звука мотора</span></label><label class="check-item"><input type="checkbox"><span>Проверьте результат на первой порции напитка</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<div class="poll-widget" id="poll-037605d5"><div class="poll-widget-question">📊 Как часто вы настраиваете помол?</div><div class="poll-widget-option" data-poll="037605d5" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Каждый день</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="037605d5" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в неделю</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="037605d5" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в месяц</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="037605d5" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Никогда, только по инструкции</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<blockquote>
+<p>⚠️ Внимание: Никогда не пытайтесь регулировать помол, когда бункер пуст или когда вы только что закрыли крышку. Жернова должны быть защищены от ударов друг о друга без зерна.</p>
+</blockquote>
+
+<h2 id="таблица-соответствия-настроек-и-результатов">Таблица соответствия настроек и результатов</h2>
+
+<p>Чтобы вам было проще ориентироваться в настройках, мы подготовили сводную таблицу. Обратите внимание, что цифры на шкале у разных производителей могут отличаться, поэтому ориентируйтесь на результат, а не только на номер.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Положение регулятора</th>
+      <th>Звук работы</th>
+      <th>Результат помола</th>
+      <th>Тип напитка</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Максимально крупный</td>
+      <td>Тишина или редкие щелчки</td>
+      <td>Целые зерна или крупные обломки</td>
+      <td>Не подходит для эспрессо</td>
+    </tr>
+    <tr>
+      <td>Средний крупный</td>
+      <td>Частые щелчки</td>
+      <td>Крупная крошка</td>
+      <td>Фильтр-кофе, френч-пресс</td>
+    </tr>
+    <tr>
+      <td>Средний мелкий</td>
+      <td>Ровный гул</td>
+      <td>Песок средней фракции</td>
+      <td>Капучино, латте</td>
+    </tr>
+    <tr>
+      <td>Мелкий (Эспрессо)</td>
+      <td>Низкий, плотный гул</td>
+      <td>Пудра, слипшаяся в комок</td>
+      <td>Классический эспрессо</td>
+    </tr>
+    <tr>
+      <td>Слишком мелкий</td>
+      <td>Скрежет, остановка</td>
+      <td>Грязь, забивание фильтра</td>
+      <td>Перегрузка помпы</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="устранение-посторонних-звуков-и-вибраций">Устранение посторонних звуков и вибраций</h2>
+
+<p>Если ваша кофемашина начинает «молиться» — издавать странные, прерывистые звуки, это часто свидетельствует о механической проблеме. Первым делом проверьте, нет ли в бункере посторонних предметов. Иногда в зерне могут оказаться мелкие камешки или кусочки металла, которые закупоривают подачу. <strong>Очистка бункера</strong> — это обязательный шаг перед каждой варкой, если вы покупаете зерно на развес.</p>
+
+<p>Иногда проблема кроется в износе редуктора или шестеренок. Если вы слышите металлический лязг или скрежет, который не проходит после чистки, возможно, механизм требует замены. <strong>Сервисное обслуживание</strong> — это не прихоть, а необходимость для продления срока службы аппарата. В дешевых моделях пластмассовые шестерни могут треснуть от перегрузки.</p>
+
+<p>Вибрация корпуса также может указывать на проблему с креплением жерновов. Убедитесь, что все винты и крепления затянуты. Иногда достаточно просто подтянуть корпус или поставить аппарат на более устойчивую поверхность. <strong>Стабильность основания</strong> влияет на качество работы мотора.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если вы слышите скрежет металла о металл, немедленно отключите прибор от сети. Продолжение работы может привести к полному разрушению жерновов и выходу из строя мотора.</p>
+</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед чисткой жерновов всегда обесточивайте кофемашину и дайте ей остыть. Использование щетки для чистки внутрь работающего механизма опасно для пальцев и может повредить жернова.</p></div>
+
+<h2 id="профессиональная-чистка-и-обслуживание">Профессиональная чистка и обслуживание</h2>
+
+<p>Регулярная чистка жерновов — залог того, что кофе будет мелиться, а не застревать. Накопившаяся кофейная пыль и масла могут создать липкую массу, которая блокирует проход зерна. Используйте специальные таблетки для чистки или рис (но только в крайнем случае и с осторожностью). <strong>Профессиональная таблетка</strong> растворяет масла и вымывает остатки кофе.</p>
+
+<p>Некоторые модели имеют функцию автоматической промывки жерновов, но она не заменяет механическую чистку. Раз в полгода рекомендуется разбирать механизм и удалять накопившуюся грязь вручную. <strong>Визуальный осмотр</strong> жерновов поможет выявить износ или сколы. Если поверхность стала гладкой и блестящей, жернова, возможно, пора менять.</p>
+
+<p>Помните, что качество помола напрямую влияет на вкус напитка. Неравномерный помол приведет к тому, что часть кофе будет пережарена, а часть не экстрагируется вовсе. <strong>Контроль качества</strong> — это ваша главная задача как владельца кофемашины. Не игнорируйте странные звуки, они — первый сигнал о проблеме.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная чистка жерновов предотвращает накопление масел и посторонних звуков, обеспечивая стабильный помол и вкус напитка.</p></div>
+
+<h2 id="частые-вопросы-о-помоле-кофе">Частые вопросы о помоле кофе</h2>
+
+<details>
+  <summary>Почему кофе мелется слишком крупно даже на минимальной настройке?</summary>
+  <p>Это может указывать на то, что жернова изношены или между ними попала посторонняя частица, которая не дает им сойтись полностью. Также возможно, что регулятор сломался и не передвигается до конца. Проверьте механизм на наличие застреваний.</p>
+</details>
+
+<details>
+  <summary>Можно ли использовать рис для чистки кофемолки?</summary>
+  <p>Использование риса не рекомендуется, так как крахмал может распылиться и забить механизм, а твердые зерна риса могут повредить жернова. Лучше использовать специальные таблетки для чистки, которые безопасны для всех типов кофемолок.</p>
+</details>
+
+<details>
+  <summary>Как часто нужно менять жернова в кофемашине?</summary>
+  <p>Срок службы жерновов зависит от типа (сталь или керамика) и объема переработки. В среднем стальные жернова служат 500-1000 кг кофе, керамические — до 2000 кг. Если звук изменился или помол стал неравномерным, пришло время замены.</p>
+</details>
+
+<details>
+  <summary>Почему кофемашина издает звук, но кофе не сыплется?</summary>
+  <p>Скорее всего, механизм заклинило посторонним предметом или произошел сбой в подаче зерна. Проверьте бункер на наличие камней. Если проблема не решается, попробуйте перезагрузить аппарат или обратитесь в сервисный центр.</p>
+</details>
+
+<blockquote>
+<p>⚠️ Внимание: Если вы не уверены в причинах поломки или не имеете опыта в разборке техники, не пытайтесь устранить проблему самостоятельно. Это может привести к потере гарантии и усугублению ситуации.</p>
+</blockquote></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#физика-процесса-почему-зерна-должны-именно-мелиться">Физика процесса: почему зерна должны именно мелиться</a></li><li><a href="#основные-причины-по-которым-кофе-не-мелется">Основные причины, по которым кофе не мелется</a></li><li><a href="#как-правильно-регулировать-зазор-жерновов">Как правильно регулировать зазор жерновов</a></li><li><a href="#таблица-соответствия-настроек-и-результатов">Таблица соответствия настроек и результатов</a></li><li><a href="#устранение-посторонних-звуков-и-вибраций">Устранение посторонних звуков и вибраций</a></li><li><a href="#профессиональная-чистка-и-обслуживание">Профессиональная чистка и обслуживание</a></li><li><a href="#частые-вопросы-о-помоле-кофе">Частые вопросы о помоле кофе</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ko/komnatnoe-rastenie-kofejnoe-derevo.html" class="related-card">Кофейное дерево в домашних условиях: уход, размножение и цветение</a></li><li><a href="/articles/c/ch/chto-luchshe-arabika-ili-robusta-dlya-kofemashiny.html" class="related-card">Арабика или Робуста: что лучше выбрать для кофемашины</a></li><li><a href="/articles/k/ka/kak-pomolot-kofe-bez-kofemolki-v-domashnikh.html" class="related-card">Как помолоть кофе без кофемолки: 5 способов для идеального вкуса</a></li><li><a href="/articles/a/ar/arabika-vs-robusta.html" class="related-card">Арабика против Робусты: Сравнение вкусов, свойств и выбор зерна</a></li><li><a href="/articles/k/ko/kofe-dlya-french-pressa.html" class="related-card">Кофе для френч пресса: выбор зерен, помол и секреты идеальной чашки</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ko/komnatnoe-rastenie-kofejnoe-derevo.html" class="related-bottom-card"><span class="related-bottom-title">Кофейное дерево в домашних условиях: уход, размножение и цветение</span><span class="related-bottom-desc">Полное руководство по выращиванию комнатного кофейного дерева. Узнайте о поливе, освещении, пересадк</span></a><a href="/articles/c/ch/chto-luchshe-arabika-ili-robusta-dlya-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Арабика или Робуста: что лучше выбрать для кофемашины</span><span class="related-bottom-desc">Сравнение арабики и робусты для кофемашин: вкус, crema, влияние на оборудование. Узнайте, какой сорт</span></a><a href="/articles/k/ka/kak-pomolot-kofe-bez-kofemolki-v-domashnikh.html" class="related-bottom-card"><span class="related-bottom-title">Как помолоть кофе без кофемолки: 5 способов для идеального вкуса</span><span class="related-bottom-desc">Нет кофемолки? Узнайте, как правильно размолоть кофейные зерна дома с помощью скалки, блендера или с</span></a><a href="/articles/a/ar/arabika-vs-robusta.html" class="related-bottom-card"><span class="related-bottom-title">Арабика против Робусты: Сравнение вкусов, свойств и выбор зерна</span><span class="related-bottom-desc">Полное сравнение арабики и робусты: разница во вкусе, содержании кофеина и влиянии на здоровье. Узна</span></a><a href="/articles/k/ko/kofe-dlya-french-pressa.html" class="related-bottom-card"><span class="related-bottom-title">Кофе для френч пресса: выбор зерен, помол и секреты идеальной чашки</span><span class="related-bottom-desc">Узнайте, какой кофе для френч пресса подходит лучше всего. Руководство по выбору сорта, уровня обжар</span></a><a href="/articles/k/ko/kofejnye-yagody-vkus.html" class="related-bottom-card"><span class="related-bottom-title">Вкус кофейных ягод: от вишни до сушеного плодородия</span><span class="related-bottom-desc">Раскрываем истинный вкус кофейных ягод: как и что едят, отличия от обжаренного зерна, влияние терруа</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

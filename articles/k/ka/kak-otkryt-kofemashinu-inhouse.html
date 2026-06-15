@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как открыть кофемашину Inhouse: разбор сервисных меню и сброс — Кофини</title>
+    <meta name="description" content="Пошаговая инструкция по доступу к инженерным настройкам кофемашин Inhouse. Сброс счетчиков, калибровка помпа и диагностика ошибок.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-otkryt-kofemashinu-inhouse.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как открыть кофемашину Inhouse: разбор сервисных меню и сброс">
+    <meta property="og:description" content="Пошаговая инструкция по доступу к инженерным настройкам кофемашин Inhouse. Сброс счетчиков, калибровка помпа и диагностика ошибок.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как открыть кофемашину Inhouse: разбор сервисных меню и сброс</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Полный гайд по доступу к сервисным функциям кофемашин Inhouse</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-сервисный-доступ">Введение в сервисный доступ</a></li><li><a href="#подготовка-оборудования-и-диагностика">Подготовка оборудования и диагностика</a></li><li><a href="#базовые-комбинации-кнопок-для-доступа">Базовые комбинации кнопок для доступа</a></li><li><a href="#работа-с-программным-обеспечением-и-диагностикой">Работа с программным обеспечением и диагностикой</a></li><li><a href="#сброс-счетчиков-обслуживания-и-наладка">Сброс счетчиков обслуживания и наладка</a></li><li><a href="#типичные-ошибки-и-способы-их-устранения">Типичные ошибки и способы их устранения</a></li><li><a href="#регламент-и-безопасность">Регламент и безопасность</a></li><li><a href="#дополнительные-нюансы-настройки">Дополнительные нюансы настройки</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-сервисный-доступ">Введение в сервисный доступ</h2>
+<p>Собственная торговая марка <em>Inhouse</em> часто предлагает оборудование, базирующееся на проверенных итальянских или турецких платформах, что упрощает поиск универсальных методик обслуживания. Однако владельцы часто сталкиваются с необходимостью получить доступ к скрытым параметрам для <strong>калибровки заварочного блока</strong> или сброса счетчиков циклов после замены узлов.</p>
+<p>Процедура входа в инженерное меню варьируется в зависимости от конкретной серии машины и версии прошивки контроллера. В некоторых случаях достаточно комбинации кнопок на панели управления, тогда как для более сложных моделей требуется специализированный программный интерфейс.</p>
+
+<h2 id="подготовка-оборудования-и-диагностика">Подготовка оборудования и диагностика</h2>
+<p>Прежде чем пытаться взломать программные защиты или войти в скрытые меню, необходимо убедиться, что кофемашина находится в исправном механическом состоянии. Попытка сбросить ошибки без устранения их физической причины приведет к повторному возникновению аварийного сигнала.</p>
+<p>Вам нужно проверить уровень воды в баке, наличие замятия в <strong>шнеке заварочного узла</strong> и целостность электрических разъемов. Если машина не включается вообще, проблема может быть в сетевом фильтре или плате питания, а не в программном обеспечении.</p>
+<p>Важно иметь под рукой мануал на английском языке, если родной документ был утерян, так как многие технические термины в интерфейсе могут быть переведены некорректно или отсутствовать вовсе.</p>
+<blockquote>⚠️ Внимание: Неправильное изменение параметров давления в <strong>качественном насосе</strong> может привести к его выходу из строя и разгерметизации системы за считанные минуты.</blockquote>
+
+<div class="checklist-block"><h4>☑️ Подготовка к сервисному режиму</h4><label class="check-item"><input type="checkbox"><span>Отключить машину от сети</span></label><label class="check-item"><input type="checkbox"><span>Снять верхнюю крышку</span></label><label class="check-item"><input type="checkbox"><span>Проверить уровень воды</span></label><label class="check-item"><input type="checkbox"><span>Найти комбинацию кнопок</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="базовые-комбинации-кнопок-для-доступа">Базовые комбинации кнопок для доступа</h2>
+<p>Большинство моделей <em>Inhouse</em>, построенных на базе стандартных платформ, позволяют войти в сервисное меню путем удержания определенных клавиш при включении питания. Обычно это сочетание кнопки "ВКЛ" и одной из функциональных клавиш, отвечающей за крепость напитка или температуру.</p>
+<p>Нажмите и удерживайте <code>ВКЛ</code> + <code>Крепость</code> в течение 5-7 секунд до появления мигания индикаторов. Если экран загорится с набором цифр, обозначающих версии ПО, вы успешно попали в инженерный режим. Выход осуществляется простым выключением устройства.</p>
+<p>Иногда требуется выполнить более сложную последовательность: удерживать кнопку сброса, нажать включение, отпустить сброс через 3 секунды, затем нажать кнопку "Капучино". Такая логика часто встречается в бюджетных сегментах.</p>
+
+<div class="poll-widget" id="poll-25dbf242"><div class="poll-widget-question">📊 Какая проблема у вашей кофемашины Inhouse?</div><div class="poll-widget-option" data-poll="25dbf242" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Не сбрасывается счетчик</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="25dbf242" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Ошибка заварочного блока</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="25dbf242" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Требует сервисного обслуживания</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="25dbf242" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не включается</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="работа-с-программным-обеспечением-и-диагностикой">Работа с программным обеспечением и диагностикой</h2>
+<p>Для глубокой диагностики и калибровки <strong>серводвигателей</strong> часто требуется подключение к ПК через кабель USB или специальный USB-адаптер. В этом случае используется специализированный софт, который распознает контроллер машины и позволяет менять параметры в реальном времени.</p>
+<p>Если у вас нет доступа к оригинальному ПО, можно попытаться использовать универсальные программы для сервоприводов, но риск повреждения прошивки возрастает многократно. <em>Inhouse</em> часто использует платформу, совместимую с софтом от производителей-партнеров, но идентификаторы устройств могут отличаться.</p>
+<p>В меню диагностики вы сможете запустить тест каждого узла отдельно: помпы, бойлера, клапанов и диспенсера. Это позволяет точно определить, какой именно механизм заклинило или не работает.</p>
+
+<details class="faq-item"><summary>Что делать, если код ошибки не сбрасывается?</summary><div class="faq-answer"><p>Иногда система блокирует сброс ошибок, если не было выполнено полное циклическое обслуживание. Попробуйте снять заварочный блок, промыть его и вставить до щелчка, затем снова войти в меню сброса.</p></div></details>
+
+<h2 id="сброс-счетчиков-обслуживания-и-наладка">Сброс счетчиков обслуживания и наладка</h2>
+<p>Одной из самых частых задач является сброс счетчика выработки кофе или промывки. В сервисном меню эту функцию обычно можно найти в разделе <code>Service -> Reset -> Coffee Counter</code>. Без доступа к этому разделу машина будет требовать обслуживания даже после полной замены фильтра.</p>
+<p>Также здесь настраивается <strong>вес порции кофе</strong> и время пролива воды. Если ваш напиток стал слишком слабым, возможно, сбился параметр времени работы помпы, который можно скорректировать в минутах и секундах.</p>
+<p>Не забудьте сохранить изменения после внесения корректировок, так как некоторые контроллеры не имеют функции автосохранения при выходе из меню. Перезагрузка без сохранения сделает все ваши усилия бесполезными.</p>
+
+<table>
+<thead>
+<tr>
+<th>Группа параметров</th>
+<th>Функция</th>
+<th>Рекомендуемое значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Заварочный блок</td>
+<td>Время заваривания</td>
+<td>20-25 секунд</td>
+</tr>
+<tr>
+<td>Помпа</td>
+<td>Давление (бар)</td>
+<td>9-10 бар</td>
+</tr>
+<tr>
+<td>Капучинатор</td>
+<td>Время подачи пара</td>
+<td>5-10 секунд</td>
+</tr>
+<tr>
+<td>Бойлер</td>
+<td>Температура воды</td>
+<td>90-93 °C</td>
+</tr>
+</tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед сбросом счетчиков сделайте фото текущего состояния экрана, чтобы в случае неудачи можно было восстановить исходные значения вручную.</p></div>
+
+<h2 id="типичные-ошибки-и-способы-их-устранения">Типичные ошибки и способы их устранения</h2>
+<p>При попытке входа в меню часто возникает ошибка "Access Denied" или экран просто гаснет. Это значит, что была выбрана неправильная комбинация или версия прошивки имеет защиту от несанкционированного доступа. В таких случаях может потребоваться обновление прошивки до последней версии, где известные методы обхода могут быть исправлены.</p>
+<p>Частой проблемой является "залипание" кнопок, которое мешает корректному вводу команд. Почистите панель управления или временно отключите клавиатуру, чтобы исключить случайные нажатия во время входа в режим.</p>
+<p>Если после сброса счетчиков машина продолжает выдавать ошибку, проверьте <strong>концевики заварочного блока</strong>. Они могут быть загрязнены кофейным маслом и не передавать сигнал о том, что узел установлен на место.</p>
+<blockquote>⚠️ Внимание: Не пытайтесь физически перепаять чипы памяти или менять прошивку программатором, если не имеете опыта работы с SMD-элементами — это гарантированно выведет плату из строя.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Сервисное меню — это мощный инструмент, но его использование требует точности и понимания процесса, чтобы не превратить рабочую машину в "кирпич".</p></div>
+
+<h2 id="регламент-и-безопасность">Регламент и безопасность</h2>
+<p>При работе с электрической частью и высокотемпературными узлами необходимо соблюдать технику безопасности. Кофемашины <em>Inhouse</strong> оснащены мощными нагревательными элементами, температура которых может достигать 130 градусов Цельсия.</p>
+<p>Всегда отключайте устройство от сети перед разборкой корпуса или касанием внутренних проводов. Даже если вы просто меняете настройки в меню, лучше иметь под рукой инструкцию по безопасности конкретной модели.</p>
+<p>Некоторые модели имеют защиту от перегрева, которая блокирует доступ к меню при превышении критической температуры. Дайте машине остыть перед попыткой входа в инженерный режим.</p>
+
+<blockquote>⚠️ Внимание: Если вы не уверены в своих силах или машина находится на гарантии, лучше обратиться в авторизованный сервисный центр, чтобы не потерять официальное обслуживание.</blockquote>
+
+<h2 id="дополнительные-нюансы-настройки">Дополнительные нюансы настройки</h2>
+<p>В некоторых случаях требуется тонкая настройка <strong>молотого кофе</em>. Если машина встала в ошибку по трамбовке, возможно, степень помола слишком мелкая и создает избыточное сопротивление. В меню можно изменить усилие трамбовки, но это не решает проблему качества напитка.</p>
+<p>Также стоит обратить внимание на настройки температуры воды для разных типов напитков. Иногда пользователь случайно меняет их, и кофе получается слишком горячим или холодным. Сброс до заводских настроек в разделе <code>Factory Reset</code> поможет вернуть прежние параметры.</p>
+<p>Если вы используете зерно с повышенным содержанием масел, может потребоваться более частая промывка системы. Счетчики промывки можно настроить более гибко в сервисном меню, чтобы машина напоминала о чистке чаще.</p>
+
+<details class="faq-item"><summary>Как проверить работоспособность клапанов?</summary><div class="faq-answer"><p>В меню диагностики запустите тест клапанов поочередно. Если клапан не срабатывает или издает странные звуки, возможно, он засорился или механически поврежден.</p></div></details>
+
+<details>
+<summary>Как войти в сервисное меню на самых популярных моделях Inhouse?</summary>
+<p>Для большинства моделей используется комбинация: удерживать кнопку "ВКЛ" и кнопку "Капучино" одновременно при включении питания. Для некоторых версий требуется удержать кнопку сброса ошибок на 10 секунд.</p>
+</details>
+
+<details>
+<summary>Можно ли сбросить счетчик промывки без входа в меню?</summary>
+<p>Нет, стандартный сброс счетчиков обслуживания требует доступа к инженерному меню. Попытки обмана датчиков физической заменой чипов часто приводят к блокировке работы машины.</p>
+</details>
+
+<details>
+<summary>Что делать, если после сброса настроек машина не включается?</summary>
+<p>Попробуйте отключить машину от сети на 15-20 минут. Если это не поможет, возможно, требуется перепрошивка контроллера через USB-кабель или обращение в сервис.</p>
+</details>
+
+<details>
+<summary>Где найти оригинальную прошивку для Inhouse?</summary>
+<p>Оригинальные прошивки обычно доступны только для авторизованных сервисных центров. В открытом доступе их найти крайне сложно из-за риска использования несовместимых версий.</p>
+</details>
+
+<details>
+<summary>Как часто нужно калибровать заварочный блок?</summary>
+<p>Калибровка рекомендуется после каждой замены заварочного блока или при появлении ошибок по давлению заваривания. В обычном режиме машина может работать без вмешательства 1-2 года.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-сервисный-доступ">Введение в сервисный доступ</a></li><li><a href="#подготовка-оборудования-и-диагностика">Подготовка оборудования и диагностика</a></li><li><a href="#базовые-комбинации-кнопок-для-доступа">Базовые комбинации кнопок для доступа</a></li><li><a href="#работа-с-программным-обеспечением-и-диагностикой">Работа с программным обеспечением и диагностикой</a></li><li><a href="#сброс-счетчиков-обслуживания-и-наладка">Сброс счетчиков обслуживания и наладка</a></li><li><a href="#типичные-ошибки-и-способы-их-устранения">Типичные ошибки и способы их устранения</a></li><li><a href="#регламент-и-безопасность">Регламент и безопасность</a></li><li><a href="#дополнительные-нюансы-настройки">Дополнительные нюансы настройки</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-otkryt-nespresso-kofemashiny.html" class="related-card">Как открыть и разобрать кофемашину Nespresso: Инструкция по чистке</a></li><li><a href="/articles/k/ka/kapelnaya-kofevarka-ne-kapaet-voda-chto-delat.html" class="related-card">Капельная кофеварка не капает: основные причины и способы ремонта</a></li><li><a href="/articles/k/ka/kak-chistit-varochnuyu-gruppu-kofemashiny-philips.html" class="related-card">Как почистить варочную группу Philips: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-ochistit-kofemashinu-saeko-ot-kofejnykh-masel-tabletkami.html" class="related-card">Как очистить кофемашину Saeco от кофейных масел: инструкция по таблеткам</a></li><li><a href="/articles/k/ko/kofemashina-mulineks-kak-polzovatsya-video.html" class="related-card">Кофемашина Мулинекс: как пользоваться, видео-инструкции и настройка</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-otkryt-nespresso-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Как открыть и разобрать кофемашину Nespresso: Инструкция по чистке</span><span class="related-bottom-desc">Пошаговое руководство по разборке кофемашин Nespresso для удаления накипи и кофейных масел. Советы п</span></a><a href="/articles/k/ka/kapelnaya-kofevarka-ne-kapaet-voda-chto-delat.html" class="related-bottom-card"><span class="related-bottom-title">Капельная кофеварка не капает: основные причины и способы ремонта</span><span class="related-bottom-desc">Вода в кофеварке не капает? Узнайте, как устранить засор, проверить клапан и почистить систему. Поша</span></a><a href="/articles/k/ka/kak-chistit-varochnuyu-gruppu-kofemashiny-philips.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить варочную группу Philips: пошаговая инструкция</span><span class="related-bottom-desc">Полное руководство по очистке и обслуживанию варочной группы кофемашин Philips. Устранение засоров, </span></a><a href="/articles/k/ka/kak-ochistit-kofemashinu-saeko-ot-kofejnykh-masel-tabletkami.html" class="related-bottom-card"><span class="related-bottom-title">Как очистить кофемашину Saeco от кофейных масел: инструкция по таблеткам</span><span class="related-bottom-desc">Пошаговая инструкция по очистке заварочного блока и кофемолки Saeco от старых кофейных масел. Выбор </span></a><a href="/articles/k/ko/kofemashina-mulineks-kak-polzovatsya-video.html" class="related-bottom-card"><span class="related-bottom-title">Кофемашина Мулинекс: как пользоваться, видео-инструкции и настройка</span><span class="related-bottom-desc">Пошаговая инструкция по эксплуатации кофемашин Moulinex. Обзор моделей, настройка помола, режимы очи</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-simens-v-domashnikh-usloviyakh.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Siemens в домашних условиях: полная инструкция</span><span class="related-bottom-desc">Пошаговое руководство по декальцинации, промывке и уходу за кофемашинами Siemens. Очистка от накипи,</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

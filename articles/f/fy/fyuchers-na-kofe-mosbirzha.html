@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Фьючерс на кофе на Мосбирже: торговля, контракт и риски — Кофини</title>
+    <meta name="description" content="Полный гайд по фьючерсу на кофе на Московской бирже. Узнайте условия контракта, как торговать, расчет маржи и особенности спекуляций на какао и зерне.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/f/fy/fyuchers-na-kofe-mosbirzha.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Фьючерс на кофе на Мосбирже: торговля, контракт и риски">
+    <meta property="og:description" content="Полный гайд по фьючерсу на кофе на Московской бирже. Узнайте условия контракта, как торговать, расчет маржи и особенности спекуляций на какао и зерне.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/zerna-i-pomol/">Зерна и помол</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Фьючерс на кофе на Мосбирже: торговля, контракт и риски</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Торговля фьючерсом на кофе на Московской бирже: условия и стратегия</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#спецификация-контракта-и-условия-торгов">Спецификация контракта и условия торгов</a></li><li><a href="#механика-работы-и-расчет-маржи">Механика работы и расчет маржи</a></li><li><a href="#факторы-влияющие-на-цену-кофе">Факторы, влияющие на цену кофе</a></li><li><a href="#стратегии-торговли-и-управление-рисками">Стратегии торговли и управление рисками</a></li><li><a href="#особенности-экспирации-и-поставок">Особенности экспирации и поставок</a></li><li><a href="#выбор-брокера-и-технические-требования">Выбор брокера и технические требования</a></li><li><a href="#налогообложение-и-отчетность">Налогообложение и отчетность</a></li><li><a href="#часто-задаваемые-вопросы">Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Рынок сырьевых деривативов предлагает трейдерам инструменты для хеджирования и спекуляций, и фьючерс на кофе занимает особое место в портфелях инвесторов. В условиях глобальной волатильности цен на сырьевые товары, биржевая торговля позволяет прогнозировать движения стоимости зерен без необходимости физического хранения партий. Московская биржа выступает ключевой площадкой для таких операций, предоставляя доступ к мировым котировкам через локальные контракты.</p>
+
+<p>В отличие от покупки физической продукции, где вы занимаетесь логистикой и хранением, <strong>биржевой контракт</strong> позволяет оперировать только разницей в ценах. Это финансовый инструмент, обязывающий стороны совершить сделку в будущем по заранее оговоренной цене. Для многих участников рынка это способ защитить бизнес от резких скачков стоимости сырья или, наоборот, заработать на колебаниях курса.</p>
+
+<p>Однако важно понимать, что фьючерс — это инструмент с повышенными рисками и использованием кредитного плеча. Неправильное управление <strong>маржинальным обеспечением</strong> может привести к быстрой потере депозита. В этой статье мы разберем механику торгов, условия спецификации контракта и нюансы, которые необходимо учитывать новичку перед выходом на рынок.</p>
+
+<h2 id="спецификация-контракта-и-условия-торгов">Спецификация контракта и условия торгов</h2>
+<p>Основой для успешной торговли является глубокое понимание параметров инструмента. На Московской бирже фьючерсы на сельскохозяйственную продукцию торгуются в рамках срочного рынка. Спецификация определяет размер лота, шаг цены, дату экспирации и базовый актив. Вы должны четко знать, что именно покупаете: например, контракт может быть привязан к арабике или робусте, что кардинально меняет динамику цены.</p>
+
+<p>Торговля ведется в рублях, что избавляет от необходимости конвертировать валюту при открытии позиций, но привязка к мировым котировкам остается прямой. Изменение курса доллара к рублю влияет на итоговую стоимость контракта. Вам необходимо следить за <strong>основным индексом</strong> и мировыми ценами на фьючерсах ICE, так как именно они формируют базу для российского инструмента.</p>
+
+<ul>
+<li>📌 Базовый актив: фьючерсный контракт на кофе (арабика/робуста) в зависимости от текущей спецификации биржи.</li>
+<li>📌 Валюта торгов: Российский рубль (RUB), что упрощает учет для локальных инвесторов.</li>
+<li>📌 Шаг цены: минимальное изменение стоимости, влияющее на расчет прибыли или убытка по сделке.</li>
+</ul>
+
+<blockquote>⚠️ Внимание: Спецификация контрактов может меняться биржей. Всегда проверяйте актуальные параметры в разделе «Срочный рынок» на официальном сайте <em>Мосбиржи</em> перед открытием новой позиции, так как размеры маржи и даты экспирации корректируются.</blockquote>
+
+<h2 id="механика-работы-и-расчет-маржи">Механика работы и расчет маржи</h2>
+<p>Главное отличие фьючерса от спотовой торговли — наличие кредитного плеча. Вам не нужно иметь полную стоимость контракта на счете, достаточно внести лишь обязательное начальное обеспечение. Это позволяет контролировать крупную позицию с небольшим капиталом. Однако именно плечо многократно увеличивает как потенциальную прибыль, так и убытки.</p>
+
+<p>Брокер определяет размер <strong>гарантийного обеспечения (ГО)</strong> в зависимости от волатильности рынка. В моменты высокой нестабильности требования к залогу могут быть повышены, чтобы покрыть риски. Если цена пойдет против вас, и свободное средств на счете упадет ниже минимального уровня, последует маржин-колл или принудительное закрытие позиций.</p>
+
+<p>Расчет стоимости фактического движения цены зависит от шага и размера лота. Даже небольшое изменение котировок на мировом рынке может привести к существенному изменению стоимости вашего портфеля в рублях. Необходимо постоянно мониторить уровень <strong>маржинального плеча</strong> и иметь запас ликвидности для покрытия просадок.</p>
+
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Тикер</td>
+<td>CFM (пример)</td>
+<td>Фьючерс на кофе на текущий месяц</td>
+</tr>
+<tr>
+<td>Лот</td>
+<td>1000 кг</td>
+<td>Объем базового актива в одной сделке</td>
+</tr>
+<tr>
+<td>ГО (ориентир)</td>
+<td>~15% от цены</td>
+<td>Минимальный залог для открытия позиции</td>
+</tr>
+<tr>
+<td>Срок</td>
+<td>3 месяца</td>
+<td>Период до экспирации контракта</td>
+</tr>
+</tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Использование кредитного плеча позволяет торговать крупными суммами с малым капиталом, но требует строгого контроля рисков и наличия резерва на счете.</p></div>
+
+<h2 id="факторы-влияющие-на-цену-кофе">Факторы, влияющие на цену кофе</h2>
+<p>Цена фьючерса не существует в вакууме, она напрямую зависит от глобальных экономических и климатических процессов. Основными драйверами выступают урожайность в ключевых регионах-производителях, таких как Бразилия, Вьетнам и Колумбия. Засухи или заморозки в этих странах мгновенно отражаются на котировках, вызывая резкие скачки стоимости.</p>
+
+<p>Важную роль играет также цена на мировом рынке, которая торгуется в долларах США. Любые геополитические события, влияющие на логистику и доставку грузов, создают дополнительное давление на рынок. Инвесторы должны учитывать сезонность: периоды сбора урожая обычно сопровождаются более стабильными ценами, тогда как межсезонье может быть волатильным.</p>
+
+<p>Не стоит забывать о курсе рубля. Поскольку контракт номинирован в рублях, ослабление национальной валюты автоматически поднимает цену фьючерса, даже если мировая стоимость кофе не изменилась. Это создает уникальный арбитражный потенциал для <strong>отечественных трейдеров</strong>, но и увеличивает валютные риски.</p>
+
+<div class="poll-widget" id="poll-be92cd19"><div class="poll-widget-question">📊 Что, по вашему мнению, сильнее влияет на цену кофе?</div><div class="poll-widget-option" data-poll="be92cd19" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Урожай в Бразилии</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="be92cd19" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Курс доллара</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="be92cd19" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Логистические проблемы</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="be92cd19" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Спрос в Китае</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="стратегии-торговли-и-управление-рисками">Стратегии торговли и управление рисками</h2>
+<p>Торговля фьючерсами требует дисциплины и четкого плана. Агрессивные стратегии с полным использованием плеча часто приводят к потере депозита. Рекомендуется использовать консервативные подходы, ограничивая риск на одну сделку небольшим процентом от капитала. Установление стоп-лоссов является обязательным условием для защиты от катастрофических убытков.</p>
+
+<p>Многие трейдеры используют методы технического анализа, изучая графики на <em>TradingView</em> или платформах брокеров. Поиск уровней поддержки и сопротивления, анализ объемов торгов помогают определить точки входа и выхода. Важно не поддаваться эмоциям и следовать торговому плану, даже когда рынок ведет себя хаотично.</p>
+
+<p>Диверсификация портфеля также играет ключевую роль. Не стоит вкладывать все средства в один актив, особенно волатильный, как кофе. Сочетание фьючерсов на сырье с акциями или облигациями позволяет сгладить колебания доходности. Вам нужно тщательно учитывать корреляцию между различными инструментами.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Всегда рассчитывайте максимальный убыток заранее. Если цена фьючерса упадет на 5%, сколько вы потеряете с учетом плеча? Если эта сумма превышает ваши возможности, уменьшите размер позиции.</p></div>
+
+<h2 id="особенности-экспирации-и-поставок">Особенности экспирации и поставок</h2>
+<p>Большинство частных инвесторов не планируют получать физическую поставку кофе в конце срока действия контракта. Поэтому важно четко понимать дату экспирации. В этот момент происходит либо денежный расчет разницы цен, либо переход к обязательству поставки. Для спекулянтов критически важно закрыть позицию до наступления последнего дня торгов, чтобы избежать нежелательных обязательств.</p>
+
+<p>Если вы не закроете сделку до экспирации, брокер может принудительно закрыть её, или, в редких случаях, инициировать процесс поставки. Для фьючерса на кофе физическая поставка означает сложную логистику хранения и сертификации товара. Это абсолютно нецелесообразно для розничного трейдера. <strong>Денежный расчет</strong> — стандартный механизм для срочного рынка, но условия могут отличаться.</p>
+
+<ul>
+<li>🗓️ Дата экспирации: последний день торгов по конкретному месячному контракту.</li>
+<li>📉 Ролловер: перенос позиции на следующий контракт для продолжения спекуляций.</li>
+<li>⚠️ Поставка: риск возникновения обязательств по доставке товара при невыполнении условий.</li>
+</ul>
+
+<blockquote>⚠️ Внимание: Не все брокеры позволяют открывать позиции, близкие к экспирации, из-за высоких требований к марже. Уточните в поддержке вашего брокера, какие ограничения накладываются на торговлю в последние дни жизни контракта.</blockquote>
+
+<details class="faq-item"><summary>Что такое ролловер и как его сделать?</summary><div class="faq-answer"><p>Ролловер — это закрытие текущей позиции с открытием новой на более поздний срок. Обычно делается в период, когда разница в стоимости между старым и новым контрактом минимальна (спред «сужается»). Это позволяет сохранить позицию без потери на разнице цен.</p></div></details>
+
+<h2 id="выбор-брокера-и-технические-требования">Выбор брокера и технические требования</h2>
+<p>Для участия в торгах необходимо открыть брокерский счет и получить доступ к торговому терминалу. Современные платформы, такие как QUIK, MetaTrader или собственные решения брокеров, предоставляют весь необходимый функционал. Вам нужно убедиться, что выбранный терминал поддерживает срочный рынок и имеет удобные инструменты для анализа.</p>
+
+<p>Техническая надежность соединения критически важна. В моменты высокой волатильности задержка в пару секунд может стоить денег. Выбирайте брокера с качественной инфраструктурой и низкой комиссией за сделки. Также обратите внимание на возможность использования <strong>мобильного приложения</strong> для оперативного управления позициями.</p>
+
+<p>Не забудьте пройти необходимый уровень квалификации, если планируете торговать сложными инструментами. Московская биржа требует от инвесторов подтверждения знаний перед допуском к определенным видам активов. Это мера безопасности, защищающая неопытных участников от необоснованных рисков.</p>
+
+<div class="checklist-block"><h4>☑️ Чек-лист перед началом торгов</h4><label class="check-item"><input type="checkbox"><span>Открыть брокерский счет</span></label><label class="check-item"><input type="checkbox"><span>Получить доступ к срочному рынку</span></label><label class="check-item"><input type="checkbox"><span>Изучить спецификацию контракта</span></label><label class="check-item"><input type="checkbox"><span>Настроить стоп-лосс в терминале</span></label><label class="check-item"><input type="checkbox"><span>Проверить стабильность интернета</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<h2 id="налогообложение-и-отчетность">Налогообложение и отчетность</h2>
+<p>Доходы от торговли фьючерсами подлежат налогообложению. В большинстве случаев брокер выступает налоговым агентом и автоматически удерживает налог с вашей прибыли в конце года. Это упрощает жизнь инвестору, но требует понимания правил расчета налоговой базы. Убытки по одним сделкам могут быть зачтены в прибыль по другим.</p>
+
+<p>Имущественный налоговый вычет на убытки от операций с фьючерсами, как правило, не применяется в том же объеме, что и для акций. Важно вести учет всех операций, даже если брокер предоставляет отчетность. В случае возникновения споров с налоговой инспекцией, ваши собственные записи станут решающим аргументом.</p>
+
+<p>Законодательство может меняться, поэтому необходимо следить за актуальными нормами Налогового кодекса РФ. Особое внимание уделяется правилам резидентства и ставкам налога для нерезидентов. Если вы планируете торговать профессионально, консультация с налоговым специалистом будет полезной инвестицией.</p>
+
+<blockquote>⚠️ Внимание: Налоговые ставки и правила предоставления вычетов могут корректироваться законодателем. Всегда сверяйте актуальные условия в личном кабинете на сайте ФНС или у вашего налогового консультанта перед подачей декларации.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Брокер обычно выступает налоговым агентом, но ответственность за правильность отражения доходов и убытков в отчетности остается на налогоплательщике.</p></div>
+
+<h2 id="часто-задаваемые-вопросы">Часто задаваемые вопросы</h2>
+<details>
+<summary>Нужно ли платить за хранение фьючерса на кофе?</summary>
+<p>Нет, фьючерс — это производный финансовый инструмент. Вы не платите за хранение физического товара, пока не дойдете до момента поставки. Однако вы платите комиссию брокеру за проведение сделок и, возможно, за хранение средств на счете.</p>
+</details>
+
+<details>
+<summary>Можно ли торговать фьючерсом на кофе без опыта?</summary>
+<p>Технически да, если у вас есть брокерский счет и доступ к срочному рынку. Однако из-за высокого кредитного плеча и волатильности рынка новичкам рекомендуется начинать с малого капитала и использовать демо-счет для отработки стратегии.</p>
+</details>
+
+<details>
+<summary>Как часто меняются котировки фьючерса?</summary>
+<p>Котировки обновляются в режиме реального времени в течение всего торгового сессии. Они зависят от активности участников рынка и изменений мировых цен на кофе. В моменты новостей цена может меняться каждые несколько секунд.</p>
+</details>
+
+<details>
+<summary>Что происходит, если цена идет против меня?</summary>
+<p>Если убыток достигнет уровня, при котором ваш депозит не покрывает гарантийное обеспечение, брокер запросит доплату (маржин-колл). При отсутствии доплаты позиция будет принудительно закрыта по рыночной цене, и вы потеряете часть или весь вложенный капитал.</p>
+</details>
+
+<details>
+<summary>В чем разница между арабикой и робустой на бирже?</summary>
+<p>Арабика и робуста — это разные сорта кофе с различными вкусовыми характеристиками и ценовым уровнем. На бирже они могут торговаться разными контрактами. Обычно арабика дороже, но волатильнее, тогда как робуста дешевле и имеет более устойчивый спрос в производстве растворимого кофе.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#спецификация-контракта-и-условия-торгов">Спецификация контракта и условия торгов</a></li><li><a href="#механика-работы-и-расчет-маржи">Механика работы и расчет маржи</a></li><li><a href="#факторы-влияющие-на-цену-кофе">Факторы, влияющие на цену кофе</a></li><li><a href="#стратегии-торговли-и-управление-рисками">Стратегии торговли и управление рисками</a></li><li><a href="#особенности-экспирации-и-поставок">Особенности экспирации и поставок</a></li><li><a href="#выбор-брокера-и-технические-требования">Выбор брокера и технические требования</a></li><li><a href="#налогообложение-и-отчетность">Налогообложение и отчетность</a></li><li><a href="#часто-задаваемые-вопросы">Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ko/kofe-s-nizkoj-kislotnostyu-molotyj.html" class="related-card">Кофе с низкой кислотностью молотый: как выбрать и правильно заварить</a></li><li><a href="/articles/o/od/odinarnyj-i-dvojnoj-espresso.html" class="related-card">Одинарный и двойной эспрессо: отличия, пропорции и секреты приготовления</a></li><li><a href="/articles/k/ka/kak-obrabatyvayut-kofe.html" class="related-card">Как обрабатывают кофейные зерна: методы, этапы и влияние на вкус</a></li><li><a href="/articles/k/ka/kak-pravilno-zasypat-kofe-v-rozhok-kofevarki.html" class="related-card">Как правильно засыпать кофе в рожок: 7 шагов идеальной экстракции</a></li><li><a href="/articles/k/ko/kofe-ili-koffe.html" class="related-card">Кофе или коффе: правильное написание, этимология и ошибки</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ko/kofe-s-nizkoj-kislotnostyu-molotyj.html" class="related-bottom-card"><span class="related-bottom-title">Кофе с низкой кислотностью молотый: как выбрать и правильно заварить</span><span class="related-bottom-desc">Полный гид по выбору молотого кофе с низкой кислотностью. Разбор сортов, уровней обжарки и способов </span></a><a href="/articles/o/od/odinarnyj-i-dvojnoj-espresso.html" class="related-bottom-card"><span class="related-bottom-title">Одинарный и двойной эспрессо: отличия, пропорции и секреты приготовления</span><span class="related-bottom-desc">Всё про одинарный и двойной эспрессо: стандарты SCA, разница в дозировке, нюансы экстракции и выбор </span></a><a href="/articles/k/ka/kak-obrabatyvayut-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Как обрабатывают кофейные зерна: методы, этапы и влияние на вкус</span><span class="related-bottom-desc">Полный гид по обработке кофейных зерен: от мытого и натурального до хани и пуэр-процесса. Узнайте, к</span></a><a href="/articles/k/ka/kak-pravilno-zasypat-kofe-v-rozhok-kofevarki.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно засыпать кофе в рожок: 7 шагов идеальной экстракции</span><span class="related-bottom-desc">Полное руководство по дозировке, темперовке и распределению кофе в холдере. Избегайте ошибок, влияющ</span></a><a href="/articles/k/ko/kofe-ili-koffe.html" class="related-bottom-card"><span class="related-bottom-title">Кофе или коффе: правильное написание, этимология и ошибки</span><span class="related-bottom-desc">Узнайте, как правильно пишется: кофе или коффе. Разбор орфографических норм, этимологии слова и част</span></a><a href="/articles/k/ka/kakoe-kofe-luchshe-v-zernakh.html" class="related-bottom-card"><span class="related-bottom-title">Какое кофе лучше в зернах: гид по сортам, обжарке и выбору</span><span class="related-bottom-desc">Узнайте, какое кофе в зернах лучше выбрать для эспрессо или фильтр-кофе. Разбор сортов арабика и роб</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

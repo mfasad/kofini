@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Принцип работы кофемашины: как готовится идеальный кофе — Кофини</title>
+    <meta name="description" content="Узнайте, как устроены кофемашины изнутри. Разбор принципов работы заварочного блока, помпы и капучинатора для приготовления вкусного эспрессо.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-gotovitsya-kofe-v-kofemashine-printsip-raboty.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Принцип работы кофемашины: как готовится идеальный кофе">
+    <meta property="og:description" content="Узнайте, как устроены кофемашины изнутри. Разбор принципов работы заварочного блока, помпы и капучинатора для приготовления вкусного эспрессо.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/vybor-kofemashin/">Выбор кофемашин</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Принцип работы кофемашины: как готовится идеальный кофе</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как готовится кофе в кофемашине: принцип работы и устройство</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#заварочный-блок-сердце-кофемашины">Заварочный блок: сердце кофемашины</a></li><li><a href="#дозировка-и-измельчение-зерен">Дозировка и измельчение зерен</a></li><li><a href="#давление-и-проход-горячей-воды">Давление и проход горячей воды</a></li><li><a href="#подготовка-молока-капучинаторы-и-пенители">Подготовка молока: капучинаторы и пенители</a></li><li><a href="#после-приготовления-и-очистка">После приготовления и очистка</a></li><li><a href="#частые-вопросы-пользователей">Частые вопросы пользователей</a></li><li><a href="#заключение">Заключение</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Многие пользователи, покупая автоматическую кофемашину, воспринимают её как «черный ящик»: загружаете зерна, нажимаете кнопку и получаете ароматный напиток. Однако внутри этого компактного устройства происходит сложный технологический процесс, напоминающий работу мини-фабрики. Понимание того, как готовится кофе в кофемашине, помогает не только ценить напиток, но и правильно ухаживать за прибором.</p>
+
+<p>Современные <strong>автоматические кофемашины</strong> сочетают в себе механическую точность и электронное управление. От момента нажатия клавиши до подачи чашки с <em>эспрессо</em> или <em>капучино</em> проходит всего несколько секунд, в течение которых агрегат выполняет десятки операций. Мы подробно разберем каждый этап этого процесса, чтобы вы знали, что происходит внутри вашего прибора.</p>
+
+<h2 id="заварочный-блок-сердце-кофемашины">Заварочный блок: сердце кофемашины</h2>
+
+<p>Ключевым элементом, определяющим качество напитка, является заварочный блок. Именно здесь происходит магия превращения молотой кофейной массы в жидкость. В большинстве бытовых моделей, таких как <em>De'Longhi Magnifica</em> или <em>Jura E8</em>, используется выдвижной модуль, который можно извлечь для обслуживания.</p>
+
+<p>Внутри этого блока происходит формирование <strong>кофейной таблетки</strong>. Две металлические пластины сжимают влажный молотый кофе под высоким давлением, создавая плотную «шайбу». Если <strong>степень помола</strong> выбрана неправильно, таблетка может развалиться или быть слишком плотной для прохождения воды, что приведет к перегреву или засору.</p>
+<blockquote>⚠️ Внимание: Никогда не запускайте кофемашину без установленного заварочного блока или с открытой крышкой. Датчики безопасности отключат систему, но постоянные попытки старта могут сжечь электродвигатель привода.</blockquote>
+
+<p>Температура воды на этом этапе критически важна. Обычно она поддерживается в диапазоне от <code>90°C</code> до <code>94°C</code>. Если температура будет ниже, вы получите кислый и водянистый напиток; если выше — горький и жженый привкус. Термоблок или бойлер постоянно мониторят этот параметр.</p>
+
+<h2 id="дозировка-и-измельчение-зерен">Дозировка и измельчение зерен</h2>
+
+<p>Процесс начинается еще до заваривания, когда кофемолка перемалывает необходимое количество зерен. Современные жерновые кофемолки позволяют настроить <strong>количественную дозировку</strong> с высокой точностью. Это позволяет варьировать крепость напитка от одной чашки до двойного эспрессо.</p>
+
+<p>Важно отметить, что степень помола напрямую влияет на скорость прохождения воды через кофейную таблетку. Для <em>эспрессо</em> требуется мелкий помол, создающий сопротивление потоку воды. Если помол будет слишком крупным, вода пройдет слишком быстро, не успев извлечь ароматические масла.</p>
+
+<div class="poll-widget" id="poll-e9b9afa6"><div class="poll-widget-question">📊 Какой тип кофемолки вы предпочитаете?</div><div class="poll-widget-option" data-poll="e9b9afa6" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Жерновая</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e9b9afa6" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Ножковая</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e9b9afa6" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Не использую помол</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e9b9afa6" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Капсульная система</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<p>Многие пользователи забывают, что настройка степени помола должна производиться <strong>только в процессе работы</strong> кофемолки. Если повернуть регулятор, пока жернова неподвижны, это может привести к их заклиниванию и поломке механизма. Это техническое требование продиктовано конструкцией зацепления.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Если вы услышали звонкий металлический скрежет при перемалывании зерен, немедленно остановите процесс. Скорее всего, в бункер попал камень или посторонний предмет, который может повредить жернова.</p></div>
+
+<h2 id="давление-и-проход-горячей-воды">Давление и проход горячей воды</h2>
+
+<p>Самый интригующий этап — это пролив воды под давлением. Для создания эспрессо необходимо давление от <strong>9 до 15 бар</strong>. Эту задачу выполняет вибрационная или роторная помпа, которая нагнетает воду в заварочную камеру.</p>
+
+<p>Вода проходит через спрессованную кофейную таблетку, растворяя кофеин, сахара и ароматические соединения. Этот процесс называется <strong>экстракцией</strong>. Идеальная экстракция длится от 20 до 30 секунд для стандартной порции. За это время формируется густая пенка — крема, которая является признаком качественного напитка.</p>
+
+<table>
+ <thead>
+ <tr>
+ <th>Параметр</th>
+ <th>Значение для Эспрессо</th>
+ <th>Значение для Американо</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Давление помпы</td>
+ <td>9-12 бар</td>
+ <td>1-3 бар (после разбавления)</td>
+ </tr>
+ <tr>
+ <td>Температура воды</td>
+ <td>92-94°C</td>
+ <td>85-90°C</td>
+ </tr>
+ <tr>
+ <td>Длительность пролива</td>
+ <td>25-30 сек</td>
+ <td>15-20 сек + добавка воды</td>
+ </tr>
+ <tr>
+ <td>Дозировка кофе</td>
+ <td>7-9 грамм</td>
+ <td>7-9 грамм</td>
+ </tr>
+ </tbody>
+</table>
+
+<p>Если давление в системе нестабильно, напиток получится неоднородным: в одной части будет кислинка, в другой — горечь. <strong>Стабильность давления</strong> обеспечивается качественной помпой и исправными уплотнителями в системе.</p>
+
+<details class="faq-item"><summary>Что такое крема и почему она важна?</summary><div class="faq-answer"><p>Крема — это эмульсия из кофейных масел и пузырьков CO2, которая образуется на поверхности эспрессо. Она защищает напиток от окисления и сохраняет аромат. Отсутствие крема часто свидетельствует о слишком старом кофе или неправильной температуре.</p></div></details>
+
+<h2 id="подготовка-молока-капучинаторы-и-пенители">Подготовка молока: капучинаторы и пенители</h2>
+
+<p>Для приготовления молочных напитков используется отдельный контур или специальный <strong>капучинатор</strong>. В автоматических моделях молоко может подаваться из отдельного контейнера, встроенного в корпус, или подаваться через трубку непосредственно из молока в упаковке.</p>
+
+<p>Технология взбивания молока основана на введении пара и воздуха. Пар нагревает молоко, а поток воздуха разбивает его на микроскопические пузырьки, создавая густую пену. В моделях типа <em>Philips LatteGo</em> эта система полностью автоматизирована и не требует ручной настройки, что упрощает процесс.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка капучинатора перед использованием</h4><label class="check-item"><input type="checkbox"><span>Трубка погружена в молоко</span></label><label class="check-item"><input type="checkbox"><span>Подключен шланг к системе</span></label><label class="check-item"><input type="checkbox"><span>Выбрана программа Cappuccino</span></label><label class="check-item"><input type="checkbox"><span>Очищен наконечник от засохшего молока</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<p>Качество пены зависит от температуры молока и жирности. Холодное молоко (из холодильника) взбивается лучше и дает более плотную структуру. Если молоко теплое, пена будет рыхлой и быстро осядет. Для идеального капучино температура подачи должна быть около <code>65°C</code>.</p>
+
+<h2 id="после-приготовления-и-очистка">После приготовления и очистка</h2>
+
+<p>После того как кофе готов и подан в чашку, кофемашина выполняет цикл самоочистки. Отработанный жмых выбрасывается в специальный контейнер для отходов. Одновременно с этим система промывает заварочный блок горячей водой, чтобы остатки масла не окислились и не испортили вкус следующего напитка.</p>
+
+<p>Если вы готовили молочный напиток, система автоматически промывает и молочную линию. Это критически важный этап, так как остатки молока быстро скисают и становятся рассадником бактерий. В некоторых моделях, таких как <em>Saeco Xelsis</em>, требуется дополнительная ручная промывка наконечника капучинатора.</p>
+
+<blockquote>⚠️ Внимание: Не оставляйте молочный контейнер внутри машины на ночь, даже в холодильнике. Остатки молока в трубках могут засохнуть и перекрыть поток, что потребует полной разборки системы для очистки.</blockquote>
+
+<blockquote>⚠️ Внимание: Регулярное использование очищающих таблеток и десикантов для удаления накипи продлевает жизнь нагревательным элементам. Игнорирование этих процедур может привести к выходу из строя термоблока, ремонт которого часто сопоставим по стоимости с покупкой новой машины.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная очистка заварочного блока и промывка системы после каждого использования молочных напитков — залог долговечности вашей кофемашины и стабильного вкуса кофе.</p></div>
+
+<h2 id="частые-вопросы-пользователей">Частые вопросы пользователей</h2>
+
+<p>Многие владельцы задаются вопросами о том, как именно работает их прибор и почему возникают те или иные сбои. Ниже мы собрали ответы на самые популярные вопросы, касающиеся принципа работы и эксплуатации.</p>
+
+<details>
+ <summary>Почему кофе получается холодным?</summary>
+ <p>Если кофе холодный, проблема чаще всего кроется в прогреве чашек или нестабильной работе термоблока. Перед началом работы прогрейте чашки горячей водой, налитой из диспенсера. Также проверьте настройки температуры в меню: возможно, она установлена на минимум.</p>
+</details>
+
+<details>
+ <summary>Как часто нужно менять фильтр воды?</summary>
+ <p>Фильтр воды в системе рекомендуется менять каждые 2 месяца или после обработки определенного объема воды (обычно 50 литров), в зависимости от модели. Игнорирование замены фильтра приведет к образованию накипи и ухудшению вкуса напитка. Некоторые модели оснащены индикатором, который напоминает о необходимости замены.</p>
+</details>
+
+<details>
+ <summary>Можно ли использовать молотый кофе вместо зерен?</summary>
+ <p>Да, большинство кофемашин имеют отдельный отсек для использования молотого кофе (предпочтительный вариант — через <code>отсек для молотого кофе</code>). Однако не стоит злоупотреблять этой функцией, так как для молотого кофе требуется другая степень уплотнения, и частое использование может быстрее изнашивать заварочный блок.</p>
+</details>
+
+<h2 id="заключение">Заключение</h2>
+
+<p>Понимание того, как готовится кофе в кофемашине, позволяет вам контролировать процесс и получать стабильно отличный результат. Зная, что происходит внутри заварочного блока, как работает помпа и почему важно качество молока, вы сможете лучше настроить свой прибор под свои вкусовые предпочтения.</p>
+
+<p>Уход за кофемашиной — это не просто требование инструкции, а необходимость, продиктованная физикой и химией процесса. Чем чище будет ваша система, тем ярче и насыщеннее будет вкус вашего утреннего эспрессо. Следите за состоянием фильтров, регулярно проводите декальцинацию и не пренебрегайте промывкой механизмов.</p></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#заварочный-блок-сердце-кофемашины">Заварочный блок: сердце кофемашины</a></li><li><a href="#дозировка-и-измельчение-зерен">Дозировка и измельчение зерен</a></li><li><a href="#давление-и-проход-горячей-воды">Давление и проход горячей воды</a></li><li><a href="#подготовка-молока-капучинаторы-и-пенители">Подготовка молока: капучинаторы и пенители</a></li><li><a href="#после-приготовления-и-очистка">После приготовления и очистка</a></li><li><a href="#частые-вопросы-пользователей">Частые вопросы пользователей</a></li><li><a href="#заключение">Заключение</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kakuyu-kofemashinu-luchshe-kupit-kapelnuyu-ili-rozhkovuyu.html" class="related-card">Капельная или рожковая кофемашина: что лучше выбрать для дома</a></li><li><a href="/articles/p/po/pochemu-kofemashiny-dorogie.html" class="related-card">Почему кофемашины дорогие: разбор цены и технологий</a></li><li><a href="/articles/k/ka/kakaya-kofemashina-delaet-vkusnyj-kapuchino.html" class="related-card">Какую кофемашину выбрать для идеального капучино: гид по молоку и пене</a></li><li><a href="/articles/k/ko/kofevarka-skolko-kornej.html" class="related-card">Кофемолка или кофеварка: сколько корней нужно для базы</a></li><li><a href="/articles/g/gd/gde-najti-kofevarku-v-toka-boka.html" class="related-card">Где купить кофеварку в Токабо: места, цены и советы по выбору</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kakuyu-kofemashinu-luchshe-kupit-kapelnuyu-ili-rozhkovuyu.html" class="related-bottom-card"><span class="related-bottom-title">Капельная или рожковая кофемашина: что лучше выбрать для дома</span><span class="related-bottom-desc">Сравнение капельных и рожковых кофемашин. Узнайте о плюсах и минусах, разнице во вкусе, цене и сложн</span></a><a href="/articles/p/po/pochemu-kofemashiny-dorogie.html" class="related-bottom-card"><span class="related-bottom-title">Почему кофемашины дорогие: разбор цены и технологий</span><span class="related-bottom-desc">Узнайте, из чего складывается стоимость кофемашин. Обзор технологий, комплектующих и брендов, опреде</span></a><a href="/articles/k/ka/kakaya-kofemashina-delaet-vkusnyj-kapuchino.html" class="related-bottom-card"><span class="related-bottom-title">Какую кофемашину выбрать для идеального капучино: гид по молоку и пене</span><span class="related-bottom-desc">Разбираем, какая кофемашина делает вкусный капучино. Сравниваем автокапучино, панарелло и молочные с</span></a><a href="/articles/k/ko/kofevarka-skolko-kornej.html" class="related-bottom-card"><span class="related-bottom-title">Кофемолка или кофеварка: сколько корней нужно для базы</span><span class="related-bottom-desc">Разбираем абсурдный запрос о&#x27;корнях&#x27; в кофеварках. Узнайте, почему это ошибка, как работают фильтры </span></a><a href="/articles/g/gd/gde-najti-kofevarku-v-toka-boka.html" class="related-bottom-card"><span class="related-bottom-title">Где купить кофеварку в Токабо: места, цены и советы по выбору</span><span class="related-bottom-desc">Ищете, где найти кофеварку в Токабо? Полное руководство по магазинам, рынкам и онлайн-платформам в э</span></a><a href="/articles/k/ko/kofevarka-kapsulnaya-ili-kapelnaya-chto-luchshe.html" class="related-bottom-card"><span class="related-bottom-title">Капсульная или капельная кофеварка: что выбрать для дома?</span><span class="related-bottom-desc">Сравниваем капсульные и капельные кофеварки по качеству, стоимости и удобству. Узнайте, какая машина</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

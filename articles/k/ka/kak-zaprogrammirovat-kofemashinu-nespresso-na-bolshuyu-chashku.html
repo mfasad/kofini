@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как запрограммировать кофемашину Nespresso на большую чашку: инструкция — Кофини</title>
+    <meta name="description" content="Пошаговая настройка объема воды для эспрессо и лунго на кофемашинах Nespresso. Учимся программировать кнопки, сбрасывать настройки и калибровать длину напитка.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-zaprogrammirovat-kofemashinu-nespresso-na-bolshuyu-chashku.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как запрограммировать кофемашину Nespresso на большую чашку: инструкция">
+    <meta property="og:description" content="Пошаговая настройка объема воды для эспрессо и лунго на кофемашинах Nespresso. Учимся программировать кнопки, сбрасывать настройки и калибровать длину напитка.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/kapsulnye-sistemy/">Капсульные системы</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как запрограммировать кофемашину Nespresso на большую чашку: инструкция</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Полное руководство: программирование объема чашки на кофемашинах Nespresso</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#программирование-объема-для-моделей-с-одной-или-двумя-кнопками">Программирование объема для моделей с одной или двумя кнопками</a></li><li><a href="#настройка-объема-на-аппаратах-с-сенсорным-управлением-и-дисплеем">Настройка объема на аппаратах с сенсорным управлением и дисплеем</a></li><li><a href="#пошаговая-инструкция-перепрограммирование-кнопок">Пошаговая инструкция: перепрограммирование кнопок</a></li><li><a href="#сброс-заводских-настроек-и-восстановление-значений">Сброс заводских настроек и восстановление значений</a></li><li><a href="#таблица-стандартных-и-рекомендуемых-объемов">Таблица стандартных и рекомендуемых объемов</a></li><li><a href="#частые-проблемы-и-способы-их-решения">Частые проблемы и способы их решения</a></li><li><a href="#важные-нюансы-эксплуатации-и-программирования">Важные нюансы эксплуатации и программирования</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2>Введение в тонкости настройки объема напитка</
+
+<p>Многие владельцы капсульных систем сталкиваются с ситуацией, когда стандартный объем заваривания не соответствует их предпочтениям. Вы можете хотеть выпить более насыщенный эспрессо или, наоборот, длинный <em>лунго</em>, который требует больше воды для прохождения через капсулу. К счастью, инженеры компании <em>Nespresso</em> предусмотрели возможность ручного программирования объема, что позволяет адаптировать работу машины под ваш вкус и размер любимой кружки.</p>
+
+<p>Процесс настройки осуществляется через саму кофемашину без необходимости использования дополнительных программ или сложных инструментов. Вам достаточно лишь знать последовательность нажатий кнопок и принцип работы системы подачи воды. Важно понимать, что память устройства хранит последние установленные параметры, поэтому после однократной настройки машина будет автоматически выливать запрограммированный объем при каждом нажатии соответствующей кнопки.</p>
+
+<p>В этой статье мы детально разберем алгоритм действий для различных моделей, рассмотрим нюансы сброса заводских настроек и ответим на частые вопросы пользователей. Следуя этим рекомендациям, вы сможете добиться идеального баланса крепости и объема для каждого напитка.</p>
+
+<h2 id="программирование-объема-для-моделей-с-одной-или-двумя-кнопками">Программирование объема для моделей с одной или двумя кнопками</h2>
+
+<p>Большинство классических моделей, таких как <em>Essenza Mini</em> или <em>Inissia</em>, имеют простую архитектуру управления с одной или двумя кнопками. Для таких устройств процедура настройки предельно интуитивна и занимает всего несколько минут. Главное условие — машина должна быть прогрета и находиться в рабочем состоянии, чтобы насос мог корректно отмерить необходимый объем воды.</p>
+
+<p>Для изменения объема вам необходимо нажать и удерживать кнопку той функции, которую вы хотите настроить. Это может быть кнопка <em>Espresso</em> (для короткого напитка) или <em>Lungo</em> (для длинного). Удерживайте нажатие в течение нескольких секунд, пока машина начнет подачу воды. В этот момент вы можете визуально контролировать наполнение вашей чашки.</p>
+
+<p>Как только объем достигнет желаемого уровня, просто отпустите кнопку. Машина <em>Nespresso</em> запомнит этот момент и сохранит его в своей памяти. В следующий раз при нажатии той же кнопки вода будет подаваться ровно до этого установленного уровня. Если вы хотите изменить настройки в будущем, процедуру можно повторить в любой момент, не сбрасывая устройство полностью.</p>
+
+<blockquote>⚠️ Внимание: Убедитесь, что вы не нажимаете кнопку слишком быстро. Система распознает команду программирования только при длительном удержании (обычно 3-5 секунд). Если вы отпустите кнопку раньше, машина просто начнет обычный цикл заваривания с заводскими настройками.</blockquote>
+
+<p>Стоит отметить, что для некоторых старых моделей процедура может légèrement отличаться, но общий принцип остается неизменным: удержание кнопки в процессе работы насоса является ключом к перепрограммированию. Это универсальный метод, который работает на практически всех устройствах линейки OriginalLine.</p>
+
+<h2 id="настройка-объема-на-аппаратах-с-сенсорным-управлением-и-дисплеем">Настройка объема на аппаратах с сенсорным управлением и дисплеем</h2>
+
+<p>Более современные модели, такие как <em>Vertuo</em> или серии <em>Prodigio</em>, оснащены сенсорными экранами и сложными алгоритмами управления. В отличие от механических кнопок, здесь часто используется цифровая индикация объема. Пользователю необходимо войти в режим настроек через меню, чтобы изменить параметры выдачи воды.</p>
+
+<p>В таких устройствах процесс может выглядеть как выбор конкретного значения в миллилитрах. Вы переходите в раздел <code>Настройки</code> → <code>Объем напитка</code> и с помощью сенсорного диска или стрелок выбираете нужное количество. Машина автоматически проведет тестовую проливку, чтобы убедиться в корректности настройки.</p>
+
+<p>Особенностью сенсорных моделей является возможность сохранения нескольких профилей для разных типов капсул. Это особенно актуально для линейки <em>Vertuo</em>, где каждая капсула имеет свой баркод, определяющий параметры заваривания. Однако даже в этих системах можно вручную скорректировать итоговый объем, если автоматический режим не устраивает.</p>
+
+<div class="poll-widget" id="poll-ac0fe5d1"><div class="poll-widget-question">📊 Какой объем чашки вы предпочитаете?</div><div class="poll-widget-option" data-poll="ac0fe5d1" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Короткий эспрессо (40 мл)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="ac0fe5d1" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Стандартный (60-80 мл)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="ac0fe5d1" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Лунго (110-150 мл)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="ac0fe5d1" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Двойная порция (200+ мл)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<p>Иногда пользователи сталкиваются с тем, что сенсор не реагирует на быстрые касания. В этом случае попробуйте удерживать палец на нужной иконке чуть дольше, либо очистите экран от влаги и следов кофейного масла, которые могут мешать работе емкостного дисплея.</p>
+
+<h2 id="пошаговая-инструкция-перепрограммирование-кнопок">Пошаговая инструкция: перепрограммирование кнопок</h2>
+
+<p>Чтобы выполнить настройку максимально точно, давайте разберем алгоритм действий в виде последовательного списка. Это поможет избежать ошибок и гарантировать успешную калибровку объема воды.</p>
+
+<p>Сначала убедитесь, что в резервуаре достаточно воды и установлена капсула. Включите машину и дождитесь, пока индикатор перестанет мигать и загорится постоянным светом, сигнализируя о готовности к работе. Подставьте под носик кофемашины чашку нужного размера.</p>
+
+<p>Теперь выполните следующие действия:</p>
+
+<ul>
+  <li>👉 Нажмите и удерживайте кнопку выбранного напитка (например, <code>Espresso</code>), пока вода не начнет литься.</li>
+  <li>👉 Следите за наполнением чашки и отпустите кнопку ровно в тот момент, когда объем вас устроит.</li>
+  <li>👉 Машина издаст звуковой сигнал или мигнет индикатором, подтверждая сохранение нового объема.</li>
+  <li>👉 Извлеките использованную капсулу, чтобы сбросить цикл и подготовить машину к следующему использованию.</li>
+</ul>
+
+<p>Эта процедура работает и для удаления капсулы, и для настройки объема без капсулы, если вы хотите просто проверить поток воды. Однако для точной настройки лучше использовать капсулу, так как сопротивление воды при прохождении через молотый кофе создает реалистичные условия заваривания.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка перед настройкой</h4><label class="check-item"><input type="checkbox"><span>Вода в баке есть</span></label><label class="check-item"><input type="checkbox"><span>Капсула вставлена</span></label><label class="check-item"><input type="checkbox"><span>Машина прогрета</span></label><label class="check-item"><input type="checkbox"><span>Чашка подставлена</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<p>После завершения настройки рекомендуется выпустить лишнюю воду в раковину, если вы случайно перелили, и проверить новый объем на чистой капсуле. Это позволит убедиться, что машина запоминает параметры корректно.</p>
+
+<h2 id="сброс-заводских-настроек-и-восстановление-значений">Сброс заводских настроек и восстановление значений</h2>
+
+<p>Иногда возникает необходимость вернуть кофемашине стандартные заводские настройки объема. Это может потребоваться, если вы забыли установленный объем, хотите передать устройство другому пользователю или просто хотите начать с "чистого листа". Процедура сброса также проста, но требует одновременного нажатия нескольких кнопок.</p>
+
+<p>Для большинства моделей <em>Nespresso</em> алгоритм сброса выглядит следующим образом: на выключенной машине зажмите одновременно кнопку <em>Espresso</em> и кнопку <em>Lungo</em>. Удерживайте их в течение 5-7 секунд, пока индикаторы не начнут быстро мигать или сменить цвет (обычно на синий или зеленый). Это сигнал о том, что система перезагружается и возвращается к параметрам по умолчанию.</p>
+
+<p>Важно отметить, что после сброса все индивидуально настроенные объемы будут потеряны. Машина вспомнит стандартные значения: обычно 40 мл для эспрессо и 110 мл для лунго. Если вы планируете часто экспериментировать с крепостью, лучше не сбрасывать настройки, а просто перенастраивать кнопки по мере необходимости.</p>
+
+<blockquote>⚠️ Внимание: При сбросе настроек может произойти кратковременная остановка насоса. Не пытайтесь включать машину или нажимать кнопки в этот момент, дайте устройству завершить цикл инициализации самостоятельно.</blockquote>
+
+<p>Если стандартный метод не сработал, попробуйте отключить машину от сети на 30 секунд, а затем повторить процедуру сброса. Это помогает очистить временную память контроллера и устранить возможные программные сбои.</p>
+
+<details class="faq-item"><summary>Что делать, если кнопки не реагируют?</summary><div class="faq-answer"><p>Если индикаторы не мигают при одновременном нажатии, проверьте, не заблокирован ли режим блокировки кнопок (Child Lock) в меню настроек. Также убедитесь, что контакты кнопок не загрязнены кофейной маслянистой пленкой.</p></div></details>
+
+<h2 id="таблица-стандартных-и-рекомендуемых-объемов">Таблица стандартных и рекомендуемых объемов</h2>
+
+<p>Чтобы помочь вам ориентироваться в параметрах, мы составили таблицу с типовыми значениями объемов для разных типов напитков. Эти данные основаны на рекомендациях производителя, но вы можете скорректировать их под свой вкус.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Тип напитка</th>
+      <th>Рекомендуемый стандарт (мл)</th>
+      <th>Минимальный объем (мл)</th>
+      <th>Максимальный объем (мл)</th>
+      <th>Тип капсулы</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Эспрессо</td>
+      <td>40</td>
+      <td>25</td>
+      <td>60</td>
+      <td>OriginalLine</td>
+    </tr>
+    <tr>
+      <td>Лунго</td>
+      <td>110</td>
+      <td>80</td>
+      <td>150</td>
+      <td>OriginalLine</td>
+    </tr>
+    <tr>
+      <td>Ристретто</td>
+      <td>25</td>
+      <td>15</td>
+      <td>35</td>
+      <td>OriginalLine</td>
+    </tr>
+    <tr>
+      <td>Кофе (Vertuo)</td>
+      <td>230</td>
+      <td>150</td>
+      <td>414</td>
+      <td>VertuoLine</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Обратите внимание, что превышение максимального объема может привести к вымыванию кофе из капсулы и появлению нежелательной пены или осадка в чашке. <strong>Оптимальный баланс</strong> достигается при соблюдении рекомендуемых производителем границ.</p>
+
+<p>Для моделей <em>Vertuo</em> объем часто привязан к штрих-коду на капсуле, и возможность ручного изменения может быть ограничена. Однако в некоторых режимах "Manual" (Ручной) вы все же можете контролировать подачу воды.</p>
+
+<h2 id="частые-проблемы-и-способы-их-решения">Частые проблемы и способы их решения</h2>
+
+<p>Иногда пользователи сталкиваются с ситуацией, когда машина не запоминает новые настройки или выдает нестабильный объем. Это может быть связано с воздушными пробками в системе или неисправностью насоса. В первую очередь проверьте, плотно ли закрыт бак для воды и нет ли в нем воздуха.</p>
+
+<p>Если проблема сохраняется, попробуйте выполнить процедуру промывки системы. Включите машину без капсулы и нажмите кнопку эспрессо несколько раз подряд, чтобы прогнать воду через систему. Это поможет удалить пузырьки воздуха, которые могут мешать точному дозированию.</p>
+
+<p>Еще одной причиной может быть засорение иголки прокалывания капсулы. Если иголка забита кофейными остатками, вода может проходить неравномерно, что приведет к искажению объема. Регулярная чистка устройства специальным раствором или уксусным раствором (в соответствии с инструкцией) поможет избежать таких проблем.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярно очищайте носик кофемашины от кофейного налета, используя мягкую губку и горячую воду. Это обеспечит стабильный поток воды и точность дозирования при программировании объема.</p></div>
+
+<p>Если ни один из этих методов не помог, возможно, требуется сервисное обслуживание или замена насоса. В таком случае обратитесь в авторизованный сервисный центр <em>Nespresso</em>.</p>
+
+<h2 id="важные-нюансы-эксплуатации-и-программирования">Важные нюансы эксплуатации и программирования</h2>
+
+<p>При работе с кофемашиной важно учитывать не только объем воды, но и температуру. Некоторые модели позволяют настраивать температуру отдельно от объема. Если вы программируете большой объем, убедитесь, что вода нагревается до нужной температуры, иначе напиток может получиться холодным.</p>
+
+<p>Также стоит помнить, что при программировании объема с пустой капсулой (без кофе) поток воды будет идти быстрее, чем с наполненной. Поэтому для наиболее точной настройки лучше использовать настоящую капсулу, так как она создает необходимое сопротивление потоку.</p>
+
+<blockquote>⚠️ Внимание: Не оставляйте машину включенной надолго без дела во время настройки. Если вы отвлеклись и не отпустили кнопку вовремя, машина может перейти в режим защиты от перегрева и отключиться, прервав процесс программирования.</blockquote>
+
+<p>Помните, что <strong>каждая модель</strong> имеет свои особенности, и иногда требуется несколько попыток, чтобы найти идеальный объем. Экспериментируйте, пробуйте разные значения и находите то, что подходит именно вам.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Правильная настройка объема позволяет раскрыть вкус кофе в полной мере, избегая как излишней горечи от переэкстракции, так и водянистости от недоэкстракции.</p></div>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+
+<details>
+  <summary>Можно ли запрограммировать разные объемы для одной и той же кнопки?</summary>
+  <p>Нет, одна кнопка хранит только один последний установленный объем. Чтобы изменить его, нужно повторить процедуру программирования. Если вам нужны разные объемы одновременно, используйте разные кнопки (если их две) или меняйте настройки вручную каждый раз.</p>
+</details>
+
+<details>
+  <summary>Сбрасывается ли память при отключении машины от сети?</summary>
+  <p>Нет, современные модели <em>Nespresso</em> обладают энергонезависимой памятью. После отключения и повторного включения машины все ранее запрограммированные объемы сохранятся.</p>
+</details>
+
+<details>
+  <summary>Почему машина перестала запоминать новый объем?</summary>
+  <p>Возможные причины: воздушная пробка в системе, неисправность насоса или программный сбой. Попробуйте сбросить настройки до заводских и перепрограммировать заново. Если проблема не решится, обратитесь в сервис.</p>
+</details>
+
+<details>
+  <summary>Можно ли настроить объем для горячей воды без кофе?</summary>
+  <p>Да, многие модели позволяют программировать объем и для функции горячей воды (Hot Water). Процедура аналогична: нажмите кнопку подачи горячей воды и удерживайте до достижения нужного объема.</p>
+</details>
+
+<details>
+  <summary>Влияет ли тип капсулы на возможность программирования?</summary>
+  <p>Для линейки OriginalLine программирование работает с любыми капсулами. Для VertuoLine объем часто жестко привязан к баркоду капсулы, и ручное изменение возможно только в ограниченном диапазоне или в специальном ручном режиме.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#программирование-объема-для-моделей-с-одной-или-двумя-кнопками">Программирование объема для моделей с одной или двумя кнопками</a></li><li><a href="#настройка-объема-на-аппаратах-с-сенсорным-управлением-и-дисплеем">Настройка объема на аппаратах с сенсорным управлением и дисплеем</a></li><li><a href="#пошаговая-инструкция-перепрограммирование-кнопок">Пошаговая инструкция: перепрограммирование кнопок</a></li><li><a href="#сброс-заводских-настроек-и-восстановление-значений">Сброс заводских настроек и восстановление значений</a></li><li><a href="#таблица-стандартных-и-рекомендуемых-объемов">Таблица стандартных и рекомендуемых объемов</a></li><li><a href="#частые-проблемы-и-способы-их-решения">Частые проблемы и способы их решения</a></li><li><a href="#важные-нюансы-эксплуатации-и-программирования">Важные нюансы эксплуатации и программирования</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ko/kofemashina-dolce-gusto-krups-kakie-kapsuly-podkhodyat.html" class="related-card">Какие капсулы подходят для кофемашины Krups Dolce Gusto: полный гид</a></li><li><a href="/articles/k/ka/kakaya-kofevarka-luchshe-nespresso-ili-dolche-gusto.html" class="related-card">Nespresso против Dolce Gusto: что выбрать? Сравнение систем</a></li><li><a href="/articles/k/ka/kak-nastroit-nespresso-kofemashiny.html" class="related-card">Как настроить кофемашину Nespresso: пошаговая инструкция и советы</a></li><li><a href="/articles/k/ka/kakoj-pomol-kofe-nuzhen-dlya-kapsulnoj-kofemashiny.html" class="related-card">Какой помол кофе нужен для капсульной кофемашины: мифы и реальность</a></li><li><a href="/articles/k/ka/kak-polzovatsya-kofemashinoj-neskafe-dolche.html" class="related-card">Как пользоваться кофемашиной Nescafé Dolce Gusto: Инструкции и советы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ko/kofemashina-dolce-gusto-krups-kakie-kapsuly-podkhodyat.html" class="related-bottom-card"><span class="related-bottom-title">Какие капсулы подходят для кофемашины Krups Dolce Gusto: полный гид</span><span class="related-bottom-desc">Узнайте, какие капсулы совместимы с кофемашиной Krups Dolce Gusto. Обзор оригинальных и альтернативн</span></a><a href="/articles/k/ka/kakaya-kofevarka-luchshe-nespresso-ili-dolche-gusto.html" class="related-bottom-card"><span class="related-bottom-title">Nespresso против Dolce Gusto: что выбрать? Сравнение систем</span><span class="related-bottom-desc">Подробное сравнение кофеварок Nespresso и Dolce Gusto. Разбор стоимости капсул, качества эспрессо, ф</span></a><a href="/articles/k/ka/kak-nastroit-nespresso-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Как настроить кофемашину Nespresso: пошаговая инструкция и советы</span><span class="related-bottom-desc">Полное руководство по настройке кофемашин Nespresso. Узнайте, как запрограммировать объем, выполнить</span></a><a href="/articles/k/ka/kakoj-pomol-kofe-nuzhen-dlya-kapsulnoj-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Какой помол кофе нужен для капсульной кофемашины: мифы и реальность</span><span class="related-bottom-desc">Узнайте, можно ли насыпать молотый кофе в капсульную кофемашину. Разбираем риски, альтернативы и пра</span></a><a href="/articles/k/ka/kak-polzovatsya-kofemashinoj-neskafe-dolche.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Nescafé Dolce Gusto: Инструкции и советы</span><span class="related-bottom-desc">Полное руководство по эксплуатации кофемашин Nescafé Dolce Gusto. Настройка давления, подготовка кап</span></a><a href="/articles/n/na/na-skolko-khvataet-odnoj-kapsuly-kofe-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Сколько хватает одной капсулы кофе: время и объем напитка</span><span class="related-bottom-desc">Узнайте, сколько времени занимает заваривание одной капсулы кофе. Факторы, влияющие на объем, типы к</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

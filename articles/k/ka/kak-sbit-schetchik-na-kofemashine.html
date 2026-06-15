@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Сброс счетчика чистки и обслуживания на кофемашине: методы и риски — Кофини</title>
+    <meta name="description" content="Пошаговая инструкция по сбросу сервисного счетчика и счетчика чашек. Разбор заводских кодов, программаторов и рисков потери гарантии на технику.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-sbit-schetchik-na-kofemashine.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Сброс счетчика чистки и обслуживания на кофемашине: методы и риски">
+    <meta property="og:description" content="Пошаговая инструкция по сбросу сервисного счетчика и счетчика чашек. Разбор заводских кодов, программаторов и рисков потери гарантии на технику.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Сброс счетчика чистки и обслуживания на кофемашине: методы и риски</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как сбросить внутренний счетчик кофемашины: полное руководство</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-проблему-сервисного-таймера">Введение в проблему сервисного таймера</a></li><li><a href="#природа-сервисных-счетчиков-и-их-виды">Природа сервисных счетчиков и их виды</a></li><li><a href="#заводские-комбинации-клавиш-и-скрытые-меню">Заводские комбинации клавиш и скрытые меню</a></li><li><a href="#использование-профессиональных-программаторов">Использование профессиональных программаторов</a></li><li><a href="#сравнение-методов-сброса-и-их-эффективность">Сравнение методов сброса и их эффективность</a></li><li><a href="#риски-потери-гарантии-и-скрытые-проблемы">Риски потери гарантии и скрытые проблемы</a></li><li><a href="#альтернативные-решения-и-профилактика">Альтернативные решения и профилактика</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-проблему-сервисного-таймера">Введение в проблему сервисного таймера</h2>
+<p>Владельцы автоматических кофемашин часто сталкиваются с ситуацией, когда устройство блокирует приготовление напитков из-за исчерпания ресурса одного из внутренних счетчиков. Это не поломка в традиционном понимании, а запрограммированная мера безопасности, призванная защитить узлы от износа. Система фиксирует количество пролитых чашек, объем промывочной воды или время работы нагревательного элемента, после чего требует проведения обязательной процедуры обслуживания.</p>
+<p>Игнорирование сигналов о необходимости сброса может привести к полному отказу техники в работе. Однако многих пользователей интересует возможность <strong>сброса счетчика</strong> без обращения в авторизованный сервисный центр, чтобы сэкономить время и деньги. Важно понимать, что разные бренды используют различные алгоритмы защиты, а попытка несанкционированного вмешательства может иметь необратимые последствия.</p>
+
+<h2 id="природа-сервисных-счетчиков-и-их-виды">Природа сервисных счетчиков и их виды</h2>
+<p>Внутри современной кофемашины, будь то <em>DeLonghi</em>, <em>Jura</em> или <em>Saeco</em>, существует несколько независимых счетчиков, каждый из которых отвечает за свой жизненно важный узел. Понимание их различий критически важно, так как методы сброса для каждого из них кардинально отличаются. Неправильная диагностика причины блокировки приведет лишь к тому, что вы сбросите один индикатор, а машина продолжит требовать обслуживания по другому параметру.</p>
+<p>Основными типами счетчиков являются <strong>счетчик чашек</strong>, <strong>счетчик чистки заварочного блока</strong> и <strong>счетчик кальцинации</strong>. Первый просто считает количество приготовленных эспрессо и капучино, второй отслеживает циклы промывки группы заваривания, а третий — количество пролитого через систему накипи описывающего средства. Самые строгие ограничения накладываются именно на счетчик кальцинации и чистки заварочного блока, так как их игнорирование ведет к быстрому выходу из строя термоблока или заклиниванию механизма.</p>
+<blockquote>⚠️ Внимание: Сброс счетчика без проведения реальных процедур чистки или декальцинации значительно сокращает срок службы дорогостоящих узлов, таких как <em>термоблок</em> или <em>насос высокого давления</em>.</p>
+
+<h2 id="заводские-комбинации-клавиш-и-скрытые-меню">Заводские комбинации клавиш и скрытые меню</h2>
+<p>Для многих моделей существует возможность сброса через комбинацию нажатия кнопок, входящих в скрытое сервисное меню. Этот метод не требует дополнительного оборудования, но доступен лишь для определенных серий и версий прошивки. Обычно алгоритм заключается в последовательном нажатии кнопок управления, таких как <code>Menu</code>, <code>Settings</code> или клавиш выбора напитка, в определенной последовательности при включении аппарата.</p>
+<p>Например, на некоторых моделях <em>Melitta</em> необходимо удерживать кнопки «Американо» и «Капучино» одновременно при включении, пока на дисплее не появится символ ключа или сервисный код. В других случаях, например у ранних версий <em>Saeco</em>, сброс осуществляется через меню «Инфо» или «Меню сервисного обслуживания», если оно доступно пользователю. Важно точно соблюдать время удержания кнопок, так как система может не распознать команду при слишком быстром или медленном нажатии.</p>
+<ul>
+<li>🔍 Изучите официальное руководство пользователя в разделе «Техническое обслуживание» или «Сервисное меню».</li>
+<li>⌨️ Проверьте возможность входа в режим инженера через одновременное нажатие кнопок во время запуска.</li>
+<li>📱 Найдите специфичные для вашей модели комбинации в профильных форумах, указав точное название <em>модели</em> и версии прошивки.</li>
+</ul>
+<div class="poll-widget" id="poll-bd663469"><div class="poll-widget-question">📊 Какой тип сброса вы искали?</div><div class="poll-widget-option" data-poll="bd663469" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Заводская комбинация клавиш</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="bd663469" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Программатор (JTAG)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="bd663469" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Прошивка</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="bd663469" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Я не знаю, ищу вариант</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="использование-профессиональных-программаторов">Использование профессиональных программаторов</h2>
+<p>Если заводские комбинации не работают или были заблокированы производителем в новой прошивке, единственным надежным способом остается использование внешних программаторов. Это специализированное оборудование, которое подключается к плате управления кофемашины через диагностический разъем или напрямую к контактам микросхемы памяти. <strong>Программатор</strong> позволяет считать текущее состояние EEPROM-памяти, изменить значения счетчиков и записать обновленные данные обратно.</p>
+<p>Процедура требует высокой квалификации, так как неправильное подключение может привести к короткому замыканию и выходу из строя всей плате управления. Существуют универсальные программаторы, поддерживающие широкий спектр брендов, а также узкоспециализированные устройства, например, для работы с контроллерами <em>Heizkörper</em> или <em>Teufel</em>. Стоимость такого оборудования часто сопоставима с ценой сервисного обслуживания, поэтому его использование оправдано только при массовых ремонтах или наличии собственных технических навыков.</p>
+<div class="checklist-block"><h4>☑️ Подготовка к работе с программатором</h4><label class="check-item"><input type="checkbox"><span>Снять корпус кофемашины</span></label><label class="check-item"><input type="checkbox"><span>Найти диагностический разъем</span></label><label class="check-item"><input type="checkbox"><span>Подключить программатор</span></label><label class="check-item"><input type="checkbox"><span>Считать дамп памяти</span></label><label class="check-item"><input type="checkbox"><span>Изменить значения счетчика</span></label><label class="check-item"><input type="checkbox"><span>Записать новые данные</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 6</div></div>
+<p>Важно отметить, что современные контроллеры, используемые в аппаратах серий <em>DeLonghi Dinamica</em> или <em>Jura Z8</em>, часто имеют криптографическую защиту. Это означает, что простое изменение значения счетчика может привести к рассинхронизации контрольных сумм, после чего аппарат перейдет в режим блокировки, который невозможно снять без замены микросхемы памяти или прошивки контроллера.</p>
+<blockquote>⚠️ Внимание: Интерфейсы и протоколы связи диагностических разъемов могут меняться с выходом новых ревизий плат. Всегда проверяйте совместимость диагностического оборудования с конкретной версией платы управления перед началом работ.</p>
+
+<h2 id="сравнение-методов-сброса-и-их-эффективность">Сравнение методов сброса и их эффективность</h2>
+<p>Выбор метода сброса зависит от модели устройства, версии прошивки и причин блокировки. Некоторые методы позволяют сбросить только счетчик чистки, в то время как другие могут обнулить все параметры, включая счетчик чашек. Сравнительная таблица ниже демонстрирует основные преимущества и недостатки популярных подходов к решению проблемы.</p>
+<table>
+<thead>
+<tr>
+<th>Метод сброса</th>
+<th>Сложность</th>
+<th>Риск поломки</th>
+<th>Эффективность</th>
+<th>Требует оборудования</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Заводская комбинация</td>
+<td>Низкая</td>
+<td>Минимальный</td>
+<td>Средняя</td>
+<td>Нет</td>
+</tr>
+<tr>
+<td>Сервисный код</td>
+<td>Средняя</td>
+<td>Низкий</td>
+<td>Высокая</td>
+<td>Нет</td>
+</tr>
+<tr>
+<td>Программатор (JTAG)</td>
+<td>Высокая</td>
+<td>Средний</td>
+<td>Максимальная</td>
+<td>Да</td>
+</tr>
+<tr>
+<td>Замена платы</td>
+<td>Высокая</td>
+<td>Низкий</td>
+<td>Максимальная</td>
+<td>Да</td>
+</tr>
+</tbody>
+</table>
+<details class="faq-item"><summary>Что такое EEPROM и почему он важен?</summary><div class="faq-answer"><p>EEPROM (Electrically Erasable Programmable Read-Only Memory) — это тип микросхемы памяти, в которой хранятся настройки и счетчики кофемашины. При сбросе счетчика мы фактически перезаписываем данные в этом чипе. Если чип поврежден физически или логически, сброс невозможен без замены всей платы.</p></div></details>
+
+<h2 id="риски-потери-гарантии-и-скрытые-проблемы">Риски потери гарантии и скрытые проблемы</h2>
+<p>Самым существенным риском самостоятельного сброса счетчиков является потеря <strong>гарантии</strong> на оборудование. Производители кофемашин, такие как <em>Saeco</em> или <em>Bosch</em>, прямо указывают в гарантийном талоне, что вскрытие корпуса и вмешательство в электронику аннулируют право на бесплатное обслуживание. Даже если вы сбросите счетчик программатором без видимых следов вскрытия, система может зафиксировать несанкционированное чтение памяти.</p>
+<p>Кроме того, сброс счетчика не решает реальных физических проблем, которые могли возникнуть из-за накопления накипи или износа уплотнений. <em>Термоблок</em> может быть уже покрыт толстым слоем накипи, который невидим снаружи, но снижает эффективность нагрева. Игнорируя показания счетчика, пользователь просто откладывает неизбежный капитальный ремонт, который в итоге обойдется гораздо дороже, чем регулярное обслуживание.</p>
+<ul>
+<li>🛡️ Проверьте условия гарантийного обслуживания вашей модели перед началом любых манипуляций.</li>
+<li>🔧 Осмотрите внутренние узлы на наличие физических повреждений после сброса счетчика.</li>
+<li>💧 Убедитесь, что вода в системе действительно чистая и не требует химической обработки.</li>
+</ul>
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед сбросом счетчика обязательно сделайте резервную копию текущих параметров (если есть возможность), чтобы в случае сбоя прошивки можно было восстановить заводские настройки.</p></div>
+
+<h2 id="альтернативные-решения-и-профилактика">Альтернативные решения и профилактика</h2>
+<p>Вместо того чтобы искать способы обхода защиты, целесообразнее внедрить регулярную профилактику, которая предотвратит частые блокировки. Использование качественной воды с правильной степенью жесткости позволяет значительно увеличить интервалы между процедурами декальцинации. Установка внешнего фильтра для воды или использование капсул с фильтром (для моделей с такой опцией) может продлить жизнь узлам в разы.</p>
+<p>Если аппарат требует сброса счетчика слишком часто, это может быть признаком неисправности датчиков или программной ошибки. В таких случаях обращение в специализированный сервисный центр может быть единственным правильным решением. <strong>Специалисты</strong> смогут провести диагностику, определить реальную причину частых срабатываний и, при необходимости, обновить прошивку до актуальной версии, устраняющую баги.</p>
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная профилактика и использование качественной воды эффективнее и дешевле, чем постоянные попытки сброса счетчиков и последующий ремонт поврежденных узлов.</p></div>
+<blockquote>⚠️ Внимание: Если аппарат требует сброса счетчика после каждой чистки, это может указывать на неисправность датчика потока или ошибки в логике работы контроллера, которые невозможно исправить простым сбросом.
+
+<h2 id="часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</h2>
+<details>
+<summary>Можно ли сбросить счетчик чашек без сброса счетчика чистки?</summary>
+<p>В большинстве случаев эти счетчики независимы, и сброс одного не влияет на другой. Однако в некоторых моделях блокировка приготовления напитков срабатывает при достижении лимита любого из них, поэтому сброс счетчика чашек не решит проблему, если счетчик чистки также исчерпан.</p>
+</details>
+<details>
+<summary>Почему после сброса счетчика машина снова просит чистку через пару дней?</summary>
+<p>Это может свидетельствовать о том, что программа считает количество пролитой воды не по факту, а по времени работы, или же в системе есть программный сбой. Также возможно, что вы сбросили счетчик, но не провели физическую процедуру промывки, и алгоритм работы машины это зафиксировал.</p>
+</details>
+<details>
+<summary>Безопасно ли использовать сторонние программаторы для сброса счетчика?</summary>
+<p>Использование стороннего оборудования всегда несет риск. Неправильные настройки могут привести к «окирпичиванию» платы управления. Рекомендуется использовать только проверенные инструменты и строго следовать инструкциям производителя программатора.</p>
+</details>
+<details>
+<summary>Что делать, если на дисплее горит ошибка «Sistema Bloccato» (Система заблокирована)?</summary>
+<p>Это состояние обычно возникает после нескольких неудачных попыток сброса или при критическом износе узлов. В этом случае часто требуется замена заварочного блока или полная перепрошивка контроллера в сервисном центре.</p>
+</details>
+<details>
+<summary>Можно ли сбросить счетчик, просто вынув вилку из розетки?</summary>
+<p>Нет, современные кофемашины сохраняют данные счетчиков в энергонезависимой памяти (EEPROM). Простое отключение питания не приведет к сбросу значений, а в некоторых случаях может вызвать рассинхронизацию часов реального времени.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-проблему-сервисного-таймера">Введение в проблему сервисного таймера</a></li><li><a href="#природа-сервисных-счетчиков-и-их-виды">Природа сервисных счетчиков и их виды</a></li><li><a href="#заводские-комбинации-клавиш-и-скрытые-меню">Заводские комбинации клавиш и скрытые меню</a></li><li><a href="#использование-профессиональных-программаторов">Использование профессиональных программаторов</a></li><li><a href="#сравнение-методов-сброса-и-их-эффективность">Сравнение методов сброса и их эффективность</a></li><li><a href="#риски-потери-гарантии-и-скрытые-проблемы">Риски потери гарантии и скрытые проблемы</a></li><li><a href="#альтернативные-решения-и-профилактика">Альтернативные решения и профилактика</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-chistit-kapuchinator-v-kofemashine-vitek.html" class="related-card">Как почистить капучинатор на кофемашине Vitek: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-razobrat-kofemashinu-bork-s801.html" class="related-card">Как разобрать кофемашину Bork C801: пошаговая инструкция по ремонту</a></li><li><a href="/articles/k/ko/kofemashina-philips-nl9206ad-4-drachten-kak-pochistit.html" class="related-card">Как почистить кофемашину Philips NL9206AD: полные инструкции</a></li><li><a href="/articles/k/ko/kofemashina-pokazyvaet-chto-net-kofe.html" class="related-card">Ошибка «Нет кофе»: почему кофемашина не видит зерна и как починить</a></li><li><a href="/articles/k/ka/kak-razobrat-kofemashinu-nespresso-kapsulnaya-delonghi.html" class="related-card">Как разобрать кофемашину Nespresso DeLonghi: Пошаговая инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-chistit-kapuchinator-v-kofemashine-vitek.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить капучинатор на кофемашине Vitek: пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как правильно очищать капучинатор на кофемашинах Vitek. Подробная инструкция по промывке, д</span></a><a href="/articles/k/ka/kak-razobrat-kofemashinu-bork-s801.html" class="related-bottom-card"><span class="related-bottom-title">Как разобрать кофемашину Bork C801: пошаговая инструкция по ремонту</span><span class="related-bottom-desc">Полное руководство по разборке автоматической кофемашины Bork C801. Инструкция по снятию корпуса, до</span></a><a href="/articles/k/ko/kofemashina-philips-nl9206ad-4-drachten-kak-pochistit.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Philips NL9206AD: полные инструкции</span><span class="related-bottom-desc">Пошаговое руководство по очистке Philips NL9206AD. Удаление накипи, промывка заварочного блока, выбо</span></a><a href="/articles/k/ko/kofemashina-pokazyvaet-chto-net-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Ошибка «Нет кофе»: почему кофемашина не видит зерна и как починить</span><span class="related-bottom-desc">Кофемашина показывает что нет кофе, хотя бункер полон? Разбираем причины: датчик, помол, статика и н</span></a><a href="/articles/k/ka/kak-razobrat-kofemashinu-nespresso-kapsulnaya-delonghi.html" class="related-bottom-card"><span class="related-bottom-title">Как разобрать кофемашину Nespresso DeLonghi: Пошаговая инструкция</span><span class="related-bottom-desc">Подробный гайд по разборке капсульных кофемашин DeLonghi Nespresso. Чистка заварочного блока, замена</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-ot-nakipi-v-domashnikh-usloviyakh-limonnoj-kislotoj-bosch.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Bosch лимонной кислотой: пошаговая инструкция</span><span class="related-bottom-desc">Пошаговая инструкция по удалению накипи в кофемашинах Bosch с помощью лимонной кислоты. Нормы расход</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

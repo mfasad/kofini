@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Стимер в кофеварке: что это, как работает и настраивать — Кофини</title>
+    <meta name="description" content="Подробный разбор функции стимера в кофемашинах. Принципы работы, настройка температуры молока, очистка и troubleshooting для идеальной пенки.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/c/ch/chto-takoe-stimer-v-kofevarke.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Стимер в кофеварке: что это, как работает и настраивать">
+    <meta property="og:description" content="Подробный разбор функции стимера в кофемашинах. Принципы работы, настройка температуры молока, очистка и troubleshooting для идеальной пенки.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Стимер в кофеварке: что это, как работает и настраивать</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Что такое стимер в кофеварке и как правильно им пользоваться</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#принцип-работы-паровой-трубки">Принцип работы паровой трубки</a></li><li><a href="#конструкция-и-типы-сопел">Конструкция и типы сопел</a></li><li><a href="#техника-взбивания-молока-шаг-за-шагом">Техника взбивания молока шаг за шагом</a></li><li><a href="#регулировка-температуры-и-давления">Регулировка температуры и давления</a></li><li><a href="#очистка-и-обслуживание-паровой-системы">Очистка и обслуживание паровой системы</a></li><li><a href="#частые-проблемы-и-их-решение">Частые проблемы и их решение</a></li><li><a href="#итоги-и-рекомендации">Итоги и рекомендации</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Для многих любителей кофе, переходящих от обычной турки или капельной машины к оборудованию с <strong>эспрессо-группой</strong>, одним из самых загадочных элементов становится паровой кран. Именно он отвечает за превращение холодного молока в нежную, горячую пену для капучино или латте. В профессиональной среде и среди энтузиастов этот элемент часто называют <strong>стимером</strong>, хотя технически это паровое сопло или джета.</p>
+
+<p>Понимание того, как работает стимер и как им управлять, кардинально меняет качество напитка. Вы больше не будете сталкиваться с перегретым молоком с резким запахом или, наоборот, с холодной жидкостью без пены. Ключ к успеху лежит в знании физики процесса и правильной подготовке устройства.</p>
+
+<p>В этой статье мы разберем, что скрывается за этим термином, как правильно настроить температуру и текстуру молока, а также какие ошибки могут привести к поломке дорогостоящего оборудования. Вы узнаете, почему некоторые модели имеют одну трубку, а другие — три, и как добиться идеальной микропены.</p>
+
+<h2 id="принцип-работы-паровой-трубки">Принцип работы паровой трубки</h2>
+
+<p>Стимер — это не просто трубка, через которую выходит пар. Это сложный <strong>инструмент аэрации</strong>, который использует энергию сжатого пара для нагрева и насыщения жидкости воздухом. Внутри корпуса кофемашины вода нагревается бойлером до температуры выше 100°C, превращаясь в пар под высоким давлением.</p>
+
+<p>Когда вы поворачиваете <code>Вентиль пара</code>, этот пар выходит через специальное сопло. Если сопло погружено в молоко, оно создает интенсивные вихревые потоки. Эти потоки захватывают молекулы воздуха с поверхности и распределяют их по всему объему жидкости, создавая структуру пены. Правильная <strong>текстура молока</strong> напоминает жидкий шоколад или краску, а не мыльную пену.</p>
+
+<p>Важно отметить, что процесс состоит из двух фаз: аэрации (вдувания воздуха) и нагрева (микронизации пузырьков). На первой фазе сопло должно находиться почти на поверхности, издавая звук "шкварчания". На второй фазе сопло углубляется, создавая вихрь, который "замешивает" пену в молоко.</p>
+
+<blockquote>⚠️ Внимание: Никогда не включайте паровой кран, если он не погружен в жидкость или если внутри него находится вода. Резкий выброс конденсата может обжечь кожу или испортить молоко, разбрызгивая его по всей рабочей зоне.</blockquote>
+
+<h2 id="конструкция-и-типы-сопел">Конструкция и типы сопел</h2>
+
+<p>Не все стимеры одинаковы, и конструкция сопла напрямую влияет на скорость работы и удобство использования. В бытовых машинах чаще всего встречаются <strong>однопоточные сопла</strong>, которые представляют собой цельную металлическую трубку с отверстиями по кругу. Они просты, но требуют более точной настройки положения чашки.</p>
+
+<p>В профессиональных моделях и продвинутых полупрофессиональных аппаратах часто используются <strong>многоструйные головки</strong>. Они имеют 2, 3 или даже 4 отверстия. Такая конструкция позволяет создавать более мощный и направленный вихрь, что значительно ускоряет процесс приготовления и делает текстуру пены более однородной.</p>
+
+<p>Материал исполнения также играет роль. Лучшими считаются сопла из латуни или нержавеющей стали. Они быстро нагреваются и долго сохраняют тепло, что критично для стабильного прогрева молока. Пластиковые или дешевые металлические элементы могут деформироваться при постоянном термическом ударе.</p>
+
+<ul>
+<li>🔹 Одноотверстные сопла идеальны для новичков, так как проще контролировать процесс аэрации.</li>
+<li>🔹 Многоструйные сопла требуют практики, но позволяют быстрее взбивать большие объемы молока.</li>
+<li>🔹 Сопла с защитным кожухом снижают риск ожогов, но могут немного замедлять процесс нагрева.</li>
+</ul>
+
+<p>Стоит также обратить внимание на наличие <em>силиконовых насадок</em> на некоторых моделях, например, у брендов <em>DeLonghi</em> или <em>Gaggia</em>. Эти насадки защищают молоко от прямого контакта с раскаленным металлом, предотвращая пригорание и образование жесткой корки на поверхности пены.</p>
+
+<div class="poll-widget" id="poll-1ec33fbf"><div class="poll-widget-question">📊 Какой тип сопла установлен на вашей кофемашине?</div><div class="poll-widget-option" data-poll="1ec33fbf" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Одноотверстное</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="1ec33fbf" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Многоструйное (2-4 отверстия)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="1ec33fbf" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Силиконовая насадка</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="1ec33fbf" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не знаю/Не смотрел</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="техника-взбивания-молока-шаг-за-шагом">Техника взбивания молока шаг за шагом</h2>
+
+<p>Чтобы получить идеальный капучино, недостаточно просто включить пар. Нужно действовать последовательно и контролировать температуру на каждом этапе. Начните с холодного молока: чем холоднее молоко, тем больше времени у вас есть на создание пены до того, как оно перегреется. Идеальная стартовая температура — около 4°C.</p>
+
+<p>Первый этап — <strong>очистка и продувка</strong>. Перед погружением сопла в кувшин обязательно откройте пар на 1-2 секунды в воздух. Это удалит конденсат, который скапливается внутри трубки за время простоя, и обеспечит сухой, горячий пар для работы. Иначе вы просто разбавите молоко водой.</p>
+
+<p>Затем погрузите сопло чуть ниже поверхности молока и откройте пар. Вы должны услышать характерный звук шкварчания — это процесс захвата воздуха. Как только объем молока увеличится на 30-50%, углубите сопло, чтобы звук прекратился, и молоко начало вращаться по спирали. Это фаза нагрева и гомогенизации.</p>
+
+<div class="checklist-block"><h4>☑️ Подготовка к взбиванию</h4><label class="check-item"><input type="checkbox"><span>Охладите молоко до 4-5°C</span></label><label class="check-item"><input type="checkbox"><span>Просушите сопло продувкой</span></label><label class="check-item"><input type="checkbox"><span>Погрузите сопло на 0.5-1 см</span></label><label class="check-item"><input type="checkbox"><span>Включите пар и создайте вихрь</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<p>Критически важно вовремя остановиться. Оптимальная температура для подачи напитка — 60-65°C. Если нагреть молоко выше 70°C, белок денатурирует, и пена станет грубой, а сам напиток приобретет неприятный привгар и потеряет сладость.</p>
+
+<blockquote>⚠️ Внимание: Не пытайтесь "додать" пену, постоянно держите сопло у поверхности. Это приведет к образованием крупных пузырей, которые невозможно скрыть. Лучше начать заново с новой порции холодного молока.</blockquote>
+
+<blockquote>⚠️ Внимание: Параметры давления пара в бойлере могут меняться в зависимости от модели и износа нагревательного элемента. Если машина старая, проверьте рекомендации производителя в сервисной документации перед регулировкой.</blockquote>
+
+<p>Если вы не знаете, как именно работает ваша конкретная модель, попробуйте поэкспериментировать с глубиной погружения. Иногда несколько миллиметров решают, будет ли у вас густая шапка или просто горячее молоко.</p>
+
+
+
+<h2 id="регулировка-температуры-и-давления">Регулировка температуры и давления</h2>
+
+<p>Многие пользователи ошибочно полагают, что стимер выдает пар с фиксированной температурой. На самом деле, температура пара зависит от настроек <strong>термостата</strong> и типа бойлера. В однобойлерных системах температура пара часто ниже, чем в двухбойлерных, так как один бойлер используется и для заваривания, и для взбивания.</p>
+
+<p>В продвинутых моделях, таких как <em>Rancilio Silvia</em> или <em>Lelit Anna</em>, можно регулировать давление пара через клапаны. Это позволяет адаптировать подачу пара под разные виды молока: растительное (овсяное, миндальное) требует более мягкого пара, чем коровье, чтобы не свернуть белки слишком быстро.</p>
+
+<p>Для растительного молока техника взбивания немного отличается. Растительные белки менее стабильны, поэтому аэрацию нужно проводить быстрее и менее агрессивно. Часто требуется более низкая температура (около 55°C), чтобы напиток не "распался" в чашке.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип молока</th>
+<th>Целевая температура</th>
+<th>Особенности взбивания</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Цельное коровье</td>
+<td>60-65°C</td>
+<td>Классическая аэрация, плотная микропена</td>
+</tr>
+<tr>
+<td>Обезжиренное</td>
+<td>55-60°C</td>
+<td>Быстрая пена, легко перегреть, менее сладкий вкус</td>
+</tr>
+<tr>
+<td>Овсяное</td>
+<td>55-60°C</td>
+<td>Требует осторожности, быстрая коагуляция белков</td>
+</tr>
+<tr>
+<td>Миндальное</td>
+<td>50-55°C</td>
+<td>Хорошо держит форму, но быстро расслаивается</td>
+</tr>
+</tbody>
+</table>
+
+<p>Если у вас нет термометра, используйте тактильный контроль. Держите руку на дне кувшина. Как только станет горячо, но еще терпимо (около 55°C), начинайте медленно убирать руку. В момент, когда руку уже больно держать — немедленно выключайте пар. Не нужно ждать, пока пар начнет "вылетать" из молока.</p>
+
+
+
+<h2 id="очистка-и-обслуживание-паровой-системы">Очистка и обслуживание паровой системы</h2>
+
+<p>Долговечность стимера и качество пены напрямую зависят от регулярного обслуживания. Молоко — идеальная среда для размножения бактерий, а при нагревании оно превращается в липкий налет, который мгновенно засыхает на горячем сопле. Игнорирование этого правила приведет к забиванию отверстий и неприятному запаху.</p>
+
+<p>Правило "трех секунд" является золотым стандартом: сразу после взбивания молока, не давая соплу остыть, необходимо протереть его влажной тканью. Это удаляет основную часть молока. Затем нужно открыть пар на секунду, чтобы смыть остатки изнутри и забить их обратно в кувшин, а не в механизм машины.</p>
+
+<p>Раз в неделю или чаще (в зависимости от интенсивности использования) необходимо проводить глубокую очистку. Снимите сопло (если конструкция позволяет) и замочите его в специальном растворе для удаления накипи и молочного налета. Для этого можно использовать таблетки для чистки кофемашин или специальные спреи.</p>
+
+<ul>
+<li>🔹 Протирайте сопло влажной тряпкой сразу после каждого использования.</li>
+<li>🔹 Проводите продувку паром перед и после работы для очистки внутренних каналов.</li>
+<li>🔹 Раз в месяц разбирайте сопло и промывайте его в чистящем средстве.</li>
+</ul>
+
+<p>Если сопло забилось и пар идет рывками или только из одного отверстия, не пытайтесь прочистить его иголкой или ножом. Вы можете повредить калиброванное отверстие. Используйте мягкую щетку или специальные иголки для чистки сопел, которые продаются в комплекте с большинством профессиональных кофемашин.</p>
+
+
+
+<h2 id="частые-проблемы-и-их-решение">Частые проблемы и их решение</h2>
+
+<p>Иногда, даже при соблюдении всех рекомендаций, возникают проблемы. Самая частая жалоба — "спаренный пар" или слабый напор. Это может быть признаком того, что бойлер не успевает нагреться до нужной температуры. В однобойлерных машинах после приготовления эспрессо нужно подождать 30-60 секунд, пока термостат снова включит нагрев.</p>
+
+<p>Другая проблема — появление крупных пузырей в молоке. Это происходит из-за неправильного угла наклона кувшина или слишком глубокого погружения сопла на этапе аэрации. Молоко должно вращаться, а не кипеть. Если пузыри крупные, попробуйте наклонить кувшин так, чтобы сопло касалось поверхности только с одной стороны, создавая сильную воронку.</p>
+
+<p>Если стимер издает странные звуки или гудит, возможно, проблема в накипи. Накипь на нагревательном элементе или внутри трубки меняет динамику потока пара. В этом случае необходимо провести процедуру декальцинации согласно инструкции к вашей модели.</p>
+
+
+
+<h2 id="итоги-и-рекомендации">Итоги и рекомендации</h2>
+
+<p>Стимер — это сердце кофейного искусства в домашних условиях. Он превращает обычный эспрессо в сложные и вкусные напитки. Однако мастерство приходит с практикой. Не расстраивайтесь, если первые попытки не увенчались успехом. Это нормально для любого, кто начинает работать с паром.</p>
+
+<p>Главное, что нужно запомнить: контроль температуры и чистота оборудования важнее, чем скорость процесса. <mark>Идеальная пена — это результат медленного, контролируемого нагрева и правильных движений кувшином, а не просто выброса пара.</mark> Тренируйтесь на холодной воде, чтобы отработать движения, не тратя молоко.</p>
+
+<p>Следуя этим рекомендациям, вы сможете не только продлить жизнь вашей кофемашины, но и каждый день радовать себя и близких напитками уровня лучших кофейных домов. Экспериментируйте с разными видами молока и настройками, чтобы найти свой идеальный баланс.</p>
+
+
+
+<details>
+<summary>Как очистить сопло стимера от засохшего молока?</summary>
+<p>Если сопло забилось, не пытайтесь его проткнуть острым предметом. Снимите головку сопла (если конструкция позволяет), замочите ее в теплой воде с добавлением средства для удаления налета на 15-20 минут. Затем промойте под струей воды и прочистите отверстия мягкой щеткой. Включите пар на пару секунд, чтобы убедиться в проходимости.</p>
+</details>
+
+<details>
+<summary>Почему молоко получается с крупными пузырями?</summary>
+<p>Крупные пузыри возникают из-за недостаточного перемешивания молока. Сопло должно быть погружено достаточно глубоко, чтобы создавать вихрь, который "забивает" воздух внутрь жидкости. Если сопло находится слишком высоко, воздух остается на поверхности в виде крупных пузырей.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать стимер для разогрева воды?</summary>
+<p>Технически это возможно, но не рекомендуется. Разогрев воды паром занимает много времени и приводит к быстрому остыванию воды в бойлере, что может нарушить температурный режим для следующей чашки эспрессо. Лучше использовать функцию горячей воды, если она предусмотрена конструкцией.</p>
+</details>
+
+<details>
+<summary>Какая температура молока идеальна для латте?</summary>
+<p>Для латте оптимальная температура молока составляет 60-65°C. При этой температуре молоко остается сладким и не теряет своих питательных свойств. Превышение 70°C приводит к денатурации белков и появлению неприятного привкуса.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#принцип-работы-паровой-трубки">Принцип работы паровой трубки</a></li><li><a href="#конструкция-и-типы-сопел">Конструкция и типы сопел</a></li><li><a href="#техника-взбивания-молока-шаг-за-шагом">Техника взбивания молока шаг за шагом</a></li><li><a href="#регулировка-температуры-и-давления">Регулировка температуры и давления</a></li><li><a href="#очистка-и-обслуживание-паровой-системы">Очистка и обслуживание паровой системы</a></li><li><a href="#частые-проблемы-и-их-решение">Частые проблемы и их решение</a></li><li><a href="#итоги-и-рекомендации">Итоги и рекомендации</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-rabotaet-kofemolka-delongi.html" class="related-card">Как работает кофемолка DeLonghi: принцип, настройка и чистка</a></li><li><a href="/articles/k/ka/kak-promyt-kofemashinu-neskafe-alegriya.html" class="related-card">Как промыть кофемашину Nescafé Alegria: полная инструкция по очистке</a></li><li><a href="/articles/k/ka/kak-razobrat-kofemashinu-polaris-1520.html" class="related-card">Как разобрать кофемашину Polaris PCM 1520: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-ochistit-ot-nakipi-kofemashinu-delonghi-magnifica-s-cappuccino.html" class="related-card">Инструкция: как очистить от накипи кофемашину Delonghi Magnifica S Cappuccino</a></li><li><a href="/articles/k/ka/kak-sdelat-ochistku-kofemashiny-philips-saeco.html" class="related-card">Как почистить кофемашину Philips Saeco: пошаговая инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-rabotaet-kofemolka-delongi.html" class="related-bottom-card"><span class="related-bottom-title">Как работает кофемолка DeLonghi: принцип, настройка и чистка</span><span class="related-bottom-desc">Разбираем устройство и принцип работы кофемолок DeLonghi. Настройка помолу, отличия жерновов, инстру</span></a><a href="/articles/k/ka/kak-promyt-kofemashinu-neskafe-alegriya.html" class="related-bottom-card"><span class="related-bottom-title">Как промыть кофемашину Nescafé Alegria: полная инструкция по очистке</span><span class="related-bottom-desc">Пошаговая инструкция по декальцинации и промывке кофемашины Nescafé Alegria. Советы по выбору средст</span></a><a href="/articles/k/ka/kak-razobrat-kofemashinu-polaris-1520.html" class="related-bottom-card"><span class="related-bottom-title">Как разобрать кофемашину Polaris PCM 1520: пошаговая инструкция</span><span class="related-bottom-desc">Подробный разбор кофемашины Polaris 1520. Инструкция по снятию корпуса, чистке заварочного блока и з</span></a><a href="/articles/k/ka/kak-ochistit-ot-nakipi-kofemashinu-delonghi-magnifica-s-cappuccino.html" class="related-bottom-card"><span class="related-bottom-title">Инструкция: как очистить от накипи кофемашину Delonghi Magnifica S Cappuccino</span><span class="related-bottom-desc">Пошаговое руководство по декальцинации кофемашины Delonghi Magnifica S Cappuccino. Советы по выбору </span></a><a href="/articles/k/ka/kak-sdelat-ochistku-kofemashiny-philips-saeco.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Philips Saeco: пошаговая инструкция</span><span class="related-bottom-desc">Пошаговое руководство по очистке, декальцинации и промывке жерновов кофемашин Philips Saeco. Советы </span></a><a href="/articles/k/ko/kofemashina-cimbali-junior-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Cimbali Junior: Инструкция и настройка</span><span class="related-bottom-desc">Полное руководство по эксплуатации кофемашины Cimbali Junior. Настройка помола, приготовление эспрес</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

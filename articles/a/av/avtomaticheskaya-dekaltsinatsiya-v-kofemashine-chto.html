@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Автоматическая декальцинация в кофемашине: что это и как работает — Кофини</title>
+    <meta name="description" content="Узнайте, что такое автоматическая декальцинация в кофемашине. Полный разбор технологии, алгоритмов очистки и сравнение с ручным режимом в нашей экспертной статье.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/a/av/avtomaticheskaya-dekaltsinatsiya-v-kofemashine-chto.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Автоматическая декальцинация в кофемашине: что это и как работает">
+    <meta property="og:description" content="Узнайте, что такое автоматическая декальцинация в кофемашине. Полный разбор технологии, алгоритмов очистки и сравнение с ручным режимом в нашей экспертной статье.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Автоматическая декальцинация в кофемашине: что это и как работает</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Автоматическая декальцинация в кофемашине: что это и как работает</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#суть-технологии-автоматического-удаления-накипи">Суть технологии автоматического удаления накипи</a></li><li><a href="#как-работает-алгоритм-очистки-внутри-устройства">Как работает алгоритм очистки внутри устройства</a></li><li><a href="#преимущества-автоматического-режима-перед-ручным">Преимущества автоматического режима перед ручным</a></li><li><a href="#влияние-на-срок-службы-и-качество-кофе">Влияние на срок службы и качество кофе</a></li><li><a href="#сравнение-ручного-и-автоматического-режимов">Сравнение ручного и автоматического режимов</a></li><li><a href="#особенности-настройки-и-обслуживания">Особенности настройки и обслуживания</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Современная кофемашина — это не просто бытовой прибор для приготовления ароматного напитка, а сложное инженерное устройство, требующее грамотного ухода. Одним из самых критичных аспектов эксплуатации является борьба с накипью, которая неизбежно образуется из-за жесткости водопроводной воды. Именно здесь на помощь приходит технология <strong>автоматической декальцинации</strong>, меняющая представление о том, как часто и как сложно обслуживать технику.</p>
+
+<p>Многие пользователи, выбирая новый аппарат, задаются вопросом: «Автоматическая декальцинация в кофемашине что это на самом деле?». Это не просто маркетинговый ход, а комплексная система, в которой электроника берет на себя управление процессом очистки. Вам больше не нужно гадать, сколько воды слить или как долго варикатор должен греться в кислоте. Алгоритм сам рассчитывает время и дозировку реагента.</p>
+
+<h2 id="суть-технологии-автоматического-удаления-накипи">Суть технологии автоматического удаления накипи</h2>
+
+<p>В основе <strong>автоматической декальцинации</strong> лежит программное обеспечение, которое анализирует накопление минеральных отложений внутри системы. Датчики жесткости воды и счетчик пролитых чашек формируют базу данных, на основе которой контроллер запускает режим очистки в нужный момент. Это исключает человеческий фактор, когда владелец забывает о процедуре или проводит её слишком редко.</p>
+
+<p>Процесс начинается с того, что система вычисляет оптимальный объем очищающего раствора. В отличие от ручных режимов, где вы сами разводите средство, здесь часто используется встроенный дозатор или система, требующая добавления средства в специальный резервуар, после чего машина сама дозирует его в необходимом соотношении с водой. Ключевым элементом здесь является <strong>электронный контроль</strong> фаз промывки.</p>
+
+<p>Важно отметить, что автоматика не просто поливает детали жидкостью. Она управляет нагревательным элементом, заставляя его работать в специфических температурных режимах, которые максимально эффективно растворяют карбонат кальция, не повреждая уплотнители и пластиковые детали. Это достигается за счет точного <strong>циклического нагрева</strong> и остывания.</p>
+
+<blockquote>⚠️ Внимание: Даже при наличии автоматического режима очистки, качество исходной воды играет решающую роль. Использование фильтрованной воды продлевает интервалы между процедурами, в то время как жесткая вода может заставить систему запускать цикл чаще, чем вы ожидали.</blockquote>
+
+<h2 id="как-работает-алгоритм-очистки-внутри-устройства">Как работает алгоритм очистки внутри устройства</h2>
+
+<p>Механизм работы автоматической системы представляет собой строго регламентированную последовательность действий, управляемую микропроцессором. Сначала аппарат сообщает пользователю о необходимости очистки через мигающий индикатор или сообщение на дисплее. После добавления средства в контейнер и нажатия кнопки подтверждения начинается процесс.</p>
+
+<p>Первая фаза — это промывка контура подогретым раствором. Машина циркулирует жидкость через заварочный блок, паровую трубку и внутреннюю магистраль, удаляя рыхлые отложения. Затем следует фаза интенсивного воздействия, где раствор удерживается в системе на определенное время, которое рассчитывается исходя из жесткости воды, установленной в настройках прибора.</p>
+
+<p>Заключительный этап — это многоступенчатая промывка чистой водой. Система автоматически сливает остатки реагента и прогоняет через себя несколько литров воды, чтобы полностью удалить следы кислоты. В моделях с функцией <strong>самоочистки</strong> заварочный блок может быть извлечен и помещен в сервисное положение, чтобы вода омывала его с обеих сторон.</p>
+
+<div class="poll-widget" id="poll-53c330f8"><div class="poll-widget-question">📊 Как часто вы проводите декальцинацию?</div><div class="poll-widget-option" data-poll="53c330f8" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Каждые 2 месяца</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="53c330f8" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в полгода</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="53c330f8" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Только когда загорелся индикатор</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="53c330f8" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Забываю и делаю раз в год</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="преимущества-автоматического-режима-перед-ручным">Преимущества автоматического режима перед ручным</h2>
+
+<p>Главное преимущество автоматической системы — это гарантия полной очистки без риска ошибок. При ручном режиме пользователи часто прерывают процесс, если он кажется слишком долгим, или не промывают систему достаточное количество раз. Автоматика же не позволит вам пропустить ни один этап, обеспечивая идеальный результат каждый раз.</p>
+
+<p>Кроме того, автоматический режим значительно экономит время и нервы. Вам не нужно изучать инструкции, высчитывать пропорции раствора или держать секундомер. Достаточно просто нажать одну кнопку, когда появится соответствующее уведомление на экране. Это особенно актуально для моделей <em>DeLonghi</em> или <em>Jura</em>, где алгоритмы очень тонко настроены под конкретные типы нагревателей.</p>
+
+<ul>
+<li>🚀 Полная защита от ошибок пользователя при дозировке химии</li>
+<li>📊 Точный расчет времени воздействия кислоты на основе данных датчиков</li>
+<li>💧 Автоматическое управление температурой для максимального эффекта</li>
+</ul>
+
+<p>Однако стоит понимать, что автоматика требует наличия совместимых средств для декальцинации. Использование неподходящих растворов может привести к тому, что система не распознает процесс или, что хуже, повредит датчики. Производители часто встраивают защиту, которая блокирует запуск цикла, если не используется оригинальная химия или если уровень воды слишком низкий.</p>
+
+
+
+<h2 id="влияние-на-срок-службы-и-качество-кофе">Влияние на срок службы и качество кофе</h2>
+
+<p>Регулярная и правильная декальцинация напрямую влияет на долговечность нагревательного элемента (ТЭНа) и заварочного блока. Накипь является теплоизолятором, из-за чего ТЭН вынужден работать с перегрузкой, что ведет к его быстрому выходу из строя. Автоматическая система предотвращает образование толстых слоев налета, поддерживая теплоотдачу на максимальном уровне.</p>
+
+<p>Качество напитка также напрямую зависит от чистоты внутренних контуров. Остатки старой накипи и кофейных масел могут придавать эспрессо горечь и посторонние привкусы. Автоматизированный процесс гарантирует, что каждый канал доставки воды и пара будет идеальным, сохраняя истинный вкус зерен.</p>
+
+<p>Существует миф, что частая автоматическая очистка вредит уплотнителям. На деле, современные реагенты и алгоритмы контроля pH настолько мягкие, что они безопасны для резины и пластика. Напротив, отсутствие очистки приводит к заклиниванию клапанов и прокладок, что требует дорогостоящего ремонта.</p>
+
+
+
+<h2 id="сравнение-ручного-и-автоматического-режимов">Сравнение ручного и автоматического режимов</h2>
+
+<p>Чтобы лучше понять разницу, стоит рассмотреть оба подхода детально. Ручной режим требует от пользователя активного участия: вы сами выбираете время, сами разводите средство и сами решаете, когда остановиться. Это подходит для энтузиастов, которые любят контролировать каждый этап обслуживания, но несет риск человеческой ошибки.</p>
+
+<p>Автоматический режим полностью берет управление на себя. Система сама определяет, когда нужна очистка, сама дозирует химию и сама контролирует длительность промывки. Это идеальный выбор для тех, кто ценит комфорт и хочет обеспечить машине максимально возможный уход без лишних усилий.</p>
+
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Ручная декальцинация</th>
+<th>Автоматическая декальцинация</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Участие пользователя</td>
+<td>Высокое (разведение, контроль)</td>
+<td>Минимальное (запуск по сигналу)</td>
+</tr>
+<tr>
+<td>Точность дозировки</td>
+<td>Зависит от внимательности</td>
+<td>Идеальная (программный контроль)</td>
+</tr>
+<tr>
+<td>Риск повреждения</td>
+<td>Выше (при ошибках)</td>
+<td>Минимальный</td>
+</tr>
+<tr>
+<td>Длительность процесса</td>
+<td>Нестабильная</td>
+<td>Оптимизированная под модель</td>
+</tr>
+<tr>
+<td>Совместимость средств</td>
+<td>Широкая (в том числе уксус)</td>
+<td>Часто ограничена (оригинальные средства)</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="особенности-настройки-и-обслуживания">Особенности настройки и обслуживания</h2>
+
+<p>Чтобы автоматическая система работала корректно, необходимо правильно настроить исходные параметры. В меню устройства нужно указать жесткость вашей воды. Это критически важный момент: если вы укажете низкую жесткость, а вода на самом деле жесткая, система будет запускать очистку слишком редко, что приведет к образованию накипи.</p>
+
+<p>Также важно периодически проверять состояние датчиков. Со временем на них может оседать налет, который искажает показания. В некоторых моделях, например у <em>Philips</em>, предусмотрена функция калибровки датчиков, которую рекомендуется запускать после каждой декальцинации, чтобы сбросить счетчик накопленной минерализации.</p>
+
+
+
+<p>Некоторые продвинутые модели позволяют настраивать порог срабатывания индикатора. Вы можете задать интервал в чашках или литрах воды, но лучше оставить это на усмотрение встроенных датчиков, так как они реагируют на реальное состояние системы, а не на условное время.</p>
+
+<blockquote>⚠️ Внимание: Всегда используйте только рекомендованные производителем средства для декальцинации. Кислоты на основе лимонной или уксусной кислоты могут быть слишком агрессивными для некоторых типов датчиков или неэффективными для современных систем высокого давления.</blockquote>
+
+<div class="checklist-block"><h4>☑️ Подготовка к автоматической очистке</h4><label class="check-item"><input type="checkbox"><span>Убедиться в наличии чистящего средства</span></label><label class="check-item"><input type="checkbox"><span>Проверить уровень воды</span></label><label class="check-item"><input type="checkbox"><span>Убедиться, что контейнер для гущи пуст</span></label><label class="check-item"><input type="checkbox"><span>Включить машину в сеть</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+
+<details>
+<summary>Нужно ли вынимать заварочный блок перед автоматической очисткой?</summary>
+<p>В большинстве современных кофемашин автоматический режим предусматривает промывку заварочного блока без его извлечения, так как раствор циркулирует через него под давлением. Однако, некоторые модели требуют вынуть блок на начальном этапе для его ручной промывки под краном, после чего вставить обратно перед запуском цикла промывки. Всегда сверяйтесь с инструкцией к вашей модели.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать обычную лимонную кислоту вместо специального средства?</summary>
+<p>Категорически не рекомендуется. Специальные средства для автоматической декальцинации имеют сбалансированный pH и состав, безопасный для сенсоров и уплотнителей. Лимонная кислота может вызвать коррозию или не раствориться полностью, засорив узкие каналы. Кроме того, система может не распознать процесс, если не используется оригинальный реагент.</p>
+</details>
+
+<details>
+<summary>Как часто нужно делать декальцинацию в автоматическом режиме?</summary>
+<p>Частота зависит от жесткости воды и интенсивности использования. В среднем, это происходит раз в 2-3 месяца при активном использовании. Автоматика сама сигнализирует о необходимости, основываясь на данных датчиков и счетчике пролитых чашек. Не стоит запускать процедуру чаще, чем требует индикатор, чтобы не подвергать детали лишнему химическому воздействию.</p>
+</details>
+
+<details>
+<summary>Что делать, если процесс прервался посередине?</summary>
+<p>Если процесс прервался из-за нехватки воды или отключения питания, система часто переходит в режим ожидания или блокирует дальнейшее приготовление кофе. Вам нужно будет долить воду, убедиться, что резервуар с химией пуст и промыт, и запустить цикл заново. В некоторых случаях требуется сброс ошибки через меню или полное выключение и включение устройства.</p>
+</details>
+
+<blockquote>⚠️ Внимание: Интерфейс меню и названия функций могут отличаться в зависимости от модели и года выпуска. Всегда проверяйте актуальную инструкцию в личном кабинете производителя или на официальном сайте перед началом обслуживания.</blockquote>
+
+<p>Понимание того, что такое автоматическая декальцинация, и грамотное использование этой функции — залог долгой и безупречной работы вашей кофемашины. Это технология, которая освобождает вас от рутины, позволяя наслаждаться качественным кофе каждый день без риска поломки оборудования.</p></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#суть-технологии-автоматического-удаления-накипи">Суть технологии автоматического удаления накипи</a></li><li><a href="#как-работает-алгоритм-очистки-внутри-устройства">Как работает алгоритм очистки внутри устройства</a></li><li><a href="#преимущества-автоматического-режима-перед-ручным">Преимущества автоматического режима перед ручным</a></li><li><a href="#влияние-на-срок-службы-и-качество-кофе">Влияние на срок службы и качество кофе</a></li><li><a href="#сравнение-ручного-и-автоматического-режимов">Сравнение ручного и автоматического режимов</a></li><li><a href="#особенности-настройки-и-обслуживания">Особенности настройки и обслуживания</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-smazyvat-kofemashinu-delonghi.html" class="related-card">Как смазывать кофемашину DeLonghi: пошаговая инструкция и нюансы</a></li><li><a href="/articles/p/po/pochemu-shumit-kofemashina.html" class="related-card">Почему шумит кофемашина: причины, диагностика и способы устранения</a></li><li><a href="/articles/k/ka/kak-v-kofemashine-delongi-smenit-zernovoj-kofe-na-molotyj.html" class="related-card">Как в кофемашине De&#x27;Longhi сменить зерновой кофе на молотый: полная инструкция</a></li><li><a href="/articles/k/ki/kislota-dlya-kofemashiny.html" class="related-card">Кислота для кофемашины: выбор, использование и безопасность</a></li><li><a href="/articles/k/ka/kak-ustanovit-filtr-dlya-vody-v-kofemashinu-delonghi.html" class="related-card">Установка фильтра для воды в кофемашину DeLonghi: Пошаговая инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-smazyvat-kofemashinu-delonghi.html" class="related-bottom-card"><span class="related-bottom-title">Как смазывать кофемашину DeLonghi: пошаговая инструкция и нюансы</span><span class="related-bottom-desc">Полное руководство по смазке заварочного блока и уплотнителей кофемашин DeLonghi. Советы по выбору с</span></a><a href="/articles/p/po/pochemu-shumit-kofemashina.html" class="related-bottom-card"><span class="related-bottom-title">Почему шумит кофемашина: причины, диагностика и способы устранения</span><span class="related-bottom-desc">Узнайте, почему кофемашина шумит, трещит или гудит. Разбор основных причин: от накипи до неисправнос</span></a><a href="/articles/k/ka/kak-v-kofemashine-delongi-smenit-zernovoj-kofe-na-molotyj.html" class="related-bottom-card"><span class="related-bottom-title">Как в кофемашине De&#x27;Longhi сменить зерновой кофе на молотый: полная инструкция</span><span class="related-bottom-desc">Подробная пошаговая инструкция: как правильно использовать дозатор для молотого кофе в кофемашинах D</span></a><a href="/articles/k/ki/kislota-dlya-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Кислота для кофемашины: выбор, использование и безопасность</span><span class="related-bottom-desc">Какую кислоту выбрать для декальцинации кофемашины? Сравнение лимонной, щавелевой и фирменных средст</span></a><a href="/articles/k/ka/kak-ustanovit-filtr-dlya-vody-v-kofemashinu-delonghi.html" class="related-bottom-card"><span class="related-bottom-title">Установка фильтра для воды в кофемашину DeLonghi: Пошаговая инструкция</span><span class="related-bottom-desc">Подробное руководство по установке и активации фильтра DeLonghi. Как избежать ошибок, продлить срок </span></a><a href="/articles/k/ka/kak-pochistit-filtr-rozhkovoj-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить фильтр рожковой кофемашины: пошаговая инструкция</span><span class="related-bottom-desc">Полное руководство по очистке фильтров рожковой кофемашины. Методы удаления кофейных масел, декальци</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

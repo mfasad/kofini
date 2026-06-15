@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Температура в кофемашине: почему это важно и как настроить — Кофини</title>
+    <meta name="description" content="Узнайте, какая температура идеальна для эспрессо и альтернативных напитков. Разбор ошибок настройки, влияние на вкус и способы регулировки.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/t/te/temperatura-v-kofemashine.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Температура в кофемашине: почему это важно и как настроить">
+    <meta property="og:description" content="Узнайте, какая температура идеальна для эспрессо и альтернативных напитков. Разбор ошибок настройки, влияние на вкус и способы регулировки.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Температура в кофемашине: почему это важно и как настроить</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Температура в кофемашине: ключ к идеальной чашке кофе</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#физика-экстракции-и-идеальные-температурные-диапазоны">Физика экстракции и идеальные температурные диапазоны</a></li><li><a href="#типы-нагревательных-систем-и-их-влияние-на-стабильность">Типы нагревательных систем и их влияние на стабильность</a></li><li><a href="#регулировка-температуры-инструкции-для-разных-брендов">Регулировка температуры: инструкции для разных брендов</a></li><li><a href="#критические-ошибки-и-симптомы-перегрева-или-недогрева">Критические ошибки и симптомы перегрева или недогрева</a></li><li><a href="#влияние-предварительного-прогрева-и-пролива">Влияние предварительного прогрева и пролива</a></li><li><a href="#сравнительная-таблица-температурных-режимов">Сравнительная таблица температурных режимов</a></li><li><a href="#техническое-обслуживание-и-диагностика">Техническое обслуживание и диагностика</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Стабильная температура в кофемашине — это фундамент качественного напитка. Если термостат работает нестабильно, вы рискуете получить либо горькую, пустую чашку, так как кофеин и масла не успеют экстрагироваться, либо кислый, плоский напиток из-за недостаточной температуры воды. Именно этот параметр определяет баланс кислотности и сладости, который мы ожидаем от дорогого зерна.</p>
+
+<p>Многие пользователи сталкиваются с тем, что напиток остывает слишком быстро или, наоборот, «обжигает» язык сразу после приготовления. Это часто свидетельствует о проблемах с термоблоком или неправильных заводских настройках. Понимание физики процесса нагрева позволит вам не только устранить дефекты, но и адаптировать работу устройства под конкретные сорта кофе.</p>
+
+<h2 id="физика-экстракции-и-идеальные-температурные-диапазоны">Физика экстракции и идеальные температурные диапазоны</h2>
+
+<p>Процесс извлечения вкуса из кофейной таблетки напрямую зависит от термодинамики. Вода, циркулирующая через <strong>кофейную таблетку</strong>, должна находиться в строго определенном коридоре температур. Если показатель опускается ниже <strong>90°C</strong>, экстракция становится неполной, и напиток приобретает характерную кислоту, напоминающую уксус. При превышении <strong>96°C</strong> начинают разрушаться тонкие ароматические соединения, а горечь становится доминирующей.</p>
+
+<p>Существует универсальное правило, которое гласит, что для большинства сортов <em>арабики</em> идеальная температура составляет 93°C. Однако это лишь отправная точка для настройки. Светлые сорта требуют более высоких показателей, чтобы раскрыть сложные фруктовые ноты, тогда как темная обжарка лучше раскрывается при чуть более низких значениях, чтобы избежать жженого привкуса.</p>
+
+<p>Важно учитывать, что температура на выходе из группы не всегда совпадает с температурой внутри <strong>термоблока</strong>. Потери тепла происходят при прохождении через трубки и металлическую голову машины. Поэтому профессионалы часто настраивают нагрев на 2-3 градуса выше рекомендуемой планки, компенсируя неизбежное охлаждение в системе.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Нестабильная температура может быть вызвана не только поломкой термостата, но и накипью, которая работает как теплоизолятор и мешает теплообмену.</p>
+</blockquote>
+
+<h2 id="типы-нагревательных-систем-и-их-влияние-на-стабильность">Типы нагревательных систем и их влияние на стабильность</h2>
+
+<p>Конструкция системы нагрева определяет, насколько стабильно устройство поддерживает заданный режим. Классические <strong>термоблоки</strong> обеспечивают мгновенный нагрев потока воды, но могут страдать от температурных скачков при длительной варке. В таких системах вода проходит через тонкую трубку, нагретую мощным ТЭНом, что требует очень точной работы датчика потока.</p>
+
+<p>Другой тип — это бойлерная система, где вода нагревается в резервуаре и хранится там до момента заваривания. Бойлеры, особенно в моделях с <em>двойным бойлером</em>, обеспечивают невероятную стабильность, так как объем воды постоянно поддерживается на нужной температуре. Это критически важно для последовательной варки нескольких эспрессо подряд без потери качества.</p>
+
+<p>Системы с одним бойлером часто имеют недостаток в виде необходимости ожидания между варкой эспрессо и взбиванием молока. При переключении режима температура резко меняется, что может привести к перегреву молока или недогреву следующей порции эспрессо, если машина не имеет функции термостабилизации.</p>
+
+<p>Для домашнего использования чаще всего встречаются термоблоки из-за их компактности и скорости. Однако в коммерческих аппаратах и премиальных домашних моделях доминируют бойлерные системы, позволяющие достичь максимальной предсказуемости результата.</p>
+
+<div class="poll-widget" id="poll-2577e037"><div class="poll-widget-question">📊 Какой тип системы нагрева используется в вашей кофемашин?</div><div class="poll-widget-option" data-poll="2577e037" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Термоблок</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="2577e037" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Один бойлер</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="2577e037" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Двойной бойлер</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="2577e037" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не знаю</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="регулировка-температуры-инструкции-для-разных-брендов">Регулировка температуры: инструкции для разных брендов</h2>
+
+<p>Доступ к настройкам температуры зависит от производителя и модели устройства. В простых бытовых аппаратах этот параметр может быть фиксированным или регулироваться через комбинацию кнопок. В более продвинутых моделях, таких как <em>De'Longhi</em> или <em>Saeco</em>, настройки часто скрыты в сервисном меню.</p>
+
+<p>Чтобы изменить параметр, необходимо зайти в режим конфигурации. Обычно это делается при выключенном устройстве: нажмите и удерживайте определенные кнопки (например, <code>Menu</code> и <code>Одну чашку</code>) до появления специального индикатора. Далее, используя кнопки выбора, перейдите к пункту <code>Temperature</code> или <code>Temp. Coffee</code> и измените значение в градусах.</p>
+
+<p>В автоматических кофемашинах <em>Jura</em> процедура может отличаться. Часто требуется использование фирменного приложения или комбинации кнопок на дисплее. Введите <code>Menu → Settings → Coffee → Temperature</code> и выберите желаемый уровень. Обратите внимание, что некоторые модели имеют 3-5 ступеней регулировки, а не точную градацию по градусам.</p>
+
+<div class="checklist-block"><h4>☑️ Процедура настройки температуры</h4><label class="check-item"><input type="checkbox"><span>Войти в сервисное меню</span></label><label class="check-item"><input type="checkbox"><span>Выбрать пункт Temperature</span></label><label class="check-item"><input type="checkbox"><span>Установить нужное значение</span></label><label class="check-item"><input type="checkbox"><span>Сохранить изменения и перезагрузить</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="критические-ошибки-и-симптомы-перегрева-или-недогрева">Критические ошибки и симптомы перегрева или недогрева</h2>
+
+<p>Как понять, что проблема именно в температуре? Если ваш эспрессо льется слишком быстро и имеет серый цвет с белесой пеной, это верный признак <strong>недогрева</strong>. Вода не успевает растворить плотные соединения, и напиток получается кислым и водянистым. В такой ситуации необходимо увеличить мощность нагрева или проверить чистоту термоэлемента.</p>
+
+<p>Напротив, если напиток льется очень медленно, имеет черный цвет и горький, вяжущий вкус, возможно, температура слишком высокая. Это явление называется <strong>переэкстракцией</strong>. Вода «выжигает» кофе, высвобождая нежелательные горькие компоненты. Также обратите внимание на запах: если от машины идет запах жженого, это явный сигнал перегрева.</p>
+
+<p>Иногда проблема кроется не в настройках, а в износе компонентов. Датчик температуры может дать сбой, показывая 90°C, когда на самом деле вода уже кипит. В таких случаях замена термодатчика становится неизбежной процедурой для восстановления работоспособности аппарата.</p>
+
+<details class="faq-item"><summary>Что делать, если температура постоянно скакает?</summary><div class="faq-answer"><p>Если вы заметили, что первая чашка нормальная, а последующие становятся холоднее или горячее, проверьте уплотнительные кольца в группе заваривания. Давление пара может быть нестабильным из-за потери герметичности в системе.</p></div></details>
+
+<h2 id="влияние-предварительного-прогрева-и-пролива">Влияние предварительного прогрева и пролива</h2>
+
+<p>Даже идеально настроенная машина не даст качественного результата, если не провести предварительный прогрев. Холодная голова заварочного блока мгновенно забирает тепло у воды, снижая температуру экстракции на 5-10 градусов. Этого достаточно, чтобы испортить вкус светлой обжарки.</p>
+
+<p>Перед началом работы всегда выполняйте цикл прогрева пустой чашки. Налейте воду в пустой стакан, затем прогоните воду через группу без кофе. Это не только нагревает металл, но и выравнивает температуру внутри системы. В современных моделях есть функция <code>Pre-heating</code>, но ручная проверка никогда не будет лишней.</p>
+
+<p>Используйте прогретые чашки. Если вы нальте горячий эспрессо в холодный стакан, температура напитка упадет еще на несколько градусов мгновенно. Холодная керамика работает как теплоотвод, лишая вас возможности насладиться ароматом в полной мере. Прогрев посуды — это простой, но эффективный шаг к стабильному результату.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Если у вашей машины нет функции автоматического прогрева, просто поставьте чашку под группу на 30 секунд до начала варки кофе. Это компенсирует тепловые потери.</p></div>
+
+<h2 id="сравнительная-таблица-температурных-режимов">Сравнительная таблица температурных режимов</h2>
+
+<p>Для наглядности приведем таблицу с рекомендуемыми параметрами для различных типов напитков и видов обжарки. Эти данные могут служить ориентиром при настройке вашего устройства.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип напитка</th>
+<th>Вид обжарки</th>
+<th>Рекомендуемая температура (°C)</th>
+<th>Ключевые характеристики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Эспрессо</td>
+<td>Темная</td>
+<td>88-92</td>
+<td>Меньше горечи, мягкий вкус</td>
+</tr>
+<tr>
+<td>Эспрессо</td>
+<td>Светлая/Средняя</td>
+<td>93-96</td>
+<td>Яркая кислотность, фруктовые ноты</td>
+</tr>
+<tr>
+<td>Американо</td>
+<td>Любая</td>
+<td>90-94</td>
+<td>Сбалансированность после разбавления</td>
+</tr>
+<tr>
+<td>Ристретто</td>
+<td>Темная</td>
+<td>86-90</td>
+<td>Концентрированный вкус без горечи</td>
+</tr>
+<tr>
+<td>Капучино (основа)</td>
+<td>Средняя</td>
+<td>92-94</td>
+<td>Идеальный баланс для молока</td>
+</tr>
+</tbody>
+</table>
+
+<p>Обратите внимание, что для <em>ристретто</em> часто используют более низкую температуру, так как экстракция происходит в меньшем объеме воды и за меньшее время. Перегрев здесь приведет к мгновенной горечи. Для <strong>американо</strong> температура может быть чуть ниже, так как добавление горячей воды из бойлера (или из под крана) изменяет итоговый баланс.</p>
+
+<h2 id="техническое-обслуживание-и-диагностика">Техническое обслуживание и диагностика</h2>
+
+<p>Если вы не можете добиться стабильной температуры, возможно, требуется техническое обслуживание. Накопление накипи является самой частой причиной проблем с нагревом. Минеральные отложения создают изолирующий слой на ТЭНе, заставляя его работать на пределе, но не передавая тепло воде эффективно.</p>
+
+<p>Проверьте состояние термостата. В старых машинах механические термостаты могут «залипать», не размыкая цепь при достижении точки кипения. Это приводит к перегреву и срабатыванию аварийных датчиков. Электронные датчики также могут выдать ошибку, если их контакты окислились или отслоились.</p>
+
+<p>Для диагностики можно использовать внешний термометр. Налейте воду в чашку сразу после прогона через группу и замерьте температуру. Если разница с настройками в меню превышает 5 градусов, это повод обратиться в сервисный центр для калибровки системы. <mark>Отклонение более 5 градусов считается критическим и требует немедленного вмешательства специалиста.</mark></p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярное декальцинирование и калибровка датчиков — залог того, что кофемашина будет выдавать стабильную температуру годами.</p></div>
+
+<blockquote>
+<p>⚠️ Внимание: Самостоятельная замена термостата требует навыков пайки и понимания электрических схем. Неисправность может привести к короткому замыканию.</p>
+</blockquote>
+
+<blockquote>
+<p>Важно проверить, не меняются ли условия эксплуатации: если в вашем доме упало напряжение в сети или изменился напор воды, это может повлиять на время нагрева и итоговую температуру. Сверьте текущие параметры с требованиями производителя в инструкции.</p>
+</blockquote>
+
+<details>
+<summary>Почему моя кофемашина остывает во время варки эспрессо?</summary>
+<p>Это может быть связано с недостаточной мощностью термоблока или большой скоростью потока воды. Если машина не успевает нагреть воду до нужной температуры за время прохождения потока, экстракция будет неполной. Проверьте настройки потока или замените термоэлемент.</p>
+</details>
+
+<details>
+<summary>Можно ли варить эспрессо при температуре 80 градусов?</summary>
+<p>Технически да, но вкус будет крайне кислым и плоским. При 80°C практически не экстрагируются сахара и масла, отвечающие за тело напитка и сладость. Такой режим подходит только для очень специфических экспериментов с зеленым кофе, но не для обычной чашки.</p>
+</details>
+
+<details>
+<summary>Как часто нужно проверять калибровку температуры?</summary>
+<p>Рекомендуется проводить проверку раз в 6 месяцев, особенно если вы используете жесткую воду. Накипь может накапливаться незаметно, постепенно снижая эффективность нагрева. Используйте внешние термометры для контроля.</p>
+</details>
+
+<details>
+<summary>Влияет ли температура воды на взбивание молока?</summary>
+<p>Да, косвенно. Для взбивания молока используется пар, температура которого всегда выше 100°C. Однако если система перегрета, пар может быть слишком влажным или сухим, что затрудняет создание правильной микропенной структуры. Стабильная температура воды в бойлере — залог качественного молока.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#физика-экстракции-и-идеальные-температурные-диапазоны">Физика экстракции и идеальные температурные диапазоны</a></li><li><a href="#типы-нагревательных-систем-и-их-влияние-на-стабильность">Типы нагревательных систем и их влияние на стабильность</a></li><li><a href="#регулировка-температуры-инструкции-для-разных-брендов">Регулировка температуры: инструкции для разных брендов</a></li><li><a href="#критические-ошибки-и-симптомы-перегрева-или-недогрева">Критические ошибки и симптомы перегрева или недогрева</a></li><li><a href="#влияние-предварительного-прогрева-и-пролива">Влияние предварительного прогрева и пролива</a></li><li><a href="#сравнительная-таблица-температурных-режимов">Сравнительная таблица температурных режимов</a></li><li><a href="#техническое-обслуживание-и-диагностика">Техническое обслуживание и диагностика</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/s/sh/sheng-ping-spf-240-10a-250v-v-kofevarke-chem-zamenit.html" class="related-card">Замена реле Sheng Ping SP-240 в кофеварке: подбор аналогов и схема подключения</a></li><li><a href="/articles/k/ka/kak-rabotaet-kofevarka-pioner.html" class="related-card">Как работает кофеварка Пионер: принцип действия и настройка</a></li><li><a href="/articles/k/ka/kak-razobrat-kofemolku-femix-50.html" class="related-card">Как разобрать кофемолку FEMIX 50: полная инструкция по чистке</a></li><li><a href="/articles/k/ka/kak-pereklyuchit-kofemashinu-s-zeren-na-molotyj.html" class="related-card">Как переключить кофемашину с зерен на молотый кофе: Инструкция</a></li><li><a href="/articles/k/ko/kofemashina-supremo-kak-polzovatsya.html" class="related-card">Кофемашина Supremо: полная инструкция по использованию и настройке</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/s/sh/sheng-ping-spf-240-10a-250v-v-kofevarke-chem-zamenit.html" class="related-bottom-card"><span class="related-bottom-title">Замена реле Sheng Ping SP-240 в кофеварке: подбор аналогов и схема подключения</span><span class="related-bottom-desc">Полное руководство по замене вышедшего из строя электромагнитного реле Sheng Ping SP-240 в кофемашин</span></a><a href="/articles/k/ka/kak-rabotaet-kofevarka-pioner.html" class="related-bottom-card"><span class="related-bottom-title">Как работает кофеварка Пионер: принцип действия и настройка</span><span class="related-bottom-desc">Разбор принципа работы кофеварок Пионер. Подробное описание цикла заваривания, фильтрации и приготов</span></a><a href="/articles/k/ka/kak-razobrat-kofemolku-femix-50.html" class="related-bottom-card"><span class="related-bottom-title">Как разобрать кофемолку FEMIX 50: полная инструкция по чистке</span><span class="related-bottom-desc">Подробный гид по разборке жерновой кофемолки FEMIX 50. Узнайте, как снять верхнюю часть, почистить м</span></a><a href="/articles/k/ka/kak-pereklyuchit-kofemashinu-s-zeren-na-molotyj.html" class="related-bottom-card"><span class="related-bottom-title">Как переключить кофемашину с зерен на молотый кофе: Инструкция</span><span class="related-bottom-desc">Пошаговая инструкция: как перевести автоматическую кофемашину на использование молотого кофе. Разбор</span></a><a href="/articles/k/ko/kofemashina-supremo-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Кофемашина Supremо: полная инструкция по использованию и настройке</span><span class="related-bottom-desc">Подробное руководство как пользоваться кофемашиной Supremо. Настройка помола, приготовление эспрессо</span></a><a href="/articles/c/ch/chem-promyt-gidrosistemu-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Чем промыть гидросистему кофемашины: безопасные средства и инструкция</span><span class="related-bottom-desc">Узнайте, чем эффективно промыть гидросистему кофемашины от накипи и кофейных масел. Обзоры средств, </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

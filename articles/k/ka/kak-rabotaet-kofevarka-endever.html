@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как работает кофеварка Endever: устройство, цикл и принципы — Кофини</title>
+    <meta name="description" content="Подробный разбор принципов работы кофеварок Endever. Устройство насосов, термоблоков и алгоритмы заваривания эспрессо. Инструкция по эксплуатации.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-rabotaet-kofevarka-endever.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как работает кофеварка Endever: устройство, цикл и принципы">
+    <meta property="og:description" content="Подробный разбор принципов работы кофеварок Endever. Устройство насосов, термоблоков и алгоритмы заваривания эспрессо. Инструкция по эксплуатации.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как работает кофеварка Endever: устройство, цикл и принципы</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Принцип работы кофеварок Endever: от насоса до чашки</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#сердце-машины-насосная-система-и-создание-давления">Сердце машины: насосная система и создание давления</a></li><li><a href="#термодинамика-как-работает-термоблок-и-прогрев">Термодинамика: как работает термоблок и прогрев</a></li><li><a href="#алгоритм-заваривания-от-помола-до-чашки">Алгоритм заваривания: от помола до чашки</a></li><li><a href="#система-подачи-пара-и-горячего-молока">Система подачи пара и горячего молока</a></li><li><a href="#техническое-обслуживание-и-профилактика">Техническое обслуживание и профилактика</a></li><li><a href="#частые-проблемы-и-их-решение">Частые проблемы и их решение</a></li><li><a href="#особенности-работы-с-разными-видами-кофе">Особенности работы с разными видами кофе</a></li><li><a href="#faq-вопросы-и-ответы">FAQ: Вопросы и ответы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Кофеварки бренда <em>Endever</em> завоевали популярность благодаря удачному сочетанию доступной стоимости и функциональности, характерной для более дорогих аналогов. Понимание того, как работает <strong>поршневой насос</strong> или <strong>термоблок</strong> в этих устройствах, поможет вам правильно эксплуатировать технику и получать стабильно вкусный напиток. Большинство моделей этой марки работают по классической схеме эспрессо-машин, где ключевую роль играет создание высокого давления.</p>
+
+<p>Многие пользователи ошибочно полагают, что цена устройства напрямую связана со сложностью его внутреннего механизма. На деле же инженеры <em>Endever</em> используют проверенные временем решения, адаптированные под бытовые нужды. Знание циклов нагрева и подачи воды позволяет избежать типичных поломок, связанных с перегревом или сухим ходом помпы.</p>
+
+<p>В этой статье мы разберем, из каких узлов состоит аппарат, как происходит процесс заваривания и какие нюансы нужно учитывать при подготовке кофейной подушки. Вы узнаете, почему важно следить за уровнем воды и как правильно поддерживать <strong>давление в системе</strong> для идеального крема.</p>
+
+<h2 id="сердце-машины-насосная-система-и-создание-давления">Сердце машины: насосная система и создание давления</h2>
+
+<p>Основой любой эспрессо-кофеварки, включая линейки <em>Endever</em>, является насос. Именно этот элемент отвечает за прокачку воды через спрессованный кофейный порошок под высоким давлением. Без правильно работающего насоса невозможно получить насыщенный вкус и характерную пенку, называемую кремой.</p>
+
+<p>В большинстве бюджетных и среднебюджетных моделей бренда используются <strong>вибрационные насосы</strong> (вибромоторы). Они работают по принципу электромагнитного толчка: мембрана движется с высокой частотой, создавая пульсирующее давление. Хотя такие механизмы могут издавать специфический звук, они надежны и способны развивать давление до 15 бар, что является стандартом для домашнего эспрессо.</p>
+
+<p>Давление в системе не является постоянным на протяжении всего цикла. В начале оно резко возрастает, затем стабилизируется, чтобы вода прошла через таблетку кофе, и в конце падает. Если <strong>клапан сброса давления</strong> загрязнен или неисправен, насос может работать в аварийном режиме, что приведет к его быстрому износу или протечкам.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Никогда не включайте кофеварку <em>Endever</em> при пустом резервуаре для воды. Вибрационный насос предназначен для охлаждения водой, и работа «на сухую» мгновенно выведет его из строя, вызвав перегрев обмотки и заклинивание мембраны.</p>
+</blockquote>
+
+<h2 id="термодинамика-как-работает-термоблок-и-прогрев">Термодинамика: как работает термоблок и прогрев</h2>
+
+<p>После того как вода подана насосом, она попадает в нагревательный элемент. В кофеварках <em>Endever</em> чаще всего применяются термоблоки, представляющие собой компактный металлический узел с встроенным ТЭНом и датчиком температуры. Такая конструкция позволяет нагревать воду за считанные секунды, в отличие от громоздких бойлеров.</p>
+
+<p>Процесс нагрева контролируется термостатом, который отключает подачу электричества на ТЭН при достижении заданной температуры (обычно 90–93°C). Если температура опускается ниже нормы, включается <strong>контроль мощности</strong>, и нагрев возобновляется. Это обеспечивает стабильность заваривания, так как слишком горячая или холодная вода портит вкус эспрессо.</p>
+
+<p>Важно учитывать, что термоблок имеет инерцию. Если вы делаете несколько чашек подряд, температура может немного колебаться. Для компенсации этого эффекта в некоторых моделях предусмотрен режим прогрева порции воды перед завариванием, который вы можете запустить, нажав кнопку <code>Прогрев</code> или <code>Hot Water</code>.</p>
+
+<p>Некоторые модели оснащены функцией «Автоматический старт», которая прогревает <strong>термогруппу</strong> сразу после включения в сеть. Это удобно, но требует времени. Если вы спешите, лучше предварительно прогреть чашки горячей водой из парового крана, чтобы они не охлаждали напиток.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Не накрывайте верхнюю часть корпуса или паровую трубку тканью или полотенцем во время работы. Это нарушает теплообмен и может привести к перегреву электронных компонентов или деформации пластика.</p>
+</blockquote>
+
+<div class="poll-widget" id="poll-d9d39e6c"><div class="poll-widget-question">📊 Какой тип кофеварки вы используете?</div><div class="poll-widget-option" data-poll="d9d39e6c" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Вибрационный насос</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d9d39e6c" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Турбина</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d9d39e6c" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Капсульная</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d9d39e6c" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Френч-пресс</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="алгоритм-заваривания-от-помола-до-чашки">Алгоритм заваривания: от помола до чашки</h2>
+
+<p>Сам процесс приготовления напитка начинается с загрузки кофе в холдер (портфильтр). Здесь критически важен <strong>размер помола</strong> и степень утрамбовки. Если помол слишком крупный, вода пройдет слишком быстро, и эспрессо будет кислым и водянистым. Если слишком мелкий — давление вырастет, вода не сможет пройти, и напиток будет горьким.</p>
+
+<p>После установки холдера в группу, вы нажимаете кнопку запуска. Насос включается, вода подается в термоблок, нагревается и направляется в кофейную таблетку. Сила струи и равномерность распределения воды зависят от качества <strong>прессовки</strong> и плотности заполнения корзины. Неравномерная утрамбовка приведет к образованию каналов, через которые вода уйдет быстрее, чем проэкстрагирует вкус.</p>
+
+<p>Контроль времени заваривания — ключевой навык. Идеальный эспрессо готовится около 25–30 секунд. Если напиток льется слишком быстро, увеличьте количество кофе или сделайте помол мельче. Если струя еле капает — уменьшите дозировку или сделайте помол крупнее. Кнопка <code>Start/Stop</code> на панели управления позволяет прервать процесс в любой момент.</p>
+
+<ul>
+<li>Используйте только свежемолотый кофе для максимального раскрытия аромата.</li>
+<li>Всегда протирайте <strong>холдер</strong> насухо перед закладкой новой порции.</li>
+<li>Регулярно проверяйте состояние резиновой манжеты группы.</li>
+</ul>
+
+<h2 id="система-подачи-пара-и-горячего-молока">Система подачи пара и горячего молока</h2>
+
+<p>Помимо заваривания, кофеварки <em>Endever</em> оснащены мощным паровым краном, который используется для взбивания молока или получения горячей воды. Принцип работы здесь отличается от цикла эспрессо: пар подается непосредственно из бойлера или термоблока, но через отдельный канал, где вода находится в состоянии кипения.</p>
+
+<p>Для взбивания молока необходимо переключить рычаг или кнопку в режим «Пар». В этот момент давление в системе перераспределяется, и пар выходит через трубку-панарелло. Воздух, засасываемый в молоко, создает микропену. Важно держать наконечник паровика чуть ниже поверхности молока, чтобы обеспечить правильную <strong>аэрацию</strong>.</p>
+
+<p>После использования паровую трубку нужно обязательно продуть и протереть. Остатки молока, засыхающие на трубке, становятся питательной средой для бактерий и забивают отверстия. Вращение паровика в стакане с водой сразу после взбивания помогает очистить его без дополнительных усилий.</p>
+
+<div class="checklist-block"><h4>☑️ Подготовка молока к взбиванию</h4><label class="check-item"><input type="checkbox"><span>Охладите молоко до 4-6°C</span></label><label class="check-item"><input type="checkbox"><span>Используйте жирность 3.2% или выше</span></label><label class="check-item"><input type="checkbox"><span>Вставьте паровик в молоко</span></label><label class="check-item"><input type="checkbox"><span>Начните подачу пара медленно</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<p>Некоторые модели имеют автоматическую систему очистки трубки: после отключения пара она автоматически продувается короткой струей пара и воды. Это полезная функция, но ручная очистка остается обязательной процедурой для гигиеничности.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Паровые краны работают при очень высоких температурах. Никогда не касайтесь металлической трубки и не направляйте поток пара на себя или окружающих во избежание серьезных ожогов.</p>
+</blockquote>
+
+<h2 id="техническое-обслуживание-и-профилактика">Техническое обслуживание и профилактика</h2>
+
+<p>Долговечность кофеварки зависит от регулярного ухода. Главный враг любого кофейного оборудования — накипь. Минеральные соли, содержащиеся в водопроводной воде, оседают на стенках термоблока, уменьшая эффективность нагрева и забивая узкие каналы. Для очистки необходимо использовать специальные <strong>декальцинирующие средства</strong>.</p>
+
+<p>Процесс удаления накипи обычно описан в инструкции к конкретной модели, но общий алгоритм таков: разведите средство в воде, залейте в резервуар и запустите режим очистки. Вода будет циркулировать через систему, растворяя отложения. После этого необходимо несколько раз промыть систему чистой водой, чтобы удалить остатки химии.</p>
+
+<p>Также важно вовремя заменять <strong>фильтры</strong> для воды, если они предусмотрены конструкцией. Фильтры смягчают воду, снижая скорость образования накипи и улучшая вкус напитка. Игнорирование этого этапа приведет к тому, что даже при использовании средств для очистки, прибор быстро выйдет из строя.</p>
+
+<table>
+<thead>
+<tr>
+<th>Операция</th>
+<th>Периодичность</th>
+<th>Цель</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Промывка холдера</td>
+<td>После каждой чашки</td>
+<td>Удаление кофейных масел</td>
+</tr>
+<tr>
+<td>Очистка паровика</td>
+<td>После каждого взбивания</td>
+<td>Предотвращение засоров</td>
+</tr>
+<tr>
+<td>Декальцинация</td>
+<td>Раз в 2-3 месяца</td>
+<td>Удаление накипи</td>
+</tr>
+<tr>
+<td>Замена фильтра</td>
+<td>Раз в 2 месяца</td>
+<td>Смягчение воды</td>
+</tr>
+</tbody>
+</table>
+
+<details class="faq-item"><summary>Что делать, если кофеварка перестала греть воду?</summary><div class="faq-answer"><p>Проверьте наличие накипи в термоблоке. Если накипь сильная, термоблок может перегреваться и отключаться по датчику защиты. Попробуйте провести процедуру декальцинации. Если проблема не решена, возможно, неисправен ТЭН или термостат, потребуется сервисное обслуживание.</p></div></details>
+
+<h2 id="частые-проблемы-и-их-решение">Частые проблемы и их решение</h2>
+
+<p>Иногда пользователи сталкиваются с тем, что кофеварка <em>Endever</em> издает странные звуки или перестает подавать воду. Чаще всего это связано с воздушной пробкой в насосе. Если вы только что заменили резервуар с водой или долго не пользовались прибором, в системе может скопиться воздух.</p>
+
+<p>Для удаления воздушной пробки необходимо снять резервуар, заполнить его полностью и снова установить. Затем включите подачу горячей воды или пара на несколько секунд, чтобы воздух вышел. Если насос работает, но воды нет — проблема именно в воздухе. Проверьте, чтобы <strong>донышко резервуара</strong> плотно прилегало к посадочному месту.</p>
+
+<p>Другая распространенная проблема — капание из группы после выключения. Это может свидетельствовать о том, что клапан слива давления не закрывается полностью. В этом случае может потребоваться замена уплотнительного кольца или пружины клапана. Не пытайтесь разобрать узел самостоятельно, если не уверены в своих силах.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Если вы надолго уезжаете, обязательно слейте воду из резервуара и запустите режим подачи пара на 5 секунд, чтобы выпустить остатки воды из термоблока. Это предотвратит застой воды и рост бактерий.</p></div>
+
+<h2 id="особенности-работы-с-разными-видами-кофе">Особенности работы с разными видами кофе</h2>
+
+<p>Кофеварки <em>Endever</em> универсальны, но лучше всего работают с определенными видами сырья. Для большинства моделей идеально подходит жареный кофе арабика или смесь арабики с робустой. Робуста добавляет плотности и кремы, а арабика отвечает за ароматику.</p>
+
+<p>Использование кофе в чалдах (E.S.E.) возможно, если вы приобрели специальный адаптер или модель, поддерживающую этот формат. Однако для классических моделей лучше использовать молотый кофе. </p>
+
+<p>Некоторые пользователи пытаются использовать растворимый кофе или молотый чай. Это категорически не рекомендуется для эспрессо-машин. Растворимый кофе забьет систему, а заваренный чай может оставить осадок, который невозможно удалить без полной разборки узла группы.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Правильная подготовка воды и свежесть кофе влияют на результат не меньше, чем настройки самой кофеварки. Используйте фильтрованную воду и помол, подходящий именно вашей модели.</p></div>
+
+<h2 id="faq-вопросы-и-ответы">FAQ: Вопросы и ответы</h2>
+
+<details>
+<summary>Почему кофеварка Endever издает громкий звук при включении?</summary>
+<p>Это нормально для вибрационных насосов. Однако, если звук стал громче обычного или появился скрежет, это может указывать на засор или наличие воздуха в системе. Попробуйте прокачать воду через систему.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать воду из-под крана?</summary>
+<p>Технически можно, но не рекомендуется. Жесткая вода быстро образует накипь в термоблоке. Лучше использовать бутилированную или профильтрованную воду для продления срока службы устройства.</p>
+</details>
+
+<details>
+<summary>Кофеварка не набирает давление, кофе льется быстро.</summary>
+<p>Скорее всего, кофе слишком крупно размолот или утрамбован недостаточно сильно. Увеличьте степень помола (сделайте мельче) и плотнее утрамбуйте подушку перед завариванием.</p>
+</details>
+
+<details>
+<summary>Как часто нужно менять прокладку группы?</summary>
+<p>Рекомендуется проверять состояние прокладки раз в год. Если вы заметили протечки или кофе течет мимо холдера, прокладку необходимо заменить. Это дешевая и простая процедура, продлевающая жизнь машине.</p>
+</details>
+
+<details>
+<summary>Можно ли готовить капучино в этой кофеварке?</summary>
+<p>Да, используя паровую трубку, вы можете взбить молоко до состояния плотной пены и смешать его с эспрессо. Для этого нужен навык работы с паровиком, но результат будет близок к кофейному.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#сердце-машины-насосная-система-и-создание-давления">Сердце машины: насосная система и создание давления</a></li><li><a href="#термодинамика-как-работает-термоблок-и-прогрев">Термодинамика: как работает термоблок и прогрев</a></li><li><a href="#алгоритм-заваривания-от-помола-до-чашки">Алгоритм заваривания: от помола до чашки</a></li><li><a href="#система-подачи-пара-и-горячего-молока">Система подачи пара и горячего молока</a></li><li><a href="#техническое-обслуживание-и-профилактика">Техническое обслуживание и профилактика</a></li><li><a href="#частые-проблемы-и-их-решение">Частые проблемы и их решение</a></li><li><a href="#особенности-работы-с-разными-видами-кофе">Особенности работы с разными видами кофе</a></li><li><a href="#faq-вопросы-и-ответы">FAQ: Вопросы и ответы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/t/ta/tabletki-dlya-ochistki-kofemashiny-ot-kofejnykh-masel-sposob-primeneniya.html" class="related-card">Таблетки для очистки кофемашины: инструкция по применению и частота</a></li><li><a href="/articles/m/mo/mozhno-li-v-kofemashinu-zasypat-rastvorimyj-kofe-vmesto-molotogo-kofe.html" class="related-card">Растворимый кофе в кофемашине: можно ли сыпать вместо молотого?</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-ot-nakipi-video-v-domashnikh-usloviyakh.html" class="related-card">Как почистить кофемашину Delonghi от накипи: Видео инструкция и пошаговый разбор</a></li><li><a href="/articles/k/ko/kofe-iz-kofemashiny-gorchit-pochemu.html" class="related-card">Почему кофе из кофемашины горчит: 7 главных причин и решение</a></li><li><a href="/articles/c/ch/chem-chistit-kofemashinu-nespresso.html" class="related-card">Как чистить кофемашину Nespresso: инструкция по декальцинации и промывке</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/t/ta/tabletki-dlya-ochistki-kofemashiny-ot-kofejnykh-masel-sposob-primeneniya.html" class="related-bottom-card"><span class="related-bottom-title">Таблетки для очистки кофемашины: инструкция по применению и частота</span><span class="related-bottom-desc">Полное руководство по использованию таблетированных средств для декальцинации и удаления масел. Как </span></a><a href="/articles/m/mo/mozhno-li-v-kofemashinu-zasypat-rastvorimyj-kofe-vmesto-molotogo-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Растворимый кофе в кофемашине: можно ли сыпать вместо молотого?</span><span class="related-bottom-desc">Можно ли использовать растворимый кофе в кофемашине? Разбор рисков засорения, поломки помпы и порчи </span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-ot-nakipi-video-v-domashnikh-usloviyakh.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Delonghi от накипи: Видео инструкция и пошаговый разбор</span><span class="related-bottom-desc">Подробная видео-инструкция по удалению накипи в кофемашинах Delonghi. Реальные этапы, ошибки новичко</span></a><a href="/articles/k/ko/kofe-iz-kofemashiny-gorchit-pochemu.html" class="related-bottom-card"><span class="related-bottom-title">Почему кофе из кофемашины горчит: 7 главных причин и решение</span><span class="related-bottom-desc">Узнайте, почему ваш эспрессо горчит. Разбор причин: от помола и температуры до задержки кофе и непра</span></a><a href="/articles/c/ch/chem-chistit-kofemashinu-nespresso.html" class="related-bottom-card"><span class="related-bottom-title">Как чистить кофемашину Nespresso: инструкция по декальцинации и промывке</span><span class="related-bottom-desc">Пошаговое руководство: чем чистить Nespresso, как провести декальцинацию, выбрать средство и избежат</span></a><a href="/articles/c/ch/chem-ochistit-ot-nakipi-kofemashinu.html" class="related-bottom-card"><span class="related-bottom-title">Как очистить кофемашину от накипи: лучшие средства и инструкция</span><span class="related-bottom-desc">Узнайте, чем эффективно очистить кофемашину от накипи. Обзор таблеток, кислот и народных средств. По</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

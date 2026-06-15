@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Диаграмма контроля заваривания кофе: как настроить идеальный вкус — Кофини</title>
+    <meta name="description" content="Изучите карту контроля заваривания (Brewing Control Chart). Узнайте, как использовать TDS и экстракцию для стабильного раскрытия вкуса зерна.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/c/co/coffee-brewing-control-chart.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Диаграмма контроля заваривания кофе: как настроить идеальный вкус">
+    <meta property="og:description" content="Изучите карту контроля заваривания (Brewing Control Chart). Узнайте, как использовать TDS и экстракцию для стабильного раскрытия вкуса зерна.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/zerna-i-pomol/">Зерна и помол</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Диаграмма контроля заваривания кофе: как настроить идеальный вкус</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Диаграмма контроля заваривания: Ваш путеводитель к идеальному кофе</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#основы-теории-tds-и-процент-экстракции">Основы теории: TDS и процент экстракции</a></li><li><a href="#зоны-диаграммы-где-искать-идеальный-вкус">Зоны диаграммы: Где искать идеальный вкус?</a></li><li><a href="#как-управлять-параметрами-процесса">Как управлять параметрами процесса</a></li><li><a href="#практическое-применение-анализ-ошибок">Практическое применение: Анализ ошибок</a></li><li><a href="#таблица-целевых-параметров-для-разных-методов">Таблица целевых параметров для разных методов</a></li><li><a href="#ограничения-и-нюансы-использования">Ограничения и нюансы использования</a></li><li><a href="#развитие-навыков-и-интуитивное-понимание">Развитие навыков и интуитивное понимание</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Многие любители кофе полагаются исключительно на интуицию и «золотое сечение», но профессионалы используют науку для достижения стабильного результата. <strong>Диаграмма контроля заваривания</strong> (Brewing Control Chart) — это графический инструмент, который связывает концентрацию напитка с уровнем экстракции веществ из кофейного зерна. Без понимания этой взаимосвязи сложно понять, почему одна и та же <em>V60</em> или <em>Chemex</em> могут давать разный вкус при изменении температуры или помола.</p>
+
+<p>Этот инструмент позволяет перейти от субъективных ощущений «крепко» или «слабо» к точным измерениям. Понимание того, как <strong>TDS</strong> (общее количество растворенных твердых веществ) влияет на восприятие напитка при разном уровне <strong>экстракции</strong>, открывает путь к созданию собственных рецептов. Вы сможете целенаправленно корректировать процесс, избегая ошибок, которые приводят к кислым или горьким оттенкам.</p>
+
+<h2 id="основы-теории-tds-и-процент-экстракции">Основы теории: TDS и процент экстракции</h2>
+<p>Чтобы грамотно пользоваться картой, необходимо четко разграничивать два ключевых понятия, которые часто путают новички. <strong>Концентрация (TDS)</strong> измеряет количество кофейных веществ, растворившихся в воде, выраженное в процентах. Это показатель «крепости» напитка, который определяет, насколько плотным и насыщенным он будет на языке.</p>
+
+<p>Второй параметр — <strong>Процент экстракции (Extraction Yield)</strong> — показывает, какая часть сухого вещества из молотого кофе фактически перешла в чашку. Если вы используете <code>20 г</code> кофе и получаете напиток с <code>9 г</code> растворенных веществ, экстракция составляет 45%. Однако на практике идеальные значения лежат в узком диапазоне, где раскрывается вкус, но не появляются горечь.</p>
+
+<p>Важно понимать, что высокая концентрация не всегда означает высокую экстракцию. Вы можете получить очень крепкий, но кислый напиток, если просто используете много кофе на малый объем воды при грубом помоле. Именно баланс между этими двумя показателями определяет конечное качество.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Не пытайтесь компенсировать низкую экстрацию простым увеличением количества кофе. Это приведет к дисбалансу вкуса и сделает напиток простым, плоским и слишком тяжелым для восприятия.</p>
+</blockquote>
+
+<p>Для начала работы вам необходимо обзавестись <em>рефрактометром</em>, прибором, который измеряет плотность жидкости. Без него построение точной диаграммы невозможно, так как визуальная оценка концентрации крайне субъективна и неточна.</p>
+
+<h2 id="зоны-диаграммы-где-искать-идеальный-вкус">Зоны диаграммы: Где искать идеальный вкус?</h2>
+<p>Классическая карта SCAA (Specialty Coffee Association) делит пространство вкуса на несколько зон. Центральная область, часто называемая «золотой чашей», находится в диапазоне экстракции от <strong>18% до 22%</strong> и концентрации TDS от <strong>1.15% до 1.35%</strong> для фильтр-кофе. Нахождение в этой зоне гарантирует сбалансированный вкус с яркой кислотностью и сладостью.</p>
+
+<p>Если вы попадаете в зону с низкой экстракцией (ниже 18%), напиток будет кислым, водянистым и лишенным сложности. Это часто происходит при слишком крупном помоле или низкой температуре воды. Напротив, экстракция выше 22% обычно приводит к появлению горького, вяжущего послевкусия и сухости во рту, что сигнализирует о том, что были вытянуты нежелательные вещества.</p>
+
+<p>Существует также зона низкой концентрации, где напиток кажется «пустым» даже при правильной экстракции. Это происходит, если вы используете слишком много воды относительно количества кофе. И наоборот, зона высокой концентрации может сделать вкус тяжелым, даже если химический состав экстракции идеален.</p>
+
+<div class="poll-widget" id="poll-e399240c"><div class="poll-widget-question">📊 Какой параметр вам сложнее всего контролировать?</div><div class="poll-widget-option" data-poll="e399240c" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Концентрация (TDS)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e399240c" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Экстракция (Yield)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e399240c" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Время заваривания</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e399240c" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Температура воды</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="как-управлять-параметрами-процесса">Как управлять параметрами процесса</h2>
+<p>Управление диаграммой осуществляется через изменение переменных: размера помола, температуры, времени и соотношения воды к кофе. Уменьшение помола увеличивает площадь поверхности частиц, что ускоряет экстракцию и, как правило, повышает и TDS. Это основной рычаг для поднятия показателя экстракции в нужную зону.</p>
+
+<p>Температура воды играет критическую роль в растворении веществ. Более горячая вода (<code>93-96°C</code>) способствует быстрой и глубокой экстракции, тогда как более холодная (<code>85-88°C</code>) замедляет процесс, вытягивая в первую очередь кислые соединения. Для светлой обжарки часто требуется высокая температура, чтобы переваривать сложные сахара и кислоты.</p>
+
+<p>Время контакта воды с кофе также влияет на итоговый результат. Если вы завариваете методом пуровер, продление процесса за счет медленного наливания воды увеличивает экстракцию. Однако если время слишком велико, риск перехода в зону горечи возрастает экспоненциально.</p>
+
+<div class="checklist-block"><h4>☑️ Настройка параметров для повышения экстракции</h4><label class="check-item"><input type="checkbox"><span>Уменьшить помол на 1 деление</span></label><label class="check-item"><input type="checkbox"><span>Повысить температуру воды</span></label><label class="check-item"><input type="checkbox"><span>Увеличить время контакта</span></label><label class="check-item"><input type="checkbox"><span>Уменьшить соотношение вода/кофе</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<blockquote>
+<p>⚠️ Внимание: Изменение одного параметра неизбежно влияет на другие. Уменьшение помола не только повысит экстракцию, но и может замедлить фильтрацию, что автоматически увеличит время контакта и концентрацию.</p>
+</blockquote>
+
+<h2 id="практическое-применение-анализ-ошибок">Практическое применение: Анализ ошибок</h2>
+<p>Рассмотрим типичные ситуации, когда напиток не нравится, и как диаграмма помогает исправить ситуацию. Если кофе кислый и плоский, это указывает на низкую экстракцию. Вам нужно либо уменьшить помол, либо повысить температуру, либо замедлить процесс заваривания, чтобы перевести точку на диаграмме вверх и вправо.</p>
+
+<p>Если же вы чувствуете горечь и сухость во рту, значит, вы ушли в зону переэкстракции. Решение здесь противоположно: увеличьте помол, снизьте температуру или сократите время контакта воды с кофе. Иногда достаточно просто изменить соотношение, добавив немного больше воды, чтобы снизить TDS, не меняя экстракцию.</p>
+
+<p>Сложность возникает, когда напиток одновременно кислый и горький (часто в середине чашки). Это может говорить о неравномерной экстракции, когда мелкие частицы переэкстрагированы, а крупные недоэкстрагированы. В этом случае проблема решается не изменением параметров, а улучшением качества помола и распределения.</p>
+
+<details class="faq-item"><summary>Что делать, если напиток слишком кислый, но экстракция в норме?
+<p>Если TDS в золотой зоне, но вкус кислый, попробуйте изменить профиль обжарки или помол. Возможно, зерно просто не раскрылось, и вам нужно более длительное время контакта или более высокая температура для растворения сахаров, которые сглаживают кислоту.--></p>
+
+<h2 id="таблица-целевых-параметров-для-разных-методов">Таблица целевых параметров для разных методов</h2>
+<p>Разные методы заваривания имеют свои оптимальные диапазоны, так как физика процесса отличается. Для эспрессо показатели TDS всегда значительно выше из-за высокого давления, а для фильтр-кофе они ниже. Приведенная ниже таблица поможет вам сориентироваться.</p>
+
+<table>
+<thead>
+<tr>
+<th>Метод заваривания</th>
+<th>Оптимальный TDS (%)</th>
+<th>Оптимальная экстракция (%)</th>
+<th>Примерное соотношение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Эспрессо</td>
+<td>8.0 – 12.0</td>
+<td>18 – 22</td>
+<td>1</summary><div class="faq-answer"><p>2</td>
+</tr>
+<tr>
+<td>Пуровер (V60, Chemex)</td>
+<td>1.15 – 1.35</td>
+<td>18 – 22</td>
+<td>1:15 – 1:17</td>
+</tr>
+<tr>
+<td>Френч-пресс</td>
+<td>1.20 – 1.45</td>
+<td>19 – 21</td>
+<td>1:12 – 1:15</td>
+</tr>
+<tr>
+<td>Аэропресс</td>
+<td>1.30 – 1.60</td>
+<td>18 – 23</td>
+<td>1:10 – 1:14</td>
+</tr>
+</tbody>
+</table>
+
+<p>Обратите внимание, что для эспрессо допустимая концентрация в разы выше, так как это концентрированный напиток. Однако и здесь процент экстракции остается в пределах стандартов Specialty Coffee. Попытка уйти за 22% в эспрессо почти гарантированно даст горечь и канцерогенные вещества.</p>
+
+
+
+<h2 id="ограничения-и-нюансы-использования">Ограничения и нюансы использования</h2>
+<p>Несмотря на свою полезность, диаграмма контроля не является абсолютной истиной. Она не учитывает индивидуальные предпочтения вкусовых рецепторов и особенности конкретного сорта кофе. Некоторые сорта с яркой кислотностью могут казаться идеальными при экстракции 17%, а другие, плотные сорта — при 23%.</p>
+
+<p>Кроме того, измерение TDS рефрактометром требует тщательной подготовки. Остатки предыдущих измерений, неправильная калибровка прибора или наличие крупных частиц в пробе могут исказить результаты. <mark>Чистота прибора и правильная калибровка по деионизированной воде критически важны для получения достоверных данных.</mark></p>
+
+<p>Иногда на диаграмме мы видим идеальные цифры, но вкус не нравится. Это может быть связано с качеством воды. Жесткость воды, содержание минералов и pH напрямую влияют на экстракцию. Вода с низким содержанием магния и кальция может «съесть» кислотность, делая напиток плоским, даже если экстракция формально высока.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если вода очень жесткая, экстракция будет проходить медленнее, и вы можете недополучить вкус, даже если цифры на приборе показывают норму. Используйте фильтрованную воду с pH около 7 и общей жесткостью 50-100 ppm.</p>
+</blockquote>
+
+<h2 id="развитие-навыков-и-интуитивное-понимание">Развитие навыков и интуитивное понимание</h2>
+<p>Со временем использование диаграммы переходит из плоскости математики в плоскость интуиции. Вы начнете чувствовать, что кислый вкус без сладости требует чуть более мелкого помола, а горькое послевкусие — чуть более грубого. Инструмент перестает быть палочкой-выручалочкой и становится способом проверки гипотез.</p>
+
+<p>Для профессионалов кофейной индустрии это основной инструмент калибровки оборудования. Регулярные замеры позволяют отслеживать деградацию жерновов кофемолки или изменение качества зерна от партии к партии. Это позволяет поддерживать стабильность вкуса в меню, что критично для репутации заведения.</p>
+
+<p>В конце концов, диаграмма контроля заваривания — это карта, но вы — путешественник. Вы можете отклониться от «золотого» пути, если хотите поэкспериментировать с необычными вкусовыми профилями. Главное — понимать, куда именно вы идете, и какие параметры для этого меняете.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Диаграмма контроля заваривания — это не догма, а навигационный инструмент, помогающий связать физические параметры процесса с субъективным восприятием вкуса.</p></div>
+
+<details>
+<summary>Что означает TDS в контексте кофе?</summary>
+<p><strong>TDS</strong> (Total Dissolved Solids) — это общее количество растворенных твердых веществ в жидкости. В кофе это показатель концентрации, который говорит о том, сколько кофейных веществ (сахаров, кислот, масел, минералов) перешло из молотого зерна в воду. Измеряется в процентах.</p>
+</details>
+
+<details>
+<summary>Как часто нужно калибровать рефрактометр?</summary>
+<p>Рефрактометр рекомендуется калибровать перед каждым сеансом измерений, особенно если он использовался для других жидкостей или хранился при изменении температуры. Используйте для калибровки дистиллированную воду, которая должна показывать 0% TDS.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать диаграмму для эспрессо?</summary>
+<p>Да, диаграмма применима и для эспрессо, но шкалы концентраций (TDS) значительно выше. Для эспрессо нормальным считается TDS от 8% до 12%, тогда как для фильтр-кофе это 1.15-1.35%. Процент экстракции (18-22%) остается примерно одинаковым.</p>
+</details>
+
+<details>
+<summary>Почему мой кофе кислый, даже если экстракция в норме?</summary>
+<p>Это может быть связано с неравномерной экстракцией или особенностями сорта. Также возможно, что вода слишком мягкая или имеет неправильный pH, что не позволяет экстрагировать нужные сахара, сглаживающие кислоту. Попробуйте изменить профиль воды.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#основы-теории-tds-и-процент-экстракции">Основы теории: TDS и процент экстракции</a></li><li><a href="#зоны-диаграммы-где-искать-идеальный-вкус">Зоны диаграммы: Где искать идеальный вкус?</a></li><li><a href="#как-управлять-параметрами-процесса">Как управлять параметрами процесса</a></li><li><a href="#практическое-применение-анализ-ошибок">Практическое применение: Анализ ошибок</a></li><li><a href="#таблица-целевых-параметров-для-разных-методов">Таблица целевых параметров для разных методов</a></li><li><a href="#ограничения-и-нюансы-использования">Ограничения и нюансы использования</a></li><li><a href="#развитие-навыков-и-интуитивное-понимание">Развитие навыков и интуитивное понимание</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ko/kofe-dlya-kofemashiny-kakoj-pomol.html" class="related-card">Какой помол кофе выбрать для кофемашины: полное руководство</a></li><li><a href="/articles/p/po/pochemu-latte-gorchit.html" class="related-card">Почему латте горчит: основные причины и способы исправления вкуса</a></li><li><a href="/articles/k/ka/kak-sdelat-kofe-krepche-v-kofemashine-saeko.html" class="related-card">Как сделать кофе крепче в кофемашине Saeco: полное руководство</a></li><li><a href="/articles/k/ka/kakoj-pomol-dlya-drip-paketa.html" class="related-card">Какой помол для дрип пакета: идеальная настройка для идеального кофе</a></li><li><a href="/articles/k/ka/kak-sdelat-vkusnyj-kofe-bez-kofemashiny.html" class="related-card">Как сделать вкусный кофе без кофемашины: лучшие способы дома</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ko/kofe-dlya-kofemashiny-kakoj-pomol.html" class="related-bottom-card"><span class="related-bottom-title">Какой помол кофе выбрать для кофемашины: полное руководство</span><span class="related-bottom-desc">Узнайте, какой помол кофе нужен для вашей кофемашины. Таблица соответствия, влияние на вкус и советы</span></a><a href="/articles/p/po/pochemu-latte-gorchit.html" class="related-bottom-card"><span class="related-bottom-title">Почему латте горчит: основные причины и способы исправления вкуса</span><span class="related-bottom-desc">Выясните, почему ваш латте горчит. Разбор ошибок приготовления, влияния обжарки зерна и настроек коф</span></a><a href="/articles/k/ka/kak-sdelat-kofe-krepche-v-kofemashine-saeko.html" class="related-bottom-card"><span class="related-bottom-title">Как сделать кофе крепче в кофемашине Saeco: полное руководство</span><span class="related-bottom-desc">Узнайте 7 рабочих способов увеличить крепость эспрессо в кофемашинах Saeco. Настройка помола, дозиро</span></a><a href="/articles/k/ka/kakoj-pomol-dlya-drip-paketa.html" class="related-bottom-card"><span class="related-bottom-title">Какой помол для дрип пакета: идеальная настройка для идеального кофе</span><span class="related-bottom-desc">Узнайте, какой помол кофе нужен для дрип-пакетов. Разбор степени помола, влияние температуры воды и </span></a><a href="/articles/k/ka/kak-sdelat-vkusnyj-kofe-bez-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Как сделать вкусный кофе без кофемашины: лучшие способы дома</span><span class="related-bottom-desc">Узнайте, как приготовить эспрессо, френч-пресс и турецкий кофе дома без дорогой техники. Секреты пом</span></a><a href="/articles/k/ko/kofejnya-19-veka.html" class="related-bottom-card"><span class="related-bottom-title">Атмосфера кофейни 19 века: интерьер, зерно и этикет</span><span class="related-bottom-desc">Как создавалась культура кафе в XIX столетии. Обзор интерьера, сортов кофе, официантского этикета и </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

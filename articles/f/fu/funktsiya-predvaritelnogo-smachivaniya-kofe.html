@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Функция предварительного смачивания кофе: польза, принцип работы и настройка — Кофини</title>
+    <meta name="description" content="Узнайте, как работает предварительное смачивание (преинфузия) в кофемашинах. Разбор влияния на вкус эспрессо, сравнение методов и советы по настройке.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/f/fu/funktsiya-predvaritelnogo-smachivaniya-kofe.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Функция предварительного смачивания кофе: польза, принцип работы и настройка">
+    <meta property="og:description" content="Узнайте, как работает предварительное смачивание (преинфузия) в кофемашинах. Разбор влияния на вкус эспрессо, сравнение методов и советы по настройке.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/vybor-kofemashin/">Выбор кофемашин</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Функция предварительного смачивания кофе: польза, принцип работы и настройка</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Функция предварительного смачивания кофе: секрет идеального эспрессо</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#физика-процесса-почему-вода-должна-ждать">Физика процесса: почему вода должна ждать</a></li><li><a href="#виды-предварительного-смачивания-в-разных-машинах">Виды предварительного смачивания в разных машинах</a></li><li><a href="#влияние-на-вкус-и-аромат-напитка">Влияние на вкус и аромат напитка</a></li><li><a href="#настройка-параметров-для-идеального-результата">Настройка параметров для идеального результата</a></li><li><a href="#распространенные-ошибки-и-мифы">Распространенные ошибки и мифы</a></li><li><a href="#когда-функция-может-быть-вредной">Когда функция может быть вредной</a></li><li><a href="#сравнение-с-ручным-приготовлением">Сравнение с ручным приготовлением</a></li><li><a href="#faq-частые-вопросы-о-предварительном-смачивании">FAQ: Частые вопросы о предварительном смачивании</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Многие любители кофе замечают, что эспрессо из автоматической или полуавтоматической кофемашины имеет разный вкус даже при использовании одного и того же зерна. Часто причиной этого становится игнорирование этапа, предшествующего основной экстракции. Именно функция предварительного смачивания, или преинфузия, играет ключевую роль в раскрытии аромата.</p>
+
+<p>Если вы когда-либо пробовали кофе, в котором чувствовалась горечь, но не хватало сладости и цветочных нот, проблема может крыться в слишком быстром давлении воды. <strong>Предварительное смачивание</strong> позволяет воде равномерно проникнуть в кофейный шнек перед тем, как насос создаст рабочее давление в 9 бар. Это простое действие способно кардинально изменить профиль чашки.</p>
+
+<p>В этой статье мы разберем физический принцип работы механизма, узнаем, какие модели кофемашин <em>DeLonghi</em> или <em>Jura</em> реализуют его лучше, и как правильно настроить процесс для получения идеального напитка. Вы поймете, почему игнорировать эту функцию не стоит, даже если у вас бюджетная модель.</p>
+
+<h2 id="физика-процесса-почему-вода-должна-ждать">Физика процесса: почему вода должна ждать</h2>
+
+<p>Представьте, что вы пытаетесь пропитать сухую губку водой под сильным напором. Скорее всего, вода пройдет по краям, оставив центр сухим, или же губка лопнет. С кофейным порошком происходит то же самое. При резком воздействии высокого давления частицы кофе сжимаются неравномерно, создавая каналы для прохождения жидкости.</p>
+
+<p><strong>Экстракция</strong> — это процесс растворения веществ из кофейной таблетки. Для получения сбалансированного вкуса необходимо, чтобы вода контактировала со всеми частицами одинаковое время. Если давление подается мгновенно, вода находит путь наименьшего сопротивления, проскакивает через <em>кофейную таблетку</em> слишком быстро, вымывая только горькие соединения.</p>
+
+<p>Механизм <strong>преинфузии</strong> дает воде время набухнуть. В первые секунды вода работает как губка, разрыхляя плотную структуру спрессованного кофе. Это выравнивает плотность шнека и предотвращает образование каналов. В результате весь объем порошка участвует в создании напитка, а не только его поверхность.</p>
+
+<blockquote>⚠️ Внимание: Если вы используете слишком мелкий помол и включите длительную преинфузию, вода может просто стечь в поддон, не создав давление для эспрессо. Экспериментируйте с временем и плотностью!</blockquote>
+
+<h2 id="виды-предварительного-смачивания-в-разных-машинах">Виды предварительного смачивания в разных машинах</h2>
+
+<p>Технологии реализации этой функции варьируются от простых механических решений до сложных алгоритмов с электронным управлением. В бюджетных моделях часто встречается статическая преинфузия, когда клапан просто пропускает воду под низким давлением на фиксированное время.</p>
+
+<p>Более продвинутые машины, такие как <em>Saeco</em> или <em>Breville</em>, используют динамическую систему. Она позволяет регулировать не только время, но и давление подачи воды на этапе смачивания. Это дает возможность гибко подстраиваться под свежесть зерна: молодое зерно требует более агрессивной экстракции, а старое — более мягкой.</p>
+
+<p><strong>Постоянная преинфузия</strong> — это режим, когда вода подается непрерывно, но с переменным давлением. В некоторых моделях, например, в линейке <em>Rancilio Silvia</em>, этот процесс можно настроить вручную, изменив положение клапана. Это требует навыков бариста, но позволяет получить уникальный результат.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип смачивания</th>
+<th>Описание процесса</th>
+<th>Идеально для</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Статическая</td>
+<td>Подача воды под низким давлением на постоянное время</td>
+<td>Средний помол, стабильное сырье</td>
+</tr>
+<tr>
+<td>Динамическая</td>
+<td>Регулировка давления и времени через электронику</td>
+<td>Сложные смеси, светлая обжарка</td>
+</tr>
+<tr>
+<td>Моментальная</td>
+<td>Быстрый рост давления без паузы</td>
+<td>Темная обжарка, крепкий эспрессо</td>
+</tr>
+<tr>
+<td>Ручная</td>
+<td>Пользователь контролирует процесс нажатием кнопки</td>
+<td>Профессиональные бариста, эксперименты</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="влияние-на-вкус-и-аромат-напитка">Влияние на вкус и аромат напитка</h2>
+
+<p>Что конкретно дает эта функция? В первую очередь, она убирает резкую горечь и кислотность, которые часто маскируют истинный вкус зерна. При равномерном смачивании высвобождаются сложные эфирные масла, отвечающие за цветочные, фруктовые и ореховые ноты.</p>
+
+<p>Вы заметите, что <strong>крема</strong> (кофейная пенка) становится более плотной и устойчивой. Это связано с тем, что эмульсия масел происходит активнее при правильном давлении. Вкус напитка становится более округлым, «тело» кофе ощутимо плотнее, а послевкусие дольше сохраняет приятный аромат.</p>
+
+<p>Для светлой обжарки, где важна кислотность и сложность вкуса, <strong>предварительное смачивание</strong> критически необходимо. Без него вода просто не успеет растворить нужные вещества из плотной структуры свежесмолотого зерна, и вы получите кислый, водянистый напиток вместо насыщенного эспрессо.</p>
+
+<div class="poll-widget" id="poll-b000ce8e"><div class="poll-widget-question">📊 Как часто вы используете функцию предварительного смачивания?</div><div class="poll-widget-option" data-poll="b000ce8e" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Всегда, это мой стандарт</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="b000ce8e" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Редко, только для экспериментов</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="b000ce8e" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Никогда, привык к обычному режиму</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="b000ce8e" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не знаю, есть ли она у меня</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="настройка-параметров-для-идеального-результата">Настройка параметров для идеального результата</h2>
+
+<p>Если ваша кофемашина позволяет регулировать этот процесс, вам нужно найти баланс между временем смачивания и давлением. Стандартное значение для большинства машин составляет от 3 до 7 секунд при давлении около 3 бар. Но это не догма, так как многое зависит от ваших предпочтений.</p>
+
+<p>Для начала попробуйте установить время <code>5 секунд</code> и наблюдайте за процессом. Если кофе течет слишком быстро и имеет водянистый вкус — увеличьте время или плотность помола. Если же потоки совсем не идут или появляются капли — уменьшите время преинфузии.</p>
+
+<div class="checklist-block"><h4>☑️ Настройка преинфузии</h4><label class="check-item"><input type="checkbox"><span>Проверить чистоту фильтров</span></label><label class="check-item"><input type="checkbox"><span>Установить средний помол</span></label><label class="check-item"><input type="checkbox"><span>Выбрать время 3-5 секунд</span></label><label class="check-item"><input type="checkbox"><span>Сварить пробную чашку</span></label><label class="check-item"><input type="checkbox"><span>Отрегулировать давление при необходимости</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<p> Очень мелкий помол может заблокировать поток даже при минимальном давлении. Поэтому сначала добейтесь стабильного помола, а затем настраивайте функцию смачивания в меню <code>Настройки напитка</code>.</p>
+
+<details class="faq-item"><summary>Расширенные настройки давления</summary><div class="faq-answer"><p>В профессиональных машинах можно настроить не только время, но и профиль давления (Pressure Profiling). Это позволяет начать с 3 бар, плавно поднять до 6, а затем до 9 бар для финального извлечения. Это продвинутая техника для гурманов.</p></div></details>
+
+<blockquote>⚠️ Внимание: Не пытайтесь настроить преинфузию на зерне, которое хранилось более 6 месяцев. Старое зерно не имеет достаточного количества газов и масел для качественного процесса, и результат будет непредсказуемым.</blockquote>
+
+<h2 id="распространенные-ошибки-и-мифы">Распространенные ошибки и мифы</h2>
+
+<p>Существует миф, что предварительное смачивание нужно только для дорогих машин. Это не так. Даже в простых моделях с механическим клапаном этот процесс происходит неизбежно, просто вы не можете его контролировать. Отсутствие настройки не означает отсутствие функции.</p>
+
+<p>Другая ошибка — считать, что чем дольше длится смачивание, тем лучше. Если вы увеличите время до 15-20 секунд, вы рискуете перегрузить таблетку водой до начала экстракции. Это приведет к вымыванию всех полезных веществ в первые же секунды, и напиток станет пустым.</p>
+
+<p><strong>Качество воды</strong> также играет роль. Если вода слишком жесткая, минералы могут осаждаться в канале подачи и нарушить процесс смачивания. Используйте фильтрованную воду или специальные картриджи, чтобы механизм работал исправно.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Если ваша кофемашина не имеет явной кнопки преинфузии, попробуйте сделать паузу после нажатия «Старт» на 5-10 секунд перед началом движения поршня. Это имитирует ручной процесс смачивания.</p></div>
+
+<h2 id="когда-функция-может-быть-вредной">Когда функция может быть вредной</h2>
+
+<p>Хотя преинфузия полезна в большинстве случаев, бывают ситуации, когда она нежелана. Если вы варите эспрессо из зерен очень темной обжарки, которые уже содержат много масел и имеют пористую структуру, дополнительное смачивание может привести к переэкстракции горечи.</p>
+
+<p>Также стоит отключать функцию, если вы используете <em>кофе без кофеина</em>. Структура таких зерен обычно более рыхлая и ломкая, поэтому длительное смачивание может разрушить таблетку еще до начала давления. В итоге вы получите мутный напиток с осадком.</p>
+
+<p>Еще один случай — это когда вы готовите напитки на основе молока, такие как капучино, в режиме быстрой варки. Если вам нужно время, чтобы взбить молоко, лишняя задержка на смачивание может не вписаться в тайминг. В таких scenarios лучше использовать режим «Эспрессо без паузы».</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Предварительное смачивание — это не панацея от плохого зерна, а инструмент для раскрытия потенциала качественного сырья. Не пытайтесь исправить ошибки помола или хранения только настройкой времени смачивания.</p></div>
+
+<h2 id="сравнение-с-ручным-приготовлением">Сравнение с ручным приготовлением</h2>
+
+<p>В ручных кофемашинах, типа <em>E61</em>, бариста контролирует процесс смачивания вручную, используя рычаг. Это позволяет чувствовать сопротивление воды и подстраиваться под него. В автоматических машинах этот процесс алгоритмизирован, но современные модели <em>La Marzocco</em> или <em>Slayer</em> предлагают схожие возможности через цифровые интерфейсы.</p>
+
+<p>Разница лишь в том, что в машине вы задаете параметры один раз, а машина выполняет их каждый раз с точностью до секунды. В ручном варианте каждый эспрессо может быть уникальным, но и риск ошибки выше. Автоматика дает стабильность, но иногда жертвует нюансами.</p>
+
+<p>Тем не менее, понимание того, как работает <strong>ручная преинфузия</strong>, поможет вам лучше настроить автоматическую машину. Попробуйте представить, как давление нарастает в чашке, и попробуйте имитировать этот процесс, если ваша техника это позволяет.</p>
+
+<blockquote>⚠️ Внимание: Если вы обновляете прошивку кофемашины, проверьте, не изменились ли настройки по умолчанию для функции преинфузии. Производители иногда меняют алгоритмы экстракции в новых версиях.</blockquote>
+
+<details class="faq-item"><summary>История технологии</summary><div class="faq-answer"><p> Функция предварительного смачивания была популяризирована в 1990-х годах итальянскими бариста, которые заметили, что отсрочка давления делает вкус кофе более сладким. Сначала это делалось вручную, а затем стало стандартом в профессиональном оборудовании.</p></div></details>
+
+<h2 id="faq-частые-вопросы-о-предварительном-смачивании">FAQ: Частые вопросы о предварительном смачивании</h2>
+
+<details>
+<summary>Обязательно ли включать предварительное смачивание для каждого напитка?</summary>
+<p>Нет, это зависит от типа зерна и ваших вкусовых предпочтений. Для темной обжарки лучше отключить или уменьшить время смачивания, чтобы избежать горечи. Для светлой обжарки оно обязательно для раскрытия вкуса.</p>
+</details>
+
+<details>
+<summary>Как понять, что время смачивания выбрано неверно?</summary>
+<p>Если кофе течет слишком быстро и выглядит водянистым — смачивание слишком короткое. Если кофе не идет или течет каплями — слишком долгое или помол слишком мелкий для выбранного времени.</p>
+</details>
+
+<details>
+<summary>Влияет ли предварительное смачивание на время приготовления эспрессо?</summary>
+<p>Да, общее время приготовления увеличивается на 3-7 секунд, так как этот процесс происходит до начала основной экстракции под давлением.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать эту функцию для заваривания чая?</summary>
+<p>Технически возможно, но бессмысленно. Чайные листья не требуют такого высокого давления и сложной экстракции, как кофейный порошок. Для чая лучше использовать стандартную подачу горячей воды.</p>
+</details>
+
+<details>
+<summary>Что делать, если машина не поддерживает настройку смачивания?</summary>
+<p>В большинстве случаев вы не сможете изменить это программно. Однако вы можете попробовать изменить помол или температуру воды, чтобы компенсировать отсутствие гибкости в процессе смачивания.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#физика-процесса-почему-вода-должна-ждать">Физика процесса: почему вода должна ждать</a></li><li><a href="#виды-предварительного-смачивания-в-разных-машинах">Виды предварительного смачивания в разных машинах</a></li><li><a href="#влияние-на-вкус-и-аромат-напитка">Влияние на вкус и аромат напитка</a></li><li><a href="#настройка-параметров-для-идеального-результата">Настройка параметров для идеального результата</a></li><li><a href="#распространенные-ошибки-и-мифы">Распространенные ошибки и мифы</a></li><li><a href="#когда-функция-может-быть-вредной">Когда функция может быть вредной</a></li><li><a href="#сравнение-с-ручным-приготовлением">Сравнение с ручным приготовлением</a></li><li><a href="#faq-частые-вопросы-о-предварительном-смачивании">FAQ: Частые вопросы о предварительном смачивании</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-vybrat-kofemashinu-simens.html" class="related-card">Как выбрать кофемашину Siemens: гид по сериям и функциям</a></li><li><a href="/articles/c/ch/chto-takoe-rozhkovaya-kofemashina-s-kapuchinatorom.html" class="related-card">Рожковая кофемашина с капучинатором: выбор, устройство и секреты идеального эспрессо</a></li><li><a href="/articles/g/gd/gde-kupit-kofemashinu-v-volgograde.html" class="related-card">Где купить кофемашину в Волгограде: лучшие магазины и советы</a></li><li><a href="/articles/r/ro/rozhkovye-kofemashiny-chto-eto-znachit.html" class="related-card">Рожковые кофемашины: что это значит и как выбрать идеальную модель</a></li><li><a href="/articles/e/ek/ekstraktsiya-kofe-v-kofemashine.html" class="related-card">Экстракция кофе в кофемашине: параметры, ошибки и настройка вкуса</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-vybrat-kofemashinu-simens.html" class="related-bottom-card"><span class="related-bottom-title">Как выбрать кофемашину Siemens: гид по сериям и функциям</span><span class="related-bottom-desc">Полный разбор линейки Siemens. Как выбрать модель SensoFroth или EQ. Советы по мощности, давлению и </span></a><a href="/articles/c/ch/chto-takoe-rozhkovaya-kofemashina-s-kapuchinatorom.html" class="related-bottom-card"><span class="related-bottom-title">Рожковая кофемашина с капучинатором: выбор, устройство и секреты идеального эспрессо</span><span class="related-bottom-desc">Узнайте всё о рожковых кофемашинах с капучинатором. Как работает система, как выбрать лучшую модель </span></a><a href="/articles/g/gd/gde-kupit-kofemashinu-v-volgograde.html" class="related-bottom-card"><span class="related-bottom-title">Где купить кофемашину в Волгограде: лучшие магазины и советы</span><span class="related-bottom-desc">Ищете, где купить кофемашину в Волгограде? Обзор салонов техники, сетевых магазинов и сервисных цент</span></a><a href="/articles/r/ro/rozhkovye-kofemashiny-chto-eto-znachit.html" class="related-bottom-card"><span class="related-bottom-title">Рожковые кофемашины: что это значит и как выбрать идеальную модель</span><span class="related-bottom-desc">Полный гид по рожковым кофемашинам: устройство, принцип работы, плюсы и минусы. Узнайте разницу межд</span></a><a href="/articles/e/ek/ekstraktsiya-kofe-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Экстракция кофе в кофемашине: параметры, ошибки и настройка вкуса</span><span class="related-bottom-desc">Полное руководство по экстракции кофе: как настроить помол, давление и температуру для идеального вк</span></a><a href="/articles/t/ts/tsu-kofemashina-chto-eto.html" class="related-bottom-card"><span class="related-bottom-title">Цу кофемашина: что это, виды и особенности выбора</span><span class="related-bottom-desc">Узнайте, что такое цу кофемашина. Полный обзор технологий, сравнение моделей, рекомендации по выбору</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

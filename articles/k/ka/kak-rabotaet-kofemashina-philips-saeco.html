@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как работает кофемашина Philips Saeco: принцип действия и цикл приготовления — Кофини</title>
+    <meta name="description" content="Подробный разбор технологии работы автоматических кофемашин Philips Saeco. Узнайте о системе Thermoblock, заварочном блоке и алгоритме приготовления эспрессо.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-rabotaet-kofemashina-philips-saeco.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как работает кофемашина Philips Saeco: принцип действия и цикл приготовления">
+    <meta property="og:description" content="Подробный разбор технологии работы автоматических кофемашин Philips Saeco. Узнайте о системе Thermoblock, заварочном блоке и алгоритме приготовления эспрессо.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как работает кофемашина Philips Saeco: принцип действия и цикл приготовления</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как работает кофемашина Philips Saeco: принцип действия и цикл приготовления</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#внутренняя-архитектура-и-система-подачи-воды">Внутренняя архитектура и система подачи воды</a></li><li><a href="#технология-мгновенного-нагрева-thermoblock">Технология мгновенного нагрева Thermoblock</a></li><li><a href="#сердце-машины-заварочный-блок-и-помол">Сердце машины: Заварочный блок и помол</a></li><li><a href="#алгоритм-приготовления-напитка-пошаговый-цикл">Алгоритм приготовления напитка: пошаговый цикл</a></li><li><a href="#поддержание-гигиены-и-уход-за-системой">Поддержание гигиены и уход за системой</a></li><li><a href="#распространенные-проблемы-и-их-причины">Распространенные проблемы и их причины</a></li><li><a href="#особенности-работы-разных-серий">Особенности работы разных серий</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Автоматические кофемашины <em>Philips Saeco</em> стали золотым стандартом в домашнем производстве эспрессо, объединяя итальянские традиции и передовые технологии. В отличие от механических устройств, эти агрегаты берут на себя весь процесс: от помола зерна до подачи готового напитка в чашку. Пользователю достаточно выбрать нужный тип кофе на дисплее или панели управления, а сложный механизм сделает остальное.</p>
+
+<p>Секрет популярности бренда кроется в продуманной инженерии, где каждый элемент выполняет строго определенную функцию. Чтобы получать стабильно качественный результат, необходимо понимать, как взаимодействуют между собой <strong>система нагрева</strong>, <strong>заварочный узел</strong> и <strong>помпа</strong>. Без этих знаний обслуживание устройства может превратиться в сложную задачу, а качество напитков — ухудшиться со временем.</p>
+
+<h2 id="внутренняя-архитектура-и-система-подачи-воды">Внутренняя архитектура и система подачи воды</h2>
+
+<p>В основе работы любой модели <em>Philips Saeco</em> лежит гидравлическая схема, которая начинается с бачка для воды. Вода не просто выливается в резервуар, она проходит через систему фильтрации, если установлен картридж <em>AquaClean</em>. Это ключевой элемент, который позволяет значительно продлить интервалы между процедурами декальцинации и защищает внутренние каналы от накипи.</p>
+
+<p>После фильтрации вода поступает к насосу. В современных моделях используется вибрационная помпа, способная создавать давление до 15 бар. Именно это высокое давление критично для правильного экстрагирования кофе. Без <strong>давления 15 бар</strong> невозможно получить густую пенку (крема) и насыщенный вкус эспрессо, так как вода просто пройдет сквозь кофейную таблетку, не вытянув из нее ароматические масла.</p>
+
+<p>Важно отметить, что поток воды управляется электронным контроллером, который точно дозирует количество жидкости для каждой чашки. Если вы выбираете режим «Лунго», система подаст больше воды, чем для стандартного «Эспрессо», но давление останется неизменным. Это обеспечивает неизменное качество напитка независимо от его объема.</p>
+
+<blockquote>⚠️ <strong>Внимание</strong>: Использование жесткой воды без фильтра <em>AquaClean</em> может привести к быстрой поломке нагревательного элемента. Качество воды напрямую влияет на срок службы всей гидросистемы.</blockquote>
+
+<div class="poll-widget" id="poll-5171100e"><div class="poll-widget-question">📊 Какой тип воды вы используете в кофемашине?</div><div class="poll-widget-option" data-poll="5171100e" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Фильтрованная водопроводная</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="5171100e" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Бутилированная</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="5171100e" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Дистиллированная</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="5171100e" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Смешанная</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="технология-мгновенного-нагрева-thermoblock">Технология мгновенного нагрева Thermoblock</h2>
+
+<p>Одной из главных отличительных черт кофемашин <em>Philips Saeco</em> является использование системы <strong>Thermoblock</strong>. В отличие от традиционных бойлеров, которые греют большой объем воды заранее, Thermoblock нагревает воду «по требованию». Вода проходит через извилистый канал внутри металлического блока, где моментально нагревается до заданной температуры за считанные секунды.</p>
+
+<p>Такая технология обладает рядом преимуществ. Во-первых, она позволяет экономить электроэнергию, так как энергия тратится только в момент приготовления напитка. Во-вторых, система обеспечивает высокую точность температуры. Электронный датчик постоянно мониторит нагрев и корректирует мощность ТЭНа, чтобы вода не была ни слишком горячей, ни холодной.</p>
+
+<p>Для капучино и латте система работает в два этапа. Сначала подается горячая вода или эспрессо, а затем в специальную насадку подается пар. В некоторых моделях <em>Philips LatteGo</em> используется отдельный контур для взбивания молока, который не требует сложной промывки парового крана после каждого использования.</p>
+
+<blockquote>⚠️ <strong>Внимание</strong>: Система Thermoblock не любит длительного простоя в холодном состоянии. Если вы используете машину редко, первый напиток может быть недостаточно горячим, так как блок прогревается только при первом запуске.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед приготовлением первого напитка утром рекомендуется пустить немного горячей воды без кофе в пустую чашку. Это прогреет заварочный блок и чашку, улучшив вкус первого эспрессо.</p></div>
+
+<h2 id="сердце-машины-заварочный-блок-и-помол">Сердце машины: Заварочный блок и помол</h2>
+
+<p>Центральным элементом, определяющим качество напитка, является съемный заварочный блок. Именно здесь происходит магия превращения зерен в эспрессо. Процесс начинается с подачи зерен из бункера в жернова кофемолки. Обычно используются стальные или керамические жернова, которые измельчают зерна до состояния мелкой пыли.</p>
+
+<p>После помола отмеренная доза кофейной гущи поступает в заварочную камеру. Там она подвергается сильному давлению, формируя плотную таблетку. Через эту таблетку под давлением проходит горячая вода, забирая с собой вкус, аромат и цвет. Ключевым параметром здесь является время экстракции и <strong>степень помола</strong>, которые можно регулировать в зависимости от сорта зерна.</p>
+
+<p>После того как вода прошла через таблетку, заварочный блок выталкивает готовый кофейный жмых в специальный контейнер. В большинстве моделей <em>Philips Saeco</em> этот процесс полностью автоматизирован и занимает всего несколько секунд. Важно регулярно извлекать и промывать заварочный блок под водой, чтобы избежать слеживания остатков кофе.</p>
+
+<div class="checklist-block"><h4>☑️ Правильная промывка заварочного блока</h4><label class="check-item"><input type="checkbox"><span>Выключить машину</span></label><label class="check-item"><input type="checkbox"><span>Нажать кнопку извлечения</span></label><label class="check-item"><input type="checkbox"><span>Промыть под проточной водой без моющих средств</span></label><label class="check-item"><input type="checkbox"><span>Дать высохнуть перед установкой</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="алгоритм-приготовления-напитка-пошаговый-цикл">Алгоритм приготовления напитка: пошаговый цикл</h2>
+
+<p>Давайте разберем, что происходит внутри машины, когда вы нажимаете кнопку «Эспрессо». Процесс строго последовательный и контролируется программным обеспечением. Сначала система проверяет наличие воды, кофе и отсутствие переполненности контейнеров. Если все условия соблюдены, включается помол.</p>
+
+<p>Далее следует этап пролива. Сначала подается небольшое количество горячей воды для предварительного смачивания кофейной таблетки (пре-инфузия). Это помогает раскрыть аромат и подготовить таблетку к основному давлению. Затем следует основной цикл пролива под высоким давлением. Время этого этапа критично: слишком быстро — напиток будет кислым, слишком медленно — горьким.</p>
+
+<p>В моделях с технологией <em>Aroma Extract</em> машина автоматически регулирует баланс между температурой, временем пролива и степенью помола. Если вы выбрали более темную обжарку зерна, система снизит температуру воды, чтобы избежать горечи. Если вы выбрали светлую обжарку, температура будет выше для максимального извлечения вкуса.</p>
+
+<blockquote>⚠️ <strong>Внимание</strong>: Если машина издает странные звуки или вибрирует сильнее обычного, проверьте контейнер для отработанного кофе. Иногда переполненный жмых блокирует механизм выталкивания таблетки.</blockquote>
+
+<details class="faq-item"><summary>Что такое предварительное смачивание?</summary><div class="faq-answer"><p>Это процесс, когда горячая вода подается на кофейную таблетку под низким давлением перед основным циклом экстракции. Это позволяет зерну набухнуть и равномерно пропустит воду, улучшая вкус напитка.</p></div></details>
+
+<h2 id="поддержание-гигиены-и-уход-за-системой">Поддержание гигиены и уход за системой</h2>
+
+<p>Уход за кофемашиной <em>Philips Saeco</em> — это залог ее долгой жизни и качества напитков. В отличие от рожковых кофеварок, здесь необходимо помнить о сложной системе внутренних каналов. Регулярная очистка включает в себя промывку заварочного блока, удаление кофейных масел из системы подачи молока и декальцинацию.</p>
+
+<p>Процедура декальцинации запускается автоматически, когда датчики фиксируют накопление минеральных отложений. Машина сама подскажет вам, когда это необходимо сделать, и попросит вставить контейнер для солевых растворов. Игнорирование этих предупреждений может привести к засору <strong>системы Thermoblock</strong> и дорогостоящему ремонту.</p>
+
+<p>Для кофемашин с молочными системами (например, серия <em>LatteGo</em>) важно промывать контейнеры для молока сразу после использования. Остатки молока быстро скисают и засоряют трубки, что может привести к появлению неприятного запаха и бактерий. Используйте только специальные чистящие средства, рекомендованные производителем.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Операция</th>
+      <th>Периодичность</th>
+      <th>Необходимые материалы</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Очистка заварочного блока</td>
+      <td>Ежедневно</td>
+      <td>Проточная вода</td>
+    </tr>
+    <tr>
+      <td>Промывка системы молока</td>
+      <td>После каждого использования</td>
+      <td>Вода, салфетка</td>
+    </tr>
+    <tr>
+      <td>Декальцинация</td>
+      <td>По требованию (примерно 3-6 мес.)</td>
+      <td>Раствор для декальцинации</td>
+    </tr>
+    <tr>
+      <td>Очистка контейнера для жмыха</td>
+      <td>1 раз в неделю</td>
+      <td>Мягкая губка</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная промывка заварочного блока водой без моющих средств — это самая важная процедура для продления срока службы заварочного узла.</p></div>
+
+<h2 id="распространенные-проблемы-и-их-причины">Распространенные проблемы и их причины</h2>
+
+<p>Иногда пользователи сталкиваются с ситуациями, когда машина не готовит кофе или выдает ошибки. Чаще всего проблема кроется не в поломке электроники, а в нарушении правил эксплуатации. Например, если машина издает шум, похожий на жужжание, но кофе не льется, возможно, засорился жернова или закончилась вода.</p>
+
+<p>Ошибка «Вставьте контейнер для отработанного кофе» часто появляется даже при пустом контейнере. Это происходит потому, что машина не видит датчика извлечения. Решение простое: включите машину, дождитесь завершения цикла прогрева, затем извлеките и снова вставьте контейнер. Важно делать это при включенном устройстве.</p>
+
+<p>Если эспрессо получается слишком жидким, проверьте настройку помола. Если помол слишком крупный, вода проходит слишком быстро. Поверните регулятор на жерновах в сторону более мелкого помола (обычно это стрелка влево или минус). Делайте это только при работающей кофемолке.</p>
+
+<h2 id="особенности-работы-разных-серий">Особенности работы разных серий</h2>
+
+<p>Хотя базовый принцип работы одинаков для всех моделей, существуют важные различия в конструкциях. Серия <em>Pure</em> ориентирована на базовые напитки и имеет упрощенную систему подачи молока. Серия <em>Series 3200</em> и <em>5400</em> уже оснащена системой <em>Aroma Extract</em> и более продвинутыми дисплеями.</p>
+
+<p>Топовые модели линейки <em>LatteGo</em> отличаются уникальным дизайном системы вспенивания. В них нет трубок внутри машины, которые нужно промывать. Молоко взбивается в отдельном прозрачном контейнере, который легко моется в посудомоечной машине. Это кардинально меняет подход к уходу за молочными кофемашинами.</p>
+
+<p>Также стоит отметить наличие системы <em>AquaClean</em> во многих новых моделях. Если установить фильтр и соблюдать правила его замены, машина может работать без декальцинации до 5000 чашек. Это уникальная технология, которая меняет представление о необходимости частых процедур очистки.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Технология AquaClean позволяет отложить процедуру декальцинации на длительное время, но только при условии использования оригинальных фильтров и корректной настройки машины.</p></div>
+
+<details>
+  <summary>Почему машина издает звуки жужжания, но не готовит кофе?</summary>
+  <p>Это часто означает, что насос пытается создать давление, но встречает препятствие. Возможные причины: пустой бачок с водой, засор в системе подачи или необходимость промывки заварочного блока. Проверьте уровень воды и извлеките заварочный блок для визуального осмотра.</p>
+</details>
+
+<details>
+  <summary>Можно ли использовать молотый кофе вместо зернового?</summary>
+  <p>Да, большинство моделей <em>Philips Saeco</em> имеют специальное отверстие для использования молотого кофе. Однако использовать его можно только для одной чашки за раз. Дозировка должна быть строго соблюдена, иначе машина может заблокироваться.</p>
+</details>
+
+<details>
+  <summary>Что означает мигающий индикатор «Заполните контейнер для гущи»?</summary>
+  <p>Индикатор мигает, когда контейнер переполнен. Если он мигает сразу после включения, значит, вы не извлекли контейнер для гущи при включении машины. Машина не может сбросить счетчик использованных чашек, пока контейнер находится внутри в выключенном состоянии.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#внутренняя-архитектура-и-система-подачи-воды">Внутренняя архитектура и система подачи воды</a></li><li><a href="#технология-мгновенного-нагрева-thermoblock">Технология мгновенного нагрева Thermoblock</a></li><li><a href="#сердце-машины-заварочный-блок-и-помол">Сердце машины: Заварочный блок и помол</a></li><li><a href="#алгоритм-приготовления-напитка-пошаговый-цикл">Алгоритм приготовления напитка: пошаговый цикл</a></li><li><a href="#поддержание-гигиены-и-уход-за-системой">Поддержание гигиены и уход за системой</a></li><li><a href="#распространенные-проблемы-и-их-причины">Распространенные проблемы и их причины</a></li><li><a href="#особенности-работы-разных-серий">Особенности работы разных серий</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-rabotaet-kofemashina-lirika-saeco.html" class="related-card">Как работает кофемашина Saeco Lierea: принцип действия и настройка</a></li><li><a href="/articles/k/ka/kak-umenshit-pomol-v-kofemolke-fiorenzato.html" class="related-card">Как уменьшить помол в кофемолке Fiorenzato: пошаговая настройка</a></li><li><a href="/articles/k/ka/kak-nastroit-kofemashinu-delonghi-na-vkusnyj-kofe-v-zernakh.html" class="related-card">Настройка кофемашины DeLonghi: секреты идеального вкуса</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-magnifika-s.html" class="related-card">Как почистить кофемашину DeLonghi Magnifica S: Полная инструкция</a></li><li><a href="/articles/c/ch/chem-chistit-kofemashinu-ot-nakipi-v-domashnikh-usloviyakh-filips.html" class="related-card">Чем чистить кофемашину Philips от накипи: лучшие средства и инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-rabotaet-kofemashina-lirika-saeco.html" class="related-bottom-card"><span class="related-bottom-title">Как работает кофемашина Saeco Lierea: принцип действия и настройка</span><span class="related-bottom-desc">Подробный разбор работы кофемашины Saeco Lierea. Узнайте о системе Thermoblock, подготовке зерна, те</span></a><a href="/articles/k/ka/kak-umenshit-pomol-v-kofemolke-fiorenzato.html" class="related-bottom-card"><span class="related-bottom-title">Как уменьшить помол в кофемолке Fiorenzato: пошаговая настройка</span><span class="related-bottom-desc">Пошаговая инструкция по калибровке жерновов Fiorenzato. Узнайте, как точно настроить помол для эспре</span></a><a href="/articles/k/ka/kak-nastroit-kofemashinu-delonghi-na-vkusnyj-kofe-v-zernakh.html" class="related-bottom-card"><span class="related-bottom-title">Настройка кофемашины DeLonghi: секреты идеального вкуса</span><span class="related-bottom-desc">Пошаговая инструкция по настройке параметров помоль, температуры и крепости в кофемашинах DeLonghi д</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-delonghi-magnifika-s.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину DeLonghi Magnifica S: Полная инструкция</span><span class="related-bottom-desc">Пошаговая инструкция по декальцинации, промывке капучинатора и очистке заварочного блока. Советы по </span></a><a href="/articles/c/ch/chem-chistit-kofemashinu-ot-nakipi-v-domashnikh-usloviyakh-filips.html" class="related-bottom-card"><span class="related-bottom-title">Чем чистить кофемашину Philips от накипи: лучшие средства и инструкция</span><span class="related-bottom-desc">Узнайте, чем эффективно удалить накипь в кофемашинах Philips. Обзор фирменных средств, уксуса и лимо</span></a><a href="/articles/k/ko/kofevarka-polaris-4011-s-kapuchinatorom-kak-polzovatsya-video.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофеваркой Polaris 4011 с капучинатором: Видео-инструкция</span><span class="related-bottom-desc">Подробное руководство по эксплуатации кофеварки Polaris 4011. Настройка капучинатора, приготовление </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

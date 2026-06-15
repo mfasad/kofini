@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как посчитать расход кофе в кофемашине: формулы и методы учета — Кофини</title>
+    <meta name="description" content="Узнайте, как точно рассчитать расход кофе в день и месяц. Методы подсчета для дома и бизнеса, влияние настроек помола и крепости на себестоимость напитка.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-poschitat-raskhod-kofe-v-kofemashine.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как посчитать расход кофе в кофемашине: формулы и методы учета">
+    <meta property="og:description" content="Узнайте, как точно рассчитать расход кофе в день и месяц. Методы подсчета для дома и бизнеса, влияние настроек помола и крепости на себестоимость напитка.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как посчитать расход кофе в кофемашине: формулы и методы учета</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Методика расчета расхода кофе в автоматической кофемашине</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-экономию-кофейных-ресурсов">Введение в экономию кофейных ресурсов</a></li><li><a href="#базовые-формулы-расчета-для-дома-и-офиса">Базовые формулы расчета для дома и офиса</a></li><li><a href="#влияние-настроек-машины-на-потребление-зерна">Влияние настроек машины на потребление зерна</a></li><li><a href="#таблица-усредненных-показателей-расхода-по-типам-напитков">Таблица усредненных показателей расхода по типам напитков</a></li><li><a href="#скрытые-потери-и-технический-брак">Скрытые потери и технический брак</a></li><li><a href="#практические-инструкции-по-ведению-учета">Практические инструкции по ведению учета</a></li><li><a href="#анализ-данных-и-оптимизация-затрат">Анализ данных и оптимизация затрат</a></li><li><a href="#частые-вопросы-и-ответы">Частые вопросы и ответы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-экономию-кофейных-ресурсов">Введение в экономию кофейных ресурсов</h2>
+<p>Точное знание того, сколько грамм молотого зерна уходит на одну чашку, является фундаментом для понимания реальной себестоимости вашего напитка. Многие владельцы автоматических кофемашин совершают ошибку, полагая, что расход равен только весу одной порции, игнорируя потери при подготовке и промывке системы.</p>
+<p>Понимание этих процессов позволяет не только оптимизировать бюджет, но и продлить срок службы <em>бункера</em> и <em>заварочного блока</em> вашего устройства. Если вы управляете кофейным аппаратом в офисе или небольшом заведении, контроль расхода становится критически важным фактором прибыльности.</p>
+<p><strong>Себестоимость напитка</strong> складывается из множества переменных: от качества сырья до настроек плотности <strong>кофейной таблетки</strong>. В этой статье мы разберем, как самостоятельно провести замеры и выявить скрытые потери.</p>
+
+<h2 id="базовые-формулы-расчета-для-дома-и-офиса">Базовые формулы расчета для дома и офиса</h2>
+<p>Наиболее простой способ узнать расход — разделить общий вес израсходованного зерна на количество приготовленных порций. Однако такой метод дает усредненную цифру, которая может варьироваться в зависимости от типа напитка. Для точного результата необходимо вести учет в течение минимум одной недели эксплуатации.</p>
+<p>Вам нужно взвесить полный бункер, затем приготовить определенное количество напитков (например, 50 порций эспрессо) и снова взвесить бункер. Разница между начальным и конечным весом, деленная на число порций, покажет средний расход на одну чашку.</p>
+<p>Не забывайте учитывать, что при приготовлении капучино или латте расходуется больше воды и молока, но вес кофейной таблетки остается относительно стабильным, если не менять настройки крепости. Для <em>автоматических кофемашин</em> производители часто указывают диапазон от 7 до 12 грамм на чашку.</p>
+<p>Если вы используете разные режимы (например, двойной эспрессо), расчет усложняется, так как двойная порция не всегда равна удвоенному весу однопорционного напитка из-за особенностей гидравлики и давления.</p>
+<blockquote>⚠️ Внимание: При использовании весов высокой точности учитывайте, что даже небольшая вибрация или сквозняк могут исказить показания на 0.1–0.2 грамма, что при массовом расчете даст существенную погрешность.</blockquote>
+
+<h2 id="влияние-настроек-машины-на-потребление-зерна">Влияние настроек машины на потребление зерна</h2>
+<p>Современные устройства, такие как <em>DeLonghi Magnifica</em> или <em>Jura Z8</em>, позволяют пользователю тонко настраивать параметры приготовления. Одна из ключевых переменных — это уровень помола. Чем мельче помол, тем больше площадь поверхности зерна, что требует более тщательного прессования, но не всегда увеличивает вес таблетки.</p>
+<p>Другой критически важный параметр — крепость напитка. Изменение настроек часто приводит к тому, что заварочный блок формирует таблетку разного веса. В некоторых моделях увеличение крепости достигается за счет уменьшения объема воды, а в других — именно за счет добавления большего количества молотого кофе.</p>
+<p>Наиболее значимым фактором является количество чашек в настройках (одна или две). В режиме двойной чашки машина может использовать не 20 грамм, а 16–18 грамм, чтобы избежать переизбытка давления в группе, что экономит <strong>кофейное сырье</strong>.</p>
+<p>Важно отметить, что автоматическая промывка заварочного блока перед и после работы также расходует небольшое количество воды и, теоретически, может вымывать остатки зерна из шнека, если машина не настроена на режим энергосбережения.</p>
+
+
+<h2 id="таблица-усредненных-показателей-расхода-по-типам-напитков">Таблица усредненных показателей расхода по типам напитков</h2>
+<p>Ниже приведена таблица, демонстрирующая примерный расход молотого кофе для различных типов напитков в стандартных автоматических кофемашинах. Эти данные могут служить отправной точкой для ваших собственных расчетов.</p>
+<table>
+<thead>
+<tr>
+<th>Тип напитка</th>
+<th>Объем воды (мл)</th>
+<th>Расход кофе (грамм)</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Эспрессо</td>
+<td>30–40</td>
+<td>7–9</td>
+<td>Стандартная одинарная порция</td>
+</tr>
+<tr>
+<td>Двойной эспрессо</td>
+<td>60–80</td>
+<td>14–18</td>
+<td>Менее 2х веса однопорционного</td>
+</tr>
+<tr>
+<td>Американо</td>
+<td>150–200</td>
+<td>7–9</td>
+<td>Эспрессо с добавлением горячей воды</td>
+</tr>
+<tr>
+<td>Капучино</td>
+<td>150 (всего)</td>
+<td>7–9</td>
+<td>Расход зерна аналогичен эспрессо</td>
+</tr>
+<tr>
+<td>Ристретто</td>
+<td>15–20</td>
+<td>8–10</td>
+<td>Меньше воды, но плотнее таблетка</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="скрытые-потери-и-технический-брак">Скрытые потери и технический брак</h2>
+<p>Часто владельцы замечают, что расчетный расход не совпадает с фактическим, и причина кроется в механических особенностях подачи зерна. Шнековый механизм может застревать, особенно если используется <strong>жирное зерно</strong> с добавками или слишком влажный кофе.</p>
+<p>В таких случаях машина может попытаться сформировать таблетку, подать неполную порцию или, наоборот, засорить жернова. Это приводит к тому, что часть зерна остается в бункере, а часть выпадает в отсек для жмыха или застревает в системе подачи.</p>
+<p>Особое внимание стоит уделить качеству помола. Если жернова изношены или неправильно настроены, часть зерна может скатываться в отсек для отходов в виде крупных фракций, не участвуя в экстракции. Это прямой убыток.</p>
+<p>Также следует учитывать периодические циклы промывки системы, которые могут выбрасывать в отсек для гущи небольшое количество свежего кофе, если они запускаются сразу после загрузки новой партии.</p>
+
+
+
+<h2 id="практические-инструкции-по-ведению-учета">Практические инструкции по ведению учета</h2>
+<p>Для точного мониторинга расхода рекомендуется использовать метод "взвешивания цикла". Это не просто теория, а практический алгоритм действий, который должен выполнять оператор кофемашины.</p>
+<p>Сначала необходимо установить <code>Точные весы</code> рядом с аппаратом. Запишите начальный вес бункера (или используйте весы на подставке, если бункер съемный). Затем запустите цикл приготовления заданного количества напитков без перерывов.</p>
+<p>После завершения цикла взвесьте бункер снова. Если возможно, взвесьте и отсек для жмыха, чтобы убедиться, что там не застряло большое количество неразваренного зерна. Разница весов — это фактический расход.</p>
+<p>Регулярность таких замеров позволит выявить тренды: например, расход может увеличиваться при перепаде влажности воздуха или при смене партии кофе с другой степенью обжарки.</p>
+
+
+
+<h2 id="анализ-данных-и-оптимизация-затрат">Анализ данных и оптимизация затрат</h2>
+<p>Полученные данные нужно сопоставлять с заявленными характеристиками вашего устройства. Если фактический расход превышает норму на 20% и более, стоит проверить настройки жерновов на предмет чрезмерно мелкого помола.</p>
+<p>Излишне мелкий помол не только увеличивает время приготовления, но и может заставлять машину делать более плотные таблетки, что повышает риск застревания и перерасхода энергии. Иногда достаточно повернуть регулировочное кольцо на один шаг в сторону более крупного помола.</p>
+<p>Также стоит обратить внимание на тип используемого зерна. Дешевые сорта с большим количеством дефектных зерен или примесей могут давать больший объем отходов и требовать более частой промывки системы.</p>
+<p>Оптимизация может заключаться и в смене режима работы: например, отключение автоматического сброса отходов после каждого напитка может немного снизить потери, если машина настроена на это.</p>
+<blockquote>⚠️ Внимание: При изменении настроек жерновов всегда делайте это только в момент работы шнека, иначе вы можете сломать механизм регулировки.</blockquote>
+
+<h2 id="частые-вопросы-и-ответы">Частые вопросы и ответы</h2>
+<details>
+<summary>Почему расход кофе в моей машине выше, чем указано в инструкции?</summary>
+<p>Возможные причины включают неправильную настройку помола, износ жерновов, использование слишком влажного зерна или частые циклы промывки из-за программных сбоев.</p>
+</details>
+<details>
+<summary>Влияет ли влажность воздуха на расход кофе?</summary>
+<p>Да, при высокой влажности кофе может слеживаться в бункере, что затрудняет подачу и заставляет машину делать повторные попытки насыпки, увеличивая расход.</p>
+</details>
+<details>
+<summary>Можно ли использовать весы с погрешностью 1 грамм для расчетов?</summary>
+<p>Нет, для точного расчета расхода на одну порцию (7–9 грамм) необходимы весы с погрешностью не более 0.1 грамма, иначе данные будут недостоверными.</p>
+</details>
+<details>
+<summary>Как часто нужно пересчитывать расход кофе?</summary>
+<p>Рекомендуется проводить контрольные замеры при смене партии зерна, после настройки жерновов или раз в месяц для стабильных условий эксплуатации.</p>
+</details>
+<details>
+<summary>Влияет ли тип кофейной чашки на расход?</summary>
+<p>Нет, тип чашки не влияет на расход кофе напрямую, но если вы ставите слишком высокую чашку и машина не может налить напиток, цикл может прерваться с потерей зерна.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-экономию-кофейных-ресурсов">Введение в экономию кофейных ресурсов</a></li><li><a href="#базовые-формулы-расчета-для-дома-и-офиса">Базовые формулы расчета для дома и офиса</a></li><li><a href="#влияние-настроек-машины-на-потребление-зерна">Влияние настроек машины на потребление зерна</a></li><li><a href="#таблица-усредненных-показателей-расхода-по-типам-напитков">Таблица усредненных показателей расхода по типам напитков</a></li><li><a href="#скрытые-потери-и-технический-брак">Скрытые потери и технический брак</a></li><li><a href="#практические-инструкции-по-ведению-учета">Практические инструкции по ведению учета</a></li><li><a href="#анализ-данных-и-оптимизация-затрат">Анализ данных и оптимизация затрат</a></li><li><a href="#частые-вопросы-и-ответы">Частые вопросы и ответы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ko/kofemashina-delongi-kak-udalit-nakip-instruktsiya.html" class="related-card">Как удалить накипь в кофемашине DeLonghi: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-pochistit-ot-nakipi-kofemashinu-delongi-nespresso-instruktsiya.html" class="related-card">Как почистить кофемашину Delonghi Nespresso: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-pravilno-chistit-kofemashinu-krups.html" class="related-card">Как правильно чистить кофемашину Krups: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-myt-kapuchinator-v-kofemashine-filips.html" class="related-card">Как мыть капучинатор Philips: полная инструкция по чистке и уходу</a></li><li><a href="/articles/k/ka/kak-chistit-kofemashinu-delongi-ot-nakipi-limonnoj-kislotoj.html" class="related-card">Как почистить кофемашину DeLonghi от накипи лимонной кислотой: пошаговая инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ko/kofemashina-delongi-kak-udalit-nakip-instruktsiya.html" class="related-bottom-card"><span class="related-bottom-title">Как удалить накипь в кофемашине DeLonghi: пошаговая инструкция</span><span class="related-bottom-desc">Подробное руководство по удалению накипи в кофемашинах DeLonghi. Узнайте, как выбрать средство, запу</span></a><a href="/articles/k/ka/kak-pochistit-ot-nakipi-kofemashinu-delongi-nespresso-instruktsiya.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Delonghi Nespresso: пошаговая инструкция</span><span class="related-bottom-desc">Пошаговая инструкция по удалению накипи из кофемашин Nespresso DeLonghi. Рецепты растворов, этапы пр</span></a><a href="/articles/k/ka/kak-pravilno-chistit-kofemashinu-krups.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно чистить кофемашину Krups: пошаговая инструкция</span><span class="related-bottom-desc">Полный гид по уходу за кофемашиной Krups. Инструкция по декальцинации, промывке жерновов и сбросу сч</span></a><a href="/articles/k/ka/kak-myt-kapuchinator-v-kofemashine-filips.html" class="related-bottom-card"><span class="related-bottom-title">Как мыть капучинатор Philips: полная инструкция по чистке и уходу</span><span class="related-bottom-desc">Пошаговая инструкция: как правильно мыть и очищать капучинатор в кофемашинах Philips. Разбор автомат</span></a><a href="/articles/k/ka/kak-chistit-kofemashinu-delongi-ot-nakipi-limonnoj-kislotoj.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину DeLonghi от накипи лимонной кислотой: пошаговая инструкция</span><span class="related-bottom-desc">Пошаговая инструкция по удалению накипи в кофемашинах DeLonghi с помощью лимонной кислоты. Рецепты р</span></a><a href="/articles/v/vi/video-kak-polzovatsya-kofemashinoj-inkhaus.html" class="related-bottom-card"><span class="related-bottom-title">Видео-инструкция: как пользоваться кофемашиной Inhouse для новичков</span><span class="related-bottom-desc">Полный видео-гид по эксплуатации кофемашин Inhouse. Разбор меню, загрузка зерна, настройка крепости </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

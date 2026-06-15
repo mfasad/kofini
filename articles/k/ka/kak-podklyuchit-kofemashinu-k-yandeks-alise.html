@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как подключить кофемашину к Яндекс Алисе: пошаговая инструкция — Кофини</title>
+    <meta name="description" content="Пошаговое руководство по интеграции умной кофемашины с Яндекс Алисой. Узнайте, как настроить сценарии, голосовое управление и автоматизацию.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-podklyuchit-kofemashinu-k-yandeks-alise.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как подключить кофемашину к Яндекс Алисе: пошаговая инструкция">
+    <meta property="og:description" content="Пошаговое руководство по интеграции умной кофемашины с Яндекс Алисой. Узнайте, как настроить сценарии, голосовое управление и автоматизацию.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/aksessuary-i-instrumenty/">Аксессуары и инструменты</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как подключить кофемашину к Яндекс Алисе: пошаговая инструкция</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Полное руководство: как подключить кофемашину к Яндексу и управлять голосом</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-умный-кофе">Введение в умный кофе</a></li><li><a href="#проверка-совместимости-и-требования">Проверка совместимости и требования</a></li><li><a href="#подготовка-сети-и-приложения">Подготовка сети и приложения</a></li><li><a href="#пошаговая-инструкция-по-подключению">Пошаговая инструкция по подключению</a></li><li><a href="#настройка-голосовых-команд-и-сценариев">Настройка голосовых команд и сценариев</a></li><li><a href="#таблица-совместимости-популярных-брендов">Таблица совместимости популярных брендов</a></li><li><a href="#решение-частых-проблем-и-советы">Решение частых проблем и советы</a></li><li><a href="#faq-частые-вопросы-пользователей">FAQ: Частые вопросы пользователей</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-умный-кофе">Введение в умный кофе</h2><p>Современная кухня стремится к максимальной автоматизации, и голосовое управление становится стандартом. <strong>Умная кофемашина</strong> в связке с <em>Яндекс Станцией</em> позволяет не просто включить прибор, но и создать полноценные утренние ритуалы без лишних движений. Вы можете проснуться от аромата свежезаваренного напитка, отдав команду голосом.</p><p>Процесс интеграции не всегда интуитивно понятен, так как производители используют разные протоколы связи. Однако, следуя правильной последовательности действий, вы сможете заставить даже старую модель <code>кофеварки</code> слушаться голосового помощника <strong>Алисы</strong>. Главное — правильно настроить экосистему и убедиться в совместимости устройств.</p><h2 id="проверка-совместимости-и-требования">Проверка совместимости и требования</h2><p>Перед началом настройки необходимо убедиться, что ваше устройство поддерживает функцию «Умный дом». Не все <em>кофемашины</em> имеют встроенный Wi-Fi модуль, необходимый для прямого подключения к интернету. Если на корпусе нет значка Wi-Fi или приложения для настройки, скорее всего, прибор требует внешнего контроллера.</p><p>Ключевым требованием является наличие стабильного соединения с сетью 2.4 ГГц. Большинство умных устройств, включая <strong>Яндекс Станцию</em> и кофемолки, не видят сети 5 ГГц. <blockquote>⚠️ Внимание: Если ваша кофемашина не поддерживает Wi-Fi напрямую, потребуется умная розетка, которая сможет имитировать включение прибора по расписанию или голосовой команде.</blockquote><p>Проверьте список совместимых брендов в приложении «Яндекс» или на официальном сайте. Часто производители заявляют о поддержке через сторонние сервисы, такие как <em>Яндекс Умный дом</strong> или <code>Яндекс Алиса</code>. Убедитесь, что прошивка устройства обновлена до последней версии.</p><p>Важно отметить, что некоторые бюджетные модели могут требовать покупки дополнительного адаптера. Это не означает, что они несовместимы, но процесс настройки будет отличаться от стандартного сценария «включил и забыл».</p><h2 id="подготовка-сети-и-приложения">Подготовка сети и приложения</h2><p>Успешная интеграция начинается с настройки базовой инфраструктуры. Убедитесь, что телефон, на котором установлено приложение <strong>Яндекс</em>, подключен к той же Wi-Fi сети, к которой вы планируете подключить кофемашину. Расхождение в сетях — самая частая причина неудач при сопряжении.</p><p>Откройте приложение <em>Яндекс</em> на смартфоне и перейдите в раздел «Устройства» или «Умный дом». Нажмите на значок плюса, чтобы добавить новое устройство. Система предложит выбрать категорию «Кухня» или «Бытовая техника». Если вы видите вашу марку кофемашины в списке, выберите её и следуйте инструкциям на экране.</p><p>Для устройств, которые не поддерживают прямое подключение, процесс будет иным. Вам потребуется скачать приложение производителя, зарегистрироваться там, а затем связать аккаунт с <strong>Яндексом</strong> через раздел «Сервисы» в настройках умного дома.</p><blockquote>⚠️ Внимание: В некоторых случаях требуется отключить двухфакторную аутентификацию в приложении производителя на время привязки аккаунта, что может создать риски безопасности, поэтому делайте это только на короткое время.</blockquote><blockquote>⚠️ Внимание: Убедитесь, чтоregion и язык в приложении Яндекса совпадают с регионом, где была приобретена кофемашина, иначе сервисы могут не отобразиться в списке доступных для связки.</blockquote><h2 id="пошаговая-инструкция-по-подключению">Пошаговая инструкция по подключению</h2><p>Разберем детальный алгоритм действий для самых популярных сценариев подключения. Начните с включения кофемашины в розетку (или умную розетку) и перевода её в режим сопряжения. Обычно это делается удержанием кнопки Wi-Fi или специальной комбинации кнопок на панели управления.</p><p>В приложении <strong>Яндекс</strong> выберите «Добавить устройство» и найдите вашу модель. Если автоматическое обнаружение не сработало, выберите «Другое устройство» и введите название бренда вручную. Следуйте подсказкам на экране: система попросит ввести пароль от Wi-Fi и подтвердить подключение.</p><div class="checklist-block"><h4>☑️ Подготовка к подключению</h4><label class="check-item"><input type="checkbox"><span>Убедиться в наличии сети 2.4 ГГц</span></label><label class="check-item"><input type="checkbox"><span>Обновить приложение Яндекс</span></label><label class="check-item"><input type="checkbox"><span>Включить кофемашину в режим сопряжения</span></label><label class="check-item"><input type="checkbox"><span>Проверить совместимость модели</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+<p>После успешного добавления прибор появится в списке устройств умного дома. Дайте ему понятное имя, например, «Кофеварка» или «Моя кофемашина». Это имя будет использоваться для голосовых команд. Избегайте сложных названий, которые Алиса может неправильно распознать.</p><blockquote>⚠️ Внимание: Если вы используете умную розетку, убедитесь, что кофемашина настроена на автоматический старт при подаче питания, иначе голосовая команда включит розетку, но машина останется в спящем режиме.</blockquote><details class="faq-item"><summary>Что делать, если устройство не находится?|Чаще всего проблема кроется в пароле Wi-Fi или режиме сети. Попробуйте временно отключить защиту сети, перезагрузить роутер и повторить попытку. В редких случаях помогает сброс настроек кофемашины до заводских.-->
+<p>Для продвинутых пользователей, у которых есть кофемашины без Wi-Fi, подключение осуществляется через <em>умную розетку</em>. В этом случае вы управляете не функциями машины, а фактом подачи электричества. Это позволяет запускать процесс, если машина настроена на включение при появлении напряжения.</p><h2 id="настройка-голосовых-команд-и-сценариев">Настройка голосовых команд и сценариев</h2><p>После того как устройство добавлено, можно переходить к настройке управления. Просто скомандуйте</summary><div class="faq-answer"><p> «Алиса, включи кофемашину». Система должна выполнить действие и подтвердить его голосом. Проверьте работу как для включения, так и для выключения.</p><p>Создание сценариев открывает широкие возможности автоматизации. Вы можете настроить утренний ритуал, который будет включать не только кофемашину, но и свет, и музыку. Для этого перейдите в раздел сценариев и создайте новый триггер по времени или голосовой команде.</p><ul><li>🌅 Утренний пробуждение: «Алиса, доброе утро» — включает свет, кофемашину и играет джаз.</li><li>☕ Быстрый кофе: «Алиса, приготовь кофе» — запускает таймер варки и включает вытяжку.</li><li>🌙 Ночной режим: «Алиса, выключи всё» — отключает розетку с кофемашиной и остальную технику.</li></ul><p>Важно учитывать, что сложные функции (например, выбор крепости или типа напитка) могут быть недоступны через голос, если производитель не интегрировал эти параметры в <em>API</em> умного дома. В таких случаях управление остается только через приложение производителя.</p><p>Для удобства настройте имена устройств так, чтобы они не пересекались с другими приборами. Если у вас есть кофемашина и кофемолка, назовите их «Кофемашина» и «Молотая кофемолка», чтобы избежать путаницы при выполнении команд.</p><h2 id="таблица-совместимости-популярных-брендов">Таблица совместимости популярных брендов</h2><p>Ниже приведена информация о том, как различные производители реализуют поддержку голосового управления. Это поможет вам понять, чего ожидать от конкретного устройства.</p><table><thead><tr><th>Бренд</th><th>Тип подключения</th><th>Особенности</th></tr></thead><tbody><tr><td><em>De'Longhi</em></td><td>Прямое (Wi-Fi)</td><td>Поддержка через приложение Smart, все функции доступны.</td></tr><tr><td><em>Philips</em></td><td>Прямое (Wi-Fi)</td><td>Интеграция через сервис Smart Coffee, выбор рецептов голосом.</td></tr><tr><td><em>Nevar</em></td><td>Через умную розетку</td><td>Только включение/выключение питания, настройка на авто-старт.</td></tr><tr><td><em>Bosch</em></td><td>Прямое (Wi-Fi)</td><td>Поддержка Home Connect, расширенные сценарии.</td></tr><tr><td><em>Kitfort</em></td><td>Через умную розетку</td><td>Бюджетные модели требуют внешнего контроллера.</td></tr></tbody></table><p>Обратите внимание, что для брендов, поддерживающих прямое подключение, функционал значительно шире. Вы можете не просто включить прибор, но и изменить настройки напитка, если это реализовано производителем.</p>
+<h2 id="решение-частых-проблем-и-советы">Решение частых проблем и советы</h2><p>Иногда процесс подключения может затянуться или прерваться. Если кофемашина не находит сеть, проверьте, не слишком ли далеко она стоит от роутера. Стены из кирпича или металла могут экранировать сигнал Wi-Fi. Попробуйте переместить роутер ближе или использовать репитер.</p><p>Другая частая проблема — потеря связи после перезагрузки роутера. Убедитесь, что кофемашина получила обновленный IP-адрес. В этом случае может потребоваться перепривязка устройства в приложении <strong>Яндекс</strong>. Также проверьте, не меняется ли пароль от Wi-Fi автоматически (например, при смене тарифа провайдера).</p><p>Нельзя исключать и программные сбои. Если устройство «зависло» в статусе подключения, попробуйте удалить его из списка и добавить заново. Это часто помогает сбросить зависшие процессы в <em>сервисах умного дома</em>.</p><blockquote>⚠️ Внимание: Обновление прошивки кофемашины может временно отключить её от умного дома. После обновления обязательно проверьте статус подключения в приложении.</blockquote><div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярное обновление приложений и прошивок устройств — залог стабильной работы голосового управления в долгосрочной перспективе.</p></div>
+<p>Для тех, кто использует <em>умные розетки</em>, важно помнить о физическом состоянии кнопок на кофемашине. Некоторые модели требуют нажатия кнопки включения после подачи питания, что делает автоматизацию невозможной без специальных доработок.</p><p>В некоторых случаях может потребоваться создание макросов через сторонние сервисы, такие как IFTTT или Home Assistant, если родная интеграция работает нестабильно. Это более сложный путь, но он дает полный контроль над процессом.</p><h2 id="faq-частые-вопросы-пользователей">FAQ: Частые вопросы пользователей</h2><p>Ниже собраны ответы на самые популярные вопросы, возникающие при настройке голосового управления кофемашиной.</p><details><summary>Можно ли выбрать конкретный напиток голосом?</summary><p>Это зависит от модели. Если кофемашина поддерживает интеграцию через <em>специализированное приложение</em> (например, Smart Coffee или Home Connect), то да, вы можете сказать «Алиса, приготовь эспрессо». Если управление только через розетку, то выбор напитка остается за вами.</p></details><details><summary>Что делать, если Алиса говорит «Я не понимаю, что делать с этим устройством»?</summary><p>Скорее всего, устройство добавлено только как выключатель, но не имеет сценариев. Зайдите в настройки устройства в приложении и создайте кастомную команду или привяжите действие к сценарю «Утро» или «Вечер».</p></details><details><summary>Нужен ли специальный Wi-Fi для кофемашины?</summary><p>Нет, достаточно стандартной домашней сети 2.4 ГГц. Однако, если у вас много устройств, лучше выделить отдельную сеть для IoT (Интернета вещей), чтобы избежать перегрузки основного канала.</p></details><details><summary>Можно ли подключить несколько кофемашин к одной Алисе?</summary><p>Да, можно подключить сколько угодно устройств, главное — давать им уникальные имена. Например, «Кофемашина на кухне» и «Кофемашина в офисе».</p></details><details><summary>Почему кофемашина не выключается голосом?</summary><p>Если машина не имеет функции авто-выключения в прошивке, команда «выключить» просто отключит питание через розетку. Это может привести к тому, что машина не завершит цикл очистки. Проверьте настройки таймера авто-выключения на самом приборе.</p></details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-умный-кофе">Введение в умный кофе</a></li><li><a href="#проверка-совместимости-и-требования">Проверка совместимости и требования</a></li><li><a href="#подготовка-сети-и-приложения">Подготовка сети и приложения</a></li><li><a href="#пошаговая-инструкция-по-подключению">Пошаговая инструкция по подключению</a></li><li><a href="#настройка-голосовых-команд-и-сценариев">Настройка голосовых команд и сценариев</a></li><li><a href="#таблица-совместимости-популярных-брендов">Таблица совместимости популярных брендов</a></li><li><a href="#решение-частых-проблем-и-советы">Решение частых проблем и советы</a></li><li><a href="#faq-частые-вопросы-пользователей">FAQ: Частые вопросы пользователей</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-v-domashnikh-usloviyakh-prigotovit-sakharnuyu-pudru-bez-kofemolki.html" class="related-card">Сахарная пудра дома без кофемолки: простой рецепт и секреты</a></li><li><a href="/articles/k/ka/kak-sdelat-shablon-dlya-kruzhki-latte-v-fotoshope.html" class="related-card">Как создать шаблон для кружки латте в Photoshop: пошаговая инструкция</a></li><li><a href="/articles/t/tu/turka-iz-serebra.html" class="related-card">Турка из серебра: польза, уход и секреты идеального кофе</a></li><li><a href="/articles/k/ka/kak-narisovat-kofemolku-karandashom-poetapno.html" class="related-card">Как нарисовать кофемолку карандашом: пошаговая инструкция для новичков</a></li><li><a href="/articles/t/ti/tips-chto-eto.html" class="related-card">Типс что это: значение термина в стоматологии и косметологии</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-v-domashnikh-usloviyakh-prigotovit-sakharnuyu-pudru-bez-kofemolki.html" class="related-bottom-card"><span class="related-bottom-title">Сахарная пудра дома без кофемолки: простой рецепт и секреты</span><span class="related-bottom-desc">Как сделать сахарную пудру без кофемолки? Узнайте 3 проверенных способа: ступка, блендер и скалка. С</span></a><a href="/articles/k/ka/kak-sdelat-shablon-dlya-kruzhki-latte-v-fotoshope.html" class="related-bottom-card"><span class="related-bottom-title">Как создать шаблон для кружки латте в Photoshop: пошаговая инструкция</span><span class="related-bottom-desc">Учимся делать профессиональный макет для кружки латте в Adobe Photoshop. Инструкция по использованию</span></a><a href="/articles/t/tu/turka-iz-serebra.html" class="related-bottom-card"><span class="related-bottom-title">Турка из серебра: польза, уход и секреты идеального кофе</span><span class="related-bottom-desc">Полный гид по серебряным туркам. Как серебро влияет на вкус напитка, правила ухода, сравнение сплаво</span></a><a href="/articles/k/ka/kak-narisovat-kofemolku-karandashom-poetapno.html" class="related-bottom-card"><span class="related-bottom-title">Как нарисовать кофемолку карандашом: пошаговая инструкция для новичков</span><span class="related-bottom-desc">Узнайте, как нарисовать кофемолку карандашом поэтапно. Подробный гайд по эскизам, теням и деталям ко</span></a><a href="/articles/t/ti/tips-chto-eto.html" class="related-bottom-card"><span class="related-bottom-title">Типс что это: значение термина в стоматологии и косметологии</span><span class="related-bottom-desc">Что такое типс в стоматологии? Узнайте, зачем нужны пластиковые шаблоны для зубов, как они помогают </span></a><a href="/articles/k/ka/kak-nazvat-kofemashinu-laskovo.html" class="related-bottom-card"><span class="related-bottom-title">Как назвать кофемашину ласково: креативные идеи и традиции</span><span class="related-bottom-desc">Узнайте, как придумать ласковое имя для вашей кофемашины. Популярные варианты, традиции именования и</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

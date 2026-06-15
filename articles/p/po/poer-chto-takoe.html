@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>POE-терминал: что это, как работает и зачем нужен в кофейне — Кофини</title>
+    <meta name="description" content="Разбираем, что такое PoE в контексте кофейного оборудования. Обзор PoE-камер, контроллеров и систем управления для автоматизации кофейного бизнеса.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/p/po/poer-chto-takoe.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="POE-терминал: что это, как работает и зачем нужен в кофейне">
+    <meta property="og:description" content="Разбираем, что такое PoE в контексте кофейного оборудования. Обзор PoE-камер, контроллеров и систем управления для автоматизации кофейного бизнеса.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/aksessuary-i-instrumenty/">Аксессуары и инструменты</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">POE-терминал: что это, как работает и зачем нужен в кофейне</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>PoE-терминал и системы: что это такое и как применимо в кофейном бизнесе</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#суть-технологии-и-принцип-работы">Суть технологии и принцип работы</a></li><li><a href="#применение-в-системах-видеонаблюдения">Применение в системах видеонаблюдения</a></li><li><a href="#управление-умным-кофейным-оборудованием">Управление умным кофейным оборудованием</a></li><li><a href="#таблица-характеристик-и-совместимости">Таблица характеристик и совместимости</a></li><li><a href="#интеграция-с-системами-лояльности-и-учета">Интеграция с системами лояльности и учета</a></li><li><a href="#безопасность-и-стабилизация-питания">Безопасность и стабилизация питания</a></li><li><a href="#частые-вопросы-и-ответы">Частые вопросы и ответы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>В мире автоматизации общественного питания все чаще встречается аббревиатура <strong>PoE</strong>, которая вызывает вопросы у владельцев кофейных точек. По своей сути это технология передачи данных и электроэнергии по одному кабелю, но в контексте кофейного оборудования она имеет несколько узкоспециализированных значений, от систем видеонаблюдения до управления умными терминалами.</p>
+
+<p>Для современного кофейного бизнеса, где каждая секунда на счету, использование таких решений позволяет отказаться от лишних проводов и розеток, упрощая монтаж и обслуживание оборудования. <strong>Power over Ethernet</strong> становится стандартом де-факто для подключения периферийных устройств, которые ранее требовали сложной разводки питания.</p>
+
+<p>Понимание того, <em>что такое PoE</em>, поможет вам грамотно спланировать инфраструктуру вашей кофейни, будь то установка камер контроля качества или внедрение системы умного учета зерна. Это не просто технический термин, а инструмент оптимизации рабочих процессов.</p>
+
+<h2 id="суть-технологии-и-принцип-работы">Суть технологии и принцип работы</h2>
+<p>Технология <strong>Power over Ethernet</strong> позволяет передавать электрический ток и цифровые данные одновременно по стандартной витой паре (кабелю Ethernet). В контексте кофейного оборудования это означает, что устройство получает питание прямо от сетевого оборудования, например, от коммутатора или инжектора, без необходимости подключать блок питания в розетку 220В.</p>
+
+<p>Схема работы выглядит достаточно просто: источник питания подает напряжение по тем же проводникам, которые используются для передачи информации. Устройства, поддерживающие этот стандарт, автоматически определяют наличие питания и начинают работу. Это критически важно для <strong>IP-камер</strong> на кассе или контроллеров, управляющих системами вентиляции и кондиционирования.</p>
+
+<p>Использование <em>PoE-инжекторов</em> или коммутаторов с поддержкой этой функции позволяет размещать оборудование в труднодоступных местах, где нет розеток. Например, для установки камеры над зоной приготовления эспрессо или датчика контроля температуры в бункере для зерна не нужно тянуть отдельный силовой кабель.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Не все сетевые устройства поддерживают стандарт <strong>802.3af</strong> или <strong>802.3at</strong>. Подключение несовместимого оборудования к PoE-порту может привести к выходу устройства из строя или отсутствию питания. Всегда проверяйте спецификацию перед установкой.</p>
+</blockquote>
+
+<div class="poll-widget" id="poll-40928af0"><div class="poll-widget-question">📊 Какой тип подключения вы используете для оборудования в вашей кофейне?</div><div class="poll-widget-option" data-poll="40928af0" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Питание от розетки 220В</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="40928af0" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">PoE (через Ethernet)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="40928af0" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Беспроводное (Wi-Fi)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="40928af0" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Гибридное подключение</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="применение-в-системах-видеонаблюдения">Применение в системах видеонаблюдения</h2>
+<p>Самое массовое применение технологии <strong>PoE</strong> в кофейнях — это организация видеонаблюдения. Видеокамеры, установленные над кофемашиной, кассой и зоной выдачи, часто требуют питания, но не всегда есть возможность провести к ним проводку электричества.</p>
+
+<p>Современные <em>IP-камеры</em> с PoE позволяют вести контроль качества работы бариста и соблюдать санитарные нормы без лишних кабелей. Один кабель Cat.5e или Cat.6 обеспечивает и передачу видео потока в высоком разрешении, и питание самой камеры.</p>
+
+<p>Преимущества такого решения очевидны для владельцев бизнеса:
+<ul>
+<li>🔹 <strong>Упрощение монтажа</strong> — достаточно проложить один кабель от коммутатора до камеры.</li>
+<li>🔹 <strong>Надежность</strong> — меньше точек отказа, так как нет внешних блоков питания, которые могут перегореть.</li>
+<li>🔹 <strong>Гибкость</strong> — камеру можно легко переместить в другое место, просто перетянув сетевой кабель.</li>
+</ul>
+</p>
+
+<p>Для записи и анализа данных используются <strong>NVR (Network Video Recorders)</strong>, которые также могут работать через PoE, создавая единую экосистему безопасности. Это особенно актуально для франшиз, где требуется централизованный контроль качества.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>При выборе камер для кофейни обращайте внимание на класс защиты (IP67) и наличие ИК-подсветки, чтобы качество съемки не падало в вечернее время или в темном углу помещения.</p></div>
+
+<h2 id="управление-умным-кофейным-оборудованием">Управление умным кофейным оборудованием</h2>
+<p>Помимо камер, термин <strong>PoE</strong> может встречаться в спецификациях современных контроллеров и смарт-терминалов для кофейных машин. Некоторые промышленные модели кофемашин оснащаются сетевыми портами для интеграции в единую сеть автомата.</p>
+
+<p>В таких системах PoE используется для питания удаленных датчиков, дисплеев или модулей управления, которые находятся внутри сложного механизированного узла. Это позволяет избежать необходимости прокладывать силовые провода внутри корпуса машины, что повышает надежность и снижает риск короткого замыкания от брызг воды или кофе.</p>
+
+<p>Важно отличать <strong>сетевое управление</strong> от обычного подключения к розетке. Если производитель указывает поддержку PoE, значит, устройство может быть полностью автономным в плане электропитания при наличии сетевого кабеля. Это часто применяется в вендинговых автоматах с кофейными модулями.</p>
+
+<details class="faq-item"><summary>Что такое PoE-сплиттер?</summary><div class="faq-answer"><p>PoE-сплиттер — это устройство, которое разделяет сигнал и питание, приходящие по одному кабелю, на два отдельных разъема. Это нужно для подключения старого оборудования, которое не умеет принимать питание через сетевой порт, но нужно подключить к PoE-сети.</p></div></details>
+
+<h2 id="таблица-характеристик-и-совместимости">Таблица характеристик и совместимости</h2>
+<p>Чтобы правильно подобрать оборудование для кофейни, необходимо понимать различия между стандартами PoE. Ниже приведена таблица, которая поможет сориентироваться в технических параметрах и выбрать подходящее решение для вашей инфраструктуры.</p>
+
+<table>
+<thead>
+<tr>
+<th>Стандарт</th>
+<th>Макс. мощность (Вт)</th>
+<th>Тип кабеля</th>
+<th>Применение в кофейне</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>802.3af (PoE)</td>
+<td>до 15.4</td>
+<td>Cat.5e</td>
+<td>IP-камеры, датчики температуры</td>
+</tr>
+<tr>
+<td>802.3at (PoE+)</td>
+<td>до 30</td>
+<td>Cat.5e/Cat.6</td>
+<td>Камеры с подогревом, роутеры</td>
+</tr>
+<tr>
+<td>802.3bt (PoE++)</td>
+<td>до 60-90</td>
+<td>Cat.6a/Cat.7</td>
+<td>Умные дисплеи, мощные контроллеры</td>
+</tr>
+<tr>
+<td>Passive PoE</td>
+<td>варьируется</td>
+<td>Любой</td>
+<td>Устаревшие модели, специфическое ПО</td>
+</tr>
+</tbody>
+</table>
+
+<p>Обратите внимание, что использование <em>пассивного PoE</em> (без стандартизации напряжения) требует особой осторожности. В отличие от активного стандарта, пассивный PoE подает напряжение постоянно, что может сжечь несовместимое устройство при неправильном подключении.</p>
+
+<p>При планировании сети в кофейне всегда закладывайте запас мощности. Если вы планируете подключать множество устройств, лучше выбрать коммутатор с запасом по ваттам, чтобы избежать сбоев в работе систем безопасности или учета.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Прокладывая кабели в зоне приготовления кофе, убедитесь, что они защищены от воздействия пара и влаги. Даже при использовании PoE, контакт воды с сетевым разъемом может вызвать замыкание и выход из строя коммутатора.</p>
+</blockquote>
+
+<div class="checklist-block"><h4>☑️ Проверка готовности сети</h4><label class="check-item"><input type="checkbox"><span>Проверить наличие PoE-порта на коммутаторе</span></label><label class="check-item"><input type="checkbox"><span>Убедиться в качестве кабеля (Cat.5e или выше)</span></label><label class="check-item"><input type="checkbox"><span>Проверить совместимость напряжения</span></label><label class="check-item"><input type="checkbox"><span>Подготовить вспомогательные коннекторы</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="интеграция-с-системами-лояльности-и-учета">Интеграция с системами лояльности и учета</h2>
+<p>Современные кофейни все чаще используют <strong>смарт-терминалы</strong> со встроенной аналитикой. Некоторые из таких устройств, особенно в формате киосков самообслуживания, могут питаться через PoE, что упрощает монтаж в интерьере.</p>
+
+<p>Это позволяет устанавливать терминалы там, где нет возможности провести мощную линию электропитания, например, на узких полках или в подвесных конструкциях. <strong>Сетевое питание</strong> делает устройство более мобильным и менее зависимым от розеточных групп.</p>
+
+<p>Кроме того, передача данных через Ethernet обеспечивает более высокую стабильность связи, чем Wi-Fi, что критично для операций оплаты и синхронизации данных о продажах с облачным сервером. Это снижает риск потери транзакций при работе консоли.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Использование PoE для терминалов самообслуживания позволяет скрыть кабели в интерьере, сохраняя эстетичный вид кофейни и обеспечивая стабильную передачу финансовых данных.</p></div>
+
+<h2 id="безопасность-и-стабилизация-питания">Безопасность и стабилизация питания</h2>
+<p>Одним из главных преимуществ PoE является централизованное управление питанием. Если в кофейне происходит скачок напряжения в сети 220В, то <strong>источник питания PoE</strong> (коммутатор) может быть дополнительно защищен стабилизатором.</p>
+
+<p>Все подключенные устройства получают «чистое» и стабилизированное напряжение через коммутатор, что продлевает их срок службы. Это особенно важно для дорогостоящих IP-камер или контроллеров, работающих 24/7.</p>
+
+<p>При использовании <em>инжекторов PoE</em> важно учитывать их мощность. Если вы подключаете камеру с подогревом в зимний период, она может потреблять больше энергии, чем стандартный PoE-порт способен выдать в режиме ожидания. В таких случаях необходимо использовать порты стандарта PoE+ (802.3at).</p>
+
+<p>Также стоит отметить, что многие современные коммутаторы имеют функцию автоматического перезапуска устройств при зависании сети. Это позволяет поддерживать работу систем видеонаблюдения и учета без физического вмешательства персонала.</p>
+
+<h2 id="частые-вопросы-и-ответы">Частые вопросы и ответы</h2>
+
+<details>
+<summary>Можно ли использовать обычный роутер для PoE-питания камер?</summary>
+<p>Обычные домашние роутеры чаще всего не имеют портов с поддержкой PoE. Вам потребуется либо специальный PoE-коммутатор, подключенный к роутеру, либо PoE-инжектор, который врезается в линию между роутером и камерой.</p>
+</details>
+
+<details>
+<summary>Какой максимальный кабель можно использовать для PoE?</summary>
+<p>Стандарт ограничивает длину кабеля 100 метрами. Для кофейни этого обычно достаточно, но если оборудование находится дальше, необходимо использовать промежуточные усилители сигнала или коммутаторы.</p>
+</details>
+
+<details>
+<summary>Что будет, если подключить устройство без PoE в PoE-порт?</summary>
+<p>Современные стандарты (802.3af/at/bt) предусматривают защиту: порт сначала подает сигнал обнаружения. Если устройство не отвечает, питание не включается. Однако старые или пассивные системы могут вывести устройство из строя.</p>
+</details>
+
+<details>
+<summary>Нужен ли отдельный монтаж для PoE-систем в кофейне?</summary>
+<p>Монтаж PoE не требует отдельных силовых линий, но требует качественной прокладки сетевых кабелей и настройки коммутации. Рекомендуется привлекать специалистов по слаботочным системам для настройки VLAN и приоритетов трафика.</p>
+</details>
+
+<blockquote>
+<p>⚠️ Внимание: Перед покупкой оборудования обязательно уточните актуальные стандарты у производителя. Технологии развиваются быстро, и требования к совместимости могут измениться в ближайшем обновлении прошивки или линейки продуктов.</p>
+</blockquote></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#суть-технологии-и-принцип-работы">Суть технологии и принцип работы</a></li><li><a href="#применение-в-системах-видеонаблюдения">Применение в системах видеонаблюдения</a></li><li><a href="#управление-умным-кофейным-оборудованием">Управление умным кофейным оборудованием</a></li><li><a href="#таблица-характеристик-и-совместимости">Таблица характеристик и совместимости</a></li><li><a href="#интеграция-с-системами-лояльности-и-учета">Интеграция с системами лояльности и учета</a></li><li><a href="#безопасность-и-стабилизация-питания">Безопасность и стабилизация питания</a></li><li><a href="#частые-вопросы-и-ответы">Частые вопросы и ответы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-narisovat-rozettu-latte-art.html" class="related-card">Как нарисовать розетту латте арт: пошаговый урок для начинающих бариста</a></li><li><a href="/articles/k/ka/kak-vyglyadit-kofemolka-elektricheskaya.html" class="related-card">Как выглядит кофемолка электрическая: виды, дизайн и устройство</a></li><li><a href="/articles/k/kh/kholder-v-kofevarke-chto-eto.html" class="related-card">Холдер в кофеварке: что это, виды и как правильно использовать</a></li><li><a href="/articles/v/vo/voda-bystree-vykipaet-s-otkrytoj-kryshkoj-ili-zakrytoj.html" class="related-card">Быстрее выкипает вода с открытой или закрытой крышкой: физика процесса</a></li><li><a href="/articles/k/ka/kak-vybrat-kapuchinator-vspenivatel-moloka-dlya-kapuchino-ruchnoj.html" class="related-card">Как выбрать ручной капучинатор: виды, материалы и советы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-narisovat-rozettu-latte-art.html" class="related-bottom-card"><span class="related-bottom-title">Как нарисовать розетту латте арт: пошаговый урок для начинающих бариста</span><span class="related-bottom-desc">Узнайте, как нарисовать идеальную розетту на кофе. Пошаговая техника, ошибки новичков, выбор молока </span></a><a href="/articles/k/ka/kak-vyglyadit-kofemolka-elektricheskaya.html" class="related-bottom-card"><span class="related-bottom-title">Как выглядит кофемолка электрическая: виды, дизайн и устройство</span><span class="related-bottom-desc">Узнайте, как выглядит электрическая кофемолка изнутри и снаружи. Обзор видов ножей, жерновов, корпус</span></a><a href="/articles/k/kh/kholder-v-kofevarke-chto-eto.html" class="related-bottom-card"><span class="related-bottom-title">Холдер в кофеварке: что это, виды и как правильно использовать</span><span class="related-bottom-desc">Узнайте, что такое холдер в кофемашине, какие бывают виды корзинок и как правильно закладывать кофе </span></a><a href="/articles/v/vo/voda-bystree-vykipaet-s-otkrytoj-kryshkoj-ili-zakrytoj.html" class="related-bottom-card"><span class="related-bottom-title">Быстрее выкипает вода с открытой или закрытой крышкой: физика процесса</span><span class="related-bottom-desc">Почему закрытая крышка сохраняет тепло, а открытая ускоряет испарение? Разбор физики кипения, энерго</span></a><a href="/articles/k/ka/kak-vybrat-kapuchinator-vspenivatel-moloka-dlya-kapuchino-ruchnoj.html" class="related-bottom-card"><span class="related-bottom-title">Как выбрать ручной капучинатор: виды, материалы и советы</span><span class="related-bottom-desc">Полный гид по выбору ручного вспенивателя молока. Сравнение пружинных и электрических моделей, анали</span></a><a href="/articles/d/dl/dlya-chego-podayut-vodu-k-kofe-espresso.html" class="related-bottom-card"><span class="related-bottom-title">Зачем подают воду к эспрессо: гид по культуре кофе и гигиене рта</span><span class="related-bottom-desc">Узнайте, зачем к чашке эспрессо подают стакан воды. Разбор гигиенических причин, влияния на вкус, те</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

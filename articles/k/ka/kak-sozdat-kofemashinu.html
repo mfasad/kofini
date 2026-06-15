@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как создать кофемашину: этапы сборки, выбор узлов и настройка — Кофини</title>
+    <meta name="description" content="Полное руководство по самостоятельной сборке кофемашины. Выбор бойлера, помпы, группы и программирование прошивки. Советы экспертов.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-sozdat-kofemashinu.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как создать кофемашину: этапы сборки, выбор узлов и настройка">
+    <meta property="og:description" content="Полное руководство по самостоятельной сборке кофемашины. Выбор бойлера, помпы, группы и программирование прошивки. Советы экспертов.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/aksessuary-i-instrumenty/">Аксессуары и инструменты</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как создать кофемашину: этапы сборки, выбор узлов и настройка</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как создать кофемашину своими руками: от чертежей до первой чашки</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#проектирование-и-выбор-архитектуры">Проектирование и выбор архитектуры</a></li><li><a href="#сердце-системы-гидравлическая-часть">Сердце системы: гидравлическая часть</a></li><li><a href="#нагревательный-модуль-и-терморегуляция">Нагревательный модуль и терморегуляция</a></li><li><a href="#электроника-и-программирование-логики">Электроника и программирование логики</a></li><li><a href="#сборка-корпуса-и-финальная-сборка">Сборка корпуса и финальная сборка</a></li><li><a href="#тестирование-и-калибровка">Тестирование и калибровка</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Мечта многих энтузиастов кофе — не просто купить готовый аппарат, а собрать его самостоятельно, полностью контролируя каждый параметр будущего шедевра. Создание <strong>кофемашины</strong> своими руками — это сложный инженерный проект, требующий знаний в области термодинамики, электроники и гидравлики.</p>
+<p>В отличие от покупки серийного устройства <em>DeLonghi</em> или <em>La Marzocco</em>, кастомная сборка позволяет вам подобрать идеальное соотношение цены и качества, а также настроить <strong>температурный профиль</strong> под конкретные сорта зерен. Этот процесс превращает приготовление эспрессо из рутины в настоящее творчество.</p>
+<p>Однако стоит понимать, что вам предстоит работать с высоким давлением и температурой. Ошибки в выборе материалов или пайке могут привести к серьезным последствиям. Поэтому подходите к задаче ответственно, изучая каждый этап сборки.</p>
+
+<h2 id="проектирование-и-выбор-архитектуры">Проектирование и выбор архитектуры</h2>
+<p>Первым шагом является определение типа машины, которую вы хотите получить. Существует три основных подхода: создание <strong>флэш-бойлера</strong> (нагрев воды в потоке), использование <em>термоблока</em> или классическая схема с отдельным <strong>бойлером</strong>.</p>
+<p>Для новичков чаще всего рекомендуют начинать с <strong>электронной группы</strong>, так как она проще в настройке, чем традиционная группа <em>E61</em>. В то же время, если вы стремитесь к максимальной стабильности температуры, стоит рассмотреть проект с двойным бойлером или системой <strong>OTV</strong> (Over Tank Valve).</p>
+<p>Вам необходимо заранее решить, будете ли вы использовать готовый корпус или проектировать его с нуля из нержавеющей стали или алюминия. Корпус влияет не только на эстетику, но и на теплоизоляцию и безопасность.</p>
+<blockquote>⚠️ Внимание: Неправильно рассчитанная мощность ТЭНа для выбранного объема воды может привести к перегреву и срабатыванию аварийных термостатов, что сделает эксплуатацию невозможной.</blockquote>
+
+<h2 id="сердце-системы-гидравлическая-часть">Сердце системы: гидравлическая часть</h2>
+<p>Гидравлическая система — это "кровеносная сосуды" вашей кофемашины. Главным элементом здесь является <strong>помпа</strong>. Существует два основных типа: вибрационные (вibrating) и роторные (rotary).</p>
+<p>Вибрационные помпы, такие как <em>Ulka</em>, более компактны и дешевы, но они создают пульсацию давления, что может негативно сказаться на экстракции. Роторные помпы, например, модели <em>Rotary</em> от <strong>Procon</strong>, обеспечивают более плавный старт и стабильное давление, но они дороже и требуют подключения к водопроводу или отдельному баку с насосом.</p>
+<p>Также критически важен выбор <strong>кранов</strong> и <strong>клапанов</strong>. Стандартные вентили могут не выдерживать длительного нагрева, поэтому лучше использовать латунные фитинги с керамическим или металлическим уплотнением.</p>
+<ul>
+<li>Выберите помпу с возможностью регулировки давления (P-Valve).</li>
+<li>Установите обратный клапан для защиты помпы от обратного тока воды.</li>
+<li>Используйте термостойкие трубки из силикона или тефлона, а не дешевый пластик.</li>
+</ul>
+
+<p>Особое внимание уделите <strong>групповому узлу</strong>. Это место, где происходит контакт горячей воды и кофе. Можно купить готовую группу <em>Grind & Brew</em> или адаптировать группу от профессиональной машины, что потребует переделки креплений.</p>
+<details class="faq-item"><summary>Секреты гидравлики</summary><div class="faq-answer"><p> Почему пульсация давления убивает вкус?
+<p>При использовании вибрационной помпы давление скачет в диапазоне 8-10 бар. Это вызывает неравномерное смачивание таблетку кофе, что приводит к появлению кислых и горьких нот одновременно. Роторная помпа дает "плоскую" кривую давления, обеспечивая идеальную экстракция.</p></div></details></p>
+
+<h2 id="нагревательный-модуль-и-терморегуляция">Нагревательный модуль и терморегуляция</h2>
+<p>Стабильность температуры — залог качественного эспрессо. Самая сложная часть сборки — это управление нагревом. Простого нагрева воды до 90°C недостаточно, так как теплопотери в трубках и группе могут быть значительными.</p>
+<p>Используйте <strong>PID-контроллер</strong> для точной регулировки температуры. Этот прибор считывает показания датчика и управляет мощностью ТЭНа, поддерживая температуру с точностью до градуса. Без PID ваша машина будет перегреваться или не догревать воду.</p>
+<p>Для нагрева воды можно использовать трубчатые электронагреватели (ТЭНы) или <strong>индукционные нагреватели</strong>. ТЭНы проще в монтаже, но индукционные системы обеспечивают более быстрый отклик и точность.</p>
+<div class="checklist-block"><h4>☑️ Проверка нагревательной системы</h4><label class="check-item"><input type="checkbox"><span>Проверить сопротивление ТЭНа мультиметром</span></label><label class="check-item"><input type="checkbox"><span>Установить термостат аварийного отключения</span></label><label class="check-item"><input type="checkbox"><span>Откалибровать датчик температуры</span></label><label class="check-item"><input type="checkbox"><span>Проверить герметичность патрубков</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<p>Важно предусмотреть систему <strong>охлаждения</strong> группы, если вы планируете готовить много напитков подряд. В профессиональных машинах для этого используют проточное охлаждение, в кастомных моделях можно установить вентилятор или радиатор.</p>
+<blockquote>⚠️ Внимание: Все соединения в зоне нагрева должны быть выполнены из нержавеющей стали или латуни. Алюминиевые детали могут окислиться и стать токсичными при повторном нагреве.</blockquote>
+
+<h2 id="электроника-и-программирование-логики">Электроника и программирование логики</h2>
+<p>Мозгом вашей машины станет микроконтроллер. Популярные варианты — <em>Arduino</em>, <em>Raspberry Pi</em> или специализированные платы для кофемашин. Программное обеспечение должно управлять не только нагревом, но и насосом, и временем пролива.</p>
+<p>Вам нужно написать или адаптировать код, который будет рассчитывать время промывки, прогрева и непосредственно эспрессо. Современные прошивки позволяют создавать <strong>профили извлечения</strong>, меняя давление в процессе приготовления.</p>
+<p>Не забудьте о <strong>дисплее</strong> или интерфейсе управления. Можно использовать LCD-экраны, сенсорные панели или даже подключить управление через смартфон по Wi-Fi. Это добавит удобству и современным возможностям.</p>
+<p>При работе с электроникой соблюдайте меры предосторожности. Высокое напряжение (220В) опасно для жизни. Все провода должны быть изолированы, а корпус заземлен.</p>
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед запуском прошивки обязательно создайте резервную копию кода и протестируйте логику на симуляторе или в безопасном режиме без нагрева воды.</p></div>
+
+<p>Далее необходимо настроить <strong>датчики давления</strong>. Они должны быть подключены к микроконтроллеру и передавать данные в реальном времени. Это позволит вам видеть точное давление в группе на экране.</p>
+<blockquote>⚠️ Внимание: Электронные компоненты чувствительны к вибрациям и влаге. Уделите особое время надежной фиксации плат и использованию влагозащитных компаундов.</blockquote>
+
+<h2 id="сборка-корпуса-и-финальная-сборка">Сборка корпуса и финальная сборка</h2>
+<p>После того как все узлы готовы, наступает этап сборки корпуса. Если вы делаете его самостоятельно, используйте <strong>нержавеющую сталь</strong> или мебельный ДСП с термостойким покрытием. Корпус должен быть жестким и не иметь люфтов.</p>
+<p>Соберите машину в следующем порядке: сначала закрепите тяжелые узлы (бойлер, помпу), затем проведите трассировку трубок и проводов, и только после этого установите декоративные панели.</p>
+<p>Важно оставить доступ к техническим узлам для обслуживания. Сделайте снимную панель снизу для доступа к помпе и сверху — к бойлеру.</p>
+<ul>
+<li>Проверьте все соединения на герметичность холодной водой.</li>
+<li>Проведите тест на нагрев без воды (внимательно следите за датчиками!).</li>
+<li>Откалибруйте дозатор и жернова (если они встроены).</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Рекомендуемый материал</th>
+<th>Особенности</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Бойлер</td>
+<td>Нержавеющая сталь 304</td>
+<td>Инертен к воде, долговечен</td>
+</tr>
+<tr>
+<td>Трубки</td>
+<td>Силикон с оплеткой</td>
+<td>Термостойкость до 200°C</td>
+</tr>
+<tr>
+<td>Фитинги</td>
+<td>Латунь хромированная</td>
+<td>Выдерживают высокое давление</td>
+</tr>
+<tr>
+<td>Помпа</td>
+<td>Роторная (Procon)</td>
+<td>Тихая, стабильное давление</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>⚠️ Внимание: Характеристики комплектующих могут меняться в зависимости от партии производителя. Всегда сверяйте спецификации на сайте поставщика перед финальной сборкой.</blockquote>
+
+<h2 id="тестирование-и-калибровка">Тестирование и калибровка</h2>
+<p>Первый запуск — самый ответственный момент. Включите машину в сеть, но пока не подавайте воду. Убедитесь, что все датчики показывают корректные значения. Затем подайте воду и проверьте работу помпы.</p>
+<p>Следующий этап — проверка температуры. Налейте воду в чашку и измерьте её температуру термометром. Сравните с показаниями <strong>дисплея</strong> и при необходимости скорректируйте настройки PID.</p>
+<p>Затем приступайте к варке кофе. Начните с настройки помола и дозировки. Запомните, что даже идеально собранная машина не даст вкусный напиток без правильно подобранных зерен.</p>
+<p>В процессе тестирования будьте готовы к тому, что придется что-то подкручивать или менять. Это нормально для кастомной сборки. <strong>Терпение</strong> и <strong>аналитический подход</strong> — ваши главные инструменты.</p>
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Успешная калибровка достигается только методом проб и ошибок. Не бойтесь менять настройки PID и давления, пока не добьетесь идеального вкуса.</p></div>
+
+<p>Если вы всё сделали правильно, вы получите уникальную машину, которая будет варить кофе лучше, чем многие заводские модели. <mark>Самодельная кофемашина позволяет реализовать любой сценарий экстракции, недоступный в серийных аппаратах.</mark></p>
+
+<p>Помните, что безопасность — это приоритет. Регулярно проверяйте целостность изоляции, состояние прокладок и работу аварийных термостатов. Ваша машина должна служить вам верой и правдой долгие годы.</p>
+
+<p>В заключение, создание кофемашины своими руками — это проект, который требует времени, денег и навыков, но результат того стоит. Вы не просто получаете инструмент для приготовления кофе, вы становитесь создателем уникального устройства.</p>
+
+<details>
+<summary>Сколько времени занимает сборка кофемашины?</summary>
+<p>В среднем, сборка занимает от 2 до 4 недель при условии, что у вас уже есть необходимые инструменты и компоненты. Если вы новичок и изучаете теорию, этот срок может увеличиться до 2 месяцев.</p>
+</details>
+<details>
+<summary>Нужно ли иметь опыт работы с электрикой?</summary>
+<p>Да, базовые знания электротехники обязательны. Вам нужно уметь работать с паяльником, мультиметром и понимать принципы работы переменного тока. Ошибки могут привести к короткому замыканию или пожару.</p>
+</details>
+<details>
+<summary>Можно ли использовать запчасти от старых кофемашин?</summary>
+<p>Это отличная идея для экономии. Часто можно найти в отличном состоянии помпы, ТЭНы и группы от разбитых корпусов. Главное — проверить их на наличие трещин и коррозии.</p>
+</details>
+<details>
+<summary>Какой бюджет нужен для сборки?</summary>
+<p>Бюджет может варьироваться от 15 000 до 50 000 рублей в зависимости от выбранных компонентов. Использование дешевых китайских аналогов снижает стоимость, но повышает риск поломок. Профессиональные узлы (например, PID, роторные помпы) значительно дороже.</p>
+</details>
+<details>
+<summary>Сложно ли обслуживать самодельную машину?</summary>
+<p>Обслуживание может быть сложнее, чем у заводских моделей, так как нет готовых инструкций. Однако, так как вы сами собирали её, вы знаете, где находится каждая деталь. Главное — регулярно проводить декальцинацию и замену прокладок.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#проектирование-и-выбор-архитектуры">Проектирование и выбор архитектуры</a></li><li><a href="#сердце-системы-гидравлическая-часть">Сердце системы: гидравлическая часть</a></li><li><a href="#нагревательный-модуль-и-терморегуляция">Нагревательный модуль и терморегуляция</a></li><li><a href="#электроника-и-программирование-логики">Электроника и программирование логики</a></li><li><a href="#сборка-корпуса-и-финальная-сборка">Сборка корпуса и финальная сборка</a></li><li><a href="#тестирование-и-калибровка">Тестирование и калибровка</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/g/gd/gde-kupit-filtry-na-kofevarku.html" class="related-card">Где купить фильтры на кофеварку: лучшие места, типы и цены</a></li><li><a href="/articles/m/me/menyu-dlya-kofejni-s-malenkoj-kukhnej.html" class="related-card">Меню для кофейни с маленькой кухней: экономия места и рост прибыли</a></li><li><a href="/articles/g/ga/gadzhety-dlya-kofemanov.html" class="related-card">Топ гаджетов для кофеманов: от помола до затишки</a></li><li><a href="/articles/k/ka/kak-pravilno-vspenit-moloko-v-kofemashine.html" class="related-card">Как правильно вспенить молоко: секреты идеальной пены в кофемашине</a></li><li><a href="/articles/k/ka/kakoe-moloko-dlya-penki.html" class="related-card">Какое молоко лучше для густой пенки: подбор по жирности и белку</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/g/gd/gde-kupit-filtry-na-kofevarku.html" class="related-bottom-card"><span class="related-bottom-title">Где купить фильтры на кофеварку: лучшие места, типы и цены</span><span class="related-bottom-desc">Ищете, где купить фильтры для кофеварки? Полный гид по магазинам, онлайн-платформам и оригинальным р</span></a><a href="/articles/m/me/menyu-dlya-kofejni-s-malenkoj-kukhnej.html" class="related-bottom-card"><span class="related-bottom-title">Меню для кофейни с маленькой кухней: экономия места и рост прибыли</span><span class="related-bottom-desc">Как составить выверенное меню для кофейни с ограниченной площадью. Секреты фудкоста, выбор оборудова</span></a><a href="/articles/g/ga/gadzhety-dlya-kofemanov.html" class="related-bottom-card"><span class="related-bottom-title">Топ гаджетов для кофеманов: от помола до затишки</span><span class="related-bottom-desc">Обзор лучших девайсов для идеального кофе: весы, термометры, моилоры и умные аксессуары. Узнайте, ка</span></a><a href="/articles/k/ka/kak-pravilno-vspenit-moloko-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно вспенить молоко: секреты идеальной пены в кофемашине</span><span class="related-bottom-desc">Пошаговая инструкция по взбиванию молока: выбор температуры, угол погружения и техника для капучино </span></a><a href="/articles/k/ka/kakoe-moloko-dlya-penki.html" class="related-bottom-card"><span class="related-bottom-title">Какое молоко лучше для густой пенки: подбор по жирности и белку</span><span class="related-bottom-desc">Узнайте, какое молоко идеально подходит для создания густой пенки в кофемашине. Разбор состава, темп</span></a><a href="/articles/k/ka/kak-vyglyadit-turka.html" class="related-bottom-card"><span class="related-bottom-title">Как выглядит турка: виды, формы и материалы джезвы</span><span class="related-bottom-desc">Подробный гид по внешнему виду турки. Узнайте, как отличить джезву по форме горлышка, материалу и ди</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

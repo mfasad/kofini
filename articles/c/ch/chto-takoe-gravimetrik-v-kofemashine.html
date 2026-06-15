@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Гравиметрика в кофемашине: принцип работы и настройка — Кофини</title>
+    <meta name="description" content="Разбираем, что такое гравиметрик в кофемашине, как взвешивание кофе влияет на вкус эспрессо и как настроить точную дозировку для идеального напитка.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/c/ch/chto-takoe-gravimetrik-v-kofemashine.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Гравиметрика в кофемашине: принцип работы и настройка">
+    <meta property="og:description" content="Разбираем, что такое гравиметрик в кофемашине, как взвешивание кофе влияет на вкус эспрессо и как настроить точную дозировку для идеального напитка.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/vybor-kofemashin/">Выбор кофемашин</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Гравиметрика в кофемашине: принцип работы и настройка</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Что такое гравиметрик в кофемашине: принцип работы и настройка</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#суть-технологии-и-принцип-работы-системы">Суть технологии и принцип работы системы</a></li><li><a href="#почему-вес-важнее-объема-при-дозировке-кофе">Почему вес важнее объема при дозировке кофе</a></li><li><a href="#типы-реализации-гравиметрических-дозаторов">Типы реализации гравиметрических дозаторов</a></li><li><a href="#преимущества-использования-весовой-дозировки">Преимущества использования весовой дозировки</a></li><li><a href="#недостатки-и-ограничения-технологии">Недостатки и ограничения технологии</a></li><li><a href="#сравнение-гравиметрии-и-таймерной-дозировки">Сравнение гравиметрии и таймерной дозировки</a></li><li><a href="#процесс-настройки-и-калибровки-системы">Процесс настройки и калибровки системы</a></li><li><a href="#уход-за-гравиметрическим-блоком">Уход за гравиметрическим блоком</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Гравиметрика в кофемашине — это технология автоматического взвешивания молотого кофе непосредственно в процессе закладки в группу, которая позволяет добиться стабильной дозировки для каждой чашки. В отличие от традиционных объемных дозаторов, которые отмеряют кофе по времени выгрузки или объему камеры, гравиметрическая система опирается на физическую массу зерен, что критически важно для качества экстракции.</p>
+<p>Пользователь, выбирая аппарат с такой функцией, получает инструмент, минимизирующий влияние разной плотности и влажности кофейных зерен на итоговый вкус. Это означает, что даже если партия <em>зёрен</em> стала более пористой или плотной, машина сама скорректирует время выгрузки, чтобы выдать ровно тот вес, который задан в рецепте.</p>
+
+<h2 id="суть-технологии-и-принцип-работы-системы">Суть технологии и принцип работы системы</h2>
+<p>В основе работы гравиметрической системы лежит высокоточный датчик веса (тензодатчик), интегрированный в дозатор или непосредственно в загрузочный лоток группы. Когда <em>используется</em> режим гравиметрики, кофемолка начинает работу, и система в реальном времени отслеживает нарастание массы кофе в приемной шайбе или бункере.</p>
+<p>Как только датчик фиксирует достижение заданного пользователем значения (например, 18 грамм), система мгновенно отключает кофемолку. Это обеспечивает исключительную точность дозирования, которая практически не зависит от времени работы ножей или плотности упаковки зерен в бункере. <strong>Точность взвешивания</strong> в современных моделях может достигать долей грамма, что является стандартом для профессионального оборудования.</p>
+<p>Традиционные же системы, работающие по таймеру, выдают разный вес при изменении влажности воздуха или степени обжарки, что приводит к нестабильности вкуса. Гравиметрия устраняет эту проблему, делая процесс приготовления эспрессо предсказуемым и повторяемым.</p>
+
+<h2 id="почему-вес-важнее-объема-при-дозировке-кофе">Почему вес важнее объема при дозировке кофе</h2>
+<p>Многие владельцы кофемашин не задумываются о том, что объем одной ложки кофе может варьироваться от 6 до 10 грамм в зависимости от сорта и обжарки. Светлая обжарка плотнее и тяжелее, темная — легче и воздушнее. Если машина отмеряет кофе по объему или времени, вы рискуете получить недоэкстрагированный или переэкстрагированный напиток.</p>
+<p>Использование <strong>весового контроля</strong> позволяет бариста или домашнему пользователю устанавливать жесткий стандарт: всегда ровно 18 грамм для двойной порции. Это фундамент для построения стабильного рецепта. Даже при смене сорта <em>зерна</em> вам не нужно подбирать время помола с нуля, достаточно будет лишь подкорректировать степень помола, так как входная масса останется неизменной.</p>
+<p>Кроме того, гравиметрика помогает экономить продукт. При объемной дозировке часто происходит пересыпание, чтобы гарантировать минимальный вес, что в пересчете на месяцы приводит к потере десятков килограммов кофе. Взвешивание по факту исключает перерасход.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Гравиметрическая система требует периодической калибровки, так как со временем показания тензодатчика могут смещаться из-за вибрации или температурных расширений корпуса.</p>
+</blockquote>
+
+<div class="poll-widget" id="poll-2e4b3617"><div class="poll-widget-question">📊 Насколько важно для вас точное взвешивание кофе?</div><div class="poll-widget-option" data-poll="2e4b3617" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Критически важно, я пью только эспрессо</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="2e4b3617" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Важно, но и таймера достаточно</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="2e4b3617" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Не важно, главное чтобы было горячо</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="2e4b3617" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не знаю, что это такое</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="типы-реализации-гравиметрических-дозаторов">Типы реализации гравиметрических дозаторов</h2>
+<p>В зависимости от архитектуры кофемашины, технология может быть реализована по-разному. В профессиональных рожковых аппаратах часто используется отдельный блок дозатора с встроенными весами, куда кофе падает из бункера. В таких системах важен <strong>путь кофе</strong>: он должен падать вертикально, без застревания на стенках, чтобы вес передавался на датчик корректно.</p>
+<p>В современных автоматических и суперавтоматических кофемашинах (например, от <em>DeLonghi</em> или <em>Jura</em>) гравиметрика часто встроена непосредственно в кофемолочный блок. Это позволяет избежать потерь при пересыпании и обеспечивает более компактную конструкцию. Датчик здесь измеряет вес зерен еще до их попадания в камеру заваривания.</p>
+<p>Существуют также гибридные решения, где система сначала отмеряет объем, а затем корректирует время работы на основе предыдущего взвешивания, но это менее точно, чем прямое гравиметрическое управление. <mark>Прямое взвешивание в реальном времени является единственным способом обеспечить 100% точность дозировки для каждой чашки.</mark></p>
+<ul>
+  <li>🔹 Прямое взвешивание: датчик стоит под приемным треком, мгновенная реакция.</li>
+  <li>🔹 Косвенное взвешивание: калибровка таймера по предыдущему циклу взвешивания.</li>
+  <li>🔹 Интегрированная гравиметрия: весы встроены в сам механизм кофемолки.</li>
+</ul>
+
+<details class="faq-item"><summary>Какие бренды используют гравиметрию?</summary><div class="faq-answer"><p>Лидерами в массовом сегменте являются DeLonghi (серия PrimaDonna), Jura (серия Z и Giga), Rancilio (профессиональные модели) и некоторые топовые модели от Saeco. В бюджетном сегменте эта технология пока встречается редко из-за высокой стоимости тензодатчиков.</p></div></details>
+
+<h2 id="преимущества-использования-весовой-дозировки">Преимущества использования весовой дозировки</h2>
+<p>Главным преимуществом является стабильность вкуса. Вы можете быть уверены, что вторая чашка кофе будет идентична первой, даже если вы готовили её через час после первой. Это особенно важно для тех, кто ценит нюансы вкуса <em>спешелти</em> сортов, где каждая доля грамма влияет на раскрытие ароматических нот.</p>
+<p>Второй плюс — это удобство настройки. Вам не нужно постоянно «гонять» время помола, чтобы получить нужный объем в корзине. Вы просто задаете вес, и машина делает всё остальное. Это снижает порог входа для новичков и экономит время опытных бариста.</p>
+<p>Также гравиметрика позволяет легко работать с разными типами зерен. Если вы переходите с арабики на робусту или меняете степень обжарки, вам не нужно перекалибровывать всю машину заново, достаточно просто изменить целевой вес в меню.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка работы гравиметрики</h4><label class="check-item"><input type="checkbox"><span>Убедиться в чистоте датчиков</span></label><label class="check-item"><input type="checkbox"><span>Проверить калибровку на пустом ходу</span></label><label class="check-item"><input type="checkbox"><span>Взвесить порцию на точных весах</span></label><label class="check-item"><input type="checkbox"><span>Сравнить с показаниями на дисплее</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="недостатки-и-ограничения-технологии">Недостатки и ограничения технологии</h2>
+<p>Несмотря на очевидные плюсы, гравиметрика имеет и свои недостатки, которые стоит учитывать. Основной из них — это стоимость. Наличие прецизионных датчиков и сложной электроники значительно удорожает аппарат, делая его менее доступным для массового потребителя.</p>
+<p>Второй момент — чувствительность к внешним факторам. Если кофе сыпется слишком быстро или кучно, датчик может не успеть среагировать мгновенно, что приведет к небольшому пересыпу (обычно 0.1-0.2 грамма). Это называется инерционностью системы.</p>
+<p>Кроме того, в некоторых моделях при сильной вибрации или на неустойчивой поверхности точность может падать. Если кофемашина стоит на столе, где вы активно печете или перемещаетесь рядом, это может влиять на показания весов, хотя современные алгоритмы фильтрации шумов решают эту проблему.</p>
+
+<ul>
+  <li>⚠️ Высокая цена оборудования и сервисного обслуживания.</li>
+  <li>⚠️ Необходимость регулярной очистки датчиков от кофейной пыли.</li>
+  <li>⚠️ Ограниченная скорость работы по сравнению с таймерными дозаторами.</li>
+</ul>
+
+<h2 id="сравнение-гравиметрии-и-таймерной-дозировки">Сравнение гравиметрии и таймерной дозировки</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Гравиметрическая дозировка</th>
+      <th>Таймерная дозировка</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Точность</td>
+      <td>Высокая (±0.1 г)</td>
+      <td>Средняя (зависит от помола)</td>
+    </tr>
+    <tr>
+      <td>Стабильность при смене зерна</td>
+      <td>Абсолютная</td>
+      <td>Низкая (требует настройки)</td>
+    </tr>
+    <tr>
+      <td>Стоимость аппарата</td>
+      <td>Выше среднего</td>
+      <td>Доступная</td>
+    </tr>
+    <tr>
+      <td>Скорость цикла</td>
+      <td>Медленнее (нужно время на взвешивание)</td>
+      <td>Быстрее (моментальная отсечка)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Выбор между этими системами зависит от ваших приоритетов. Если вам нужна скорость и низкая цена, таймерная система справится с задачей, если вы готовы тратить время на подстройку под каждое новое зерно. Если же приоритет — идеальный вкус и отсутствие рутины, гравиметрика станет лучшим выбором.</p>
+<p>Следует отметить, что в профессиональных кофейнях стандартом является именно гравиметрия, так как там цена ошибки слишком высока. В домашних условиях разница может быть не так заметна, но для истинных ценителей кофе это необходимый элемент.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Для максимальной точности гравиметрической системы рекомендуется использовать зерна одной партии и не менять бленды слишком часто, так как каждая новая партия имеет свою влажность и плотность.</p></div>
+
+<blockquote>
+<p>⚠️ Внимание: Убедитесь, что поверхность, на которой стоит кофемашина, абсолютно ровная и твердая. Мягкие коврики или неровный стол могут нарушить работу чувствительных весов.</p>
+</blockquote>
+
+<h2 id="процесс-настройки-и-калибровки-системы">Процесс настройки и калибровки системы</h2>
+<p>Настройка гравиметрики обычно происходит через сервисное меню или основной интерфейс. Пользователю необходимо выбрать пункт, отвечающий за дозировку, и задать желаемый вес. Часто процесс начинается с калибровки «нуля», когда система определяет вес пустой шайбы или лотка.</p>
+<p>Для точной настройки рекомендуется использовать наружные <em>электронные весы</em>. Вы включаете дозировку в ручном режиме, ловите порцию на своих весах и сравниваете показание с тем, что показала машина. Если есть расхождение, вносите корректировку в настройках. В некоторых моделях, например <em>Saeco</em>, это делается через ввод поправок в процентах.</p>
+<p>Важно проводить эту процедуру в начале использования аппарата и периодически повторять её, особенно после чистки дозатора или длительного перерыва в работе. Это гарантирует, что ваши настройки соответствуют реальности.</p>
+<p>В современных моделях настройка упрощена до минимума: вы просто указываете вес на экране, а машина сама подстраивает время работы кофемолки под текущие условия. Это делает процесс интуитивно понятным даже для тех, кто раньше не занимался профессиональным приготовлением кофе.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Гравиметрия превращает кофемашину из простого устройства для заваривания в точный кулинарный инструмент, где результат зависит только от качества сырья, а не от случайных факторов дозировки.</p></div>
+
+<h2 id="уход-за-гравиметрическим-блоком">Уход за гравиметрическим блоком</h2>
+<p>Чтобы система работала безотказно, за ней необходим регулярный уход. Главная задача — не допускать попадания кофейной пыли и масла на датчики веса. Скопление грязи может изменить показания, сделав их неточными.</p>
+<p>Рекомендуется раз в неделю проводить чистку дозатора мягкой кистью или сжатым воздухом, чтобы избежать залипания зерен. Также важно следить за тем, чтобы в механизм не попадали посторонние предметы или крупные частицы, которые могут повредить чувствительные элементы.</p>
+<p>Если вы заметили, что машина стала выдавать разный вес при одной и той же настройке, это может быть признаком загрязнения или поломки датчика. В таком случае лучше обратиться к специалисту, так как самостоятельная разборка может привести к потере гарантии и нарушению калибровки.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Никогда не используйте агрессивные химические средства или воду для чистки блока весов. Используйте только сухие методы или специальные салфетки для электроники.</p>
+</blockquote>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+<details>
+  <summary>Что делать, если гравиметрия показывает неверный вес?</summary>
+  <p>Начните с калибровки нуля в сервисном меню. Если проблема сохраняется, проверьте, стоит ли машина на ровной поверхности. Возможно, датчик загрязнен, и потребуется чистка кистью.</p>
+</details>
+<details>
+  <summary>Можно ли отключить гравиметрию в таких аппаратах?</summary>
+  <p>В большинстве профессиональных и полупрофессиональных моделей можно переключиться в ручной режим или таймерный режим, если система весов временно неисправна или вам нужна скорость.</p>
+</details>
+<details>
+  <summary>Влияет ли влажность зерна на работу гравиметрики?</summary>
+  <p>Нет, гравиметрия измеряет массу, а не объем. Влажность влияет на плотность, но вес порции останется неизменным, что является главным преимуществом этой технологии.</p>
+</details>
+<details>
+  <summary>Нужно ли калибровать систему после каждой заправки бункера?</summary>
+  <p>Нет, достаточно сделать это один раз при настройке или после длительной паузы. Система автоматически подстраивается под текущие условия, если датчик исправен.</p>
+</details>
+<details>
+  <summary>Какая точность считается нормой?</summary>
+  <p>Для домашних и полупрофессиональных аппаратов допустимая погрешность составляет ±0.1–0.2 грамма. В профессиональных условиях стремятся к ±0.05 грамма.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#суть-технологии-и-принцип-работы-системы">Суть технологии и принцип работы системы</a></li><li><a href="#почему-вес-важнее-объема-при-дозировке-кофе">Почему вес важнее объема при дозировке кофе</a></li><li><a href="#типы-реализации-гравиметрических-дозаторов">Типы реализации гравиметрических дозаторов</a></li><li><a href="#преимущества-использования-весовой-дозировки">Преимущества использования весовой дозировки</a></li><li><a href="#недостатки-и-ограничения-технологии">Недостатки и ограничения технологии</a></li><li><a href="#сравнение-гравиметрии-и-таймерной-дозировки">Сравнение гравиметрии и таймерной дозировки</a></li><li><a href="#процесс-настройки-и-калибровки-системы">Процесс настройки и калибровки системы</a></li><li><a href="#уход-за-гравиметрическим-блоком">Уход за гравиметрическим блоком</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-vybrat-khoroshuyu-nedoroguyu-kofevarku.html" class="related-card">Как выбрать недорогую кофеварку: гид по типам и характеристикам</a></li><li><a href="/articles/k/ka/kakuyu-kofemolku-luchshe-kupit-dlya-doma-elektricheskuyu.html" class="related-card">Какую электрическую кофемолку лучше купить для дома: гид по выбору</a></li><li><a href="/articles/c/ch/chem-otlichaetsya-kofevarka-kapelnaya-ot-kapsulnoj.html" class="related-card">Капельная или капсульная кофеварка: полное сравнение и выбор</a></li><li><a href="/articles/k/ko/kofemolka-delonghi-kto-proizvoditel.html" class="related-card">Кто производитель кофемолок DeLonghi: итальянский бренд или аутсорсинг?</a></li><li><a href="/articles/k/ka/kakie-byvayut-kofemashiny-ikh-otlichiya.html" class="related-card">Виды кофемашин: гид по выбору и отличиям всех типов</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-vybrat-khoroshuyu-nedoroguyu-kofevarku.html" class="related-bottom-card"><span class="related-bottom-title">Как выбрать недорогую кофеварку: гид по типам и характеристикам</span><span class="related-bottom-desc">Полный разбор бюджетных моделей кофеварок. Сравнение капсульных, рожковых и гейзерных устройств. Сов</span></a><a href="/articles/k/ka/kakuyu-kofemolku-luchshe-kupit-dlya-doma-elektricheskuyu.html" class="related-bottom-card"><span class="related-bottom-title">Какую электрическую кофемолку лучше купить для дома: гид по выбору</span><span class="related-bottom-desc">Разбираем типы жерновов и мощность. Узнайте, какую электрическую кофемолку выбрать для эспрессо, фре</span></a><a href="/articles/c/ch/chem-otlichaetsya-kofevarka-kapelnaya-ot-kapsulnoj.html" class="related-bottom-card"><span class="related-bottom-title">Капельная или капсульная кофеварка: полное сравнение и выбор</span><span class="related-bottom-desc">Сравниваем капельные и капсульные кофеварки по скорости, вкусу, затратам и удобству. Узнайте, какой </span></a><a href="/articles/k/ko/kofemolka-delonghi-kto-proizvoditel.html" class="related-bottom-card"><span class="related-bottom-title">Кто производитель кофемолок DeLonghi: итальянский бренд или аутсорсинг?</span><span class="related-bottom-desc">Узнайте, кто на самом деле производит кофемолки DeLonghi, где находятся заводы и как отличить оригин</span></a><a href="/articles/k/ka/kakie-byvayut-kofemashiny-ikh-otlichiya.html" class="related-bottom-card"><span class="related-bottom-title">Виды кофемашин: гид по выбору и отличиям всех типов</span><span class="related-bottom-desc">Полный разбор типов кофемашин: рожковые, капсульные, зерновые и гейзерные. Сравнение преимуществ, ст</span></a><a href="/articles/k/ka/kak-vybrat-kofemashinu-2023.html" class="related-bottom-card"><span class="related-bottom-title">Как выбрать кофемашину в 2023 году: гид по типам и функциям</span><span class="related-bottom-desc">Полный разбор типов кофемашин, сравнение рожковых и автоматических моделей, советы по выбору кофемол</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

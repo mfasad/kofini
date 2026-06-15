@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Устройство капсульной кофемашины: принцип работы и внутренняя схема — Кофини</title>
+    <meta name="description" content="Подробный разбор внутреннего устройства капсульной кофемашины. Узнайте, как работают насос, пьезоэлектрический излучатель и система прокола капсул для идеального эспрессо.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/u/us/ustrojstvo-kapsulnoj-kofemashiny.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Устройство капсульной кофемашины: принцип работы и внутренняя схема">
+    <meta property="og:description" content="Подробный разбор внутреннего устройства капсульной кофемашины. Узнайте, как работают насос, пьезоэлектрический излучатель и система прокола капсул для идеального эспрессо.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/kapsulnye-sistemy/">Капсульные системы</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Устройство капсульной кофемашины: принцип работы и внутренняя схема</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Как устроена капсульная кофемашина изнутри: принцип работы и ключевые узлы</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#сердце-системы-гидравлический-контур-и-насос">Сердце системы: гидравлический контур и насос</a></li><li><a href="#механика-прокола-и-система-заваривания">Механика прокола и система заваривания</a></li><li><a href="#электронный-мозг-и-система-управления">Электронный мозг и система управления</a></li><li><a href="#проблема-накипи-и-система-очистки">Проблема накипи и система очистки</a></li><li><a href="#технические-характеристики-и-типы-систем">Технические характеристики и типы систем</a></li><li><a href="#типичные-неисправности-и-их-причины">Типичные неисправности и их причины</a></li><li><a href="#заключение-и-советы-по-эксплуатации">Заключение и советы по эксплуатации</a></li><li><a href="#часто-задаваемые-вопросы">Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Капсульные кофемашины стали настоящим феноменом в мире домашней кофеварки, обеспечивая стабильное качество напитка при минимальных усилиях пользователя. В основе их популярности лежит не только удобство использования, но и инженерная гениальность внутренней конструкции, которая скрывается за лаконичным пластиковым корпусом. Понимание того, как именно функционирует этот механизм, помогает владельцам дольше поддерживать аппарат в рабочем состоянии и избегать распространенных поломок.</p>
+<p>В отличие от традиционных рожковых или зерновых автоматов, здесь процесс экстракции максимально автоматизирован и управляется микропроцессором. Вам не нужно рассчитывать дозировку или темперовать кофе; вместо этого система создает идеальные условия для заваривания внутри герметичной капсулы. Однако за этой простотой скрывается сложная цепочка взаимодействий между механическими и электронными компонентами.</p>
+
+<h2 id="сердце-системы-гидравлический-контур-и-насос">Сердце системы: гидравлический контур и насос</h2>
+<p>Главным элементом, обеспечивающим процесс приготовления, является <strong>насос</strong>. Именно он создает давление, необходимое для быстрого прохода воды через спрессованный кофе. В большинстве современных устройств, таких как <em>Nespresso Original</em> или <em>De'Longhi</em>, используются вибрационные насосы, которые генерируют давление до 19 бар. Это значение позволяет воде мгновенно насыщаться ароматическими маслами, создавая плотную пенку — крему.</p>
+<p>Вода подается из резервуара через систему трубчатых магистралей, которые часто выполнены из специального термостойкого пластика или силикона. Если насос работает с перебоями, это сразу сказывается на качестве напитка, делая его водянистым или слишком горьким.</p>
+<p>Следующим критическим узлом является <strong>термоблок</strong>. Это компактное нагревательное устройство, которое способно за секунды довести воду до точной температуры, обычно составляющей 90-93 градуса Цельсия. Термоблок работает по принципу мгновенного нагрева проточной жидкости, что исключает необходимость долгого ожидания, как в случае с бойлерами. Он оснащен датчиками температуры, которые передают данные на управляющую плату для поддержания стабильного режима.</p>
+<p>В некоторых моделях, особенно премиум-класса, может встречаться бойлерная система, но она занимает больше места и требует больше времени на прогрев. <strong>Гидравлический контур</strong> включает в себя также клапаны и обратные заслонки, которые предотвращают обратный ток воды и сброс избыточного давления. Нарушение герметичности в этом контуре часто приводит к протечкам, видимым снаружи корпуса.</p>
+
+<h2 id="механика-прокола-и-система-заваривания">Механика прокола и система заваривания</h2>
+<p>Уникальность капсульных систем заключается в способе взаимодействия с капсулой. Перед приготовлением аппарат должен герметично зафиксировать капсулу и пробить её с обеих сторон. Для этого используется механизм <strong>закрывающей системы</strong>, который может быть рычажным или автоматическим. При закрытии крышки капсула зажимается между двумя наборами игл или острых ножей.</p>
+<p>Верхние иглы прокалывают дно капсулы для подачи горячей воды, а нижние — основание для выхода готового напитка. Конструкция игл рассчитана так, чтобы минимизировать усилия при входе, но при этом обеспечить надежное уплотнение. Если <strong>заварочный блок</strong> засорится кофейной пылью или остатками капсулы, давление в камере может упасть, что приведет к неполному извлечению кофе.</p>
+<p>Существует два основных типа систем заваривания: игловая и ножевая. В игловых системах, таких как у <em>Nespresso</em>, используются тонкие трубки, через которые проходит вода. В ножевых системах, например, у <em>Keurig</em> (для своих капсул), используются острые лезвия, разрезающие капсулу. Каждый тип имеет свои преимущества и недостатки, влияющие на характеристики напитка.</p>
+
+<div class="poll-widget" id="poll-3102ef83"><div class="poll-widget-question">📊 Какой тип капсульной системы вы предпочитаете?</div><div class="poll-widget-option" data-poll="3102ef83" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Игловая (Nespresso)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="3102ef83" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Ножевая (Keurig)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="3102ef83" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Универсальная (Dolce Gusto)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="3102ef83" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Другой</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<p>Особое внимание следует уделить системе сброса капсулы. После завершения цикла заваривания механизм открывает крышку, и капсула подается в специальный контейнер для отходов. Этот процесс должен быть плавным и бесшумным. Засорение контейнера или поломка рычага выброса — одна из самых частых механических проблем, с которой сталкиваются пользователи.</p>
+
+<h2 id="электронный-мозг-и-система-управления">Электронный мозг и система управления</h2>
+<p>Не менее важна роль электроники, которая управляет всеми процессами. <strong>Платформа управления</strong> считывает данные с датчиков давления, температуры и положения кнопок, запуская алгоритмы заваривания. Микроконтроллер отвечает за тайминг подачи воды, что критично для получения напитка нужного объема и крепости. Плата также контролирует работу насоса, включая и выключая его в нужные моменты.</p>
+<p>В современных моделях, таких как <em>Philips Series 3000</em> или <em>Bosch Tassimo</em>, электроника умеет распознавать тип капсулы по штрих-коду на её крышке. Датчик считывает код, и машина автоматически подстраивает объем воды, температуру и давление под конкретный сорт кофе. Это позволяет получить идеально сбалансированный вкус без участия человека.</p>
+<p>Электронный блок также отвечает за функцию автоотключения для экономии энергии. Если кофемашина простаивает определенное время, она переходит в режим ожидания или полностью выключается. Это важная функция безопасности и энергосбережения, которая реализована программно. Сбои в работе контроллера могут привести к тому, что аппарат перестанет реагировать на нажатия или будет выдавать ложные ошибки.</p>
+<p>Датчики уровня воды в резервуаре обычно работают на индукционной основе или используют поплавковый механизм. Они сигнализируют системе о необходимости пополнения запаса. Если датчик загрязнен накипью, он может ошибочно сообщать о пустом баке, даже когда он наполнен водой.</p>
+
+
+
+<h2 id="проблема-накипи-и-система-очистки">Проблема накипи и система очистки</h2>
+<p>Накипь — главный враг любой кофемашины, и капсульные системы здесь не исключение. Из-за высокой температуры и постоянного контакта с водой минеральные соли откладываются на стенках термоблока и насоса. Это приводит к снижению теплопередачи и нарушению гидравлического давления. Для борьбы с этим производители внедряют сложные системы <strong>декальцинации</strong>.</p>
+<p>Процесс очистки запускается автоматически по истечении определенного количества приготовленных напитков. Машина выдает сигнал на дисплее или миганием индикатора. Пользователю необходимо добавить специальный раствор в резервуар и запустить режим очистки через меню. Раствор циркулирует по всем трубкам, растворяя отложения кальция и магния.</p>
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: Использование некачественных или неподходящих средств для декальцинации может привести к разрушению уплотнительных резинок и коррозии металлических деталей внутри термоблока. Всегда используйте растворы, рекомендованные производителем именно для вашей модели.</p>
+</blockquote>
+<p>Система очистки также включает промывку кофейного канала после каждого приготовления. Это предотвращает смешивание вкусов разных сортов и образование плесени. Однако, если фильтр для воды в резервуаре не заменен вовремя, эффективность промывки снижается, и накипь образуется быстрее. <strong>Фильтры</strong> задерживают часть солей жесткости, продлевая срок службы устройства.</p>
+<p>Важно отметить, что в некоторых моделях, например, в серии <em>Nespresso Vertuo</em>, используется центробежная сила для смешивания кофе и воды, что требует особого подхода к очистке вращающихся частей. Засорение этих элементов может привести к дисбалансу и шумной работе аппарата.</p>
+
+<div class="checklist-block"><h4>☑️ Подготовка к процедуре декальцинации</h4><label class="check-item"><input type="checkbox"><span>Купить оригинальный раствор</span></label><label class="check-item"><input type="checkbox"><span>Очистить резервуар от накипи</span></label><label class="check-item"><input type="checkbox"><span>Вставить пустой поддон для капель</span></label><label class="check-item"><input type="checkbox"><span>Запустить режим очистки в меню</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="технические-характеристики-и-типы-систем">Технические характеристики и типы систем</h2>
+<p>Для наглядности сравним основные параметры различных типов капсульных кофемашин. Каждая система имеет свои особенности конструкции, влияющие на вкус напитка и удобство использования. Ниже приведена таблица, демонстрирующая ключевые различия.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип системы</th>
+<th>Давление насоса</th>
+<th>Метод экстракции</th>
+<th>Совместимость капсул</th>
+<th>Особенность конструкции</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Неспрессо Оригинал</td>
+<td>19 бар</td>
+<td>Высокое давление</td>
+<td>Оригинальные и совместимые</td>
+<td>Игловая система прокола</td>
+</tr>
+<tr>
+<td>Неспрессо Вертуо</td>
+<td>до 7 бар (центробежная)</td>
+<td>Центробежная сила</td>
+<td>Только оригинальные</td>
+<td>Чтение штрих-кода крышки</td>
+</tr>
+<tr>
+<td>Дольче Густо</td>
+<td>15 бар</td>
+<td>Двойная экстракция</td>
+<td>Смешивание молока и кофе</td>
+<td>Одна капсула для всего напитка</td>
+</tr>
+<tr>
+<td>Кеуриг</td>
+<td>10-12 бар</td>
+<td>Низкое давление</td>
+<td>Подобные K-Cup</td>
+<td>Ножевая система прокола</td>
+</tr>
+</tbody>
+</table>
+
+<p>Различия в давлении и методе экстракции напрямую влияют на текстуру напитка. Высокое давление, как в классических <em>Nespresso</em>, создает плотную крему, характерную для эспрессо. Центробежная система <em>Vertuo</em> создает пенку за счет смешивания жидкости с воздухом, что дает более воздушную текстуру. Выбор системы зависит от ваших предпочтений по вкусу и бюджету на покупку капсул.</p>
+<p>Также стоит учитывать размеры и вес устройства. Компактные модели, такие как <em>Essenza Mini</em>, занимают минимум места, но могут иметь меньший резервуар для воды. Более крупные аппараты часто оснащены встроенными системами подогрева чашек или дополнительными функциями программирования. Понимание этих нюансов поможет вам выбрать модель, которая идеально впишется в вашу кухню.</p>
+
+
+
+<h2 id="типичные-неисправности-и-их-причины">Типичные неисправности и их причины</h2>
+<p>Даже самый надежный механизм может выйти из строя. Чаще всего проблемы связаны с засорением, износом насоса или неисправностью электроники. Если кофемашина перестала готовить, первым делом проверьте наличие воды и правильность установки капсулы. Ошибки часто указывают на то, что машина не может прокачать воду через систему.</p>
+<p>Шумная работа насоса может свидетельствовать о попадании воздуха в гидравлический контур или о начале его износа. В таких случаях рекомендуется провести процедуру прокачки, удалив воздух из системы. Если насос гудит, но вода не идет, возможно, забит фильтр или возникла проблема с термоблоком. Иногда помогает простая очистка игл прокола от остатков кофе.</p>
+<p>Утечка воды под корпусом часто вызвана повреждением уплотнительных колец или трещиной в трубке. В таких ситуациях требуется разборка аппарата и замена поврежденных деталей. Если вы не обладаете навыками ремонта, лучше обратиться в сервисный центр. Неправильная сборка после ремонта может привести к новым протечкам или короткому замыканию.</p>
+<p>Важно знать, что некоторые модели имеют встроенную защиту от перегрева. Если термостат сработал, машина может временно отключиться. Дайте ей остыть и попробуйте снова. Если ошибка повторяется, возможно, проблема в самом термисторе или плате управления. <strong>Диагностика</strong> таких неисправностей требует специального оборудования.</p>
+
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: Не пытайтесь самостоятельно разобрать корпус, если устройство находится на гарантии. Это приведет к потере права на бесплатное обслуживание. Вскрытие корпуса нарушает пломбы, которые легко заметить специалистам сервисного центра.</p>
+</blockquote>
+
+<p>Иногда проблема кроется в несовместимости капсул. Дешевые копии могут иметь неправильный размер или плотность, что приводит к застреванию в механизме прокола. Это вызывает нагрузку на мотор и может сломать рычаг закрывания. Всегда используйте капсулы, рекомендованные производителем, чтобы избежать механических повреждений.</p>
+
+
+
+<h2 id="заключение-и-советы-по-эксплуатации">Заключение и советы по эксплуатации</h2>
+<p>Понимание устройства капсульной кофемашины позволяет вам не только наслаждаться вкусным кофе, но и грамотно ухаживать за техникой. Знание того, как работают насос, термоблок и система прокола, помогает быстро выявлять причины неполадок и предотвращать их. Правильное использование и своевременная чистка значительно продлевают срок службы аппарата.</p>
+<p>Не забывайте регулярно проводить процедуру декальцинации, даже если машина работает исправно. Профилактика всегда дешевле, чем ремонт. Также уделяйте внимание качеству воды: использование фильтрованной воды снижает образование накипи и улучшает вкус кофе. Это простой шаг, который имеет огромное значение для долговечности устройства.</p>
+<p>Если вы планируете купить новую кофемашину, обратите внимание на типы капсул, доступные в вашем регионе, и стоимость их эксплуатации. Некоторые системы предлагают более широкий выбор вкусов, другие — более низкую цену за чашку. Выбор зависит от ваших личных предпочтений и образа жизни.</p>
+
+<blockquote>
+<p>⚠️ <strong>Внимание</strong>: При покупке совместимых капсул обращайте внимание на отзывы о качестве прокола. Дешевые капсулы с неправильным расположением отверстий могут застревать в механизме, вызывая поломку игл или рычага закрывания.</p>
+</blockquote>
+
+<h2 id="часто-задаваемые-вопросы">Часто задаваемые вопросы</h2>
+<details>
+<summary>Можно ли использовать капсулы разных брендов в одной машине?</summary>
+<p>Да, во многих моделях (например, Nespresso Original) можно использовать капсулы сторонних производителей. Однако качество напитка может отличаться, а риск застревания капсулы возрастает, если они не соответствуют точным размерам.</p>
+</details>
+<details>
+<summary>Как часто нужно чистить кофемашину от накипи?</summary>
+<p>Частота зависит от жесткости вашей воды. Обычно производители рекомендуют проводить процедуру декальцинации после приготовления 300-600 чашек или при появлении соответствующего индикатора на панели управления.</p>
+</details>
+<details>
+<summary>Почему машина издает странные звуки при работе?</summary>
+<p>Странные звуки могут быть вызваны попаданием воздуха в систему, засорением игл прокола или износом насоса. Попробуйте провести прокачку или очистку. Если звук не исчезает, обратитесь в сервис.</p>
+</details>
+<details>
+<summary>Можно ли хранить капсулы в холодильнике?</summary>
+<p>Нет, хранение в холодильнике не рекомендуется, так как конденсат может повредить герметичность капсулы и вкус кофе. Лучше хранить их в сухом месте при комнатной температуре.</p>
+</details>
+<details>
+<summary>Что делать, если машина не подает воду в капсулу?</summary>
+<p>Проверьте, не забились ли иглы прокола. Иногда достаточно протереть их влажной тканью. Также убедитесь, что насос исправен и в резервуаре есть вода. Если проблема сохраняется, возможно, требуется замена насоса.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#сердце-системы-гидравлический-контур-и-насос">Сердце системы: гидравлический контур и насос</a></li><li><a href="#механика-прокола-и-система-заваривания">Механика прокола и система заваривания</a></li><li><a href="#электронный-мозг-и-система-управления">Электронный мозг и система управления</a></li><li><a href="#проблема-накипи-и-система-очистки">Проблема накипи и система очистки</a></li><li><a href="#технические-характеристики-и-типы-систем">Технические характеристики и типы систем</a></li><li><a href="#типичные-неисправности-и-их-причины">Типичные неисправности и их причины</a></li><li><a href="#заключение-и-советы-по-эксплуатации">Заключение и советы по эксплуатации</a></li><li><a href="#часто-задаваемые-вопросы">Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kakie-kapsuly-podkhodyat-dlya-kofevarki-bosh-tassimo.html" class="related-card">Капсулы для Bosch Tassimo: полный гид по совместимости и выбору</a></li><li><a href="/articles/k/ka/kapsulnaya-kofemashina-kakie-kapsuly-podkhodyat-dlya-kofemashiny.html" class="related-card">Какие капсулы подходят: совместимость, Nespresso и Dolce Gusto</a></li><li><a href="/articles/d/do/dolce-gusto-kofemashina-kakaya-luchshe.html" class="related-card">Какая кофемашина Dolce Gusto лучше: рейтинг моделей и советы</a></li><li><a href="/articles/k/ka/kapsulnaya-kofemashina-krups-infinissima-kp173b-cosmic-grey-kakie-kapsuly-podkhodyat.html" class="related-card">Капсулы для Krups Infinissima KP173B: полный список совместимых типов</a></li><li><a href="/articles/k/ka/kak-polzovatsya-kofemashinoj-dolche-gusto-instruktsiya.html" class="related-card">Как пользоваться кофемашиной Dolce Gusto: полная инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kakie-kapsuly-podkhodyat-dlya-kofevarki-bosh-tassimo.html" class="related-bottom-card"><span class="related-bottom-title">Капсулы для Bosch Tassimo: полный гид по совместимости и выбору</span><span class="related-bottom-desc">Узнайте, какие капсулы подходят для кофеварки Bosch Tassimo. Обзор всех брендов, разбор штрих-кодов </span></a><a href="/articles/k/ka/kapsulnaya-kofemashina-kakie-kapsuly-podkhodyat-dlya-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Какие капсулы подходят: совместимость, Nespresso и Dolce Gusto</span><span class="related-bottom-desc">Узнайте, какие капсулы подходят для вашей кофемашины. Полный гид по системам Nespresso, Dolce Gusto </span></a><a href="/articles/d/do/dolce-gusto-kofemashina-kakaya-luchshe.html" class="related-bottom-card"><span class="related-bottom-title">Какая кофемашина Dolce Gusto лучше: рейтинг моделей и советы</span><span class="related-bottom-desc">Полный разбор линейки Dolce Gusto. Узнайте, какая модель лучше для дома, сравните функции, мощность </span></a><a href="/articles/k/ka/kapsulnaya-kofemashina-krups-infinissima-kp173b-cosmic-grey-kakie-kapsuly-podkhodyat.html" class="related-bottom-card"><span class="related-bottom-title">Капсулы для Krups Infinissima KP173B: полный список совместимых типов</span><span class="related-bottom-desc">Какие капсулы подходят для кофемашины Krups Infinissima KP173B Cosmic Grey? Разбор совместимости с N</span></a><a href="/articles/k/ka/kak-polzovatsya-kofemashinoj-dolche-gusto-instruktsiya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Dolce Gusto: полная инструкция</span><span class="related-bottom-desc">Пошаговое руководство по эксплуатации капсульной кофемашины Dolce Gusto. Настройка давления, заварив</span></a><a href="/articles/v/vs/vse-li-kapsuly-dlya-kofemashiny-odinakovye.html" class="related-bottom-card"><span class="related-bottom-title">Все ли капсулы для кофемашины одинаковые? Совместимость и типы</span><span class="related-bottom-desc">Полный разбор совместимости капсул: Nespresso, Dolce Gusto, Tassimo и другие. Узнайте, как выбрать п</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

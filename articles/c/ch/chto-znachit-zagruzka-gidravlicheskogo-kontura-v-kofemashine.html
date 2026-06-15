@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Загрузка гидравлического контура: что это и зачем нужно — Кофини</title>
+    <meta name="description" content="Разбираем, что значит загрузка гидравлического контура в кофемашине. Как работает система, когда требуется прокачка и как избежать воздушных пробок.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/c/ch/chto-znachit-zagruzka-gidravlicheskogo-kontura-v-kofemashine.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Загрузка гидравлического контура: что это и зачем нужно">
+    <meta property="og:description" content="Разбираем, что значит загрузка гидравлического контура в кофемашине. Как работает система, когда требуется прокачка и как избежать воздушных пробок.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Загрузка гидравлического контура: что это и зачем нужно</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Загрузка гидравлического контура в кофемашине: полные инструкции</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#физика-процесса-и-роль-воздуха-в-системе">Физика процесса и роль воздуха в системе</a></li><li><a href="#когда-требуется-принудительная-загрузка-контура">Когда требуется принудительная загрузка контура</a></li><li><a href="#пошаговая-процедура-ручного-запуска">Пошаговая процедура ручного запуска</a></li><li><a href="#особенности-для-разных-типов-насосов">Особенности для разных типов насосов</a></li><li><a href="#автоматизация-процесса-и-сервисные-режимы">Автоматизация процесса и сервисные режимы</a></li><li><a href="#последствия-игнорирования-процедуры">Последствия игнорирования процедуры</a></li><li><a href="#частые-ошибки-при-самостоятельной-прокачке">Частые ошибки при самостоятельной прокачке</a></li><li><a href="#faq-ответы-на-частые-вопросы">FAQ: Ответы на частые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Вы когда-нибудь замечали, что после длительного простоя или замены фильтра кофемашина начинает издавать странные звуки, а эспрессо получается жидким и без пенки? В 90% случаев проблема кроется в отсутствии воды в ключевых узлах системы. Именно в этот момент специалисту или владельцу устройства приходится инициировать процедуру, известную как загрузка гидравлического контура.</p>
+
+<p>Этот процесс не является простым наполнением бака водой. Это сложная инженерная операция, направленная на полное удаление воздуха из замкнутой системы труб, помпы и бойлера. Без качественной загрузки гидравлического контура даже самая дорогая автоматическая машина <em>DeLonghi Magnifica</em> или <em>Jura Z10</em> не сможет поддерживать стабильное давление, необходимое для экстракции кофе.</p>
+
+<p>Почему воздух так опасен для кофемашин? Он действует как губка, сжимаясь под давлением вместо того, чтобы передавать усилие для прокачки воды. В результате <strong>роторная помпа</strong> начинает работать всухую, что приводит к её перегреву и быстрому выходу из строя. Понимание сути процесса позволяет избежать дорогостоящего ремонта и наслаждаться качественным напитком каждый день.</p>
+
+<h2 id="физика-процесса-и-роль-воздуха-в-системе">Физика процесса и роль воздуха в системе</h2>
+
+<p>Чтобы понять, зачем нужна загрузка контура, необходимо рассмотреть принцип работы гидравлики кофемашин. Вода — это несжимаемая жидкость, которая идеально передает давление от насоса к варочному блоку. Воздух же сжимаем в сотни раз. Когда в системе присутствует воздушная пробка, насос создает вакуум, пытаясь протолкнуть сжимаемый газ, вместо того чтобы толкать воду.</p>
+
+<p>В результате этого дисбаланса давление в <strong>гидроцилиндре</strong> не достигает требуемых 9 бар, необходимых для эспрессо. Кофе течет медленно, цвет напитка становится бледным, а crema (кофейная пенка) быстро оседает. В худшем случае насос, не встречая сопротивления воды, начинает вибрировать и перегреваться, что может привести к разрыву прокладок или поломке механизма.</p>
+
+<p>Загрузка гидравлического контура — это процесс принудительной прокачки, когда вода под давлением вытесняет весь воздух из трубок, теплообменника и варочной группы. Это критически важно после любых манипуляций с системой: замены фильтров, размораживания, ремонта или длительного хранения без воды.</p>
+
+<h2 id="когда-требуется-принудительная-загрузка-контура">Когда требуется принудительная загрузка контура</h2>
+
+<p>Обычно современные кофемашины имеют функцию автоматической прокачки при первом включении. Однако бывают ситуации, когда автоматика не справляется, и требуется ручная или сервисная загрузка. Это происходит, если вы полностью опорожнили бак для воды, оставив систему "сухой" более чем на 24 часа.</p>
+
+<p>Также процедура необходима после проведения профилактических работ, таких как замена <strong>фильтра для воды</strong> или прочистка системы от накипи. В этот момент в трубы попадает большое количество воздуха. Не менее частый случай — ремонт гидравлической системы, когда мастер демонтировал трубы и снова их подключил.</p>
+
+<ul>
+  <li>🚨 После полной замены водяного фильтра в системе</li>
+  <li>🚨 После размораживания машины в зимний период</li>
+  <li>🚨 При замене помпы или термоблока в сервисном центре</li>
+  <li>🚨 Если машина долго стояла без воды (более 2 недель)</li>
+</ul>
+
+<p>В некоторых моделях <em>Philips Serie 2200</em> или <em>Saeco PicoBaristo</em> после замены фильтра вы увидите на дисплее сообщение о необходимости прокачки. Игнорировать этот сигнал нельзя, так как машина может заблокировать заваривание до тех пор, пока давление не стабилизируется.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если вы видите ошибку "Pressure Fault" или "Pump Error" сразу после замены фильтров, это верный признак того, что загрузка гидравлического контура прошла некорректно или не была выполнена вовсе.</p>
+</blockquote>
+
+<div class="poll-widget" id="poll-329cb02f"><div class="poll-widget-question">📊 Ваша кофемашина умеет прокачивать систему автоматически?</div><div class="poll-widget-option" data-poll="329cb02f" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Да, я просто нажимаю кнопку</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="329cb02f" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Нет, я делаю это вручную</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="329cb02f" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Не знаю, как проверить</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="329cb02f" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">У меня старая модель без дисплея</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="пошаговая-процедура-ручного-запуска">Пошаговая процедура ручного запуска</h2>
+
+<p>Если автоматическая система не сработала, вам придется выполнить загрузку гидравлического контура вручную. Процесс может немного отличаться в зависимости от производителя, но общая логика остается неизменной. Главное правило: никогда не пытайтесь включить режим заваривания, не убедившись, что в трубах есть вода.</p>
+
+<p>Первым делом убедитесь, что бак с водой заполнен до максимума и фильтр установлен правильно. Откройте кран подачи горячей воды или парового вентиль. Это создаст максимально возможное сечение для выхода воздуха. Включите машину и дождитесь окончания цикла прогрева.</p>
+
+<p>Активируйте подачу пара или горячей воды. Вы услышите характерный звук "кашлящей" помпы — это воздух выходит из системы. Держите кран открытым, пока из него не потечет ровная струя воды без пузырьков. Только после этого можно закрывать вентиль. Это и есть завершение загрузки гидравлического контура.</p>
+
+<p>Важно следить за звуком работы насоса. Если он начинает жужжать слишком громко и бесперебойно, но воды нет — немедленно прекратите процедуру. Это признак работы всухую. В таких случаях лучше обратиться к инструкции для вашей модели <em>Bezzera</em> или <em>Rancilio</em>, где описаны специфические настройки.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка перед запуском прокачки</h4><label class="check-item"><input type="checkbox"><span>Бак с водой полный</span></label><label class="check-item"><input type="checkbox"><span>Фильтр установлен</span></label><label class="check-item"><input type="checkbox"><span>Кран пара открыт</span></label><label class="check-item"><input type="checkbox"><span>Парогенератор прогрет</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="особенности-для-разных-типов-насосов">Особенности для разных типов насосов</h2>
+
+<p>Технология загрузки контура существенно зависит от типа установленного насоса. В бытовых машинах чаще всего встречаются вибрационные (вибрационные) и ротационные насосы. Они по-разному реагируют на наличие воздуха в системе и требуют разных подходов к прокачке.</p>
+
+<p>Вибрационные насосы, используемые в большинстве домашних машин, имеют встроенный обратный клапан. Они могут создавать достаточное давление для вытеснения воздуха, но при этом сильно шумят. Если они долго работают всухую, ресурс их мембраны сокращается в разы. Поэтому для вибрационных помп критически важно не держать их включенными более 30-40 секунд без проточной воды.</p>
+
+<p>Ротационные насосы, характерные для полупрофессиональных и профессиональных моделей, более устойчивы к воздушным пробкам. Они способны создавать давление за счет вращения винтов, но запускать их без предварительной заправки водой строго запрещено. В таких машинах процедура загрузки часто включает в себя использование специального клапана заправки.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Тип насоса</th>
+      <th>Срок службы при сухой работе</th>
+      <th>Сложность загрузки</th>
+      <th>Типичное применение</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Вибрационный (Vibrato)</td>
+      <td>Минуты</td>
+      <td>Низкая</td>
+      <td>Домашние кофемашины</td>
+    </tr>
+    <tr>
+      <td>Ротационный (Rotary)</td>
+      <td>Часы</td>
+      <td>Высокая</td>
+      <td>Офисные и профессиональные</td>
+    </tr>
+    <tr>
+      <td>Термоблок (без насоса)</td>
+      <td>Не применимо</td>
+      <td>Средняя</td>
+      <td>Капсульные системы</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="автоматизация-процесса-и-сервисные-режимы">Автоматизация процесса и сервисные режимы</h2>
+
+<p>Современные кофемашины оснащены сложными электронными контроллерами, которые пытаются автоматизировать загрузку гидравлического контура. При первом включении или после сброса настроек машина сама пытается прокачать систему, подавая воду порциями с паузами.</p>
+
+<p>В сервисном меню многих моделей (например, <em>Saeco</em> или <em>Jura</em>) существует специальная функция "Priming" или "System Flush". Она позволяет инженеру или опытному пользователю принудительно запустить насос на определенное время, контролируя процесс вывода воздуха. Это более безопасный метод, чем ручное открытие крана пара.</p>
+
+<p>Если автоматическая прокачка не помогает, возможно, проблема глубже. В таких случаях требуется проверка датчиков давления и уровня воды. Иногда воздух попадает в систему через микротрещины в шлангах или негерметичные соединения. Это уже задача для профессионального ремонта.</p>
+
+<details class="faq-item"><summary>Скрытая проблема с датчиками давления</summary><div class="faq-answer"><p>Если датчик давления загрязнен или смещен, он может показывать ложное отсутствие давления даже при наличии воды в системе. Это приведет к бесконечной попытке прокачки и перегреву насоса.</p></div></details>
+
+<p>Важно понимать разницу между "прокачкой" и "загрузкой". Прокачка — это удаление воздуха из варочного блока, а загрузка контура — это наполнение всей системы от бака до бойлера. Последняя процедура более сложная и требует больше времени.</p>
+
+<blockquote>
+<p>⚠️ Внимание: В профессиональных машинах с бойлерами под давлением (например, La Marzocco) процедура загрузки контура всегда должна выполняться через специальный клапан сброса давления. Попытка запустить насос с закрытыми клапанами может привести к разрыву шлангов.</p>
+</blockquote>
+
+<h2 id="последствия-игнорирования-процедуры">Последствия игнорирования процедуры</h2>
+
+<p>Что будет, если вы проигнорируете необходимость загрузки гидравлического контура? Самое безобидное — это получение невкусного кофе с бедной пенкой. Вода будет проскакивать через кофейную таблетку слишком быстро, не экстрагируя ароматические масла.</p>
+
+<p>Более серьезная проблема — повреждение <strong>насоса</strong>. Роторные и вибрационные насосы не предназначены для работы с воздухом. Отсутствие гидравлического смазывания приводит к быстрому износу подшипников, клапанов и мембран. Замена насоса часто стоит треть от стоимости новой кофемашины.</p>
+
+<p>Также страдает термоблок или бойлер. Если насос качает воздух, вода не циркулирует в нагревательном элементе. Это может привести к локальному перегреву и "выгоранию" ТЭНа. В профессиональных аппаратах это может вызвать деформацию металлических элементов и потерю герметичности.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед запуском цикла прокачки всегда проверяйте, что сливной поддон установлен правильно. Вода, выходящая из системы вместе с воздухом, может залить электронику, если поддон переполнен или отсутствует.</p></div>
+
+<h2 id="частые-ошибки-при-самостоятельной-прокачке">Частые ошибки при самостоятельной прокачке</h2>
+
+<p>Многие владельцы кофемашин совершают одну и ту же ошибку: открывают кран пара и оставляют его открытым на несколько минут, надеясь, что воздух выйдет сам. Это неэффективно и опасно. Воздух может застрять в "мертвых зонах" системы, если поток воды слишком слабый.</p>
+
+<p>Другая ошибка — попытка запустить заваривание кофе сразу после появления первой капли воды. Этого недостаточно. Вода должна течь ровной струей без пузырьков минимум 30-40 секунд. Только тогда можно считать, что загрузка гидравлического контура прошла успешно.</p>
+
+<p>Никогда не используйте для прокачки системы горячую воду из-под крана, если это не предусмотрено инструкцией. Это может нарушить работу сенсоров температуры и повредить пластиковые элементы внутри машины. Используйте только воду из специального бака машины.</p>
+
+<p>Если вы слышите, как насос работает с перерывами (рывками), это признак наличия воздушной пробки. В таком случае лучше остановить процесс, подождать минуту, и попробовать снова, возможно, слегка покачав бак с водой, чтобы спровоцировать движение воды к насосу.</p>
+
+<details class="faq-item"><summary>Особенности работы с фильтрами обратного осмоса</summary><div class="faq-answer"><p>Если ваша машина подключена к системе обратного осмоса, загрузка контура может занимать больше времени из-за низкого давления воды на входе. Убедитесь, что система осмоса работает корректно.</p></div></details>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная проверка герметичности системы и своевременная прокачка после сервисных работ — лучший способ продлить жизнь дорогого насоса и обеспечить идеальный вкус кофе.</p></div>
+
+<h2 id="faq-ответы-на-частые-вопросы">FAQ: Ответы на частые вопросы</h2>
+
+<details>
+  <summary>Как долго должна идти загрузка гидравлического контура?</summary>
+  <p>Процесс обычно занимает от 1 до 3 минут. Если вода течет ровной струей без пузырьков более 30 секунд, загрузку можно считать завершенной. В профессиональных аппаратах с большими бойлерами процесс может длиться до 5 минут.</p>
+</details>
+
+<details>
+  <summary>Можно ли делать загрузку, если машина не включена?</summary>
+  <p>Нет, загрузка гидравлического контура требует работы насоса, который приводится в действие электродвигателем. Без подачи электричества вода не сможет преодолеть сопротивление системы и выйти из трубок.</p>
+</details>
+
+<details>
+  <summary>Что делать, если после прокачки машина все равно не готовит кофе?</summary>
+  <p>Возможно, воздушная пробка осталась в варочном блоке. Попробуйте запустить цикл промывки или очистку варочной группы по инструкции. Если проблема сохраняется, возможно, неисправен датчик давления или сам насос.</p>
+</details>
+
+<details>
+  <summary>Нужна ли загрузка контура после замены фильтра?</summary>
+  <p>Да, это обязательно. При замене фильтра в систему неизбежно попадает воздух. Большинство современных машин автоматически предлагают выполнить процедуру прокачки после установки нового фильтра.</p>
+</details>
+
+<blockquote>
+<p>⚠️ Внимание: Правила и последовательность действий могут незначительно отличаться для разных брендов и моделей. Всегда сверяйтесь с технической документацией вашего устройства, чтобы избежать ошибок при обслуживании.</p>
+</blockquote></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#физика-процесса-и-роль-воздуха-в-системе">Физика процесса и роль воздуха в системе</a></li><li><a href="#когда-требуется-принудительная-загрузка-контура">Когда требуется принудительная загрузка контура</a></li><li><a href="#пошаговая-процедура-ручного-запуска">Пошаговая процедура ручного запуска</a></li><li><a href="#особенности-для-разных-типов-насосов">Особенности для разных типов насосов</a></li><li><a href="#автоматизация-процесса-и-сервисные-режимы">Автоматизация процесса и сервисные режимы</a></li><li><a href="#последствия-игнорирования-процедуры">Последствия игнорирования процедуры</a></li><li><a href="#частые-ошибки-при-самостоятельной-прокачке">Частые ошибки при самостоятельной прокачке</a></li><li><a href="#faq-ответы-на-частые-вопросы">FAQ: Ответы на частые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-pomyt-varochnuyu-gruppu-v-kofemashine-philips.html" class="related-card">Как правильно помыть варочную группу кофемашины Philips</a></li><li><a href="/articles/c/ch/chistyashchee-sredstvo-ot-kofejnykh-masel.html" class="related-card">Чистящее средство от кофейных масел: выбор и правильное использование</a></li><li><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-yura.html" class="related-card">Как включить кофемашину Jura: пошаговая инструкция запуска</a></li><li><a href="/articles/k/ko/kofemashina-delonghi-rozhkovaya-kak-pochistit.html" class="related-card">Как почистить рожковую кофемашину DeLonghi: Полная инструкция</a></li><li><a href="/articles/k/ka/kak-promyt-kapelnuyu-kofevarku-limonnoj-kislotoj.html" class="related-card">Как промыть капельную кофеварку лимонной кислотой: полная инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-pomyt-varochnuyu-gruppu-v-kofemashine-philips.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно помыть варочную группу кофемашины Philips</span><span class="related-bottom-desc">Пошаговая инструкция: как снять, промыть и собрать варочную группу кофемашин Philips. Советы по уход</span></a><a href="/articles/c/ch/chistyashchee-sredstvo-ot-kofejnykh-masel.html" class="related-bottom-card"><span class="related-bottom-title">Чистящее средство от кофейных масел: выбор и правильное использование</span><span class="related-bottom-desc">Полный гид по удалению кофейных масел из кофемашины. Обзор средств, инструкции по декальцинации и пр</span></a><a href="/articles/k/ka/kak-vklyuchit-kofemashinu-yura.html" class="related-bottom-card"><span class="related-bottom-title">Как включить кофемашину Jura: пошаговая инструкция запуска</span><span class="related-bottom-desc">Подробное руководство: как правильно включить кофемашину Jura, провести первичную подготовку и настр</span></a><a href="/articles/k/ko/kofemashina-delonghi-rozhkovaya-kak-pochistit.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить рожковую кофемашину DeLonghi: Полная инструкция</span><span class="related-bottom-desc">Пошаговое руководство по очистке и декальцинации рожковых кофемашин DeLonghi. Советы по уходу за гру</span></a><a href="/articles/k/ka/kak-promyt-kapelnuyu-kofevarku-limonnoj-kislotoj.html" class="related-bottom-card"><span class="related-bottom-title">Как промыть капельную кофеварку лимонной кислотой: полная инструкция</span><span class="related-bottom-desc">Подробное руководство по декальцинации капельной кофеварки лимонной кислотой. Узнайте пропорции, эта</span></a><a href="/articles/k/ka/kak-pervyj-raz-zapustit-kofemashinu-delongi.html" class="related-bottom-card"><span class="related-bottom-title">Первый запуск кофемашины De&#x27;Longhi: пошаговая инструкция и настройка</span><span class="related-bottom-desc">Подробное руководство по первому запуску кофемашины De&#x27;Longhi. Инструкция по промывке, настройке жёс</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

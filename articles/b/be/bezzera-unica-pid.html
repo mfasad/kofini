@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Код PID кофемашины Bezzera Unica: расшифровка и диагностика — Кофини</title>
+    <meta name="description" content="Что такое PID Bezzera Unica? Полный разбор кодов ошибок, настройка температуры и инструкция по сбросу для профессионалов и владельцев.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/b/be/bezzera-unica-pid.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Код PID кофемашины Bezzera Unica: расшифровка и диагностика">
+    <meta property="og:description" content="Что такое PID Bezzera Unica? Полный разбор кодов ошибок, настройка температуры и инструкция по сбросу для профессионалов и владельцев.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Код PID кофемашины Bezzera Unica: расшифровка и диагностика</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Код PID в кофемашинах Bezzera Unica: расшифровка и настройка</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#функциональное-назначение-pid-регулятора-в-bezzera-unica">Функциональное назначение PID-регулятора в Bezzera Unica</a></li><li><a href="#вход-в-инженерное-меню-и-навигация-по-параметрам">Вход в инженерное меню и навигация по параметрам</a></li><li><a href="#перечень-основных-кодов-ошибок-и-их-значение">Перечень основных кодов ошибок и их значение</a></li><li><a href="#процедура-калибровки-температуры-и-сброс-настроек">Процедура калибровки температуры и сброс настроек</a></li><li><a href="#влияние-качества-воды-на-работу-pid-системы">Влияние качества воды на работу PID-системы</a></li><li><a href="#типичные-ошибки-бариста-при-настройке">Типичные ошибки бариста при настройке</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Владельцы профессиональных кофемашин <em>Bezzera Unica</em> часто сталкиваются с необходимостью глубокой настройки параметров заваривания для достижения идеального вкуса эспрессо. Ключевым элементом здесь выступает система управления температурой, которая в современных моделях реализована через <strong>PID-регулятор</strong> (пропорционально-интегрально-дифференцирующий регулятор). Именно этот алгоритм позволяет поддерживать стабильную температуру воды в группе с точностью до долей градуса, что критически важно для экстракции.</p>
+
+<p>Однако в профессиональной среде под термином <strong>PID PID</strong> или просто <em>PID</em> иногда ошибочно подразумевают специфические коды ошибок, появляющиеся на дисплее, или же секретный код доступа к инженерному меню. <strong>Настройка температуры</strong> через этот интерфейс требует от бариста не только технических знаний, но и понимания физики процесса заваривания. Неправильные действия могут привести к нестабильной работе бойлера или перегреву группы.</p>
+
+<p>В данной статье мы разберем, как правильно интерпретировать данные от <strong>датчика температуры</strong>, как войти в режим калибровки и какие параметры влияют на качество напитка. Мы также рассмотрим типичные ошибки, связанные с <em>PID-контроллером</em>, и способы их устранения без вызова сервисного инженера.</p>
+
+<h2 id="функциональное-назначение-pid-регулятора-в-bezzera-unica">Функциональное назначение PID-регулятора в Bezzera Unica</h2>
+
+<p>Система управления <em>Bezzera Unica</em> базируется на электронном контроллере, который непрерывно считывает показания термодатчика и корректирует мощность нагревательного элемента. Благодаря <strong>PID-алгоритму</strong>, машина не просто включается и выключается при достижении порога, а плавно меняет мощность, исключая термические скачки. Это обеспечивает постоянство вкуса от первой чашки до сотой.</p>
+
+<p>Важно понимать, что <strong>PID-регулятор</strong> отвечает не только за бойлер, но и за термостабильность варочной группы (в моделях с термоблоком или отдельным нагревателем группы). Если вы замечаете, что эспрессо то горчит, то кислит при неизменном параметре помола, проблема часто кроется именно в настройке коэффициентов <em>PID</em> или неисправности датчика.</p>
+
+<p>Производитель <em>Bezzera</em> закладывает в <strong>прошивку</strong> оптимальные значения для большинства видов кофе, но <strong>кастомизация</strong> этих параметров открывает новые горизонты для экспериментов. Например, для светлой обжарки может потребоваться более высокая температура, а для плотной экстракции — специфический профиль прогрева.</p>
+
+<h2 id="вход-в-инженерное-меню-и-навигация-по-параметрам">Вход в инженерное меню и навигация по параметрам</h2>
+
+<p>Для доступа к настройкам <strong>PID-регулятора</strong> необходимо выполнить специальную последовательность действий. На большинстве моделей <em>Bezzera Unica</em> вход осуществляется через комбинацию кнопок на панели управления. Обычно это удержание клавиши <code>Steam</code> и <code>Espresso</code> одновременно в течение 5-7 секунд до появления мигания индикаторов.</p>
+
+<p>После входа в режим настройки на дисплее отобразится текущее значение температуры или код параметра. Использовать <strong>навигацию</strong> нужно с предельной осторожностью, так как изменение неверного коэффициента может привести к поломке нагревательного элемента. Перемещение по меню осуществляется кнопками выбора напитка, а подтверждение — кнопкой подтверждения.</p>
+
+<p>В меню вы найдете параметры <strong>P</strong> (пропорциональная составляющая), <strong>I</strong> (интегральная) и <strong>D</strong> (дифференциальная). Каждая из этих величин влияет на скорость реакции системы. <em>Изменение</em> этих значений требует фиксирования результата на бумаге, чтобы при неудачной попытке можно было вернуться к исходным заводским настройкам.</p>
+
+<blockquote>⚠️ Внимание: Не меняйте значения коэффициентов более чем на 10% от заводских, не имея перед глазами таблиц температурной кривой вашей конкретной модели. Слишком агрессивный PID может вызвать перегрев бойлера и срабатывание аварийного термостата.</blockquote>
+
+<div class="poll-widget" id="poll-d42c9240"><div class="poll-widget-question">📊 Какая у вас модель Bezzera Unica?</div><div class="poll-widget-option" data-poll="d42c9240" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Unica D/S</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d42c9240" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Unica Plus</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d42c9240" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Unica Smart</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d42c9240" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Другая версия</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="перечень-основных-кодов-ошибок-и-их-значение">Перечень основных кодов ошибок и их значение</h2>
+
+<p>Иногда под запросом "PID Unica" пользователи ищут расшифровку кодов ошибок, связанных с температурным контуром. Дисплей может отображать сообщения, указывающие на сбой в работе <strong>термодатчика</strong> или обрыв цепи нагревателя. Понимание этих сигналов позволяет быстро локализовать проблему.</p>
+
+<p>Чаще всего встречаются ошибки, связанные с перегревом или недогревом воды. Если система фиксирует отклонение более чем на 5°C от заданного значения в течение длительного времени, <em>PID-контроллер</em> блокирует работу машины для защиты оборудования. В этом случае на экране может появиться код, начинающийся с буквы "E" или цифрового индекса.</p>
+
+<p>Для точной диагностики рекомендуется сверяться с технической документацией, так как коды могут отличаться в зависимости от года выпуска и ревизии платы. Однако основные ошибки, такие как <strong>отказ датчика</strong> или <strong>перегрев бойлера</strong>, имеют схожую логику проявления. Ниже приведена таблица с наиболее распространенными индикаторами.</p>
+
+<table>
+ <thead>
+  <tr>
+   <th>Код/Индикатор</th>
+   <th>Описание проблемы</th>
+   <th>Вероятная причина</th>
+   <th>Рекомендуемое действие</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><code>TEMP_ERR</code></td>
+   <td>Ошибка датчика температуры</td>
+   <td>Обрыв проводки или выход из строя NTC-термистора</td>
+   <td>Замена датчика или проверка контактов</td>
+  </tr>
+  <tr>
+   <td><code>OVER_HEAT</code></td>
+   <td>Критический перегрев бойлера</td>
+   <td>Неисправность термостата или залипание реле</td>
+   <td>Проверка термостата, сброс аварийной температуры</td>
+  </tr>
+  <tr>
+   <td><code>LOW_TEMP</code></td>
+   <td>Невозможность нагреть воду</td>
+   <td>Воздух в системе, неисправность ТЭНа</td>
+   <td>Деаэрация системы, проверка ТЭНа</td>
+  </tr>
+  <tr>
+   <td><code>SYS_LOCK</code></td>
+   <td>Блокировка системы управления</td>
+   <td>Сбой прошивки или критическая ошибка PID</td>
+   <td>Перезагрузка, сброс к заводским настройкам</td>
+  </tr>
+ </tbody>
+</table>
+
+<div class="checklist-block"><h4>☑️ Диагностика ошибки PID</h4><label class="check-item"><input type="checkbox"><span>Снять машину с сети</span></label><label class="check-item"><input type="checkbox"><span>Проверить питание на плате</span></label><label class="check-item"><input type="checkbox"><span>Осмотреть проводку датчика</span></label><label class="check-item"><input type="checkbox"><span>Заменить NTC-термистор</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="процедура-калибровки-температуры-и-сброс-настроек">Процедура калибровки температуры и сброс настроек</h2>
+
+<p>Если вы подозреваете неточность показаний <strong>температуры воды</strong>, необходимо выполнить процедуру калибровки. Это не то же самое, что настройка коэффициентов PID, а скорее коррекция смещения (offset) датчика. В меню <em>Bezzera Unica</em> этот пункт часто обозначается как <code>OFFSET</code> или <code>CAL</code>.</p>
+
+<p>Для начала необходимо довести машину до полного прогрева. Затем, используя внешний термометр (модифицированную холостую экстракцию), замерьте реальную температуру воды. Разница между показаниями дисплея и реальными значениями вносится в поле смещения. Если дисплей показывает <code>93°C</code>, а на выходе <code>91°C</code>, нужно скорректировать значение на <code>+2</code>.</p>
+
+<p>После внесения изменений <strong>необходимо</strong> перезагрузить систему, чтобы новые параметры применились. Неправильная калибровка может привести к тому, что пар будет недостаточно сухим, а эспрессо недогретым.</p>
+
+<blockquote>⚠️ Внимание: При калибровке используйте только доведенный до кипения или стабилизированный термометр. Ошибка измерения в 1-2 градуса приведет к неправильной настройке всей системы.</blockquote>
+
+<details class="faq-item"><summary>Секретный код заводской калибровки</summary><div class="faq-answer"><p>Для входа в режим глубокой калибровки на некоторых ревизиях плат нужно нажать комбинацию кнопок в момент включения питания, удерживая их до появления звукового сигнала. Это сбрасывает все пользовательские настройки коэффициентов P, I и D к заводским.</p></div></details>
+
+<h2 id="влияние-качества-воды-на-работу-pid-системы">Влияние качества воды на работу PID-системы</h2>
+
+<p>Часто проблема нестабильной работы <strong>PID-регулятора</strong> кроется не в электронике, а в качестве воды. Отложения накипи на нагревательном элементе и термодатчике создают изолирующий слой, который искажает теплообмен. Датчик <em>NTC</em> начинает "видеть" температуру воды с задержкой, что приводит к колебаниям и перегреву.</p>
+
+<p>В регионах с жесткой водой <em>Bezzera Unica</strong> требует регулярного декальцинации. Игнорирование этого правила приводит к тому, что <strong>алгоритм управления</strong> перестает справляться с нагрузкой, выходя на предельные значения мощности. В итоге машина может отключаться по аварийному термостату даже при наличии воды.</p>
+
+<p>Используйте только фильтрованную воду или воду в бутылках с минерализацией не более 150 мг/л. Это продлит жизнь нагревательному элементу и обеспечит точность работы <strong>термостата</strong>. Также рекомендуется использовать специальные таблетки для автоматического декальцинации, если ваша модель поддерживает этот режим.</p>
+
+<p>Регулярная чистка группы и диффузора также влияет на теплопередачу. Забитые каналы могут создавать локальные перегревы, которые система воспринимает как ошибку. <strong>Профилактика</strong> всегда дешевле и проще, чем замена электронной платы или ТЭНа.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Проводите проверку точности температуры раз в 3 месяца с помощью калиброванного термометра, особенно если вы заметили изменение вкусовых качеств эспрессо.</p></div>
+
+<blockquote>⚠️ Внимание: В зависимости от региональных стандартов водоснабжения и обновлений прошивки, требования к минерализации воды могут корректироваться производителем. Всегда сверяйтесь с актуальной инструкцией в личном кабинете на сайте Bezzera или в сервисном центре.</blockquote>
+
+<h2 id="типичные-ошибки-бариста-при-настройке">Типичные ошибки бариста при настройке</h2>
+
+<p>Одной из самых частых ошибок является попытка "подогнать" температуру под вкус кофе без учета фактического состояния машины. Если вы увеличиваете значение <strong>темп</strong> на 5 градусов, но не понимаете, что датчик уже показывает неверные данные, вы только усугубите ситуацию. <strong>Анализ</em> ситуации должен начинаться с проверки оборудования.</p>
+
+<p>Другая распространенная ошибка — частая смена настроек <em>PID</em>. Система обладает инерцией, и для стабилизации температуры после изменения параметров может потребоваться 15-20 минут. Постоянное "тыканье" в настройки приведет к хаотичным скачкам, которые невозможно отследить. <strong>Терпение</strong> здесь является ключевым фактором успеха.</p>
+
+<p>Некоторые пользователи пытаются отключить <strong>PID-функцию</strong> полностью, переводя машину в режим простого термостата. Это лишает кофемашину её главного преимущества — точности. Для <em>Bezzera Unica</em> это особенно критично, так как её конструкция рассчитана на работу именно с продвинутым алгоритмом управления.</p>
+
+<p>Важно также учитывать, что температура на входе в группу может отличаться от температуры в бойлере. Если вы меняете настройки, следите за тем, как реагирует <strong>нагревательный элемент</strong>. Аномально быстрое включение и выключение реле (частое щелканье) говорит о том, что коэффициенты PID подобраны неверно.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Правильная настройка PID — это баланс между скоростью реакции системы и отсутствием перерегулирования (скачков температуры).</p></div>
+
+<p>В заключение стоит отметить, что работа с <strong>PID-системой</strong> <em>Bezzera Unica</em> открывает возможности для тонкой настройки, недоступные в обычных бытовых аппаратах. Однако это требует ответственного подхода и понимания принципов работы. Если вы не уверены в своих силах, лучше доверить тонкую настройку специалистам сервисного центра.</p>
+
+<h2 id="часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</h2>
+
+<details>
+ <summary>Как сбросить настройки PID к заводским значениям?</summary>
+ <p>Для сброса необходимо войти в сервисное меню (обычно удержание кнопок при включении), найти пункт <code>RESET</code> или <code>DEFAULT</code> и подтвердить выбор. После этого система перезагрузится с заводскими параметрами.</p>
+</details>
+
+<details>
+ <summary>Что делать, если температура воды постоянно скачет?</summary>
+ <p>Сначала проверьте наличие накипи и работу термодатчика. Если датчик исправен, возможно, коэффициенты <strong>PID</strong> подобраны слишком агрессивно. Попробуйте снизить значение коэффициента <code>P</code> на 10-15%.</p>
+</details>
+
+<details>
+ <summary>Можно ли отключить PID в Bezzera Unica?</summary>
+ <p>Технически это возможно через прошивку, но крайне не рекомендуется. Отключение PID приведет к потере точности температуры и ухудшению качества эспрессо, превращая профессиональную машину в обычную термостатную.</p>
+</details>
+
+<details>
+ <summary>Как часто нужно калибровать температуру?</summary>
+ <p>Рекомендуется проводить калибровку раз в 6 месяцев или при смене поставщика воды. Также проверка необходима после каждого декальцинационного цикла.</p>
+</details>
+
+<details>
+ <summary>Почему дисплей показывает ошибку, но машина работает?</summary>
+ <p>Возможно, это ложное срабатывание из-за скачка напряжения или временной потери связи платы с датчиком. Попробуйте полностью обесточить машину на 10 минут. Если ошибка повторяется, требуется диагностика.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#функциональное-назначение-pid-регулятора-в-bezzera-unica">Функциональное назначение PID-регулятора в Bezzera Unica</a></li><li><a href="#вход-в-инженерное-меню-и-навигация-по-параметрам">Вход в инженерное меню и навигация по параметрам</a></li><li><a href="#перечень-основных-кодов-ошибок-и-их-значение">Перечень основных кодов ошибок и их значение</a></li><li><a href="#процедура-калибровки-температуры-и-сброс-настроек">Процедура калибровки температуры и сброс настроек</a></li><li><a href="#влияние-качества-воды-на-работу-pid-системы">Влияние качества воды на работу PID-системы</a></li><li><a href="#типичные-ошибки-бариста-при-настройке">Типичные ошибки бариста при настройке</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-myt-kofevarku-dexp.html" class="related-card">Как правильно мыть кофеварку DEXP: инструкция по удалению накипи и чистке</a></li><li><a href="/articles/k/ka/kakaya-dolzhna-byt-zhestkost-vody-v-kofemashine.html" class="related-card">Идеальная жесткость воды для кофемашины: нормы, риски и методы контроля</a></li><li><a href="/articles/k/ka/kak-polzovatsya-kofemashinoj-barista-coffee-roastery.html" class="related-card">Как пользоваться кофемашиной Barista Coffee Roastery: полная инструкция</a></li><li><a href="/articles/p/po/pochemu-v-kofemashine-mokrye-otkhody-filips.html" class="related-card">Почему в кофемашине Philips мокрые отходы: причины и решения</a></li><li><a href="/articles/c/ch/chem-smazyvat-kofemashiny.html" class="related-card">Чем смазывать кофемашины: выбор силикона и инструкция по уходу</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-myt-kofevarku-dexp.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно мыть кофеварку DEXP: инструкция по удалению накипи и чистке</span><span class="related-bottom-desc">Пошаговая инструкция: как эффективно очистить кофеварку DEXP от кофейных масел и накипи. Советы по в</span></a><a href="/articles/k/ka/kakaya-dolzhna-byt-zhestkost-vody-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Идеальная жесткость воды для кофемашины: нормы, риски и методы контроля</span><span class="related-bottom-desc">Узнайте, какая жесткость воды нужна для кофемашины, чтобы избежать накипи. Норма в градусах, влияние</span></a><a href="/articles/k/ka/kak-polzovatsya-kofemashinoj-barista-coffee-roastery.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Barista Coffee Roastery: полная инструкция</span><span class="related-bottom-desc">Пошаговое руководство по эксплуатации кофемашин Barista. Настройка помола, приготовление эспрессо, к</span></a><a href="/articles/p/po/pochemu-v-kofemashine-mokrye-otkhody-filips.html" class="related-bottom-card"><span class="related-bottom-title">Почему в кофемашине Philips мокрые отходы: причины и решения</span><span class="related-bottom-desc">В кофемашине Philips скопились мокрые отходы? Узнайте основные причины протечек, способы очистки кон</span></a><a href="/articles/c/ch/chem-smazyvat-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Чем смазывать кофемашины: выбор силикона и инструкция по уходу</span><span class="related-bottom-desc">Полный гид по выбору пищевых смазок для заварочного блока. Разбор силиконовых и минеральных составов</span></a><a href="/articles/k/ka/kak-polzovatsya-kofemashinoj-vitek-1512.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Vitek VT-1512: Инструкция и советы</span><span class="related-bottom-desc">Полное руководство по эксплуатации автоматической кофемашины Vitek VT-1512. Настройка помола, пригот</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

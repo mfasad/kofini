@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Давление для эспрессо: стандарт, ошибки и настройка помпы — Кофини</title>
+    <meta name="description" content="Узнайте, при каком давлении готовится идеальный эспрессо. Разбор стандартов 9 бар, влияние давления на вкус, настройка помпы и устранение частых ошибок.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/p/po/pod-kakim-davleniem-gotovitsya-espresso.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Давление для эспрессо: стандарт, ошибки и настройка помпы">
+    <meta property="og:description" content="Узнайте, при каком давлении готовится идеальный эспрессо. Разбор стандартов 9 бар, влияние давления на вкус, настройка помпы и устранение частых ошибок.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Давление для эспрессо: стандарт, ошибки и настройка помпы</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Оптимальное давление для приготовления эспрессо в кофемашине</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#физика-процесса-почему-именно-9-бар">Физика процесса: почему именно 9 бар?</a></li><li><a href="#типы-помп-и-их-влияние-на-стабильность">Типы помп и их влияние на стабильность</a></li><li><a href="#распространенные-ошибки-и-их-последствия">Распространенные ошибки и их последствия</a></li><li><a href="#влияние-помола-и-температуры-на-давление">Влияние помола и температуры на давление</a></li><li><a href="#настройка-давления-в-домашних-условиях">Настройка давления в домашних условиях</a></li><li><a href="#сравнение-давлений-для-разных-типов-напитков">Сравнение давлений для разных типов напитков</a></li><li><a href="#диагностика-проблем-по-манометру">Диагностика проблем по манометру</a></li><li><a href="#faq-частые-вопросы-о-давлении-в-эспрессо">FAQ: Частые вопросы о давлении в эспрессо</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Искусство приготовления эспрессо кроется не только в качестве зерна, но и в строгом соблюдении физических параметров экстракции. Ключевым фактором, определяющим профиль напитка, является <strong>давление воды</strong> в группе кофемашины. Именно этот показатель заставляет горячую жидкость проходить через спрессованную таблетку кофе, вымывая из неё ароматические масла, кофеин и растворимые вещества.</p>
+<p>Большинство профессионалов и производителей сошлись во мнении, что золотым стандартом для классического итальянского эспрессо является значение в <strong>9 бар</strong>. Однако на практике этот параметр может варьироваться в зависимости от модели <em>кофемашины</em>, глубины обжарки зерна и желаемого вкусового профиля. Понимание того, как работает система давления, позволяет вам не просто следовать инструкции, а управлять вкусом напитка, превращая процесс в настоящий творческий контроль.</p>
+
+<h2 id="физика-процесса-почему-именно-9-бар">Физика процесса: почему именно 9 бар?</h2>
+<p>Почему именно это число стало эталоном? Дело в балансе между скоростью прохождения воды и степенью экстракции. При давлении ниже <strong>7 бар</strong> вода просто стекает через кофе, не успевая растворить достаточное количество масел, что приводит к водянистому, кисловатому напитку без плотной пенки. Слишком высокое давление, превышающее <em>11 бар</em>, вызывает"проскальзывание" потоков, когда вода находит самые слабые места в таблетке и промывает её неравномерно.</p>
+<p>Именно при <strong>9 барах</strong> создается оптимальное сопротивление, которое обеспечивает время экстракции в диапазоне 25-30 секунд для порции в 30 мл. В этот момент происходит полный гидролиз растворимых веществ, а под давлением углекислый газ и масла формируют стабильную <strong>крема</strong> (пенку). Если вы используете зерно средней обжарки, именно этот параметр раскроет его-сладкий баланс лучше всего.</p>
+<p>Важно понимать, что давление — это динамический параметр. В современных машинах оно может меняться в течение цикла приготовления. Это позволяет <em>предварительному смачиванию</em> (pre-infusion) мягко насытить кофе перед основным давлением, избегая резких скачков, которые разрушают структуру кофейной таблетки.</p>
+<blockquote>⚠️ Внимание: Не путайте давление в бойлере с давлением в группе. Бойлер может работать на 1.5 бара для нагрева, но насос должен развить 9 бар именно в момент прохождения воды через кофе. Проверьте манометр на вашей <em>кофемашине</em>, чтобы убедиться, что стрелка находится в зеленой зоне во время работы.</blockquote>
+
+<h2 id="типы-помп-и-их-влияние-на-стабильность">Типы помп и их влияние на стабильность</h2>
+<p>Способ генерации давления напрямую зависит от типа насоса, установленного в вашем устройстве. Самые простые бытовые модели часто оснащаются <strong>вибрационными помпами</strong>. Они работают по принципу быстрого возвратно-поступательного движения поршня, создавая пульсирующее давление. Это может приводить к нестабильной экстракции, так как поток воды то ускоряется, то замедляется несколько раз в секунду.</p>
+<p>Более продвинутые решения используют <strong>роторные помпы</strong>. Они обеспечивают абсолютно плавный, непрерывный поток воды, что позволяет поддерживать давление ровно на <strong>9 барах</strong> на протяжении всего цикла. Именно такие системы можно встретить в профессиональных эспрессо-машинах и топовых рожковых моделях для дома. Если вы цените стабильность вкуса и планируете готовить много напитков подряд, роторный тип будет лучшим выбором.</p>
+<p>Некоторые современные устройства оснащаются системами управления давлением, которые позволяют оператору вручную регулировать этот параметр. Вы можете начать с <em>предварительного смачивания</em> на 3 бара, а затем плавно поднять давление до <strong>9 бар</strong> или даже выше для специфической экстракции. Это открывает простор для экспериментов с разными сортами кофе.</p>
+
+<div class="poll-widget" id="poll-4c1c0171"><div class="poll-widget-question">📊 Какое давление показывает манометр вашей кофемашины во время приготовления?</div><div class="poll-widget-option" data-poll="4c1c0171" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Ниже 8 бар (недоэкстракция)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="4c1c0171" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">9 бар (идеал)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="4c1c0171" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Выше 10 бар (пересолен)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="4c1c0171" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Нет манометра, не знаю</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="распространенные-ошибки-и-их-последствия">Распространенные ошибки и их последствия</h2>
+<p>Многие любители кофе сталкиваются с ситуацией, когда вкус напитка постоянно меняется. Часто причина кроется в неправильной интерпретации показаний давления или механических неисправностях. Если вы видите, что давление падает во время экстракции, это может указывать на <strong>недостаточный помол</strong> или, наоборот, на то, что таблетка рассыпается под напором воды. В первом случае вода не может пройти, во втором — уходит слишком быстро.</p>
+<p>Другая частая проблема —"каналирование". Когда давление слишком высокое для данного помола, вода пробивает каналы в кофейной таблетке, минуя большую часть молотого зерна. Результат вы увидите сразу: напитка будет много, но он будет горьким, с привкусом жженой резины и без ароматной <em>крема</em>. Это классический признак того, что помол слишком крупный для заданного давления.</p>
+<p>Также стоит учитывать, что давление зависит от температуры. При перегреве бойлера могут возникать скачки давления, которые негативно сказываются на вкусе. Проверьте настройки температуры в меню <code>Настройки -> Кофе -> Температура</code> и убедитесь, что они соответствуют рекомендациям производителя для вашего вида зерна.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка системы давления</h4><label class="check-item"><input type="checkbox"><span>Проверить чистоту фильтра</span></label><label class="check-item"><input type="checkbox"><span>Осмотреть уплотнительные кольца</span></label><label class="check-item"><input type="checkbox"><span>Проследить за стрелкой манометра</span></label><label class="check-item"><input type="checkbox"><span>Сравнить время экстракции с нормой</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="влияние-помола-и-температуры-на-давление">Влияние помола и температуры на давление</h2>
+<p>Давление не существует в вакууме; оно неразрывно связано со степенью помола. Увеличивая тонкость помола, вы повышаете сопротивление, и давление в группе растет. Если вы уменьшаете тонкость, сопротивление падает, и давление снижается. Это означает, что при смене сорта зерна или степени обжарки вам придется перенастраивать помол, чтобы вернуть давление к <strong>9 барам</strong>.</p>
+<p>Температура воды также играет роль. Горячая вода менее вязкая и легче проникает через кофейную таблетку, что может немного снижать давление. Холодная вода, напротив, создает большее сопротивление. Поэтому важно поддерживать стабильную температуру, обычно это диапазон <code>90-94°C</code> для эспрессо. Резкие перепады температуры могут привести к тому, что даже при идеальном помоле давление будет"плавать".</p>
+
+<details class="faq-item"><summary>Скрытый секрет профессионалов</summary><div class="faq-answer"><p>Эксперты часто используют метод"давящего" эспрессо, намеренно повышая давление до 10-12 бар для очень свежего зерна, чтобы быстрее извлечь ароматы, которые еще содержат много CO2. Однако это требует очень точного контроля, иначе напиток будет горчить.</p></div></details>
+
+<h2 id="настройка-давления-в-домашних-условиях">Настройка давления в домашних условиях</h2>
+<p>Если ваша <em>кофемашина</em> оснащена регулировкой давления, вы можете провести настройку самостоятельно. Обычно это делается с помощью винта на помпе или через программные настройки в меню. Осторожно: изменение давления влияет на весь профиль вкуса. Начните с малого шага, например, снизив давление до <strong>8 бар</strong> и попробуйте приготовить напиток. Если он станет ярче и слаще, возможно, это идеал для вашего зерна.</p>
+<p>Для машин без электронной регулировки единственным способом изменения давления является изменение помола. Попробуйте <code>отрегулировать жернова помолу</code> на шаг мельче, чтобы увеличить сопротивление. Если давление подскочило выше 10 бар, сделайте помол чуть крупнее. Это медленный, но надежный метод достижения баланса.</p>
+<blockquote>⚠️ Внимание: Регулировка помельче увеличивает риск засора системы и перегрева насоса. Не оставляйте машину без присмотра при экспериментах с очень мелким помолом и высоким давлением. Следите за тем, чтобы насос не гудел слишком громко.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Если вы используете кофе из разных регионов, создайте таблицу соответствия: степень обжарки, помол и полученное давление. Это поможет вам быстро возвращаться к идеальным настройкам при смене пачки.</p></div>
+
+<h2 id="сравнение-давлений-для-разных-типов-напитков">Сравнение давлений для разных типов напитков</h2>
+<p>Хотя эспрессо требует 9 бар, другие напитки могут требовать иных параметров. Например, для приготовления американо часто используется то же давление, но с большим объемом воды, что меняет вкус. Однако для специфических методов, таких как <em>флэт уайт</em> или <strong>лунго</strong>, параметры могут незначительно варьироваться в зависимости от рецептуры.</p>
+<p>В таблице ниже приведены ориентировочные значения давления и времени экстракции для различных типов напитков на основе эспрессо-основы. Эти данные являются общими рекомендациями, но могут меняться в зависимости от модели оборудования.</p>
+
+<table>
+<thead>
+<tr>
+<th>Тип напитка</th>
+<th>Оптимальное давление (бар)</th>
+<th>Время экстракции (сек)</th>
+<th>Особенности</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Классический эспрессо</td>
+<td>9</td>
+<td>25-30</td>
+<td>Золотой стандарт, плотная крема</td>
+</tr>
+<tr>
+<td>Ристретто</td>
+<td>9-10</td>
+<td>15-20</td>
+<td>Концентрированный, густой, сладкий</td>
+</tr>
+<tr>
+<td>Лунго</td>
+<td>8-9</td>
+<td>35-45</td>
+<td>Более горький, сниженная плотность</td>
+</tr>
+<tr>
+<td>Двойной эспрессо</td>
+<td>9</td>
+<td>25-30</td>
+<td>Двойная порция, тот же профиль</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="диагностика-проблем-по-манометру">Диагностика проблем по манометру</h2>
+<p>Манометр — это ваш главный помощник в диагностике. Если стрелка во время работы не поднимается выше <strong>7 бар</strong>, проверьте, не слишком ли крупный у вас помол. Возможно, уплотнительная резинка группы изношена, и давление просто"сдувается". В этом случае потребуется замена <em>прокладки группы</em> или ремонт помпы.</p>
+<p>Если же стрелка уходит в красную зону выше <strong>12 бар</strong> и машина начинает гудеть, немедленно остановите процесс. Это признак того, что вода не может пройти, и насос работает вхолостую или под экстремальной нагрузкой. Проверьте, не забит ли фильтр или не слишком ли сильно вы утрамбовали (тамповали) кофе.</p>
+<blockquote>⚠️ Внимание: Если манометр показывает 0 бар при работающем насосе, это может означать полную поломку помпы или отсутствие воды в баке. Не включайте сухую помпу более чем на несколько секунд, чтобы не сжечь её обмотку.</blockquote>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Идеальный эспрессо — это результат синхронизации давления (9 бар), температуры и правильного помола. Никакое самое дорогое оборудование не спасет напиток, если эти три параметра не сбалансированы.</p></div>
+
+<h2 id="faq-частые-вопросы-о-давлении-в-эспрессо">FAQ: Частые вопросы о давлении в эспрессо</h2>
+
+<details>
+<summary>Можно ли готовить эспрессо без давления?</summary>
+<p>Нет, без давления (или при очень низком давлении менее 5 бар) вы получите просто горячую кофейную заварку, похожую на фильтр-кофе. Эспрессо по определению требует высокого давления для образования крема и экстракции специфических масел.</p>
+</details>
+
+<details>
+<summary>Почему давление падает в середине экстракции?</summary>
+<p>Это часто случается из-за неравномерного распределения порошка в корзине или слишком быстрого прохождения воды через каналы (каналирование). Также причиной может быть засорение сетки фильтра или использование слишком свежего зерна с высоким содержанием CO2.</p>
+</details>
+
+<details>
+<summary>Влияет ли высота над уровнем моря на давление кофемашины?</summary>
+<p>Да, атмосферное давление влияет на точку кипения воды, но современные электрические помпы в кофемашинах работают автономно и создают избыточное давление, которое компенсирует высоту. Однако в экстремально высокогорных условиях может потребоваться более тщательная настройка.</p>
+</details>
+
+<details>
+<summary>Что делать, если манометр не показывает давление?</summary>
+<p>Проверьте, не заблокирован ли датчик или стрелка механически. Если манометр электронный, возможно, проблема в проводке или модуле управления. В механических моделях часто забивается капиллярная трубка, соединяющая датчик с группой. Попробуйте её прочистить.</p>
+</details>
+
+<details>
+<summary>Нужно ли сбрасывать давление после приготовления?</summary>
+<p>В большинстве бытовых машин сброс давления происходит автоматически через клапан. В профессиональных аппаратах оператор должен вручную открыть кран пара или воды, чтобы сбросить остаточное давление в системе перед переключением режимов. Это продлевает жизнь помпе.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#физика-процесса-почему-именно-9-бар">Физика процесса: почему именно 9 бар?</a></li><li><a href="#типы-помп-и-их-влияние-на-стабильность">Типы помп и их влияние на стабильность</a></li><li><a href="#распространенные-ошибки-и-их-последствия">Распространенные ошибки и их последствия</a></li><li><a href="#влияние-помола-и-температуры-на-давление">Влияние помола и температуры на давление</a></li><li><a href="#настройка-давления-в-домашних-условиях">Настройка давления в домашних условиях</a></li><li><a href="#сравнение-давлений-для-разных-типов-напитков">Сравнение давлений для разных типов напитков</a></li><li><a href="#диагностика-проблем-по-манометру">Диагностика проблем по манометру</a></li><li><a href="#faq-частые-вопросы-о-давлении-в-эспрессо">FAQ: Частые вопросы о давлении в эспрессо</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-otklyuchit-filtr-u-kofemashiny-filips.html" class="related-card">Как отключить фильтр у кофемашины Philips: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-izmenit-schetchik-na-kofemashine.html" class="related-card">Как изменить счетчик на кофемашине: сброс и настройка</a></li><li><a href="/articles/k/ko/kofemashina-bosh-kompakt-klass-ekstra-kak-polzovatsya.html" class="related-card">Как пользоваться кофемашиной Bosch Compact Class Extra: Полное руководство</a></li><li><a href="/articles/b/bo/bork-kofemashina-s-806-kak-polzovatsya.html" class="related-card">Как пользоваться кофемашиной Borck 806: Инструкция и советы</a></li><li><a href="/articles/m/ma/magnifika-kofemashina-kak-chistit-nakip.html" class="related-card">Как правильно чистить накипь в кофемашине Magnifica: пошаговая инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-otklyuchit-filtr-u-kofemashiny-filips.html" class="related-bottom-card"><span class="related-bottom-title">Как отключить фильтр у кофемашины Philips: пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как временно или полностью отключить фильтр умягчения воды в кофемашинах Philips. Безопасна</span></a><a href="/articles/k/ka/kak-izmenit-schetchik-na-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Как изменить счетчик на кофемашине: сброс и настройка</span><span class="related-bottom-desc">Полное руководство по изменению счетчика чашек на кофемашинах. Инструкция для DeLonghi, Saeco, Jura </span></a><a href="/articles/k/ko/kofemashina-bosh-kompakt-klass-ekstra-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Bosch Compact Class Extra: Полное руководство</span><span class="related-bottom-desc">Подробная инструкция по эксплуатации кофемашины Bosch Compact Class Extra. Настройка помола, пригото</span></a><a href="/articles/b/bo/bork-kofemashina-s-806-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Borck 806: Инструкция и советы</span><span class="related-bottom-desc">Полное руководство по эксплуатации кофемашины Borck 806. Настройка помола, приготовление эспрессо, к</span></a><a href="/articles/m/ma/magnifika-kofemashina-kak-chistit-nakip.html" class="related-bottom-card"><span class="related-bottom-title">Как правильно чистить накипь в кофемашине Magnifica: пошаговая инструкция</span><span class="related-bottom-desc">Полное руководство по декальцинации кофемашин De&#x27;Longhi Magnifica. Узнайте, какие средства использов</span></a><a href="/articles/k/ko/kofemashina-bosh-kak-pochistit-sopla.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить сопла на кофемашине Bosch: Полная инструкция</span><span class="related-bottom-desc">Пошаговое руководство по очистке сопел и трубки подачи молока на кофемашинах Bosch. Устранение засор</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

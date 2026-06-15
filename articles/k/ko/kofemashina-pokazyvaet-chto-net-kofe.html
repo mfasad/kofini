@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Ошибка «Нет кофе»: почему кофемашина не видит зерна и как починить — Кофини</title>
+    <meta name="description" content="Кофемашина показывает что нет кофе, хотя бункер полон? Разбираем причины: датчик, помол, статика и настройка. Пошаговая инструкция по устранению сбоя.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ko/kofemashina-pokazyvaet-chto-net-kofe.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Ошибка «Нет кофе»: почему кофемашина не видит зерна и как починить">
+    <meta property="og:description" content="Кофемашина показывает что нет кофе, хотя бункер полон? Разбираем причины: датчик, помол, статика и настройка. Пошаговая инструкция по устранению сбоя.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Ошибка «Нет кофе»: почему кофемашина не видит зерна и как починить</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Кофемашина показывает «нет кофе»: почему так происходит и как исправить</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#почему-датчик-не-видит-зерна-в-бункере">Почему датчик не видит зерна в бункере</a></li><li><a href="#влияние-степени-помола-на-работу-датчика">Влияние степени помола на работу датчика</a></li><li><a href="#проблемы-статического-электричества-и-влажности">Проблемы статического электричества и влажности</a></li><li><a href="#механические-засоры-и-заклинивание-шнека">Механические засоры и заклинивание шнека</a></li><li><a href="#сброс-ошибок-и-калибровка-системы">Сброс ошибок и калибровка системы</a></li><li><a href="#специфика-работы-с-капсульными-системами">Специфика работы с капсульными системами</a></li><li><a href="#когда-стоит-обратиться-в-сервисный-центр">Когда стоит обратиться в сервисный центр</a></li><li><a href="#профилактика-и-правильный-уход">Профилактика и правильный уход</a></li><li><a href="#таблица-основные-причины-и-способы-устранения">Таблица: Основные причины и способы устранения</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="почему-датчик-не-видит-зерна-в-бункере">Почему датчик не видит зерна в бункере</h2>
+
+<p>Ошибка «нет кофе» на дисплее, даже при полном бункере, чаще всего указывает не на неисправность электроники брендов <em>DeLonghi</em>, <em>Jura</em> или <em>Saeco</em>, а на застревание зерен в шнеке или неправильную работу датчика уровня. Вместо паники и поиска поломок пользователю следует проверить физическое взаимодействие зерна с механизмом подачи, так как именно этот фактор в большинстве случаев блокирует заваривание напитка.</p>
+
+<p>Внутри бункера установлен <strong>датчик наличия зерна</strong>, который может быть оптическим, механическим или магнитным. Если <strong>зерна застревают</strong> в узком месте или образуют «свод», сенсор просто не фиксирует движение продукта. Также причиной может стать статическое электричество, которое прилипает к стенкам контейнера, создавая иллюзию пустоты для оптического сенсора. Иногда достаточно просто потрясти бункер, чтобы разбить скопившийся комок.</p>
+
+<p>Важно понимать, что современные <strong>автоматические кофемашины</strong> запрограммированы на строгую последовательность действий. Если механизм шнека или подающий ролик не может провернуться из-за слишком мелкого помола, система аварийно останавливает процесс и сообщает о нехватке сырья. Это защитная функция, предотвращающая сгорание мотора заварочного блока.</p>
+
+<p>Некоторые пользователи ошибочно полагают, что проблема решается добавлением еще большего количества зерен, однако это лишь усугубляет ситуацию, увеличивая давление на подающий механизм. <strong>Качество помола</strong> играет решающую роль в том, как именно зерна будут доставляться к кофемолке. Если вы используете слишком крупные зерна или смешиваете сорта с разной плотностью, поток может прерваться, и машина «решит», что зерна закончились.</p>
+
+<h2 id="влияние-степени-помола-на-работу-датчика">Влияние степени помола на работу датчика</h2>
+
+<p>Настройка <strong>степени помола</strong> — это первый шаг к устранению ошибки отсутствия кофе. Слишком мелкий помол приводит к тому, что кофейная пыль забивает зазор между лезвиями кофемолки и подающим каналом. В результате зерна не могут просыпаться вниз, и датчик фиксирует остановку потока. Вам необходимо проверить текущую настройку и, при необходимости, сделать помол крупнее.</p>
+
+<p>Изменение регулировки следует производить <strong>только в процессе работы</strong> кофемолки. Если вы попытаетесь повернуть регулятор, когда мотор выключен, вы рискуете повредить резьбу или сломать пластиковые шестерни. <strong>Регулятор помола</strong> обычно находится под бункером для зерна и имеет метки от минимума до максимума. Делайте повороты плавно, на один шаг за раз, и следите за реакцией машины.</p>
+
+<p>Иногда проблема возникает из-за использования <strong>обжаренных в масле зерен</strong>. Такие зерна выделят жиры, которые скапливаются на стенках бункера и на механизме подачи, создавая липкую среду. В этой среде зерна слипаются, образуя пробки, которые датчик не может «увидеть». В таких случаях необходима тщательная очистка бункера и подающего шнека специальными средствами.</p>
+
+<p>Если вы недавно меняли сорт кофе, возможно, новая партия имеет другую влажность или форму зерна, что требует перенастройки параметров. Не все <strong>бренды зерен</strong> одинаково хорошо проходят через стандартные настройки большинства аппаратов. Экспериментируйте, но помните, что слишком грубый помол также может привести к тому, что зерна будут пролетать мимо кофемолки, не попадая в заварочный блок.</p>
+
+<h2 id="проблемы-статического-электричества-и-влажности">Проблемы статического электричества и влажности</h2>
+
+<p>Статическое электричество — это скрытый враг правильной работы кофемашины, о котором часто забывают производители и пользователи. Когда <strong>сухие зерна</strong> трутся о пластик бункера, они генерируют заряд, который заставляет их прилипать к стенкам. Оптический датчик, направленный в центр бункера, видит пустоту, потому что зерна «приклеились» по периметру. Это особенно актуально в зимний период, когда воздух в помещении крайне сухой.</p>
+
+<p>Для решения этой проблемы многие владельцы используют антистатические спреи или просто протирают стенки бункера слегка влажной салфеткой перед загрузкой. Однако будьте осторожны: <strong>влажность</strong> — главный враг кофейных зерен. Если вы намочите бункер слишком сильно, зерна начнут отсыревать, что приведет к заплесневелости и порче вкуса будущих напитков.</p>
+
+<p>Еще одним фактором является качество самого пластика. Дешевые бункеры или старые, изношенные контейнеры могут накапливать статический заряд быстрее. В некоторых моделях <em>Krups</em> или <em>Gaggia</em> производители специально добавляют в пластик антистатические добавки, но со временем этот эффект сходит на нет. Если проблема повторяется часто, возможно, стоит рассмотреть замену бункера на новый.</p>
+
+<p>Также стоит обратить внимание на температуру в помещении. В слишком холодных условиях зерна становятся более хрупкими и пылят, усиливая эффект статического притяжения. <strong>Температурный режим</strong> хранения кофе и работы машины должен быть стабильным. Не ставьте аппарат рядом с батареями отопления или кондиционерами, так как перепады температур могут влиять на электронику датчиков.</p>
+
+<div class="poll-widget" id="poll-ee9dba91"><div class="poll-widget-question">📊 Какая проблема чаще всего встречается в вашей кофемашине?</div><div class="poll-widget-option" data-poll="ee9dba91" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Датчик не видит зерна</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="ee9dba91" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Зерна застревают в бункере</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="ee9dba91" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Слишком мелкий помол</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="ee9dba91" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Статическое электричество</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="механические-засоры-и-заклинивание-шнека">Механические засоры и заклинивание шнека</h2>
+
+<p>Если электроника исправна, но машина все равно показывает отсутствие кофе, проблема может быть чисто механической. <strong>Подающий шнек</strong> или ролик могут быть забиты посторонними предметами или спрессованным кофейным порошком. Проверьте, вращается ли шнек вручную при отключенном питании. Если он не поддается или вращается с огромным усилием, необходима глубокая чистка.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Никогда не пытайтесь вытолкнуть застрявшие зерна твердыми предметами, такими как нож или отвертка. Вы можете повредить лезвия кофемолки или поцарапать пластиковый корпус, что приведет к еще большим проблемам в будущем.</p>
+</blockquote>
+
+<p>Часто причиной засора становятся некачественные зерна, содержащие посторонние включения, например, камешки или обломки веточек. Эти предметы застревают в механизме, блокируя подачу. <strong>Механические препятствия</strong> могут находиться как в самом бункере, так и в канале, ведущем к заварочному блоку. Используйте щетку, идущую в комплекте с машиной, чтобы прочистить узкие места.</p>
+
+<p>В некоторых случаях проблема заключается в износе шестерен редуктора. Со временем пластиковые зубья истираются, и шнек перестает захватывать зерна. Это характерно для машин с большим пробегом, варивших более 10 000 чашек. Если вы слышите характерный «треск» или гул мотора, но шнек не крутится, вероятно, требуется замена редуктора или всего заварочного узла.</p>
+
+<p>Регулярное обслуживание — залог долгой жизни механизма подачи. Очищайте бункер и шнек хотя бы раз в неделю, особенно если вы используете темную обжарку. <strong>Чистота механизма</strong> предотвращает накопление кофейных масел, которые со временем превращаются в твердый налет. Игнорирование этих процедур неизбежно приведет к заклиниванию.</p>
+
+<div class="checklist-block"><h4>☑️ Проверка механизма подачи</h4><label class="check-item"><input type="checkbox"><span>Отключить кофемашину от сети</span></label><label class="check-item"><input type="checkbox"><span>Снять бункер для зерна</span></label><label class="check-item"><input type="checkbox"><span>Осмотреть шнек на предмет засоров</span></label><label class="check-item"><input type="checkbox"><span>Прочистить канал щеткой</span></label><label class="check-item"><input type="checkbox"><span>Проверить вращение вручную</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 5</div></div>
+
+<h2 id="сброс-ошибок-и-калибровка-системы">Сброс ошибок и калибровка системы</h2>
+
+<p>Иногда система управления просто «зависает» и продолжает показывать ошибку даже после устранения физической причины. В таких случаях помогает <strong>полная перезагрузка</strong> устройства. Выключите машину кнопкой, отключите её от сети на 5-10 минут, а затем включите снова. Это сбросит временные ошибки в памяти контроллера.</p>
+
+<p>Для более сложных моделей может потребоваться вход в <strong>сервисное меню</strong> для калибровки датчиков. В аппаратах <em>Philips</em> и <em>Saeco</em> часто используется комбинация кнопок для сброса счетчиков и проверки сенсоров. Однако будьте осторожны: неправильное использование сервисного меню может привести к потере настроек программы. Если вы не уверены в своих силах, лучше обратитесь к документации производителя.</p>
+
+<p>Если ошибка сохраняется после перезагрузки, попробуйте запустить цикл промывки или очистки. Некоторые машины автоматически проверяют наличие зерна при выполнении этих циклов. Если в процессе промывки ошибка исчезает, значит, проблема была временной. <strong>Автоматические циклы</strong> часто помогают системе пересчитать состояние внутренних компонентов.</p>
+
+<p>В редких случаях может потребоваться замена самого датчика. Это сложный ремонт, требующий разборки корпуса и наличия паяльника. Если вы не обладаете навыками ремонта электроники, не стоит пытаться сделать это самостоятельно. <strong>Замена датчика</strong> — это работа для профессионального мастера, который сможет точно определить неисправный элемент.</p>
+
+<details class="faq-item"><summary>Как войти в сервисное меню Philips?|Нажмите и удерживайте кнопки «Кофе» и «Отмена» одновременно при включении машины. Появится меню диагностики. Используйте кнопки выбора напитка для навигации.-->
+
+<h2 id="специфика-работы-с-капсульными-системами">Специфика работы с капсульными системами</h2>
+
+<p>Если вы используете капсульную кофемашину, ошибка «нет кофе» может означать, что механизм не распознает капсулу. В таких аппаратах <strong>оптический датчик капсулы</strong> проверяет наличие объекта в загрузочной зоне. Грязные линзы или неправильная установка капсулы могут привести к ложному срабатыванию. Очистите зону загрузки сухой мягкой тканью.</p>
+
+<p>Иногда проблема кроется в самих капсулах. Если они деформированы или имеют нестандартную форму, механизм может не захватывать их. <strong>Совместимость капсул</strong> — важный аспект. Используйте только оригинальные капсулы или проверенные аналоги, рекомендованные производителем. Дешевые копии часто имеют погрешности в геометрии, что мешает работе датчика.</p>
+
+<p>Также стоит проверить механизм прокалывания. Если иглы забиты кофейной гущей, капсула может не дойти до нужного положения, и датчик решит, что она отсутствует. Регулярная чистка игл специальным ершиком поможет избежать этой проблемы. <strong>Прочистка механизмов</strong> должна быть частью вашего еженедельного ритуала ухода за машиной.</p>
+
+<p>В капсульных системах также может быть проблема с износом прижимного механизма. Со временем пружины теряют упругость, и капсула не фиксируется должным образом. Если вы заметите, что капсулы выпадают или не проходят цикл прокола, возможно, потребуется замена прижимного механизма. Это частая проблема у машин с высокой нагрузкой.</p>
+
+<!--WIDGET</summary><div class="faq-answer"><p>tip:Перед загрузкой капсул убедитесь, что лоток для использованных капсул не переполнен, так как это может блокировать механизм подачи новых капсул.</p></div></details>
+
+<h2 id="когда-стоит-обратиться-в-сервисный-центр">Когда стоит обратиться в сервисный центр</h2>
+
+<p>Если все вышеперечисленные методы не помогли, возможно, проблема серьезнее, чем кажется на первый взгляд. <strong>Выход из строя электроники</strong> или механической части может требовать профессионального вмешательства. Не пытайтесь ремонтировать сложные узлы самостоятельно, если не имеете опыта. Это может привести к полному выходу машины из строя.</p>
+
+<p>Обратитесь в сервис, если: ошибка появляется сразу после включения, несмотря на полный бункер; слышны посторонние звуки (скрежет, гул) изнутри корпуса; машина сильно нагревается или вибрирует. Эти признаки указывают на серьезную неисправность. <strong>Профессиональная диагностика</strong> сэкономит вам время и деньги в долгосрочной перспективе.</p>
+
+<p>Также стоит обратиться в сервис, если машина находится на гарантии. Любые попытки самостоятельного ремонта могут привести к потере гарантийных обязательств. <strong>Гарантийный ремонт</strong> должен проводиться только авторизованными специалистами. Сохраняйте чеки и документы о покупке для подтверждения права на бесплатное обслуживание.</p>
+
+<p>Иногда замена датчика или редуктора обходится дешевле, чем покупка новой машины. Но если машине более 5-7 лет, возможно, стоит задуматься о замене. <strong>Экономическая целесообразность</strong> ремонта зависит от стоимости запчастей и работы. Сравните стоимость ремонта с ценой новой модели, чтобы принять взвешенное решение.</p>
+
+<details class="faq-item"><summary>Как продлить жизнь кофемолке?|Используйте только сухие зерна. Избегайте добавления ароматизаторов в зерна. Очищайте кофемолку раз в месяц специальной таблеткой или орехами.-->
+
+<h2 id="профилактика-и-правильный-уход">Профилактика и правильный уход</h2>
+
+<p>Регулярный уход за кофемашиной — лучшая профилактика ошибки «нет кофе». Очищайте бункер от остатков старых зерен, протирайте датчики и проверяйте состояние шнека. <strong>Профилактические меры</strong> помогают избежать внезапных поломок и простоя техники. Уделяйте внимание машине хотя бы раз в неделю.</p>
+
+<p>Используйте качественные зерна правильной обжарки. Слишком темная обжарка выделяет много масел, которые загрязняют механизм. <strong>Качество сырья</strong> напрямую влияет на ресурс кофемашины. Выбирайте проверенные бренды и следите за сроком годности зерен. Старые зерна могут крошиться и забивать каналы подачи.</p>
+
+<p>Не забывайте о регулярной очистке заварочного блока. В некоторых моделях это можно делать самостоятельно, в других — требуется сервис. <strong>Чистота заварочного блока</strong> обеспечивает стабильную работу всей системы. Если блок забит, он может создавать избыточное сопротивление, которое машина интерпретирует как отсутствие зерна.</p>
+
+<p>Следите за состоянием фильтров для воды. Забитый фильтр может снизить давление в системе, что повлияет на работу помпы и кофемолки. <strong>Качество воды</strong> также играет роль в общей работоспособности машины. Используйте фильтрованную или бутилированную воду, чтобы избежать накипи и засоров.</p>
+
+<blockquote>
+<p>⚠️ Внимание</summary><div class="faq-answer"><p> Не смешивайте разные сорта кофе в одном бункере. Разная плотность и влажность зерен могут привести к неравномерной подаче и образованию пробок в механизме.</p>
+</blockquote>
+
+<p>Замена фильтра для воды должна проводиться регулярно, обычно каждые 2 месяца или после 50-100 литров воды. <strong>Своевременная замена</strong> предотвращает образование накипи, которая может повредить датчики и насосы. Используйте только оригинальные фильтры или качественные аналоги.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если вы используете зерна с добавлением ароматизаторов или масел, очищайте бункер и кофемолку чаще обычного. Такие добавки быстро образуют липкий налет, который блокирует работу датчиков.</p>
+</blockquote>
+
+
+
+<h2 id="таблица-основные-причины-и-способы-устранения">Таблица: Основные причины и способы устранения</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Причина</th>
+      <th>Симптом</th>
+      <th>Способ решения</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Статическое электричество</td>
+      <td>Зерна прилипают к стенкам, датчик не видит</td>
+      <td>Протереть бункер, использовать антистатик</td>
+    </tr>
+    <tr>
+      <td>Слишком мелкий помол</td>
+      <td>Зерна застревают в кофемолке</td>
+      <td>Увеличить помол, очистить кофемолку</td>
+    </tr>
+    <tr>
+      <td>Забитый шнек</td>
+      <td>Механизм не вращается, гул мотора</td>
+      <td>Очистить шнек щеткой, проверить на посторонние предметы</td>
+    </tr>
+    <tr>
+      <td>Неисправность датчика</td>
+      <td>Ошибка при полном бункере после перезагрузки</td>
+      <td>Проверить провода, заменить датчик</td>
+    </tr>
+    <tr>
+      <td>Износ редуктора</td>
+      <td>Скрежет, шнек не крутится</td>
+      <td>Замена шестерен или редуктора в сервисе</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Понимание работы механизмов вашей кофемашины поможет вам быстро реагировать на возникающие проблемы. <strong>Знание устройства</strong> — это половина успеха в ремонте. Не бойтесь разбирать и чистить доступные узлы, но соблюдайте осторожность.</p>
+
+<p>Если вы столкнулись с проблемой, которую не можете решить самостоятельно, не отчаивайтесь. В большинстве случаев ошибка «нет кофе» решается простой чисткой или перенастройкой. <strong>Правильный подход</strong> к обслуживанию техники продлит её жизнь на многие годы. Заботьтесь о своей кофемашине, и она ответит вам качественным напитком.</p>
+
+<p>Помните, что каждая модель имеет свои особенности. Изучите инструкцию к вашему устройству, чтобы узнать специфические нюансы обслуживания. <strong>Индивидуальный подход</strong> к уходу за техникой — залог её стабильной работы. Не игнорируйте рекомендации производителя.</p>
+
+<p>Надеемся, что эта статья помогла вам разобраться в причинах ошибки и найти способ её устранения. Правильный уход и внимание к деталям — это ключ к долгой и бесперебойной работе вашей кофемашины. <strong>Удачной эксплуатации</strong> и вкусного кофе!</p>
+
+<details>
+  <summary>Почему кофемашина показывает «нет кофе», если бункер полон?</summary>
+  <p>Чаще всего это связано с тем, что зерна застряли в бункере из-за статики или слишком мелкого помола, либо датчик загрязнился и не видит уровень зерна.</p>
+</details>
+
+<details>
+  <summary>Как очистить датчик зерна в кофемашине?</summary>
+  <p>Снимите бункер, найдите оптический датчик (обычно это маленькое окошко) и протрите его сухой мягкой тканью или ватной палочкой. Убедитесь, что на нем нет кофейной пыли.</p>
+</details>
+
+<details>
+  <summary>Можно ли использовать зерна с ароматизаторами?</summary>
+  <p>Не рекомендуется. Ароматические масла быстро загрязняют механизм кофемолки и шнек, что приводит к заклиниванию и ошибкам датчика. Если используете, очищайте машину чаще.</p>
+</details>
+
+<details>
+  <summary>Что делать, если после чистки ошибка не исчезает?</summary>
+  <p>Попробуйте полностью обесточить машину на 10-15 минут. Если это не помогло, возможно, неисправен сам датчик или электронный блок управления, и потребуется визит в сервисный центр.</p>
+</details>
+
+<details>
+  <summary>Влияет ли влажность воздуха на работу датчика?</summary>
+  <p>Да. В сухом воздухе статическое электричество сильнее, что заставляет зерна прилипать к стенкам бункера. В условиях высокой влажности зерна могут слипаться из-за влаги. Оптимальная влажность — 40-60%.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#почему-датчик-не-видит-зерна-в-бункере">Почему датчик не видит зерна в бункере</a></li><li><a href="#влияние-степени-помола-на-работу-датчика">Влияние степени помола на работу датчика</a></li><li><a href="#проблемы-статического-электричества-и-влажности">Проблемы статического электричества и влажности</a></li><li><a href="#механические-засоры-и-заклинивание-шнека">Механические засоры и заклинивание шнека</a></li><li><a href="#сброс-ошибок-и-калибровка-системы">Сброс ошибок и калибровка системы</a></li><li><a href="#специфика-работы-с-капсульными-системами">Специфика работы с капсульными системами</a></li><li><a href="#когда-стоит-обратиться-в-сервисный-центр">Когда стоит обратиться в сервисный центр</a></li><li><a href="#профилактика-и-правильный-уход">Профилактика и правильный уход</a></li><li><a href="#таблица-основные-причины-и-способы-устранения">Таблица: Основные причины и способы устранения</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/g/gd/gde-kupit-tabletki-dlya-chistki-kofemashiny.html" class="related-card">Где купить таблетки для чистки кофемашины: лучшие магазины и цены</a></li><li><a href="/articles/k/ka/kak-smazat-varochnuyu-gruppu-v-kofemashine-philips-5000-series.html" class="related-card">Как смазать варочную группу Philips 5000 Series: Пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-filips-limonnoj-kislotoj-ot-nakipi-v-domashnikh-usloviyakh-video.html" class="related-card">Как почистить кофемашину Philips лимонной кислотой: пошаговая инструкция</a></li><li><a href="/articles/k/ka/kak-pochistit-kofemashinu-nespresso-v-domashnikh.html" class="related-card">Как почистить кофемашину Nespresso: полное руководство по декальцинации</a></li><li><a href="/articles/k/ka/kak-nazyvaetsya-chasti-kofemashiny.html" class="related-card">Названия деталей кофемашины: Полный гайд по узлам и агрегатам</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/g/gd/gde-kupit-tabletki-dlya-chistki-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Где купить таблетки для чистки кофемашины: лучшие магазины и цены</span><span class="related-bottom-desc">Ищете, где приобрести качественные таблетки для декальцинации? Сравнение цен в онлайн-магазинах, сов</span></a><a href="/articles/k/ka/kak-smazat-varochnuyu-gruppu-v-kofemashine-philips-5000-series.html" class="related-bottom-card"><span class="related-bottom-title">Как смазать варочную группу Philips 5000 Series: Пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как правильно смазать варочную группу кофемашины Philips 5000 series. Инструкция по обслужи</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-filips-limonnoj-kislotoj-ot-nakipi-v-domashnikh-usloviyakh-video.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Philips лимонной кислотой: пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как самостоятельно удалить накипь в кофемашине Philips с помощью лимонной кислоты. Подробна</span></a><a href="/articles/k/ka/kak-pochistit-kofemashinu-nespresso-v-domashnikh.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Nespresso: полное руководство по декальцинации</span><span class="related-bottom-desc">Пошаговая инструкция, как почистить кофемашину Nespresso в домашних условиях. Удаление накипи, промы</span></a><a href="/articles/k/ka/kak-nazyvaetsya-chasti-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Названия деталей кофемашины: Полный гайд по узлам и агрегатам</span><span class="related-bottom-desc">Узнайте, как называются основные части кофемашины: от заварочного блока до бокофинов. Подробное опис</span></a><a href="/articles/c/ch/chto-takoe-udalit-nakip-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Как удалить накипь в кофемашине: полная инструкция по декальцинации</span><span class="related-bottom-desc">Научитесь правильно удалять накипь из кофемашины. Пошаговая инструкция, выбор средств, частота проце</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

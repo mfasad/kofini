@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Стример кофемашины: что это и зачем нужен — Кофини</title>
+    <meta name="description" content="Полный разбор функции стримера в кофемашинах. Зачем она нужна, как использовать для взбитого молока и чем отличается от других систем.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/s/st/strimer-kofemashiny-chto-eto.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Стример кофемашины: что это и зачем нужен">
+    <meta property="og:description" content="Полный разбор функции стримера в кофемашинах. Зачем она нужна, как использовать для взбитого молока и чем отличается от других систем.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/aksessuary-i-instrumenty/">Аксессуары и инструменты</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Стример кофемашины: что это и зачем нужен</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Стример кофемашины: что это и зачем нужен</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#основы-работы-паровой-системы">Основы работы паровой системы</a></li><li><a href="#типы-насадок-и-их-назначение">Типы насадок и их назначение</a></li><li><a href="#техника-ручного-взбивания-молока">Техника ручного взбивания молока</a></li><li><a href="#секреты-идеальной-текстуры">Секреты идеальной текстуры</a></li><li><a href="#обслуживание-и-уход-за-насадкой">Обслуживание и уход за насадкой</a></li><li><a href="#частые-проблемы-и-их-решение">Частые проблемы и их решение</a></li><li><a href="#автоматические-системы-против-ручных">Автоматические системы против ручных</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Многие владельцы домашних кофемашин сталкиваются с термином, который звучит как что-то сложное и техническое, но на деле является ключом к приготовлению идеального кофе с молоком. <strong>Стример</strong> — это специализированная насадка или трубка, встроенная в паровую систему устройства, предназначенная для подачи перегретого пара и горячей воды.</p>
+
+<p>Без этого элемента невозможно создать ту самую воздушную пенку, которая делает капучино или латте настоящим произведением искусства. Понимание принципа работы и правильного использования <strong>парового стримера</strong> позволяет раскрыть весь потенциал вашей техники и наслаждаться напитками уровня кофейни прямо у себя на кухне.</p>
+
+<p>В этой статье мы детально разберем, как работает этот механизм, какие существуют типы насадок и как избежать распространенных ошибок при взбивании молока.</p>
+
+<h2 id="основы-работы-паровой-системы">Основы работы паровой системы</h2>
+
+<p>В основе действия любого эспрессо-аппарата лежит нагрев воды до температуры кипения и выше. Когда вы активируете режим пара, вода превращается в газ и под высоким давлением выходит через специальный канал, который и называется <strong>паровой насадкой</strong> или стримером.</p>
+
+<p>Этот процесс требует четкого контроля температуры и давления. Если <em>паровой кран</em> открыт слишком сильно, поток будет слишком бурным, что приведет к разбрызгиванию молока и ухудшению текстуры пены. Напротив, слабая струя не сможет создать необходимую турбулентность для насыщения жидкости кислородом.</p>
+
+<p>Современные устройства оснащаются системами, которые стабилизируют давление, чтобы вы могли получать стабильный результат даже без профессиональных навыков бариста. Однако сам принцип остается неизменным: пар смешивается с жидкостью, нагревая её и создавая микропузырьки воздуха.</p>
+
+<blockquote>⚠️ Внимание: Никогда не включайте режим пара на пустой системе без воды, так как это может привести к перегреву бойлера и выходу кофемашины из строя. Всегда проверяйте уровень воды перед активацией функции.</blockquote>
+
+<h2 id="типы-насадок-и-их-назначение">Типы насадок и их назначение</h2>
+
+<p>Не все стримеры выглядят одинаково. Производители используют разные конструкции для решения конкретных задач. Одни насадки предназначены исключительно для взбивания молока, другие — для подачи горячей воды для американо.</p>
+
+<p>Существуют модели с поворотными головками, позволяющими менять угол подачи пара. Это особенно важно для <strong>взбивания молока в кувшине</strong>, так как позволяет оптимально расположить насадку относительно стенок емкости. Другие варианты оснащены несколькими отверстиями, что дает более мощный поток, но требует более аккуратного обращения.</p>
+
+<p>Классификация насадок часто зависит от бренда и ценового сегмента аппарата. Базовые модели могут иметь простую прямую трубку, в то время как профессиональные устройства оснащаются сложными <em>автоматическими капучинаторами</em>, которые сами забирают молоко и взбивают его.</p>
+
+<ul>
+<li>🔹 Прямые металлические трубки — классика для ручного взбивания, требуют навыка.</li>
+<li>🔹 Вращающиеся насадки с отверстиями — упрощают процесс создания пены.</li>
+<li>🔹 Автоматические системы — подключаются к емкости с молоком и работают по заданной программе.</li>
+</ul>
+
+<div class="poll-widget" id="poll-e4148430"><div class="poll-widget-question">📊 Какой тип взбивания вы используете чаще?</div><div class="poll-widget-option" data-poll="e4148430" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Ручное взбивание паром</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e4148430" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Автоматический капучинатор</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e4148430" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Керамическая френч-пресс</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="e4148430" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не использую молоко</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="техника-ручного-взбивания-молока">Техника ручного взбивания молока</h2>
+
+<p>Использование <strong>ручного стримера</strong> — это искусство, которое требует практики. Главное правило заключается в том, чтобы не погружать насадку слишком глубоко. Кончик трубки должен находиться чуть ниже поверхности молока, чтобы захватывать воздух.</p>
+
+<p>Правильное положение насадки создает характерный звук шипения, похожий на звук порванной бумаги. Если звук слишком тихий, значит, вы слишком глубоко опустили трубку и не захватываете воздух. Если слишком громкий и булькающий — насадка находится слишком высоко, и вы просто разбрызгиваете продукт.</p>
+
+<p>После захвата воздуха необходимо немного опустить кувшин, чтобы погрузить насадку глубже. Это создает вихрь, который перемешивает горячий пар с молоком, делая текстуру глянцевой и однородной. Процесс занимает обычно 10-15 секунд.</p>
+
+<div class="checklist-block"><h4>☑️ Подготовка к взбиванию молока</h4><label class="check-item"><input type="checkbox"><span>Охладите кувшин</span></label><label class="check-item"><input type="checkbox"><span>Налейте молоко до половины</span></label><label class="check-item"><input type="checkbox"><span>Подготовьте стример</span></label><label class="check-item"><input type="checkbox"><span>Поставьте под поток пара</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<p>Ошибки в технике часто приводят к тому, что молоко становится слишком горячим и теряет сладость. Температура выше 60-65°C разрушает белковые структуры, и идеальная пена просто не получится.</p>
+
+<blockquote>⚠️ Внимание: Если вы чувствуете, что молоко начинает кипеть или появляется запах гари, немедленно прекратите процесс. Перегретое молоко невозможно использовать для качественных кофейных напитков.</blockquote>
+
+<h2 id="секреты-идеальной-текстуры">Секреты идеальной текстуры</h2>
+
+<p>Секрет бариста кроется в температуре молока и его качестве. Для взбивания лучше всего подходит холодное молоко из холодильника, так как у вас есть больше времени на работу с паром до достижения критической температуры.</p>
+
+<p>Жирность молока также играет роль. Цельное молоко с жирностью 3,2% или выше дает самую плотную и сладкую пену. Обезжиренные продукты сложнее вспенить, а пена из них получается более воздушной и быстро оседает.</p>
+
+<p>Не забывайте о чистоте. Даже мельчайшие остатки старого молока на поверхности <em>парового стримера</em> могут пригореть при следующем включении и испортить вкус свежего напитка. Протирайте насадку влажной тряпкой сразу после использования и промывайте её паром.</p>
+
+<details class="faq-item"><summary>Почему молоко не взбивается?|Причин может быть несколько</summary><div class="faq-answer"><p> недостаточно холодное молоко, слишком старое молоко, неправильный угол насадки или забитые отверстия стримера. Попробуйте заменить молоко и тщательно прочистить насадку иглой для прочистки.</p></div></details>
+
+<h2 id="обслуживание-и-уход-за-насадкой">Обслуживание и уход за насадкой</h2>
+
+<p>Долговечность работы кофемашины напрямую зависит от регулярного ухода за паровой системой. Молоко, попавшее внутрь или на поверхность <strong>стримера</strong>, быстро скисает и образует твердый налет, который блокирует выход пара.</p>
+
+<p>После каждого использования необходимо протирать насадку смоченной в воде тряпкой и сразу же продувать её паром в течение 2-3 секунд. Это предотвращает засыхание остатков молока внутри трубки.</p>
+
+<p>Раз в неделю рекомендуется проводить глубокую очистку. Для этого можно использовать специальные таблетки для удаления накипи и молочного налета, либо выкрутить насадку (если конструкция позволяет) и замочить её в растворе лимонной кислоты.</p>
+
+<ul>
+<li>🔹 Протирайте насадку сразу после взбивания, пока молоко не высохло.</li>
+<li>🔹 Проверяйте отверстия на наличие засоров иглой или зубочисткой.</li>
+<li>🔹 Используйте специальные средства для удаления молочного налета раз в неделю.</li>
+</ul>
+
+<h2 id="частые-проблемы-и-их-решение">Частые проблемы и их решение</h2>
+
+<p>Иногда пользователи сталкиваются с ситуацией, когда пар из <strong>стримера</strong> идет рывками или не идет вовсе. Чаще всего это связано с засором отверстий или недостаточным уровнем воды в бойлере.</p>
+
+<p>Если пар выходит с неприятным запахом или брызгает непрогретой водой, это может означать, что кофемашине требуется полная очистка и прокачка системы. В таких случаях не стоит игнорировать проблему, так как она может привести к поломке нагревательного элемента.</p>
+
+<p>В таблице ниже приведены основные симптомы и способы их устранения для быстрой диагностики:</p>
+
+<table>
+<thead>
+<tr>
+<th>Проблема</th>
+<th>Возможная причина</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Пар идет рывками</td>
+<td>Засор насадки или бойлера</td>
+<td>Прочистить насадку, запустить цикл очистки</td>
+</tr>
+<tr>
+<td>Пар не греет молоко</td>
+<td>Недостаточное давление или холодный бойлер</td>
+<td>Дать аппарату прогреться, проверить уровень воды</td>
+</tr>
+<tr>
+<td>Вода брызгает из насадки</td>
+<td>Конденсат в трубке</td>
+<td>Продуть насадку паром перед использованием</td>
+</tr>
+<tr>
+<td>Пар не идет</td>
+<td>Забит фильтр или низкий уровень воды</td>
+<td>Проверить фильтр, долить воду</td>
+</tr>
+</tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Для удаления застывшего молока из узких отверстий используйте специальную металлическую иглу, которая часто идет в комплекте с кофемашиной.</p></div>
+
+<h2 id="автоматические-системы-против-ручных">Автоматические системы против ручных</h2>
+
+<p>Современный рынок предлагает два основных подхода к взбиванию молока. Ручной стример дает полный контроль над процессом, позволяя создавать сложные узоры на поверхности латте-арт, но требует времени и сноровки.</p>
+
+<p>Автоматические системы, такие как <em>LatteCrema</em> или <em>OneTouch</em>, берут на себя всю работу. Вы просто опускаете трубку в кувшин с молоком, нажимаете кнопку, и аппарат сам регулирует время, температуру и объем пены.</p>
+
+<p>Выбор зависит от ваших приоритетов. Если вы цените скорость и удобство, автоматика станет идеальным решением для утренней рутины. Если же вы любите процесс создания кофе как хобби, ручной <strong>паровой стример</strong> подарит вам больше возможностей для творчества.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Ручное взбивание дает контроль и художественные возможности, а автоматика обеспечивает стабильность и экономию времени в утренние часы.</p></div>
+
+<blockquote>⚠️ Внимание: В автоматических системах важно использовать только свежее молоко и регулярно промывать резервуар, так как остатки продукта внутри трубок могут стать средой для размножения бактерий.</blockquote>
+
+<p>Понимание того, как работает стример, позволяет вам не просто использовать кофемашину, а управлять ею. Независимо от того, выбрали вы сложный ручной процесс или автоматический режим, правильный уход и знание принципов работы гарантируют чашку кофе, которая порадует вас своим вкусом каждый день.</p>
+
+<details>
+<summary>Что такое стример в кофемашине простыми словами?</summary>
+<p>Стример — это паровая насадка кофемашины, через которую подается горячий пар для взбивания молока и приготовления напитков.</p>
+</details>
+
+<details>
+<summary>Почему стример брызгает холодным молоком?</summary>
+<p>Это может происходить из-за конденсата в трубке. Всегда продувайте насадку паром перед началом работы, чтобы удалить остатки воды.</p>
+</details>
+
+<details>
+<summary>Как часто нужно чистить стример?</summary>
+<p>Внешнюю часть нужно протирать после каждого использования. Глубокую очистку от молочного налета рекомендуется проводить раз в неделю.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать стример для нагрева воды?</summary>
+<p>Да, многие кофемашины позволяют использовать насадку для подачи горячей воды для приготовления американо или чая, просто переключив режим.</p>
+</details>
+
+<details>
+<summary>Что делать, если пар идет слабо?</summary>
+<p>Проверьте, не забиты ли отверстия насадки. Попробуйте прочистить их иглой или запустить цикл самоочистки аппарата.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#основы-работы-паровой-системы">Основы работы паровой системы</a></li><li><a href="#типы-насадок-и-их-назначение">Типы насадок и их назначение</a></li><li><a href="#техника-ручного-взбивания-молока">Техника ручного взбивания молока</a></li><li><a href="#секреты-идеальной-текстуры">Секреты идеальной текстуры</a></li><li><a href="#обслуживание-и-уход-за-насадкой">Обслуживание и уход за насадкой</a></li><li><a href="#частые-проблемы-и-их-решение">Частые проблемы и их решение</a></li><li><a href="#автоматические-системы-против-ручных">Автоматические системы против ручных</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ko/kofemolka-s-vesami.html" class="related-card">Кофемолка с весами: как выбрать, настроить и использовать для идеального эспрессо</a></li><li><a href="/articles/k/ka/kak-vzbit-penku-dlya-kapuchino-kapuchinatorom-iz-ikea.html" class="related-card">Как взбить идеальную пенку для капучино капучинатором из ИКЕА</a></li><li><a href="/articles/k/ko/kofemolka-royal-kuchen-kak-polzovatsya.html" class="related-card">Royal Kuchen кофемолка: полная инструкция по использованию и настройке</a></li><li><a href="/articles/k/ka/kakaya-kofemolka-luchshe-zhernovaya-ili-rotatsionnaya-elektricheskaya.html" class="related-card">Жерновая или роторная кофемолка: какая лучше для кофе</a></li><li><a href="/articles/d/do/domashnyaya-kofemolka-kak-vybrat.html" class="related-card">Как выбрать домашнюю кофемолку: гид по жерновам, типу и мощности</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ko/kofemolka-s-vesami.html" class="related-bottom-card"><span class="related-bottom-title">Кофемолка с весами: как выбрать, настроить и использовать для идеального эспрессо</span><span class="related-bottom-desc">Полный гид по кофемолкам со встроенными весами. Разбираем типы датчиков, калибровку, влияние на вкус</span></a><a href="/articles/k/ka/kak-vzbit-penku-dlya-kapuchino-kapuchinatorom-iz-ikea.html" class="related-bottom-card"><span class="related-bottom-title">Как взбить идеальную пенку для капучино капучинатором из ИКЕА</span><span class="related-bottom-desc">Пошаговая инструкция по взбиванию молока капучинатором IKEA. Секреты текстуры, выбор молока, ошибки </span></a><a href="/articles/k/ko/kofemolka-royal-kuchen-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Royal Kuchen кофемолка: полная инструкция по использованию и настройке</span><span class="related-bottom-desc">Подробное руководство: как пользоваться кофемолкой Royal Kuchen, настроить помол, почистить устройст</span></a><a href="/articles/k/ka/kakaya-kofemolka-luchshe-zhernovaya-ili-rotatsionnaya-elektricheskaya.html" class="related-bottom-card"><span class="related-bottom-title">Жерновая или роторная кофемолка: какая лучше для кофе</span><span class="related-bottom-desc">Сравнение жерновых и роторных электрических кофемолок. Полный разбор плюсов, минусов, стабильности п</span></a><a href="/articles/d/do/domashnyaya-kofemolka-kak-vybrat.html" class="related-bottom-card"><span class="related-bottom-title">Как выбрать домашнюю кофемолку: гид по жерновам, типу и мощности</span><span class="related-bottom-desc">Полный разбор типов кофемолок для дома. Сравнение жерновных и ножных моделей. Как подобрать устройст</span></a><a href="/articles/d/de/derzhatel-dlya-drip-paketa.html" class="related-bottom-card"><span class="related-bottom-title">Держатель для дрип пакета: как выбрать и использовать правильно</span><span class="related-bottom-desc">Полный гид по держателям для дрип пакетов. Обзор материалов, сравнение моделей, инструкция по исполь</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

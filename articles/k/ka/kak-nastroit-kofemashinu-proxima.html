@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как настроить кофемашину Proxima: Полное руководство по параметрам — Кофини</title>
+    <meta name="description" content="Пошаговая инструкция по калибровке, настройке помолу и программированию напитков для автоматов Proxima. Секреты идеального эспрессо и декальцинация.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-nastroit-kofemashinu-proxima.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как настроить кофемашину Proxima: Полное руководство по параметрам">
+    <meta property="og:description" content="Пошаговая инструкция по калибровке, настройке помолу и программированию напитков для автоматов Proxima. Секреты идеального эспрессо и декальцинация.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как настроить кофемашину Proxima: Полное руководство по параметрам</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Полное руководство: Как правильно настроить кофемашину Proxima</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#введение-в-мир-кофейных-автоматов-proxima">Введение в мир кофейных автоматов Proxima</a></li><li><a href="#подготовка-и-первичная-инициализация-системы">Подготовка и первичная инициализация системы</a></li><li><a href="#калибровка-кофемолки-и-градация-помола">Калибровка кофемолки и градация помола</a></li><li><a href="#программирование-объема-и-крепости-напитка">Программирование объема и крепости напитка</a></li><li><a href="#управление-жесткостью-воды-и-системами-очистки">Управление жесткостью воды и системами очистки</a></li><li><a href="#настройка-капучинатора-и-системы-взбивания-молока">Настройка капучинатора и системы взбивания молока</a></li><li><a href="#решение-частых-проблем-и-обслуживание">Решение частых проблем и обслуживание</a></li><li><a href="#faq-ответы-на-частые-вопросы">FAQ: Ответы на частые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><h2 id="введение-в-мир-кофейных-автоматов-proxima">Введение в мир кофейных автоматов Proxima</h2>
+<p>Кофемашины бренда <em>Proxima</em> завоевали популярность благодаря своей надежности и возможности тонкой настройки вкусовых параметров. Однако, только что купленное устройство или аппарат после длительного простоя требует обязательной калибровки перед началом эксплуатации. Без правильной установки высоты помола и дозировки даже самые дорогие зерна не раскроют свой потенциал.</p>
+<p>Многие пользователи совершают ошибку, пытаясь настроить параметры «на глаз» или используя стандартные заводские установки для всех видов зерен. Это приводит к нестабильному давлению экстракции, горечи или кислинке в чашке. <strong>Качественная настройка</strong> — это баланс между весом порошка, временем пролива и температурой воды, который нужно подобрать индивидуально под вашу воду и сорт кофе.</p>
+<p>В этом материале мы разберем не только базовые операции, но и тонкие нюансы работы с <em>Proxima</em>, которые часто упускают из виду. Вы узнаете, как избежать типичных ошибок при программировании и как поддерживать стабильность вкуса на протяжении всего рабочего дня. Правильная конфигурация оборудования напрямую влияет на его ресурс и удовлетворенность клиентов.</p>
+
+<h2 id="подготовка-и-первичная-инициализация-системы">Подготовка и первичная инициализация системы</h2>
+<p>Перед тем как приступить к глубокой настройке параметров напитка, необходимо убедиться в готовности технической части кофемашины. Процесс инициализации включает в себя проверку уровня воды, наполнение бункера зерном и запуск первого цикла промывки. Эти действия критически важны для удаления смазочных материалов с новых деталей и подготовки гидравлической системы к работе.</p>
+<p>Заполните резервуар чистой водой, избегая использования дистиллированной или кипяченой жидкости, так как отсутствие минералов может нарушить работу датчиков жесткости. Всыпьте зерна в бункер, убедившись, что они не перекрыли загрузочный канал. После включения питания система автоматически выполнит самопроверку всех узлов, включая <strong>нагревательный блок</strong> и насос высокого давления.</p>
+<blockquote>⚠️ Внимание: Если кофемашина Proxima оснащена модельным типом с жесткой привязкой к параметрам воды, игнорирование рекомендаций по минерализации может привести к некорректным показаниям сенсоров качества воды.</blockquote>
+<p>Важно отметить, что первые несколько чашек, приготовленных сразу после сборки или долгого перерыва, лучше выпустить в раковину. Это необходимо для полного вымывания остатков технологических масел из <em>кофемолки</em> и группы заваривания. Только после визуального контроля чистоты воды и стабильности струи можно переходить к программированию вкусовых профилей.</p>
+
+<h2 id="калибровка-кофемолки-и-градация-помола">Калибровка кофемолки и градация помола</h2>
+<p>Самый критичный этап настройки любой кофемашины — это регулировка степени помола. От качества <strong>мелкости помола</strong> зависит время экстракции: слишком крупный помол приведет к быстрому проливу и водянистому вкусу, а слишком мелкий — к забиванию фильтра и горечи. В моделях <em>Proxima</em> этот процесс осуществляется через поворотный регулятор, доступный через загрузочный люк.</p>
+<p>Ни в коем случае не пытайтесь изменить положение регулятора, пока кофемолка находится в активном режиме работы (когда жернова вращаются). Это может привести к поломке жерновов или заклиниванию механизма. Изменять настройки следует только при остановке двигателя или вращении жерновов вхолостую при открытой крышке. После каждого изменения параметров необходимо пролить несколько порций кофе для стабилизации результата.</p>
+<p>Для достижения идеального результата используйте метод «проб и ошибок», начиная с среднего положения регулятора. Приготовьте порцию эспрессо и оцените время вытекания: для стандартного объема в 30 мл идеальное время составляет 25–30 секунд. Если вода льется быстрее, поверните регулятор в сторону уменьшения (обычно по часовой стрелке), если медленнее — в сторону увеличения.</p>
+
+<div class="poll-widget" id="poll-ccb2ac08"><div class="poll-widget-question">📊 Как часто вы чистите жернова кофемолки?</div><div class="poll-widget-option" data-poll="ccb2ac08" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в неделю</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="ccb2ac08" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Раз в месяц</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="ccb2ac08" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Только при поломке</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="ccb2ac08" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Ежедневно</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<div class="checklist-block"><h4>☑️ Проверка перед регулировкой помола</h4><label class="check-item"><input type="checkbox"><span>Убедиться, что кофемолка остановлена</span></label><label class="check-item"><input type="checkbox"><span>Открыть загрузочный люк</span></label><label class="check-item"><input type="checkbox"><span>Проверить уровень зерен</span></label><label class="check-item"><input type="checkbox"><span>Изменить положение регулятора</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<p>Помните, что влажность зерна и его свежесть также влияют на необходимые настройки. Летом, когда влажность воздуха выше, кофе может требовать более крупного помола, а зимой — более мелкого. <strong>Динамическая корректировка</strong> позволяет адаптировать аппарат под текущие климатические условия и гарантировать стабильный вкус.</p>
+
+<h2 id="программирование-объема-и-крепости-напитка">Программирование объема и крепости напитка</h2>
+<p>После настройки механической части наступает черед программного обеспечения. Современные модели <em>Proxima</em> позволяют пользователю самостоятельно определять объем воды для каждого типа напитка. Для этого достаточно войти в режим обслуживания или меню пользователя, выбрать нужный вид кофейного изделия и удерживать кнопку запуска до достижения желаемого объема.</p>
+<p>Дополнительно можно настроить количество используемого молотого кофе, что напрямую влияет на крепость. В некоторых модификациях доступна функция двойного помола, которая удваивает дозировку порошка для одной чашки, создавая более насыщенный и плотный вкус. Это особенно актуально для приготовления <strong>двойного эспрессо</strong> или напитков на основе крепкой основы.</p>
+<blockquote>⚠️ Внимание: При программировании объема помните, что время прогрева воды может влиять на итоговый объем. Если машина была выключена на ночь, первые несколько порций могут быть меньше запрограммированного объема из-за охлаждения бойлера.</blockquote>
+<p>Для настройки температурного режима нужно учитывать, что слишком горячая вода может сжечь тонкие ароматические соединения в кофе, придав напитку жженый привкус. Оптимальная температура для эспрессо находится в диапазоне от 90 до 94 градусов. В меню <code>Настройки -> Температура</code> можно задать смещение температуры для каждого типа напитка отдельно, если аппарат поддерживает такую функцию.</p>
+
+<details class="faq-item"><summary>Секретный код для доступа к инженерным настройкам</summary><div class="faq-answer"><p>В большинстве моделей Proxima доступ к расширенным инженерным меню (Service Mode) осуществляется путем удержания комбинации кнопок "Включить" и "Настройки" при включении питания, однако точная комбинация зависит от ревизии платы управления.</p></div></details>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Запишите ваши идеальные настройки объема и помола в отдельный блокнот или файл, чтобы при сбросе настроек или замене прошивки вы могли быстро вернуть привычные параметры вкуса без долгих экспериментов.</p></div>
+
+<p>Важно понимать, что изменение объема напитка не всегда должно сопровождаться изменением дозировки кофе. Если вы увеличиваете объем воды, но оставляете ту же дозу кофе, напиток станет более водянистым. Для сохранения крепости при увеличении объема необходимо пропорционально увеличивать и дозу молотых зерен.</p>
+
+<h2 id="управление-жесткостью-воды-и-системами-очистки">Управление жесткостью воды и системами очистки</h2>
+<p>Жесткость воды является одним из ключевых факторов, влияющих на долговечность кофемашины и качество вкуса. Система <em>Proxima</em> оснащена датчиками жесткости или позволяет задать этот параметр вручную. Неправильная настройка жесткости может привести к преждевременному образованию накипи или, наоборот, к коррозии металлических элементов из-за слишком агрессивной воды.</p>
+<p>Если вы используете фильтрованную воду, необходимо точно установить уровень жесткости в соответствии с показаниями тест-полосок. Обычно шкала делится на 3-5 уровней: от мягкой до очень жесткой. В меню <code>Настройки -> Вода -> Жесткость</code> выберите соответствующий уровень. Это поможет системе правильно рассчитать интервалы для автоматического цикла декальцинации.</p>
+
+<table>
+ <thead>
+  <tr>
+   <th>Уровень жесткости</th>
+   <th>Содержание солей (мг/л)</th>
+   <th>Рекомендуемый интервал очистки</th>
+   <th>Тип воды</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Уровень 1 (Мягкая)</td>
+   <td>0-50</td>
+   <td>Раз в 6 месяцев</td>
+   <td>Обратный осмос</td>
+  </tr>
+  <tr>
+   <td>Уровень 2 (Средняя)</td>
+   <td>50-100</td>
+   <td>Раз в 3-4 месяца</td>
+   <td>Фильтр-кувшин</td>
+  </tr>
+  <tr>
+   <td>Уровень 3 (Жесткая)</td>
+   <td>100-200</td>
+   <td>Раз в 2 месяца</td>
+   <td>Водопроводная (мягкая)</td>
+  </tr>
+  <tr>
+   <td>Уровень 4 (Очень жесткая)</td>
+   <td>200+</td>
+   <td>Раз в 1 месяц</td>
+   <td>Водопроводная</td>
+  </tr>
+ </tbody>
+</table>
+
+<p>Регулярное использование специальных средств для очистки от накипи обязательно, даже при использовании мягкой воды. Кислоты, содержащиеся в кофе, также требуют периодической промывки заварочного блока. <strong>Автоматический цикл очистки</strong> запускается после определенного количества приготовленных чашек и требует от пользователя своевременной постановки контейнера для жмыха.</p>
+<p>Если на дисплее загорается индикатор «Decalcify» или «Clean», необходимо немедленно запустить соответствующую процедуру. Игнорирование сигналов датчиков может привести к блокировке работы аппарата и дорогостоящему ремонту. Процесс декальцинации обычно занимает от 20 до 40 минут и требует наличия специальной жидкости в резервуаре.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Правильная настройка жесткости воды — это не только вопрос вкуса, но и гарантия долгой жизни нагревательного элемента и гидравлических узлов кофемашины Proxima.</p></div>
+
+<h2 id="настройка-капучинатора-и-системы-взбивания-молока">Настройка капучинатора и системы взбивания молока</h2>
+<p>Для приготовления качественных молочных напитков критически важна настройка парового или автоматического капучинатора. В моделях <em>Proxima</em> с автоматическими капучинаторами (встроенными в трубку) регулировка осуществляется через длину шланга погружения и параметры подачи пара. Если капучинатор съемный, его нужно промыть сразу после использования и проверить на отсутствие засоров в форсунках.</p>
+<p>Температура взбивания молока должна быть строго контролируемой: перегрев молока выше 65 градусов разрушает белковую структуру, делая пену грубой и быстро оседающей. В системе можно установить целевую температуру для молока, чтобы аппарат автоматически отключал пар при достижении нужного значения. Это обеспечивает <strong>идеальную текстуру пены</strong> для капучино и латте.</p>
+<blockquote>⚠️ Внимание: При использовании автоматического капучинатора убедитесь, что шланг для молока погружен в емкость с молоком полностью. Если шланг находится на поверхности, в пену попадут пузырьки воздуха, что сделает текстуру неравномерной и «пористой».</blockquote>
+<p>Регулировка консистенции пены также может производиться через специальные насадки или программные настройки. Для капучино требуется густая, плотная пена, а для латте — более жидкая и воздушная. Экспериментируйте с длиной цикла взбивания и временем подачи молока в стакан, чтобы найти баланс между объемом напитка и качеством покрытия.</p>
+
+<details class="faq-item"><summary>Технический нюанс очистки капучинатора</summary><div class="faq-answer"><p>Для глубокой очистки автоматического капучинатора снимите его и замочите в теплой воде с добавлением специального средства на 10-15 минут, затем промойте под струей воды, нажав кнопку подачи пара/воды.</p></div></details>
+
+<p> Использование теплого молока приведет к перегреву и сворачиванию белков еще до достижения нужной температуры. Также рекомендуется использовать молоко с нормальным содержанием жира, так как обезжиренное молоко плохо держит пену и дает менее насыщенный вкус.</p>
+
+<h2 id="решение-частых-проблем-и-обслуживание">Решение частых проблем и обслуживание</h2>
+<p>Даже при грамотной настройке в процессе эксплуатации могут возникать нестандартные ситуации. Если кофемашина <em>Proxima</em> выдает ошибку «Забитый фильтр» или «Прерывание пролива», первым делом проверьте правильность установки кофейного фильтра и наличие остатков в лотке для жмыха. Иногда достаточно просто очистить заварочную группу от спрессованного жмыха.</p>
+<p>В случае если напиток получается слишком водянистым, несмотря на правильную дозировку, проверьте давление в гидравлической системе. Падение давления может свидетельствовать о неисправности насоса или наличии воздушных пробок в магистрали. Для удаления воздуха выполните цикл прокачки системы, заполнив резервуар и прогнав воду через все каналы без использования кофе.</p>
+<p>Если на дисплее постоянно мигает индикатор «Заполните бункер» при наличии зерен, проверьте наличие в бункере антистатических свойств или наличие слипшихся зерен. <strong>Антистатическая присыпка</strong> может помочь, если зерна слишком сухие и отталкиваются друг от друга, не попадая в жернова. Также стоит проверить, не заблокирован ли канал подачи зерна засохшим кофе.</p>
+<p>Для поддержания работоспособности аппарата рекомендуется проводить плановое техническое обслуживание каждые 5000-10000 приготовленных чашек. Это включает замену фильтров, смазку подвижных частей заварочного блока и проверку герметичности уплотнительных колец. Регулярное обслуживание продлевает срок службы машины и сохраняет стабильность вкусовых характеристик.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярное обслуживание и своевременная очистка — залог того, что ваша кофемашина Proxima будет служить годами, не требуя дорогостоящего ремонта.</p></div>
+
+<h2 id="faq-ответы-на-частые-вопросы">FAQ: Ответы на частые вопросы</h2>
+<details>
+ <summary>Как сбросить настройки кофемашины Proxima до заводских?</summary>
+ <p>Для сброса настроек перейдите в меню <code>Настройки -> Система -> Сброс</code>. Подтвердите действие, введя код доступа (обычно 0000 или 1234, если не менялся). Это удалит все пользовательские настройки объема, температуры и жесткости.</p>
+</details>
+<details>
+ <summary>Можно ли использовать кофейные таблетки вместо зерен?</summary>
+ <p>Нет, большинство кофемашин Proxima оснащены кофемолкой и рассчитаны исключительно на цельные зерна. Использование таблеток может привести к поломке жерновов и засору системы заваривания.</p>
+</details>
+<details>
+ <summary>Как часто нужно менять фильтр для воды в кофемашине?</summary>
+ <p>Срок службы фильтра зависит от жесткости исходной воды и объема потребления. Обычно рекомендуется замена каждые 2-3 месяца или после приготовления 500-800 литров воды.</p>
+</details>
+<details>
+ <summary>Почему кофемашина издает громкие звуки при работе?</summary>
+ <p>Громкие звуки могут указывать на наличие воздушных пробок, неисправность насоса или отсутствие воды в резервуаре. Проверьте уровень воды и выполните прокачку системы.</p>
+</details>
+<details>
+ <summary>Что делать, если индикатор декальцинации не гаснет после очистки?</summary>
+ <p>Если после завершения цикла очистки индикатор продолжает гореть, необходимо вручную сбросить счетчик. Обычно это делается через меню обслуживания путем удержания кнопки «ОК» или комбинации кнопок в течение 5 секунд.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#введение-в-мир-кофейных-автоматов-proxima">Введение в мир кофейных автоматов Proxima</a></li><li><a href="#подготовка-и-первичная-инициализация-системы">Подготовка и первичная инициализация системы</a></li><li><a href="#калибровка-кофемолки-и-градация-помола">Калибровка кофемолки и градация помола</a></li><li><a href="#программирование-объема-и-крепости-напитка">Программирование объема и крепости напитка</a></li><li><a href="#управление-жесткостью-воды-и-системами-очистки">Управление жесткостью воды и системами очистки</a></li><li><a href="#настройка-капучинатора-и-системы-взбивания-молока">Настройка капучинатора и системы взбивания молока</a></li><li><a href="#решение-частых-проблем-и-обслуживание">Решение частых проблем и обслуживание</a></li><li><a href="#faq-ответы-на-частые-вопросы">FAQ: Ответы на частые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ko/kofemashina-saeco-poemia-kak-polzovatsya.html" class="related-card">Как пользоваться кофемашиной Saeco Poemia: Полное руководство по эксплуатации</a></li><li><a href="/articles/k/ka/kak-sbrosit-kofemashinu-nespresso.html" class="related-card">Как сбросить кофемашину Nespresso: Полная инструкция по перезагрузке</a></li><li><a href="/articles/k/ka/kak-pereklyuchit-kofemashinu-filips-s-zeren-na-molotyj-kofe.html" class="related-card">Как переключить кофемашину Philips с зерен на молотый кофе: инструкция</a></li><li><a href="/articles/c/ch/chem-otmyt-plastik-kofemashiny.html" class="related-card">Чем отмыть пластик кофемашины: безопасные средства и методы</a></li><li><a href="/articles/k/ko/kofemashina-brown-king-kak-polzovatsya.html" class="related-card">Как пользоваться кофемашиной Brown King: Инструкция и советы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ko/kofemashina-saeco-poemia-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Saeco Poemia: Полное руководство по эксплуатации</span><span class="related-bottom-desc">Подробная инструкция по использованию Saeco Poemia HD8751/8761. Настройка мелкости помола, приготовл</span></a><a href="/articles/k/ka/kak-sbrosit-kofemashinu-nespresso.html" class="related-bottom-card"><span class="related-bottom-title">Как сбросить кофемашину Nespresso: Полная инструкция по перезагрузке</span><span class="related-bottom-desc">Пошаговое руководство: как сбросить настройки Nespresso, выполнить декальцинацию и исправить ошибки.</span></a><a href="/articles/k/ka/kak-pereklyuchit-kofemashinu-filips-s-zeren-na-molotyj-kofe.html" class="related-bottom-card"><span class="related-bottom-title">Как переключить кофемашину Philips с зерен на молотый кофе: инструкция</span><span class="related-bottom-desc">Пошаговая инструкция: как использовать дозатор молотого кофе в кофемашинах Philips. Советы по выбору</span></a><a href="/articles/c/ch/chem-otmyt-plastik-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Чем отмыть пластик кофемашины: безопасные средства и методы</span><span class="related-bottom-desc">Полное руководство по очистке пластика кофемашины. Удаление жира, кофеина и накипи без повреждения д</span></a><a href="/articles/k/ko/kofemashina-brown-king-kak-polzovatsya.html" class="related-bottom-card"><span class="related-bottom-title">Как пользоваться кофемашиной Brown King: Инструкция и советы</span><span class="related-bottom-desc">Полное руководство: как включить, настроить, приготовить кофе и провести обслуживание кофемашины Bro</span></a><a href="/articles/k/ka/kak-vzryvaetsya-kofemashina.html" class="related-bottom-card"><span class="related-bottom-title">Как взрывается кофемашина: причины, риски и безопасная эксплуатация</span><span class="related-bottom-desc">Почему кофемашина может взорваться: разрыв бойлера, засор клапанов и ошибки обслуживания. Разбор реа</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

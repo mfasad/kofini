@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как пользоваться TDS-метром: пошаговая инструкция и расшифровка — Кофини</title>
+    <meta name="description" content="Полное руководство по использованию TDS-метра: калибровка, измерение качества воды, расшифровка значений PPM и частые ошибки при эксплуатации.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/t/td/tds-metr-kak-polzovatsya.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как пользоваться TDS-метром: пошаговая инструкция и расшифровка">
+    <meta property="og:description" content="Полное руководство по использованию TDS-метра: калибровка, измерение качества воды, расшифровка значений PPM и частые ошибки при эксплуатации.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/aksessuary-i-instrumenty/">Аксессуары и инструменты</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как пользоваться TDS-метром: пошаговая инструкция и расшифровка</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Полное руководство: как правильно пользоваться TDS-метром для контроля качества воды</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#принцип-работы-и-устройство-прибора">Принцип работы и устройство прибора</a></li><li><a href="#подготовка-и-калибровка-перед-первым-использованием">Подготовка и калибровка перед первым использованием</a></li><li><a href="#пошаговая-инструкция-по-измерению-воды">Пошаговая инструкция по измерению воды</a></li><li><a href="#расшифровка-показателей-и-интерпретация-данных">Расшифровка показателей и интерпретация данных</a></li><li><a href="#типичные-ошибки-и-профилактика-поломок">Типичные ошибки и профилактика поломок</a></li><li><a href="#уход-за-прибором-и-хранение">Уход за прибором и хранение</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Контроль чистоты питьевой воды стал неотъемлемой частью заботы о здоровье миллионов людей по всему миру. Владельцы систем обратного осмоса, фильтрационных колонок и бытовых фильтров часто сталкиваются с вопросом, насколько эффективно их оборудование очищает жидкость. Именно для решения этой задачи используется компактный прибор, способный мгновенно оценить минерализацию жидкости. <strong>TDS-метр</strong> (Total Dissolved Solids) — это незаменимый инструмент, который показывает содержание растворенных твердых веществ в воде, помогая понять, пригодна ли она для питья.</p>
+
+<p>Многие пользователи ошибочно полагают, что для работы с устройством требуются глубокие знания в химии или физике. На самом деле принцип действия <em>TDS-метра</em> предельно прост, а управление им интуитивно понятно даже для новичка. Достаточно понять основные этапы подготовки, правильного погружения зонда и интерпретации полученных цифр, чтобы получать точные данные о качестве воды в вашем доме.</p>
+
+<p>Правильное использование прибора позволяет своевременно заменить фильтрующие элементы и избежать употребления загрязненной воды. Без регулярного мониторинга вы можете не заметить, что мембрана осмоса или угольный картридж потеряли свои свойства, что влечет за собой риски для здоровья. Мы подробно разберем, как превратить этот простой гаджет в надежного помощника на вашей кухне.</p>
+
+<h2 id="принцип-работы-и-устройство-прибора">Принцип работы и устройство прибора</h2>
+
+<p>Чтобы эффективно пользоваться <strong>TDS-метром</strong>, важно понимать, что именно он измеряет и как это происходит. Прибор не анализирует химический состав воды напрямую, а измеряет электропроводность жидкости. Чистая дистиллированная вода практически не проводит электрический ток, тогда как вода с растворенными солями, металлами и другими минералами становится проводником. Метр посылает сигнал через электроды, измеряет сопротивление и конвертирует его в значение концентрации растворенных веществ.</p>
+
+<p>Результат измерения отображается на дисплее в единицах PPM (Parts Per Million) или мг/л. Это означает количество миллиграммов растворенных веществ на один литр воды. Это ключевой нюанс, который нужно учитывать при интерпретации данных.</p>
+
+<p>Конструкция большинства бытовых приборов включает в себя герметичный корпус, жидкокристаллический дисплей и погружной электрод. Некоторые модели имеют дополнительные кнопки для переключения температурной компенсации или удержания значения (HOLD). Качество электродов напрямую влияет на точность показаний, поэтому бережное отношение к зонду — залог долгой службы устройства.</p>
+
+<h2 id="подготовка-и-калибровка-перед-первым-использованием">Подготовка и калибровка перед первым использованием</h2>
+
+<p>Перед тем как начать измерения, необходимо убедиться, что ваш прибор готов к работе. Многие новички пропускают этот этап, что приводит к неточным результатам. Если вы только достали <strong>TDS-метр</strong> из упаковки, проверьте наличие защитного колпачка и его заполнение раствором для хранения электродов. Если колпачок пуст, электроды могут пересохнуть, что повредит чувствительные датчики.</p>
+
+<p>Калибровка — это процесс настройки прибора под эталонный раствор. Хотя многие бытовые модели идут с заводской настройкой, периодическая калибровка повышает точность. Для этого используется специальный калибровочный раствор, обычно с концентрацией 1413 PPM или 64 PPM. Окуните электрод в раствор, дождитесь стабилизации показаний и нажмите кнопку калибровки (CAL), следуя инструкции к конкретной модели <em>TDS-метра</em>.</p>
+
+<p>Важно проверить уровень заряда батарейки. Низкое напряжение может исказить показания или привести к сбою в работе дисплея. Если на экране появляется значок батареи или цифры начинают "плавать", замените элементы питания на новые. Не используйте прибор с разряженными батарейками, так как это может спровоцировать ложные выводы о качестве воды.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Никогда не протирайте электроды сухой тканью или бумажными полотенцами. Это может повредить чувствительный слой датчика и привести к необратимым погрешностям измерений. Используйте только мягкую губку или промокательную бумагу, если необходимо удалить капли воды.</p>
+</blockquote>
+
+<h2 id="пошаговая-инструкция-по-измерению-воды">Пошаговая инструкция по измерению воды</h2>
+
+<p>Процесс измерения предельно прост, но требует соблюдения определенных правил для получения достоверных данных. Возьмите емкость с исследуемой водой и откройте защитный колпачок прибора. Убедитесь, что электроды чистые и на них нет видимых загрязнений или следов накипи. Если на датчиках есть налет, аккуратно промойте их дистиллированной водой перед началом работы.</p>
+
+<p>Опустите погружную часть <strong>TDS-метра</strong> в воду на глубину, указанную в инструкции (обычно это 3-5 см). Не опускайте прибор до самого дна емкости, чтобы избежать контакта с осадком. Удерживайте устройство вертикально и слегка покачивайте его, чтобы выгнать пузырьки воздуха с поверхности электродов. Пузырьки могут искажать электрический контакт и давать ложные показания.</p>
+
+<p>Подождите несколько секунд, пока цифры на дисплее перестанут меняться. Современные <em>приборы</em> оснащены функцией автоматической фиксации (Hold), которая запоминает значение. Если такой функции нет, просто снимите показания, когда они стабилизируются. Запишите результат и сравните его с нормативами для питьевой воды.</p>
+
+<div class="checklist-block"><h4>☑️ Правильное измерение воды</h4><label class="check-item"><input type="checkbox"><span>Проверить заряд батареи</span></label><label class="check-item"><input type="checkbox"><span>Очистить электроды</span></label><label class="check-item"><input type="checkbox"><span>Опустить на нужную глубину</span></label><label class="check-item"><input type="checkbox"><span>Убрать пузырьки воздуха</span></label><label class="check-item"><input type="checkbox"><span>Дождаться стабилизации</span></label><label class="check-item"><input type="checkbox"><span>Зафиксировать результат</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 6</div></div>
+
+<p>Для получения наилучшего результата проводите измерения при комнатной температуре. Слишком горячая или холодная вода может исказить данные, так как электропроводность зависит от температуры. Большинство приборов имеют встроенную температурную компенсацию, но экстремальные значения все же могут влиять на точность. Старайтесь измерять воду сразу после ее забора, чтобы исключить взаимодействие с воздухом.</p>
+
+<h2 id="расшифровка-показателей-и-интерпретация-данных">Расшифровка показателей и интерпретация данных</h2>
+
+<p>Получив цифру на дисплее, важно понять, что она означает для вашего здоровья и работы фильтра. Значение <strong>0-50 PPM</strong> обычно указывает на воду, прошедшую через систему обратного осмоса или дистилляцию. Это очень низкая минерализация, идеальная для приготовления чая или кофе, но не рекомендуется для постоянного питья в чистом виде без реминерализации.</p>
+
+<p>Значения в диапазоне <strong>50-150 PPM</strong> считаются отличным показателем для питьевой воды. Такая вода содержит полезные минералы в оптимальном количестве и не несет рисков для здоровья. Водопроводная вода в развитых странах часто имеет значения от 150 до 300 PPM, что является допустимым, но может оставлять налет на чайнике при кипячении.</p>
+
+<p>Показатели выше <strong>300-500 PPM</strong> указывают на высокую жесткость и наличие большого количества растворенных веществ. Вода с концентрацией более 500 PPM считается непригодной для длительного употребления без предварительной очистки. Высокий уровень TDS может свидетельствовать о загрязнении тяжелыми металлами или нитратами, хотя сам по себе прибор не определяет вид примесей.</p>
+
+<table>
+<thead>
+<tr>
+<th>Уровень PPM</th>
+<th>Категория качества</th>
+<th>Рекомендация</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 50</td>
+<td>Дистиллированная/Осмос</td>
+<td>Подходит для техники, питья с минерализатором</td>
+</tr>
+<tr>
+<td>50 - 150</td>
+<td>Отличная</td>
+<td>Идеальна для питья и приготовления пищи</td>
+</tr>
+<tr>
+<td>150 - 300</td>
+<td>Допустимая</td>
+<td>Нормально, возможен налет при кипячении</td>
+</tr>
+<tr>
+<td>300 - 500</td>
+<td>Высокая жесткость</td>
+<td>Рекомендуется использовать фильтр</td>
+</tr>
+<tr>
+<td>> 500</td>
+<td>Непригодная</td>
+<td>Требует обязательной очистки</td>
+</tr>
+</tbody>
+</table>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Для точной оценки работы фильтра обратного осмоса измеряйте воду в двух точках: из крана бытовой воды и из крана очищенной воды. Разница в показателях должна быть не менее 90-95%.</p></div>
+
+<p>Помните, что низкий TDS не всегда означает безопасность. Вода может быть лишена солей, но содержать вирусы или бактерии, которые прибор не видит. Поэтому <strong>TDS-метр</strong> — это инструмент контроля минерализации, а не панацея от всех загрязнений. Используйте его в комплексе с другими методами проверки качества воды.</p>
+
+<div class="poll-widget" id="poll-92bc6a2c"><div class="poll-widget-question">📊 Какой уровень минерализации воды в вашем доме?</div><div class="poll-widget-option" data-poll="92bc6a2c" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">0-50 PPM</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="92bc6a2c" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">50-150 PPM</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="92bc6a2c" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">150-300 PPM</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="92bc6a2c" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Более 300 PPM</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="типичные-ошибки-и-профилактика-поломок">Типичные ошибки и профилактика поломок</h2>
+
+<p>Одной из самых распространенных ошибок является измерение воды из-под крана без предварительной промывки. Если вы наберете воду сразу после открытия крана, вы можете получить завышенные показатели из-за стоячей воды в трубах. Всегда сливайте первые 30-60 секунд воды перед измерением, чтобы получить актуальную картину качества поступающей воды.</p>
+
+<p>Никогда не погружайте <em>корпус</em> прибора в воду глубже, чем позволяет маркировка. Вода может попасть внутрь электроники, вызвав короткое замыкание и выход устройства из строя. Даже если корпус водонепроницаем для брызг, длительное погружение всей конструкции часто приводит к поломке. Следите за состоянием уплотнительного кольца в месте соединения электродов и корпуса.</p>
+
+<p>Хранение прибора без защитного колпачка — верный путь к его быстрому износу. Электроды должны всегда находиться во влажной среде, чтобы оставаться чувствительными. Если вы не планируете использовать прибор длительное время, оставьте в колпачке немного дистиллированной воды. Это предотвратит высыхание и окисление датчиков.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если вы измеряете очень горячую воду (выше 50°C), высока вероятность повреждения электродов. Большинство бытовых моделей имеют температурный предел до 50 градусов Цельсия. Измеряйте воду комнатной температуры для продления срока службы прибора.</p>
+</blockquote>
+
+<p>Иногда пользователи сталкиваются с тем, что прибор показывает "0" или случайные цифры на воздухе. Это нормально, так как воздух не проводит ток. Однако если при погружении в воду цифры не меняются или остаются нулевыми, проверьте, не пересохли ли электроды. Попробуйте замочить их в теплой воде на 10-15 минут, чтобы восстановить чувствительность.</p>
+
+<details class="faq-item"><summary>Что делать, если прибор показывает неверные значения?</summary><div class="faq-answer"><p>Если вы уверены в исправности прибора, попробуйте провести повторную калибровку. Замените батарейки и убедитесь, что электроды чистые. Если проблема не решается, возможно, датчик вышел из строя из-за попадания агрессивной среды или пересыхания. В таком случае требуется замена прибора.</p></div></details>
+
+<h2 id="уход-за-прибором-и-хранение">Уход за прибором и хранение</h2>
+
+<p>После каждого использования тщательно промойте электроды дистиллированной водой. Это удалит остатки измеряемой жидкости и предотвратит образование налета. Протрите корпус сухой мягкой тканью и наденьте защитный колпачок. Не используйте для очистки агрессивные химические растворители или абразивные материалы.</p>
+
+<p>Храните <strong>TDS-метр</strong> в сухом месте, вдали от прямых солнечных лучей и источников тепла. Экстремальные температуры могут повредить дисплей и электронные компоненты. Идеальным местом будет кухонный ящик или специальная подставка, где прибор будет защищен от ударов и пыли.</p>
+
+<p>Раз в несколько месяцев проводите проверку работоспособности, опуская прибор в раствор с известной концентрацией. Это поможет убедиться, что датчики функционируют корректно. Если показания расходятся с эталоном более чем на 5%, выполните калибровку или замените устройство. Регулярный уход гарантирует точность измерений на протяжении многих лет.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная калибровка и правильное хранение в увлажненном состоянии — главные условия долгой жизни и точности вашего TDS-метра.</p></div>
+
+<h2 id="часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</h2>
+
+<details>
+<summary>Может ли TDS-метр показать наличие бактерий в воде?</summary>
+<p>Нет, TDS-метр измеряет только электропроводность, которая зависит от концентрации растворенных солей и минералов. Бактерии, вирусы и органические примеси не влияют на электропроводность так, как соли, поэтому прибор не может их обнаружить. Для проверки микробиологического качества воды необходимы лабораторные исследования.</p>
+</details>
+
+<details>
+<summary>Почему вода из крана показывает высокий TDS, хотя я пользуюсь фильтром?</summary>
+<p>Это может происходить по нескольким причинам: фильтрам требуется замена, мембрана обратного осмоса повреждена или вы измеряете воду до фильтрации. Также высокий TDS может быть связан с сезонными изменениями в водоснабжении или накоплением солей в баке фильтра. Проверьте исправность системы и замените картриджи.</p>
+</details>
+
+<details>
+<summary>Нужно ли калибровать TDS-метр каждый раз перед использованием?</summary>
+<p>Нет, ежедневная калибровка не требуется. Достаточно проводить эту процедуру раз в 1-3 месяца или если вы подозреваете неточность показаний. Если прибор хранится в правильных условиях и используется редко, заводская калибровка может сохраняться долгое время.</p>
+</details>
+
+<details>
+<summary>Какой оптимальный уровень TDS для питьевой воды?</summary>
+<p>Оптимальным считается диапазон от 50 до 150 PPM. Вода в этом диапазоне содержит достаточное количество полезных минералов и не имеет избыточной жесткости. Вода с TDS ниже 50 PPM (после осмоса) полезна для чая, но для постоянного питья лучше добавить минерализатор.</p>
+</details>
+
+<details>
+<summary>Почему прибор показывает разные значения при повторном измерении одной и той же воды?</summary>
+<p>Причины могут быть в температурных колебаниях, наличии пузырьков воздуха на электродах или нестабильном контакте. Также на показания влияет перемешивание воды. Для стабильного результата погружайте прибор на одинаковую глубину, ждите стабилизации и исключайте движение воды во время измерения.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#принцип-работы-и-устройство-прибора">Принцип работы и устройство прибора</a></li><li><a href="#подготовка-и-калибровка-перед-первым-использованием">Подготовка и калибровка перед первым использованием</a></li><li><a href="#пошаговая-инструкция-по-измерению-воды">Пошаговая инструкция по измерению воды</a></li><li><a href="#расшифровка-показателей-и-интерпретация-данных">Расшифровка показателей и интерпретация данных</a></li><li><a href="#типичные-ошибки-и-профилактика-поломок">Типичные ошибки и профилактика поломок</a></li><li><a href="#уход-за-прибором-и-хранение">Уход за прибором и хранение</a></li><li><a href="#часто-задаваемые-вопросы-faq">Часто задаваемые вопросы (FAQ)</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kak-razmnozhit-kofejnoe-derevo-v-domashnikh-usloviyakh-cherenkami.html" class="related-card">Размножение кофейного дерева черенками: пошаговая инструкция</a></li><li><a href="/articles/d/dl/dlya-chego-mozhno-ispolzovat-kofejnuyu-gushchu.html" class="related-card">10 способов применения кофейной гущи: от ухода за растениями до косметики</a></li><li><a href="/articles/d/df/df-64-kofemolka.html" class="related-card">Кофемолка DF64: обзор, характеристики и выбор версии</a></li><li><a href="/articles/k/kr/kruzhka-keramicheskaya-opisanie.html" class="related-card">Керамическая кружка: полное руководство по выбору, уходу и особенностям</a></li><li><a href="/articles/k/ka/kak-nazyvaetsya-chelovek-kotoryj-delaet-kofe-v-kofejne.html" class="related-card">Бариста или кофемейкер: как называется кто делает кофе</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kak-razmnozhit-kofejnoe-derevo-v-domashnikh-usloviyakh-cherenkami.html" class="related-bottom-card"><span class="related-bottom-title">Размножение кофейного дерева черенками: пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как получить новое арабское кофейное дерево в домашних условиях. Методика укоренения черенк</span></a><a href="/articles/d/dl/dlya-chego-mozhno-ispolzovat-kofejnuyu-gushchu.html" class="related-bottom-card"><span class="related-bottom-title">10 способов применения кофейной гущи: от ухода за растениями до косметики</span><span class="related-bottom-desc">Узнайте, как эффективно использовать кофейную гущу дома: удобрения для сада, скрабы для тела, средст</span></a><a href="/articles/d/df/df-64-kofemolka.html" class="related-bottom-card"><span class="related-bottom-title">Кофемолка DF64: обзор, характеристики и выбор версии</span><span class="related-bottom-desc">Полный разбор кофемолки DF64 от 64mm. Сравнение версий, выбор ножей, настройка помола и советы по об</span></a><a href="/articles/k/kr/kruzhka-keramicheskaya-opisanie.html" class="related-bottom-card"><span class="related-bottom-title">Керамическая кружка: полное руководство по выбору, уходу и особенностям</span><span class="related-bottom-desc">Всё о керамических кружках: виды глазури, термостойкость, безопасность и советы по уходу. Узнайте, к</span></a><a href="/articles/k/ka/kak-nazyvaetsya-chelovek-kotoryj-delaet-kofe-v-kofejne.html" class="related-bottom-card"><span class="related-bottom-title">Бариста или кофемейкер: как называется кто делает кофе</span><span class="related-bottom-desc">Узнайте, как правильно называется специалист по кофе в кофейне. Разбор профессий бариста, кофемейкер</span></a><a href="/articles/k/ka/kak-iz-odnorazovoj-kapsuly-dlya-kofemashiny-sdelat-mnogorazovuyu.html" class="related-bottom-card"><span class="related-bottom-title">Как сделать многоразовую капсулу: пошаговая инструкция</span><span class="related-bottom-desc">Узнайте, как превратить одноразовую капсулу в многоразовую. Пошаговое руководство, необходимые инстр</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

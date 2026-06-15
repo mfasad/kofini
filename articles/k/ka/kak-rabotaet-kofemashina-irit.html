@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как работает кофемашина Irit: устройство, цикл заваривания и особенности — Кофини</title>
+    <meta name="description" content="Подробный разбор принципа работы кофемашин Irit. Узнайте о работе помпы, термоблока и системе заваривания напитков.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-rabotaet-kofemashina-irit.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как работает кофемашина Irit: устройство, цикл заваривания и особенности">
+    <meta property="og:description" content="Подробный разбор принципа работы кофемашин Irit. Узнайте о работе помпы, термоблока и системе заваривания напитков.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/vybor-kofemashin/">Выбор кофемашин</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как работает кофемашина Irit: устройство, цикл заваривания и особенности</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Принцип работы кофемашин Irit: от воды до готового эспрессо</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#сердце-аппарата-система-подачи-воды-и-помпа">Сердце аппарата: система подачи воды и помпа</a></li><li><a href="#термоблок-и-поддержание-температурного-режима">Термоблок и поддержание температурного режима</a></li><li><a href="#механизм-заваривания-и-работа-кофемолки">Механизм заваривания и работа кофемолки</a></li><li><a href="#процесс-приготовления-и-система-управления">Процесс приготовления и система управления</a></li><li><a href="#техническое-обслуживание-и-уход-за-узлами">Техническое обслуживание и уход за узлами</a></li><li><a href="#распространенные-неисправности-и-их-диагностика">Распространенные неисправности и их диагностика</a></li><li><a href="#ключевые-особенности-моделей-irit">Ключевые особенности моделей Irit</a></li><li><a href="#faq-частые-вопросы-пользователей">FAQ: Частые вопросы пользователей</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body"><p>Устройства бренда <em>Irit</em> завоевали популярность благодаря доступной цене и простоте эксплуатации, однако многие пользователи не до конца понимают, что происходит внутри корпуса во время приготовления напитка. Понимание алгоритма работы помогает не только правильно использовать аппарат, но и вовремя заметить признаки неисправности, которые могут привести к дорогостоящему ремонту.</p>
+
+<p>В основе функционирования любой модели от этого производителя лежит автоматизация процесса экстракции кофе под давлением. Вам не нужно вручную утрамбовывать землю или следить за температурой воды — встроенный <strong>микроконтроллер</strong> берет на себя все технические задачи, обеспечивая стабильный результат при каждом нажатии кнопки.</p>
+
+<p>Сам процесс выглядит как последовательная цепочка действий, где каждый узел играет критическую роль. От качества сборки и калибровки <strong>встроенной кофемолки</strong> зависит помол, а от исправности <strong>насоса</strong> — давление, необходимое для получения густой пенки крема. Рассмотрим детально, как именно происходит этот магия превращения зерен в ароматный напиток.</p>
+
+<h2 id="сердце-аппарата-система-подачи-воды-и-помпа">Сердце аппарата: система подачи воды и помпа</h2>
+<p>Первым этапом работы любой кофемашины является забор воды из резервуара. В моделях <em>Irit</em> обычно используется пластиковый бак, который снимается дляного наполнения. Вода под действием гравитации или легкого всасывания попадает в <strong>заборный клапан</strong>, откуда начинается её путь к нагревательному элементу.</p>
+
+<p>Ключевым узлом здесь является <strong>помпа</strong> (вибрационный насос). Именно она создает необходимое давление в системе, которое обычно составляет от 15 до 19 бар. Это давление критически важно для того, чтобы вода могла пройти через плотно утрамбованную таблетку кофе, извлекая из неё масла и ароматические соединения.</p>
+
+<p>Если помпа работает исправно, вы услышите характерный монотонный гул во время приготовления. При снижении давления или возникновении посторонних звуков (гул, стук) стоит проверить фильтр-насадку на входе или наличие воздуха в трубках. <strong>Гидравлическая система</strong> должна быть полностью герметична для поддержания стабильного напора.</p>
+
+<blockquote>
+<p>⚠️ Внимание: Если кофемашина <em>Irit</em> начала издавать громкие щелчки или перестала набирать воду, это может указывать на засорение входного фильтра или выход из строя самой вибрационной помпы. Не пытайтесь разбирать насос самостоятельно, так как это нарушает герметичность системы.</p>
+</blockquote>
+
+<p>В некоторых моделях предусмотрен предохранительный клапан, который сбрасывает избыточное давление, чтобы избежать разрыва патрубков. Это важный элемент безопасности, который часто игнорируется пользователями до момента поломки. Регулярная очистка системы от накипи продлевает жизнь всем гидравлическим узлам.</p>
+
+<h2 id="термоблок-и-поддержание-температурного-режима">Термоблок и поддержание температурного режима</h2>
+<p>После того как вода прошла через помпу, она должна быть нагрета до точной температуры, обычно это диапазон от 90 до 93 градусов Цельсия. В большинстве бюджетных и средних моделей <em>Irit</em> используется не бойлер, а <strong>термоблок</strong>. Это компактное устройство, где вода проходит по длинной спиральной трубке внутри металлического корпуса с ТЭНом.</p>
+
+<p>Главное преимущество термоблока — высокая скорость нагрева и мгновенная готовность к работе. Вам не нужно ждать несколько минут, пока вода закипит в большом объеме. Датчик температуры (<strong>термостат</strong>) мгновенно считывает показания и отключает нагрев, как только цель достигнута, предотвращая перегрев.</p>
+
+<p>Однако термоблок имеет и свои нюансы. При приготовлении большого количества напитков подряд вода может не успевать нагреваться до идеальной температуры, что влияет на вкус. В таких случаях рекомендуется делать паузу или выбирать режим приготовления одной чашки.</p>
+
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Функция</th>
+<th>Типичная неисправность</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Термоблок</td>
+<td>Мгновенный нагрев потока воды</td>
+<td>Отложение накипи, снижение КПД</td>
+</tr>
+<tr>
+<td>Термостат</td>
+<td>Контроль температуры (90-93°C)</td>
+<td>Нестабильные показания, перегрев</td>
+</tr>
+<tr>
+<td>ТЭН (нагреватель)</td>
+<td>Нагрев металлического корпуса</td>
+<td>Выгорание спирали</td>
+</tr>
+<tr>
+<td>Датчик потока</td>
+<td>Контроль наличия воды</td>
+<td>Блокировка работы при отсутствии воды</td>
+</tr>
+</tbody>
+</table>
+
+<p>Накипь — главный враг термоблока. В отличие от бойлерных систем, где она оседает на дне, в термоблоке отложения сужают внутренний канал, что приводит к перегреву и выходу из строя ТЭНа. Использование умягченной воды или специальных таблеток для умягчения обязательно для долгой службы устройства.</p>
+
+<div class="poll-widget" id="poll-1ff884a1"><div class="poll-widget-question">📊 Какой тип кофемашины вам ближе?</div><div class="poll-widget-option" data-poll="1ff884a1" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Рожковая</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="1ff884a1" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Автоматическая (зерновая)</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="1ff884a1" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Капсульная</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="1ff884a1" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Эспрессо-машина с термоблоком</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="механизм-заваривания-и-работа-кофемолки">Механизм заваривания и работа кофемолки</h2>
+<p>Центральным элементом, определяющим вкус напитка, является <strong>заварочный узел</strong>. В кофемашинах <em>Irit</em> он часто выполнен в виде съемного блока, который можно вынуть для промывки. Именно здесь происходит магия экстракции: горячая вода под высоким давлением проходит через слой молотого кофе.</p>
+
+<p>Перед завариванием устройство автоматически дозирует необходимое количество зерен. За это отвечает <strong>кофемолка</strong> с коническими или плоскими жерновами, встроенная в корпус. Вы можете регулировать степень помола, что напрямую влияет на вкус: чем мельче помол, тем крепче и насыщеннее напиток, но выше риск забивания фильтра.</p>
+
+<p>После того как зерна перемолоты, механизм <strong>прессует</strong> их в таблетку. В более простых моделях это может происходить пассивно под собственным весом, в то время как в продвинутых версиях используется рычажный механизм для создания равномерной плотности. От качества прессовки зависит скорость прохождения воды и, следовательно, извлечение вкуса.</p>
+
+<p>Важно отметить, что съемный заварочный блок требует регулярной очистки. Остатки кофейного масла и жмыха со временем окисляются, придавая напитку горечь и неприятный запах. Раз в неделю следует вынимать этот узел и промывать его под теплой водой без использования жестких щеток.</p>
+
+<div class="checklist-block"><h4>☑️ Осмотр заварочного блока</h4><label class="check-item"><input type="checkbox"><span>Визуально проверить на наличие остатков кофе</span></label><label class="check-item"><input type="checkbox"><span>Промыть блок под проточной водой</span></label><label class="check-item"><input type="checkbox"><span>Осмотреть резиновые уплотнители на трещины</span></label><label class="check-item"><input type="checkbox"><span>Дать деталям полностью высохнуть перед установкой</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<blockquote>
+<p>⚠️ Внимание: Никогда не включайте кофемашину <em>Irit</em> без установленного заварочного блока или с влажным блоком. Влага может попасть на электронные контакты, вызвав короткое замыкание, а отсутствие блока приведет к разбрызгиванию воды и повреждению помпы.</p>
+</blockquote>
+
+<h2 id="процесс-приготовления-и-система-управления">Процесс приготовления и система управления</h2>
+<p>Управление всеми процессами осуществляется через центральный <strong>контроллер</strong> (материнскую плату), который получает сигналы от кнопок на панели. Вы выбираете тип напитка, и система запускает заранее запрограммированную последовательность действий: помол, прессовка, подача воды, формирование пенки.</p>
+
+<p>В моделях с панелью управления вы можете настроить объем напитка (эспрессо, лунго, капучино). Контроллер рассчитывает время подачи воды: чем дольше вода течет, тем больше объем. Современные версии позволяют сохранять пользовательские настройки, чтобы не перенастраивать их при каждом включении.</p>
+
+<p>Для приготовления капучино или латте используется <strong>капучинатор</strong>. Это либо автоматическая насадка, встроенная в корпус, либо отдельный паровой кран. В паровых кранах вы вручную вводите трубку в молоко, и поток пара взбивает его в густую пену. Автоматические капучинаторы делают это сами, подавая молоко из отдельного контейнера.</p>
+
+<p>После приготовления напитка система сбрасывает давление в магистрали, и механизм выбрасывает использованную таблетку (жмых) в специальный отсек. Этот процесс должен происходить плавно и без заеданий, иначе жмых может застрять в заварочном цилиндре.</p>
+
+<details class="faq-item"><summary>Почему кофемашина может не взбивать молоко?|Если капучинатор не взбивает молоко, проверьте чистоту форсунки. Засорившееся отверстие не пропускает пар, необходимый для аэрации. Также убедитесь, что молоко достаточно холодное и жирное (лучше всего 2.5-3.2%).-->
+
+<h2 id="техническое-обслуживание-и-уход-за-узлами">Техническое обслуживание и уход за узлами</h2>
+<p>Долговечность устройства напрямую зависит от регулярного обслуживания. Самое важное — это <strong>декальцинация</strong>. Кальций, содержащийся в водопроводной воде, откладывается на нагревательных элементах и внутри трубок, снижая эффективность нагрева и нарушая гидравлику.</p>
+
+<p>Процедуру очистки следует проводить с использованием специальных средств, рекомендованных производителем. Вода с уксусом или лимонной кислотой может повредить внутренние уплотнители и датчики. Следуйте инструкции по разведению средства, обычно это пропорция 1</summary><div class="faq-answer"><p>3 или 1:4 с водой.</p>
+
+<p>Также необходимо регулярно чистить <strong>отсек для жмыха</strong>. Если он заполнен до предела, датчик может заблокировать работу машины, потребовать очистки, даже если вы просто хотите выпить чашку эспрессо. Очищайте контейнер после каждого использования или раз в несколько дней, в зависимости от интенсивности эксплуатации.</p>
+
+<p>Не забывайте про чистку кофемолки. Если вы меняете сорт кофе с темного на светлый, или наоборот, остатки старого зерна могут испортить вкус нового напитка. В некоторых моделях предусмотрена функция сухой очистки: засыпьте специальные гранулы и запустите цикл помола.</p>
+
+
+
+<h2 id="распространенные-неисправности-и-их-диагностика">Распространенные неисправности и их диагностика</h2>
+<p>Даже надежные устройства <em>Irit</em> могут столкнуться с проблемами. Первой частой ошибкой является <strong>забитый фильтр</strong> на входе воды. Если машина издает гул, но не набрасывает воду, скорее всего, проблема именно там. Фильтр-сеточку можно извлечь и промыть под струей воды.</p>
+
+<p>Другая проблема — неравномерный поток или отсутствие пенки. Это часто связано с неправильным помолом или износом прокладок в заварочном блоке. Если вода течет слишком быстро, помол может быть слишком крупным. Если медленно — слишком мелким. Попробуйте отрегулировать диск помола до идеального состояния.</p>
+
+<p>В случае, если машина перестала включаться, проверьте розетку и сетевой кабель. Иногда проблема кроется в предохранителе на плате, который перегорает при скачке напряжения. В таких случаях без помощи квалифицированного мастера не обойтись, так как требуется разборка корпуса.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная декальцинация и очистка заварочного блока — это 90% успеха в обеспечении долгой службы вашей кофемашины Irit без серьезных поломок.</p></div>
+
+<h2 id="ключевые-особенности-моделей-irit">Ключевые особенности моделей Irit</h2>
+<p>Кофемашины бренда <em>Irit</em> выделяются своим соотношением цены и функциональности. В отличие от премиальных брендов, здесь используется более простая электроника, но при этом сохраняются базовые функции автоматизации. Это делает их идеальным выбором для дома, где не требуется профессиональная точность каждый день.</p>
+
+<p>Особенностью многих моделей является наличие <strong>программируемых настроек</strong> крепости и объема. Это позволяет адаптировать устройство под вкусы всех членов семьи. Вы можете настроить одну кнопку на крепкий эспрессо, а другую — на мягкий американо.</p>
+
+<p>Конструкция корпуса часто выполнена из прочного пластика с металлическими вставками, что обеспечивает легкий вес и простоту перестановки. Панели управления интуитивно понятны, что снижает порог входа для новичков в мире кофеварения. Многие пользователи отмечают надежность работы насоса даже при высоких нагрузках.</p>
+
+<p> Съемные блоки значительно упрощают уход, тогда как несъемные требуют более деликатной чистки и могут быстрее выйти из строя из-за скопления грязи. Проверьте доступность запасных частей для выбранной модели перед покупкой.</p>
+
+
+
+<h2 id="faq-частые-вопросы-пользователей">FAQ: Частые вопросы пользователей</h2>
+
+<details>
+<summary>Как часто нужно проводить декальцинацию кофемашины Irit?</summary>
+<p>Частота зависит от жесткости вашей воды. При использовании водопроводной воды процедуру рекомендуется проводить каждые 2-3 месяца или после приготовления 200-300 чашек. Если вода мягкая, интервал можно увеличить до 4-5 месяцев.</p>
+</details>
+
+<details>
+<summary>Можно ли использовать молотый кофе вместо зернового в Irit?</summary>
+<p>Да, большинство моделей имеют функцию использования молотого кофе. Обычно для этого есть отдельная кнопка или переключатель, который обходит кофемолку и направляет кофе сразу в заварочный блок. Однако использовать его можно только без зерна в бункере, иначе механизм сломается.</p>
+</details>
+
+<details>
+<summary>Почему кофемашина издает странные звуки при работе?</summary>
+<p>Стук или щелчки могут быть нормой для вибрационной помпы, но если звук стал громким или нехарактерным, возможно, в систему попал воздух (нужно прокачать) или засорился фильтр. Также причиной может быть накипь в термоблоке.</p>
+</details>
+
+<details>
+<summary>Как правильно хранить кофе в бункере?</summary>
+<p>Кофе в бункере хранится недолго, так как он быстро теряет аромат при контакте с воздухом. Рекомендуется засыпать не более чем на неделю. Для длительного хранения используйте герметичные банки в прохладном месте и загружайте машину перед каждым приготовлением.</p>
+</details>
+
+<details>
+<summary>Что делать, если машина не выбрасывает жмых?</summary>
+<p>Проверьте, не переполнен ли отсек для жмыха. Если он пуст, а машина все равно не выбрасывает, возможно, заклинил механизм выброса или попал крупный комок жмыха. Попробуйте извлечь заварочный блок и вручную очистить механизм.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#сердце-аппарата-система-подачи-воды-и-помпа">Сердце аппарата: система подачи воды и помпа</a></li><li><a href="#термоблок-и-поддержание-температурного-режима">Термоблок и поддержание температурного режима</a></li><li><a href="#механизм-заваривания-и-работа-кофемолки">Механизм заваривания и работа кофемолки</a></li><li><a href="#процесс-приготовления-и-система-управления">Процесс приготовления и система управления</a></li><li><a href="#техническое-обслуживание-и-уход-за-узлами">Техническое обслуживание и уход за узлами</a></li><li><a href="#распространенные-неисправности-и-их-диагностика">Распространенные неисправности и их диагностика</a></li><li><a href="#ключевые-особенности-моделей-irit">Ключевые особенности моделей Irit</a></li><li><a href="#faq-частые-вопросы-пользователей">FAQ: Частые вопросы пользователей</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kapelnaya-kapsulnaya-ili-rozhkovaya-kofevarka-kakuyu-vybrat.html" class="related-card">Капельная, капсульная или рожковая кофеварка: какую выбрать для дома?</a></li><li><a href="/articles/k/ka/kak-rabotaet-kofevarka-braer.html" class="related-card">Как работает кофеварка Brauer: принцип действия и устройство</a></li><li><a href="/articles/s/s-/s-kakim-kapuchinatorom-luchshe-pokupat-kofemashinu.html" class="related-card">Какой капучинатор выбрать для кофемашины: виды, плюсы и минусы</a></li><li><a href="/articles/c/ch/chto-takoe-protivokapelnaya-sistema-v-kofemashine.html" class="related-card">Противокапельная система в кофемашине: устройство, принцип работы и нюансы</a></li><li><a href="/articles/c/ch/chem-otlichaetsya-kofevarka-ot-kofemashiny-i-chto-luchshe-video.html" class="related-card">Кофеварка или кофемашина: что лучше выбрать и в чем разница</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kapelnaya-kapsulnaya-ili-rozhkovaya-kofevarka-kakuyu-vybrat.html" class="related-bottom-card"><span class="related-bottom-title">Капельная, капсульная или рожковая кофеварка: какую выбрать для дома?</span><span class="related-bottom-desc">Сравниваем капельные, капсульные и рожковые кофеварки. Плюсы, минусы, стоимость владения и советы по</span></a><a href="/articles/k/ka/kak-rabotaet-kofevarka-braer.html" class="related-bottom-card"><span class="related-bottom-title">Как работает кофеварка Brauer: принцип действия и устройство</span><span class="related-bottom-desc">Подробный разбор работы кофеварок Brauer. Узнайте о технологии прогревания, давлении помпы и секрета</span></a><a href="/articles/s/s-/s-kakim-kapuchinatorom-luchshe-pokupat-kofemashinu.html" class="related-bottom-card"><span class="related-bottom-title">Какой капучинатор выбрать для кофемашины: виды, плюсы и минусы</span><span class="related-bottom-desc">Сравниваем автоматические и ручные капучинаторы. Узнайте, какая система взбивания молока лучше подхо</span></a><a href="/articles/c/ch/chto-takoe-protivokapelnaya-sistema-v-kofemashine.html" class="related-bottom-card"><span class="related-bottom-title">Противокапельная система в кофемашине: устройство, принцип работы и нюансы</span><span class="related-bottom-desc">Подробный разбор противокапельной системы в кофемашинах. Как работает, зачем нужна и как избежать пр</span></a><a href="/articles/c/ch/chem-otlichaetsya-kofevarka-ot-kofemashiny-i-chto-luchshe-video.html" class="related-bottom-card"><span class="related-bottom-title">Кофеварка или кофемашина: что лучше выбрать и в чем разница</span><span class="related-bottom-desc">Полное руководство по отличиям кофеварок и кофемашин. Сравнение функций, цен и качества напитка. Узн</span></a><a href="/articles/k/ka/kapuchinator-v-kofemashine-chto-eto.html" class="related-bottom-card"><span class="related-bottom-title">Капучинатор в кофемашине: что это и как выбрать идеальный</span><span class="related-bottom-desc">Узнайте, что такое капучинатор в кофемашине, какие типы существуют и как правильно пользоваться для </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как работает автоматический капучинатор в кофемашине: принцип и настройка — Кофини</title>
+    <meta name="description" content="Подробный разбор принципа работы автоматического капучинатора. Технологии аэрации, настройки текстуры молока и советы по очистке для идеальной пенки.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/a/av/avtomaticheskij-kapuchinator-v-kofemashine-kak-rabotaet.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как работает автоматический капучинатор в кофемашине: принцип и настройка">
+    <meta property="og:description" content="Подробный разбор принципа работы автоматического капучинатора. Технологии аэрации, настройки текстуры молока и советы по очистке для идеальной пенки.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/obsluzhivanie-i-remont/">Обслуживание и ремонт</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как работает автоматический капучинатор в кофемашине: принцип и настройка</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Принцип работы автоматического капучинатора в кофемашине</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#как-устроен-механизм-подачи-и-аэрации-молока">Как устроен механизм подачи и аэрации молока</a></li><li><a href="#технология-смешивания-паровых-потоков">Технология смешивания паровых потоков</a></li><li><a href="#настройка-текстуры-и-плотности-пены">Настройка текстуры и плотности пены</a></li><li><a href="#особенности-работы-с-разными-видами-молока">Особенности работы с разными видами молока</a></li><li><a href="#процесс-автоматической-очистки-и-промывки">Процесс автоматической очистки и промывки</a></li><li><a href="#возможные-неисправности-и-методы-решения">Возможные неисправности и методы решения</a></li><li><a href="#сравнение-автоматического-и-полуавтоматического-капучинаторов">Сравнение автоматического и полуавтоматического капучинаторов</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Многие любители кофейных напитков сталкиваются с проблемой: приготовленный дома капучино или латте выглядит не так, как в любимом кафе. Часто проблема кроется не в качестве зерен, а в несовершенстве ручного взбивания молока. Современные автоматические кофемашины решили эту задачу, внедрив встроенный <strong>автоматический капучинатор</strong>, который берет на себя всю сложную работу по созданию идеальной текстуры.</p>
+<p>Этот механизм позволяет получать густую, шелковистую пенку буквально одним нажатием кнопки. Вам больше не нужно удерживать паровую палочку, следить за температурой и контролировать угол погружения. Машина сама дозирует молоко, взбивает его и смешивает с эспрессо, обеспечивая стабильный результат при каждой чашке.</p>
+
+<h2 id="как-устроен-механизм-подачи-и-аэрации-молока">Как устроен механизм подачи и аэрации молока</h2>
+<p>Сердцем системы является специальный <strong>всасывающий патрубок</strong>, который опускается непосредственно в емкость с молоком. В отличие от внешних трубок, которые часто забиваются, встроенные системы имеют замкнутый контур. Под давлением насоса молоко подается в специальную камеру, где происходит ключевой процесс — аэрация.</p>
+<p>Внутри камеры находится <strong>мембрана</strong> или <strong>форсунка Вентури</strong>, через которую с высокой скоростью проходит пар или смесь пара и воды. Именно здесь происходит всасывание молока в поток пара. Скорость и давление Streams создают вакуум, который затягивает жидкое молоко в зону смешивания, где оно мгновенно нагревается и насыщается микроскопическими пузырьками воздуха.</p>
+<p>Важно понимать, что качество пены напрямую зависит от <strong>температуры молока</strong> и его жирности. Холодное молоко (из холодильника) лучше удерживает структуру пены, а белок в молоке отвечает за стабильность воздушных пузырьков. Если вы используете растительное молоко, убедитесь, что на упаковке стоит пометка"Barista Edition", так как обычное растительное молоко может не вспениться должным образом.</p>
+
+<h2 id="технология-смешивания-паровых-потоков">Технология смешивания паровых потоков</h2>
+<p>В большинстве автоматических машин используется технология двойного потока. Пар подается в камеру под высоким давлением, создавая турбулентность. Молоко всасывается в эту зону и разбивается на мельчайшие капли. Этот процесс называют <strong>инжекцией пара</strong>. В результате получается эмульсия, где воздух равномерно распределен в жидкости.</p>
+<p>Некоторые продвинутые модели, такие как <em>De'Longhi Magnifica S</em> или <em>Jura Z10</em>, оснащены интеллектуальными системами контроля. Они могут менять соотношение пара и молока в зависимости от выбранного напитка. Для капучино машина подаст больше воздуха для густой шапки, а для латте-макиато — создаст более жидкую, но горячую основу.</p>
+<p>Конструкция смешивающей камеры часто выполнена из нержавеющей стали или термостойкого пластика, что позволяет ей быстро нагреваться и остывать. Это важно для гигиены и предотвращения запахов. После приготовления напитка система автоматически промывается, чтобы остатки молока не засохли внутри трубок.</p>
+
+<blockquote>
+<p>⚠️ <strong>Внимание:</strong> Использование молока с истекшим сроком годности или неправильным температурным режимом может привести к закупорке микрофорсунок. Всегда используйте свежее молоко и мойте контейнер после каждого использования.</p>
+</blockquote>
+
+<div class="poll-widget" id="poll-26243b84"><div class="poll-widget-question">📊 Какую пенку вы предпочитаете?</div><div class="poll-widget-option" data-poll="26243b84" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Тугая и сухая</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="26243b84" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Жидкая и горячая</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="26243b84" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Средняя плотность</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="26243b84" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Не принципиально</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="настройка-текстуры-и-плотности-пены">Настройка текстуры и плотности пены</h2>
+<p>Многие пользователи не знают, что плотность пены можно регулировать. На корпусе <strong>капучинатора</strong> часто есть поворотное кольцо или рычаг, который изменяет количество воздуха, поступающего в смесь. Поворот в одну сторону увеличивает подачу воздуха, делая пену сухой и высокой, а в другую — снижает аэрацию для более кремовой текстуры.</p>
+<p>В цифровых моделях настройка осуществляется через <code>Меню → Настройки напитков → Капучино</code>. Здесь вы можете выбрать уровень пены: <code>Минимум</code>, <code>Средний</code>, <code>Максимум</code> или <code>Без пены</code>. Это позволяет адаптировать напиток под ваши вкусовые предпочтения без необходимости механической настройки устройства.</p>
+<p>Если вы заметили, что пена стала слишком жидкой или, наоборот, не поднимается, проверьте положение регулировочного кольца. Иногда оно самопроизвольно сдвигается при мытье. Также убедитесь, что трубка не перекручена и не имеет заломов, которые ограничивают поток молока.</p>
+
+<table>
+ <thead>
+ <tr>
+ <th>Тип напитка</th>
+ <th>Плотность пены</th>
+ <th>Температура подачи</th>
+ <th>Особенности аэрации</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Капучино</td>
+ <td>Высокая</td>
+ <td>60-65°C</td>
+ <td>Много воздуха, мелкопузырчатая структура</td>
+ </tr>
+ <tr>
+ <td>Латте</td>
+ <td>Средняя</td>
+ <td>55-60°C</td>
+ <td>Умеренная аэрация, много жидкого молока</td>
+ </tr>
+ <tr>
+ <td>Латте Макиато</td>
+ <td>Максимальная</td>
+ <td>55-60°C</td>
+ <td>Длительная аэрация, многослойность</td>
+ </tr>
+ <tr>
+ <td>Горячий шоколад</td>
+ <td>Низкая</td>
+ <td>65-70°C</td>
+ <td>Минимум воздуха, акцент на нагрев</td>
+ </tr>
+ </tbody>
+</table>
+
+<div class="checklist-block"><h4>☑️ Проверка готовности системы</h4><label class="check-item"><input type="checkbox"><span>Емкость с молоком на месте</span></label><label class="check-item"><input type="checkbox"><span>Трубка опущена в молоко</span></label><label class="check-item"><input type="checkbox"><span>Регулятор пены установлен</span></label><label class="check-item"><input type="checkbox"><span>Молоко охлаждено до 4-5°C</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<h2 id="особенности-работы-с-разными-видами-молока">Особенности работы с разными видами молока</h2>
+<p>Автоматический капучинатор чувствителен к составу жидкости. Цельное коровье молоко с высоким содержанием белка и жира дает самую стабильную пену. <strong>Обезжиренное молоко</strong> вспенивается лучше по объему, но пена получается сухой и быстро оседает. Для кофемашин оно подходит, но результат будет отличаться от классического.</p>
+<p>Растительные альтернативы требуют особого подхода. Миндальное, соевое или овсяное молоко имеют другую структуру белка. <em>Oatly Barista</em> или <em>Alpro Barista</em> созданы специально для взбивания и содержат стабилизаторы, которые помогают пене держаться. Обычное растительное молоко из супермаркета часто расслаивается при контакте с паром.</p>
+<p>Если у вас аллергия на лактозу или вы предпочитаете растительное молоко, обязательно прочитайте инструкцию к вашей модели. Некоторые производители <strong>запрещают</strong> использование растительных напитков в автоматических системах из-за риска образования осадка, который трудно вымыть.</p>
+
+<blockquote>
+<p>⚠️ <strong>Внимание:</strong> Не используйте молоко с добавками сахара или ароматизаторами. Сахар карамелизуется на горячих элементах и может привести к необратимому засору капучинатора, который невозможно устранить простой промывкой.</p>
+</blockquote>
+
+<details class="faq-item"><summary>Что делать, если пена не получается?</summary><div class="faq-answer"><p>Если пена не появляется, проверьте, не перекручена ли трубка. Часто проблема в том, что всасывающая насадка не погружена достаточно глубоко в молоко или молоко комнатной температуры. Попробуйте использовать молоко прямо из холодильника, так как холодная жидкость лучше удерживает пузырьки воздуха при нагреве. Также убедитесь, что в системе нет воздуха — выполните цикл промывки паром без молока.</p></div></details>
+
+<h2 id="процесс-автоматической-очистки-и-промывки">Процесс автоматической очистки и промывки</h2>
+<p>Самая важная часть эксплуатации — регулярная чистка. Автономные машины оснащены функцией <strong>самоочистки</strong>, которая запускается автоматически при каждом приготовлении напитка или по расписанию. Система прогоняет горячую воду через каналы, чтобы смыть остатки молока.</p>
+<p>Однако простой промывки водой недостаточно. Раз в день необходимо снимать съемные части капучинатора (если конструкция это позволяет) и промывать их под краном. Внутренние трубки могут накапливать молочный налет, который со временем превращается в твердый осадок. Для этого существуют специальные таблетки для очистки системы молочных путей.</p>
+<p>Процесс очистки обычно выглядит так: выньте контейнер, промойте трубки, вставьте их обратно и запустите цикл промывки через <code>Меню → Очистка → Промывка капучинатора</code>. Длительность цикла составляет около 1-2 минут. Не прерывайте этот процесс, так как это может оставить остатки воды в системе.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед запуском цикла очистки всегда проверяйте, что емкость для слива воды не переполнена, иначе промывка может прерваться и оставить грязные остатки внутри машины.</p></div>
+
+<h2 id="возможные-неисправности-и-методы-решения">Возможные неисправности и методы решения</h2>
+<p>Иногда капучинатор перестает работать корректно. Если вы слышите звук работы насоса, но молоко не поднимается, проверьте, не замерзла ли трубка в морозильной камере (что бывает при неправильном хранении) или не забились ли форсунки. Попробуйте продуть систему паром без молока.</p>
+<p>Если пена стала слишком жидкой и «капризной», возможно, изношена прокладка в зоне смешивания или мембрана потеряла эластичность. В некоторых моделях <em>Philips Series 2200</em> это решается заменой всего блока капучинатора, так как он имеет модульную конструкцию.</p>
+<p>Другая частая проблема — не набирает молоко, хотя контейнер полон. Это случается, если трубка неплотно прилегает к стенке емкости или если в системе образовался воздушный пузырь. Отсоедините трубку и снова погрузите её в молоко, слегка покачав контейнер.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Регулярная очистка и использование качественного холодного молока — залог долговечности капучинатора и стабильного вкуса напитков.</p></div>
+
+<h2 id="сравнение-автоматического-и-полуавтоматического-капучинаторов">Сравнение автоматического и полуавтоматического капучинаторов</h2>
+<p>Автоматические системы выигрывают в удобстве и стабильности результата. Вам не нужно тренироваться годами, чтобы научиться взбивать молоко. Машина делает это за вас, соблюдая точные параметры температуры и времени. Это идеальный вариант для тех, кто ценит время и хочет получать кофе <strong>одинакового качества</strong> каждое утро.</p>
+<p>Полуавтоматические системы с паровой палочкой дают больше контроля бариста над текстурой. Профессионалы могут создавать латте-арт, но для дома это требует определенных навыков. Если вам нужно просто выпить вкусный капучино без лишних действий, автоматический вариант будет предпочтительнее.</p>
+<p>Главный недостаток автоматических систем — сложность очистки внутренних трубок. В полуавтоматических палочках достаточно протереть поверхность и продуть паром. В автоматических системах требуется разборка и промывка каналов, что добавляет времени на уход за техникой.</p>
+
+<details class="faq-item"><summary>Как продлить жизнь капучинатору?</summary><div class="faq-answer"><p>Периодически (раз в неделю) используйте специальные таблетки для очистки молочных путей. Они растворяют белковый налет, который не берет обычная вода. Если машина стоит долго без использования, обязательно промойте систему чистой водой перед следующим запуском, чтобы избежать размножения бактерий в застоявшемся молоке.</p></div></details>
+
+<blockquote>
+<p>⚠️ <strong>Внимание:</strong> Не оставляйте молоко в контейнере более чем на 24 часа. Даже в холодильнике бактерии размножаются, что может привести к порче вкуса напитка и засорению системы. Всегда мойте контейнер сразу после использования.</p>
+</blockquote>
+
+<h2 id="faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</h2>
+<details>
+ <summary>Почему молоко не взбивается, а просто течет?</summary>
+ <p>Это может быть связано с неправильным положением регулировочного кольца на капучинаторе. Поверните его в положение максимальной аэрации. Также проверьте, достаточно ли холодное молоко — теплое молоко плохо держит пену.</p>
+</details>
+<details>
+ <summary>Можно ли использовать растительное молоко?</summary>
+ <p>Да, но только специальное «Barista Edition». Обычное растительное молоко может свернуться от горячей воды и забить трубки. Уточните совместимость в инструкции к вашей модели.</p>
+</details>
+<details>
+ <summary>Как часто нужно чистить капучинатор?</summary>
+ <p>Промывка водой должна происходить после каждого использования. Глубокую очистку таблетками рекомендуется проводить раз в 2-4 недели в зависимости от частоты приготовления молочных напитков.</p>
+</details>
+<details>
+ <summary>Почему капучинатор издает странные звуки?</summary>
+ <p>Стук или гул может указывать на наличие воздуха в системе. Попробуйте погрузить трубку глубже в молоко и повторите попытку. Если звук не исчез, выполните цикл промывки.</p>
+</details>
+<details>
+ <summary>Можно ли кипятить молоко в кофемашине?</summary>
+ <p>Нет, автоматические капучинаторы предназначены для нагрева до 60-65°C. Кипячение молока приведет к разрушению структуры белка и ухудшению качества пены, а также может повредить систему.</p>
+</details></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#как-устроен-механизм-подачи-и-аэрации-молока">Как устроен механизм подачи и аэрации молока</a></li><li><a href="#технология-смешивания-паровых-потоков">Технология смешивания паровых потоков</a></li><li><a href="#настройка-текстуры-и-плотности-пены">Настройка текстуры и плотности пены</a></li><li><a href="#особенности-работы-с-разными-видами-молока">Особенности работы с разными видами молока</a></li><li><a href="#процесс-автоматической-очистки-и-промывки">Процесс автоматической очистки и промывки</a></li><li><a href="#возможные-неисправности-и-методы-решения">Возможные неисправности и методы решения</a></li><li><a href="#сравнение-автоматического-и-полуавтоматического-капучинаторов">Сравнение автоматического и полуавтоматического капучинаторов</a></li><li><a href="#faq-часто-задаваемые-вопросы">FAQ: Часто задаваемые вопросы</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kapsulnaya-kofevarka-ne-podaet-vodu-chto-delat.html" class="related-card">Капсульная кофеварка не подает воду: диагностика и ремонт своими руками</a></li><li><a href="/articles/k/kr/krups-kofemashina-kapsulnaya-dolche-gusto-kak-pochistit.html" class="related-card">Как почистить кофемашину Krups Dolce Gusto: Полная инструкция</a></li><li><a href="/articles/c/ch/chto-takoe-tabletki-dlya-kofemashiny.html" class="related-card">Таблетки для кофемашины: виды, назначение и правила использования</a></li><li><a href="/articles/k/ka/kak-otregulirovat-pomol-kofe-v-kofemashine-krups.html" class="related-card">Как отрегулировать помол кофе в кофемашине Krups: полная инструкция</a></li><li><a href="/articles/k/ko/kofemashina-delonghi-kak-ochistit-ot-nakipi.html" class="related-card">Как очистить кофемашину Delonghi от накипи: пошаговая инструкция</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kapsulnaya-kofevarka-ne-podaet-vodu-chto-delat.html" class="related-bottom-card"><span class="related-bottom-title">Капсульная кофеварка не подает воду: диагностика и ремонт своими руками</span><span class="related-bottom-desc">Кофемашина не подает воду? Узнайте, как почистить систему, устранить засоры и исправить ошибки подач</span></a><a href="/articles/k/kr/krups-kofemashina-kapsulnaya-dolche-gusto-kak-pochistit.html" class="related-bottom-card"><span class="related-bottom-title">Как почистить кофемашину Krups Dolce Gusto: Полная инструкция</span><span class="related-bottom-desc">Подробное руководство по очистке и декальцинации капсульных кофемашин Krups Dolce Gusto. Удаление на</span></a><a href="/articles/c/ch/chto-takoe-tabletki-dlya-kofemashiny.html" class="related-bottom-card"><span class="related-bottom-title">Таблетки для кофемашины: виды, назначение и правила использования</span><span class="related-bottom-desc">Узнайте, какие бывают таблетки для очистки кофемашин и зачем они нужны. Подробный гид по декальцинац</span></a><a href="/articles/k/ka/kak-otregulirovat-pomol-kofe-v-kofemashine-krups.html" class="related-bottom-card"><span class="related-bottom-title">Как отрегулировать помол кофе в кофемашине Krups: полная инструкция</span><span class="related-bottom-desc">Узнайте, как правильно настроить степень помола в кофемашинах Krups для идеального вкуса. Пошаговая </span></a><a href="/articles/k/ko/kofemashina-delonghi-kak-ochistit-ot-nakipi.html" class="related-bottom-card"><span class="related-bottom-title">Как очистить кофемашину Delonghi от накипи: пошаговая инструкция</span><span class="related-bottom-desc">Эффективная процедура декальцинации для автоматических кофемашин De&#x27;Longhi. Выбор средств, пошаговый</span></a><a href="/articles/k/ko/kofemashina-krups-kak-ispolzovat.html" class="related-bottom-card"><span class="related-bottom-title">Кофемашина KRUPS: пошаговая инструкция по использованию и настройке</span><span class="related-bottom-desc">Полное руководство: как правильно заваривать кофе, настраивать помол, проводить декальцинацию и обсл</span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>

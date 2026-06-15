@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+    <title>Как построить кофемашину в Minecraft: редстоун-схемы и автоматизация — Кофини</title>
+    <meta name="description" content="Полное руководство: как создать автоматическую кофемашину в Minecraft. Схема редстоуна, использование командных блоков и механика ферм напитков.">
+    <link rel="canonical" href="https://kofini.vercel.app/articles/k/ka/kak-postroit-kofemashinu-v-majnkrafte.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Как построить кофемашину в Minecraft: редстоун-схемы и автоматизация">
+    <meta property="og:description" content="Полное руководство: как создать автоматическую кофемашину в Minecraft. Схема редстоуна, использование командных блоков и механика ферм напитков.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=1781521119">
+    <style>
+    .site-footer-premium {
+        margin-top: 60px; padding: 40px 0 0; background: #1e293b; color: #94a3b8;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+        padding-bottom: 32px; border-bottom: 1px solid #334155;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .footer-about { font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+    .footer-updated { font-size: 0.8rem; color: #64748b; }
+    .footer-col h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #60a5fa; }
+    .footer-bottom { padding: 20px 0; text-align: center; font-size: 0.85rem; }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .cookie-popup {
+        position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff;
+        padding: 16px; transition: transform 0.5s ease; z-index: 9999; border-top: 2px solid #2563eb;
+        transform: translateY(100%);
+    }
+    .cookie-popup.visible { transform: translateY(0); }
+    .cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.9rem; }
+    .cookie-btn { background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .cookie-btn:hover { background: #1d4ed8; }
+    @media (max-width: 640px) {
+        .cookie-inner { flex-direction: column; text-align: center; }
+    }
+</style>
+    
+    <!--#include virtual="/ssi/head.html" -->
+</head>
+<body>
+        <!--#include virtual="/ssi/body_top.html" -->
+    <style>
+    .nav-dropdown { position: relative; display: inline-block; }
+    .dropdown-toggle {
+        background: none; border: none; cursor: pointer;
+        font: inherit; color: inherit; padding: 8px 12px;
+        border-radius: 8px; transition: background 0.2s;
+    }
+    .dropdown-toggle:hover { background: rgba(0,0,0,0.05); }
+    .dropdown-menu {
+        display: none; position: absolute; right: 0; top: 100%;
+        min-width: 240px; max-height: 70vh; overflow-y: auto;
+        background: var(--card-bg, #fff); border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        padding: 8px 0; z-index: 1000;
+    }
+    .nav-dropdown::after {
+        content: ''; position: absolute; left: 0; right: 0;
+        top: 100%; height: 12px;
+    }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-item {
+        display: block; padding: 10px 20px; color: var(--text, #1f2937);
+        text-decoration: none; font-size: 0.95rem; transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .dropdown-item:hover { background: rgba(37,99,235,0.06); color: var(--primary, #2563eb); }
+    @media (max-width: 768px) {
+        .main-nav > .nav-link { display: none; }
+        .dropdown-toggle { display: none; }
+        .dropdown-menu {
+            display: block !important; position: static;
+            box-shadow: none; border: none; border-radius: 0;
+            min-width: auto; max-height: none; padding: 0;
+            background: transparent;
+        }
+        .dropdown-item {
+            padding: 8px 0; font-size: 1rem;
+        }
+    }
+    </style>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Кофини</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Меню" id="menuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="/category/vybor-kofemashin/" class="nav-link">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="nav-link">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="nav-link">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="nav-link">🌰 Зерна и помол</a>
+<div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle">📂 Все разделы ▾</button>
+            <div class="dropdown-menu"><a href="/category/vybor-kofemashin/" class="dropdown-item">🛒 Выбор кофемашин</a>
+<a href="/category/obsluzhivanie-i-remont/" class="dropdown-item">🔧 Обслуживание и ремонт</a>
+<a href="/category/retsepty-napitkov/" class="dropdown-item">🥛 Рецепты напитков</a>
+<a href="/category/zerna-i-pomol/" class="dropdown-item">🌰 Зерна и помол</a>
+<a href="/category/kapsulnye-sistemy/" class="dropdown-item">🔹 Капсульные системы</a>
+<a href="/category/gejzernye-i-kapelnye/" class="dropdown-item">⏳ Гейзерные и капельные</a>
+<a href="/category/aksessuary-i-instrumenty/" class="dropdown-item">🥄 Аксессуары и инструменты</a>
+<a href="/category/spetsii-i-dobavki/" class="dropdown-item">🌿 Специи и добавки</a>
+<a href="/category/zdorove-i-polza/" class="dropdown-item">❤️ Здоровье и польза</a>
+<a href="/category/chaj-i-kakao/" class="dropdown-item">🍵 Чай и какао</a>
+<a href="/category/orekhi-i-sukhofrukty/" class="dropdown-item">🥜 Орехи и сухофрукты</a>
+<a href="/category/drugoe/" class="dropdown-item">📁 Другое</a></div>
+        </div>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Навигация">
+        <div class="container"><a href="/">Главная</a><span class="breadcrumb-sep">›</span><a href="/category/drugoe/">Другое</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Как построить кофемашину в Minecraft: редстоун-схемы и автоматизация</span></div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-main">
+                    
+                    <h1>Полное руководство: как построить кофемашину в Minecraft</h1>
+                    <nav class="mobile-toc"><details><summary>📋 Содержание</summary><ul><li><a href="#выбор-концепции-ванильная-игра-или-моды">Выбор концепции: Ванильная игра или Моды</a></li><li><a href="#подготовка-материалов-и-локации">Подготовка материалов и локации</a></li><li><a href="#архитектура-корпуса-и-дизайн">Архитектура корпуса и дизайн</a></li><li><a href="#сборка-механизма-работы-в-ванильной-версии">Сборка механизма работы в ванильной версии</a></li><li><a href="#интеграция-модов-и-аддонов">Интеграция модов и аддонов</a></li><li><a href="#таблица-команд-и-логика-управления">Таблица команд и логика управления</a></li><li><a href="#полезные-советы-по-оптимизации-и-дизайну">Полезные советы по оптимизации и дизайну</a></li><li><a href="#решение-частых-проблем-и-faq">Решение частых проблем и FAQ</a></li></ul></details></nav>
+                    <!--#include virtual="/ssi/article_before.html" -->
+                    <div class="article-body">
+
+<p>Мир <strong>Minecraft</strong> позволяет игрокам реализовывать практически любые инженерные замыслы, от простых ферм до сложных заводов. Однако концепция «кофемашины» в классической игре имеет свои особенности, так как стандартный набор блоков не включает настоящие напитки. Тем не менее, с помощью модов, аддонов или изощренного использования <em>редстоуна</em> и командных блоков, можно создать функциональный автомат.</p>
+
+<p>В этой статье мы разберем два основных подхода к созданию такого устройства. Первый вариант подходит для ванильной игры с использованием командных блоков, а второй — для игроков, использующих популярные модификации, добавляющие реальную физику напитков. Вы узнаете, как реализовать <strong>автоматизацию</strong>, подобрать материалы для декора и настроить логику работы механизма.</p>
+
+<h2 id="выбор-концепции-ванильная-игра-или-моды">Выбор концепции: Ванильная игра или Моды</h2>
+
+<p>Прежде чем начать строительство, необходимо определиться с техническим фундаментом вашего проекта. В чистой версии игры (Vanilla) физика жидкости ограничена водой и лавой, поэтому для имитации кофе придется использовать визуальные эффекты или механику <code>item frames</code>. Если же вы играете на сервере с поддержкой модов, то задача сводится к интеграции готовой техники из таких модов как <em>Immersive Engineering</em>, <em>Create</em> или <em>Coffee Mod</em>.</p>
+
+<p>Для ванильного подхода вам потребуется глубокое понимание работы <strong>командных блоков</strong> и систем паровых вычислений. Вы будете создавать иллюзию работы машины, выдавая игроку предметы с измененным названием. Это сложнее в настройке, но гарантирует работу на любом сервере без установки дополнительных файлов.</p>
+
+<p>Модовый путь значительно упрощает задачу, предоставляя готовые блоки <em>кофемолки</em>, <em>экстрактора</em> и <em>эспрессо-машины</em>. В этом случае ваша роль сводится к подключению предметов и энергии через конвейерные ленты или трубы. Выбор зависит от целей: хотите ли вы впечатлить друзей инженерией или просто получить напиток в игре.</p>
+
+<blockquote>⚠️ Внимание: Если вы планируете использовать моды, убедитесь, что версия игры на сервере совпадает с версией клиента. Несовпадение версий может привести к краху игры или невозможности зайти на проект.</blockquote>
+
+<blockquote>⚠️ Внимание: В ванильной версии команды могут быть запрещены администраторами серверов. Всегда уточняйте правила использования <code>give</code> или <code>execute</code> перед началом постройки.</blockquote>
+
+<div class="poll-widget" id="poll-d64f6b1e"><div class="poll-widget-question">📊 Какой стиль игры вам ближе?</div><div class="poll-widget-option" data-poll="d64f6b1e" data-idx="0" onclick="pbPollVote(this)"><span class="poll-widget-label">Ванильная редстоун-магия</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d64f6b1e" data-idx="1" onclick="pbPollVote(this)"><span class="poll-widget-label">Моды с реальными рецептами</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d64f6b1e" data-idx="2" onclick="pbPollVote(this)"><span class="poll-widget-label">Красивый декор без функционала</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div><div class="poll-widget-option" data-poll="d64f6b1e" data-idx="3" onclick="pbPollVote(this)"><span class="poll-widget-label">Готовые сборки серверов</span><span class="poll-widget-bar"></span><span class="poll-widget-pct"></span></div></div>
+
+<h2 id="подготовка-материалов-и-локации">Подготовка материалов и локации</h2>
+
+<p>Для строительства даже простого автомата потребуется выделить достаточно места. Рекомендуется выбирать локацию рядом с <strong>базой</strong> или кафе, чтобы другие игроки могли легко найти ваш проект. Подготовьте набор строительных блоков, которые визуально имитируют металл и стекло: <em>кирпичные блоки</em>, <strong>полированный андезит</strong> и <code>стеклянные панели</code>.</p>
+
+<p>Если вы делаете функциональную машину через команды, вам понадобятся <strong>командные блоки</strong> разных типов (Impulse, Chain, Repeating). Их можно получить только в режиме творческого режима или через команду <code>/give @s command_block</code>. Не забудьте также про <em>редстоун-факелы</em>, <strong>повторители</strong> и <code>раздатчики</code> для выдачи готовых предметов.</p>
+
+<p>Для модового варианта список материалов будет зависеть от выбранного мода, но базовый набор обычно включает <em>железные слитки</em>, <strong>медную пластину</strong> и блоки <em>энергии</em>. Проверьте рецепты крафта в игровой книге, чтобы не бегать лишний раз в шахту за редкими ресурсами.</p>
+
+<ul>
+<li>Соберите минимум 10 <strong>командных блоков</strong> для реализации сложной логики работы.</li>
+<li>Заготовьте <em>стекло</em> и <code>каменные плитки</code> для создания прозрачного корпуса.</li>
+<li>Подготовьте <strong>раздатчики</strong> для автоматической выдачи чашек.</li>
+</ul>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Используйте разные виды камня и кирпича для создания текстуры корпуса. Смешивание <code>каменных плиток</code> и <strong>кирпича</strong> сделает машину более реалистичной и объемной.</p></div>
+
+<h2 id="архитектура-корпуса-и-дизайн">Архитектура корпуса и дизайн</h2>
+
+<p>Внешний вид кофемашины должен соответствовать её назначению. Классический стиль предполагает использование <strong>серых и темных тонов</strong>, имитирующих металл. Начните с фундамента размером 3x3 или 5x5 блоков, чтобы разместить внутри все необходимые механические части. Используйте <em>трап-блоки</em> для создания горизонтальных поверхностей, напоминающих платформы для чашек.</p>
+
+<p>Особое внимание уделите передней панели. Здесь часто устанавливают <strong>кнопки</strong> или <em>рычаги</strong>, которые будут служить интерфейсом для взаимодействия. Сверху можно возвести резервуар, используя <code>стеклянные блоки</code>, наполненные водой, чтобы имитировать емкость для воды или молока. Это добавит макету <strong>реалистичности</strong>.</p>
+
+<p>Не забудьте про декоративные элементы, такие как трубы или провода. В ванильной игре их можно заменить на <strong>лестницы</em>, поставленные вверх ногами, или <code>активные редстоун-повторители</code>. Если вы используете моды, трубы будут выглядеть как отдельные блоки, которые нужно соединить с машиной.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Качественный дизайн корпуса не только улучшает эстетику, но и скрывает техническую начинку, создавая эффект работающего механизма без видимых проводов.</p></div>
+
+<h2 id="сборка-механизма-работы-в-ванильной-версии">Сборка механизма работы в ванильной версии</h2>
+
+<p>Сердцем вашей ванильной кофемашины станет цепочка <strong>командных блоков</em>, настроенных на выдачу предметов. Сначала разместите <em>Chain Command Block</strong> в центре конструкции, настроив его на выполнение команды выдачи чашки. Установите <code>Give @p minecraft:glass_bottle 1</code> (или другой предмет), чтобы игрок получал пустой сосуд.</p>
+
+<p>Следующим этапом настройте <strong>повторитель</strong> и второй командный блок для добавления эффекта кофе. Используйте команду <code>enchant</code> или <code>item</code> (в новых версиях), чтобы изменить название предмета на «Горячий эспрессо». Важно подключить <em>кнопку</em> к цепочке, чтобы запускал процесс только при нажатии. Это создаст удобный <strong>интерфейс</em> взаимодействия.</p>
+
+<p>Для визуализации налейте воду из <em>ведра</strong> через <strong>раздатчик</strong>, когда игрок нажимает кнопку. Используйте <code>Command Block</code> с триггером <code>execute as @p at @s run setblock ~ ~ ~ water</code>, чтобы создать иллюзию наливания жидкости. Это потребует точной настройки координат, чтобы жидкость не упала мимо.</p>
+
+<div class="checklist-block"><h4>☑️ Чек-лист настройки командной цепи</h4><label class="check-item"><input type="checkbox"><span>Установить Chain Command Block</span></label><label class="check-item"><input type="checkbox"><span>Написать команду выдачи предмета</span></label><label class="check-item"><input type="checkbox"><span>Подключить Redstone-кнопку</span></label><label class="check-item"><input type="checkbox"><span>Настроить задержку через Repeat Block</span></label><div class="check-progress">Выполнено: <span class="check-count">0</span> / 4</div></div>
+
+<blockquote>⚠️ Внимание: Ошибка в синтаксисе команды может привести к тому, что предмет выдаст не игроку, а в воздух. Всегда тестируйте команды в режиме выживания перед финальной сборкой.</blockquote>
+
+<h2 id="интеграция-модов-и-аддонов">Интеграция модов и аддонов</h2>
+
+<p>Если вы используете моды, процесс создания <strong>кофемашины</em> становится гораздо проще, но требует изучения новых механик. Например, в моде <em>Create</em> вам потребуется построить конвейерную линию: поставьте <code>Millstone</code> для помола зерен, затем <code>Mixer</code> для смешивания с водой.</p>
+
+<p>Для работы <em>Immersive Engineering</em> необходим источник энергии, например, <strong>водяное колесо</strong> или <em>двигатель внутреннего сгорания</em>. Подключите машину к <code>Power Converter</code> и настройте конвейер для подачи зерен на вход. Готовый напиток будет автоматически упадать на выходе в виде <strong>предмета</strong>.</p>
+
+<p>Важно соблюдать очередность блоков в линии. Зерна должны проходить через <em>помол</em>, затем <strong>экстракцию</strong> и, наконец, <code>упаковку</code>. Любое нарушение порядка приведет к остановке производства. Используйте <em>люки</em> для загрузки ингредиентов и <strong>конвейеры</strong> для вывода готовых чашек.</p>
+
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Функция</th>
+<th>Необходимый ресурс</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Командный блок</td>
+<td>Логика выдачи предметов</td>
+<td>Песок + Редстоун</td>
+</tr>
+<tr>
+<td>Раздатчик</td>
+<td>Выдача предметов</td>
+<td>Доски + Редстоун</td>
+</tr>
+<tr>
+<td>Кнопка/Рычаг</td>
+<td>Запуск процесса</td>
+<td>Камень/Дерево</td>
+</tr>
+<tr>
+<td>Стекло</td>
+<td>Визуализация жидкости</td>
+<td>Песок + Печка</td>
+</tr>
+<tr>
+<td>Конвейер (мод)</td>
+<td>Транспортировка</td>
+<td>Железо + Дерево</td>
+</tr>
+</tbody>
+</table>
+
+<details class="faq-item"><summary>Секретная комбинация для ванильной машины</summary><div class="faq-answer"><p>Если вы хотите, чтобы машина выдавала разные напитки, используйте <code>scoreboard</code> для подсчета нажатий. Каждая кнопка меняет счетчик, и <strong>командный блок</strong> выдает соответствующий предмет.</p></div></details>
+
+<h2 id="таблица-команд-и-логика-управления">Таблица команд и логика управления</h2>
+
+<p>Для тех, кто решил строить машину на командах, важно понимать структуру кода. Ниже приведена таблица основных команд, которые понадобятся вам для настройки логики. Каждая строка отвечает за определенную фазу работы <strong>автомата</strong>.</p>
+
+<p>Используйте <code>/execute</code> для проверки позиции игрока, чтобы предмет выдавался именно в руки, а не в инвентарь. Команда <code>/clear</code> может понадобиться для удаления старых чашек, чтобы не засорять мир. Настройка задержек через <em>редстоун-повторители</em> критична для успеха.</p>
+
+<p>Помните, что порядок выполнения команд в цепочке Block строго важен. Если вы поставите команду на очистку перед выдачей, игрок ничего не получит. Тщательно тестируйте каждый шаг, используя <strong>командные блоки</strong> в режиме «Always Active» для отладки.</p>
+
+<pre><code>execute as @p at @s run give @s minecraft:paper{display:{Name:'{"text":"Эспрессо","color":"brown"}'}} 1</code></pre>
+
+<pre><code>execute as @p at @s run setblock ~ ~ ~ air replace minecraft:water</code></pre>
+
+<ul>
+<li>Проверьте синтаксис <strong>команд</strong> перед вставкой в блок.</li>
+<li>Используйте <em>свитки</em> или книги для сохранения кода.</li>
+<li>Настройте <strong>задержку</strong> между выдачей и очисткой жидкости.</li>
+</ul>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Правильная последовательность команд в Chain Command Block — залог того, что игрок получит напиток, а не пустую чашку или ошибку.</p></div>
+
+<h2 id="полезные-советы-по-оптимизации-и-дизайну">Полезные советы по оптимизации и дизайну</h2>
+
+<p>Чтобы ваша кофемашина работала стабильно и радовала глаз, следуйте нескольким рекомендациям. Во-первых, используйте <strong>блоки света</strong> внутри корпуса, чтобы подсветить процесс. Это создаст эффект работающей печи или подогревателя. Во-вторых, не забудьте про поддон для капель, используя <code>трап-блоки</code> внизу конструкции.</p>
+
+<p>Если вы строите на сервере с другими игроками, добавьте <em>табличку</em> с инструкцией. Напишите, как пользоваться <strong>машиной</strong> и какие ингредиенты нужны. Это предотвратит путаницу иPortion-сборку. Используйте <strong>красные лампы</strong> для индикации состояния: включена или выключена.</p>
+
+<p>Для самых продвинутых пользователей можно реализовать систему <em>биллинга</em>. Используйте <strong>книжный стол</strong> и <code>compost</code> для имитации оплаты. Игрок кладет предмет, а машина выдает напиток. Это требует сложных скриптов, но добавляет уникальный функционал вашему проекту.</p>
+
+<p>Не забывайте, что <strong>оптимизация</strong> важна для производительности сервера. Избегайте бесконечных циклов командных блоков без задержки. Используйте <em>редстоун-сигналы</em> для управления потоком, чтобы процесс не происходил каждую тик. Это спасет ваш мир от лагов.</p>
+
+<ul>
+<li>Добавьте <strong>подсветку</strong> внутри корпуса для эффекта работы.</li>
+<li>Установите <em>табличку</em> с инструкцией для других игроков.</li>
+<li>Используйте <strong>редстоун</strong> для управления потоком и задержек.</li>
+</ul>
+
+<details class="faq-item"><summary>Секретный трюк</summary><div class="faq-answer"><p>Используйте <code>custom_head</code> для создания уникальных чашек с логотипом вашей базы. Это потребует внешних генераторов скинов, но выглядит невероятно круто.</p></div></details>
+
+<h2 id="решение-частых-проблем-и-faq">Решение частых проблем и FAQ</h2>
+
+<p>При создании кофемашины вы можете столкнуться с рядом проблем. Чаще всего это связанно с неправильной <strong>конфигурацией</strong> командных блоков или отсутствием нужных предметов. Проверьте, включен ли <em>режим выживания</em> и есть ли у вас права на использование команд.</p>
+
+<p>Если машина выдает ошибку, проверьте <strong>координаты</strong> и синтаксис. Ошибка в одной запятой может сломать всю логику. Используйте <code>debug stick</code> (если мод позволяет) или просто перенастройте блоки заново. Также убедитесь, что <em>редстоун</em> подключен корректно.</p>
+
+<p> Всегда сверяйтесь с официальным вики или <strong>документацией</strong> мода. Если вы используете <code>1.16</code> и ниже, команды будут отличаться от <code>1.20</code>.</p>
+
+<div class="attention-box attention-tip"><span class="attention-icon">💡</span><p>Перед финальной сборкой создайте копию мира. Если вы допустите ошибку в <strong>командном блоке</strong>, вы сможете откатить изменения без потери прогресса.</p></div>
+
+<details>
+<summary>Как добавить молоко в кофейную машину?</summary>
+<p>В ванильной версии используйте команду <code>give</code> с тегом <code>Enchantments</code> или <code>CustomPotionEffects</code> для имитации молока. В модах просто добавьте <em>ведро молока</em> в конвейер перед смешиванием.</p>
+</details>
+
+<details>
+<summary>Почему моя машина не выдает предмет?</summary>
+<p>Скорее всего, вы забыли установить <strong>командный блок</strong> в режим «Chain» или «Repeat». Проверьте, что кнопка подает сигнал на первый блок, а остальные блоки направлены в правильную сторону.</p>
+</details>
+
+<details>
+<summary>Можно ли сделать кофемашину без командных блоков?</summary>
+<p>В чистой версии без использования <code>command_block</code> создать функциональную машину невозможно. Можно лишь сделать декоративную постройку. Для автоматизации нужны <strong>редстоун</strong> или моды.</p>
+</details>
+
+<details>
+<summary>Как защитить машину от воровства?</summary>
+<p>Используйте <em>сундуки</em> с замками (мод) или настройте <strong>командный блок</strong> так, чтобы он выдавал предмет только определенному игроку (по UUID). В ваниле можно поставить <code>glass</code> вокруг, чтобы никто не мог сломать блоки.</p>
+</details>
+
+<details>
+<summary>Какая версия Minecraft лучше для таких проектов?</summary>
+<p>Для <strong>редстоун-механик</strong> лучше подходят версии 1.16–1.18, где есть стабильные команды. Для модов выбирайте последние стабильные версии 1.19 или 1.20, где обновлены библиотеки и аддоны.</p>
+</details>
+
+<blockquote>⚠️ Внимание: Обновления игры могут изменить работу командных блоков. Всегда проверяйте актуальность синтаксиса команд перед запуском проекта в новой версии.</blockquote></div>
+                    <!--#include virtual="/ssi/article_after.html" -->
+
+                </article>
+                <aside class="article-sidebar"><!--#include virtual="/ssi/sidebar_top.html" --><nav class="sidebar-search"><div class="sidebar-search-box"><input type="text" id="globalSearchInput" placeholder="🔍 Поиск статей..." autocomplete="off"><div class="search-dropdown" id="globalSearchDropdown"></div></div></nav><!--#include virtual="/ssi/sidebar_before_toc.html" --><nav class="sidebar-toc" id="sidebarToc"><h3>Содержание</h3><ul><li><a href="#выбор-концепции-ванильная-игра-или-моды">Выбор концепции: Ванильная игра или Моды</a></li><li><a href="#подготовка-материалов-и-локации">Подготовка материалов и локации</a></li><li><a href="#архитектура-корпуса-и-дизайн">Архитектура корпуса и дизайн</a></li><li><a href="#сборка-механизма-работы-в-ванильной-версии">Сборка механизма работы в ванильной версии</a></li><li><a href="#интеграция-модов-и-аддонов">Интеграция модов и аддонов</a></li><li><a href="#таблица-команд-и-логика-управления">Таблица команд и логика управления</a></li><li><a href="#полезные-советы-по-оптимизации-и-дизайну">Полезные советы по оптимизации и дизайну</a></li><li><a href="#решение-частых-проблем-и-faq">Решение частых проблем и FAQ</a></li></ul></nav><!--#include virtual="/ssi/sidebar_before_related.html" --><nav class="sidebar-related"><h3>Похожие статьи</h3><ul><li><a href="/articles/k/ka/kakoj-sharf-podkhodit-k-palto-kapuchino.html" class="related-card">Какой шарф подходит к пальто цвета капучино: гид по стилю и материалу</a></li><li><a href="/articles/d/de/deserty-s-shokoladom.html" class="related-card">Лучшие десерты с шоколадом: секреты приготовления и рецепты</a></li><li><a href="/articles/c/ch/chto-dobavit-v-rastoplennyj-shokolad-chtoby-on-byl-zhidkim.html" class="related-card">Как сделать жидкий шоколад: добавки для идеальной консистенции</a></li><li><a href="/articles/k/ka/kak-pokrasit-derevo-v-tsvet-kapuchino.html" class="related-card">Как покрасить дерево в цвет капучино: выбор оттенка и техника нанесения</a></li><li><a href="/articles/t/ts/tsvet-latte-eto-kakoj-v-mebeli-foto.html" class="related-card">Цвет латте в интерьере: какой оттенок выбрать для мебели (фото)</a></li></ul></nav><!--#include virtual="/ssi/sidebar_after_related.html" --></aside>
+            </div>
+        </div>
+    </main>
+
+    <!--#include virtual="/ssi/before_related_bottom.html" -->
+    <section class="related-bottom">
+        <div class="container">
+            <h2 class="related-bottom-heading">📖 Читайте также</h2>
+            <div class="related-bottom-grid"><a href="/articles/k/ka/kakoj-sharf-podkhodit-k-palto-kapuchino.html" class="related-bottom-card"><span class="related-bottom-title">Какой шарф подходит к пальто цвета капучино: гид по стилю и материалу</span><span class="related-bottom-desc">Узнайте, какой шарф выбрать к пальто оттенка капучино. Советы по цветам, фактурам и комбинациям для </span></a><a href="/articles/d/de/deserty-s-shokoladom.html" class="related-bottom-card"><span class="related-bottom-title">Лучшие десерты с шоколадом: секреты приготовления и рецепты</span><span class="related-bottom-desc">Искусство создания шоколадных десертов: от муссов до трюфелей. Узнайте, как выбрать идеальный какао-</span></a><a href="/articles/c/ch/chto-dobavit-v-rastoplennyj-shokolad-chtoby-on-byl-zhidkim.html" class="related-bottom-card"><span class="related-bottom-title">Как сделать жидкий шоколад: добавки для идеальной консистенции</span><span class="related-bottom-desc">Узнайте, что добавить в растопленный шоколад, чтобы он остался жидким. Секреты добавления масла, сли</span></a><a href="/articles/k/ka/kak-pokrasit-derevo-v-tsvet-kapuchino.html" class="related-bottom-card"><span class="related-bottom-title">Как покрасить дерево в цвет капучино: выбор оттенка и техника нанесения</span><span class="related-bottom-desc">Полное руководство по окрашиванию деревянных изделий в благородный кофейный цвет. Выбор морилки, гла</span></a><a href="/articles/t/ts/tsvet-latte-eto-kakoj-v-mebeli-foto.html" class="related-bottom-card"><span class="related-bottom-title">Цвет латте в интерьере: какой оттенок выбрать для мебели (фото)</span><span class="related-bottom-desc">Узнайте, какой именно цвет называют латте в мебели. Обзор оттенков, сочетания с интерьером и фото-пр</span></a><a href="/articles/k/ko/kofevarka-kak-samogonnyj-apparat.html" class="related-bottom-card"><span class="related-bottom-title">Кофеварка как самогонный аппарат: мифы, риски и реальность дистилляции</span><span class="related-bottom-desc">Попытка использовать кофеварку для перегонки спирта: анализ конструктивных рисков, химии материалов </span></a></div>
+        </div>
+    </section>
+    <!--#include virtual="/ssi/after_related_bottom.html" -->
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">☕ Кофини</div>
+                    <p class="footer-about">Полный справочник по выбору, приготовлению и обслуживанию кофемашин, кофеварок и кофейных напитков.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Разделы</h4>
+                    <ul><li><a href="/category/vybor-kofemashin/">🛒 Выбор кофемашин</a></li>
+<li><a href="/category/obsluzhivanie-i-remont/">🔧 Обслуживание и ремонт</a></li>
+<li><a href="/category/retsepty-napitkov/">🥛 Рецепты напитков</a></li>
+<li><a href="/category/zerna-i-pomol/">🌰 Зерна и помол</a></li>
+<li><a href="/category/kapsulnye-sistemy/">🔹 Капсульные системы</a></li>
+<li><a href="/category/gejzernye-i-kapelnye/">⏳ Гейзерные и капельные</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about.html">О проекте</a></li>
+                        <li><a href="/categories.html">Все разделы</a></li>
+                        <li><a href="/contact.html">Контакты</a></li>
+                        <li><a href="/privacy.html">Конфиденциальность</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Кофини. Все права защищены.</p>
+                <!--LiveInternet counter--><div style="margin-top:10px;"><a href="https://www.liveinternet.ru/click"
+                target="_blank"><img id="licnt06C4" width="88" height="15" style="border:0" 
+                title="LiveInternet: показано число посетителей за сегодня"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                alt=""/></a><script>(function(d,s){d.getElementById("licnt06C4").src=
+                "https://counter.yadro.ru/hit?t26.5;r"+escape(d.referrer)+
+                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})(document,screen)</script></div><!--/LiveInternet-->
+            </div>
+        </div>
+    </footer>
+    <div id="cookie-consent" class="cookie-popup">
+        <div class="cookie-inner">
+            <span>🍪 Мы используем файлы cookie для улучшения работы сайта.</span>
+            <button id="cookie-accept" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+    <script>
+    (function() {
+        const popup = document.getElementById('cookie-consent');
+        const btn = document.getElementById('cookie-accept');
+        if (popup && btn && !localStorage.getItem('cookie-accepted')) {
+            popup.classList.add('visible');
+            btn.onclick = () => {
+                localStorage.setItem('cookie-accepted', 'true');
+                popup.classList.remove('visible');
+            };
+        }
+    })();
+    </script>
+    <script>
+    function pbPollVote(el) {
+        var poll = el.closest('.poll-widget');
+        if (poll.classList.contains('voted')) return;
+        poll.classList.add('voted');
+        el.classList.add('selected');
+        var opts = poll.querySelectorAll('.poll-widget-option');
+        var n = opts.length;
+        var raw = [];
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            var v = Math.random() * 50 + 5;
+            if (opts[i] === el) v += 30;
+            raw.push(v);
+            sum += v;
+        }
+        var pcts = raw.map(function(v) { return Math.round(v / sum * 100); });
+        var diff = 100 - pcts.reduce(function(a,b){ return a+b; }, 0);
+        pcts[Array.from(opts).indexOf(el)] += diff;
+        setTimeout(function() {
+            opts.forEach(function(opt, i) {
+                opt.querySelector('.poll-widget-bar').style.width = pcts[i] + '%';
+                opt.querySelector('.poll-widget-pct').textContent = pcts[i] + '%';
+            });
+        }, 50);
+    }
+    </script>
+    <!--#include virtual="/ssi/body_bottom.html" -->
+    <script src="/static/js/inject.js" defer></script>
+</body>
+</html>
